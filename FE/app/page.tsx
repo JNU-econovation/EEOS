@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <Title>행사 목록</Title>
+      <Title className="w-full">행사 목록</Title>
       <Tabs<eventStatusKr>
         options={eventStatusList}
         selected={eventStatus}
