@@ -5,10 +5,9 @@
   "homepage": "http://bada308.github.io/black_company/FE",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "next build && next export && git add -f out && git commit -m 'Deploy' && git subtree push --prefix out origin gh-pages"
+    "lint": "next lint"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.7",
