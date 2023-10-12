@@ -1,8 +1,8 @@
 import { eventStatusEn } from "@/src/types/home/home";
 
 export interface defaultEvent {
-  name: string;
-  timestamp: string;
+  title: string;
+  programDate: string;
   content: string;
 }
 

@@ -3,7 +3,7 @@ import {
   createEventResponse,
   getEventListResponse,
   updateEventRequest,
-} from ".";
+} from "./type";
 import { https } from "..";
 
 /* 행사 생성 */
