@@ -1,15 +1,23 @@
-import { summaryEvent } from "@/src/apis/event";
+import { summaryEvent } from "@/src/apis/event/type";
 import { convertDate } from "@/src/utils/date";
+import Link from "next/link";
 
-const EventListItem = ({ id, name, timestamp, eventStatus }: summaryEvent) => {
+interface EventListItemProps {
+  eventData: summaryEvent;
+}
+
+const EventListItem = ({ eventData }: EventListItemProps) => {
+  const { id, title, programDate } = eventData;
+
   return (
-    <a
+    <Link
       href={`/detail/${id}`}
       className="flex justify-between items-center w-full rounded-lg px-8 py-6 bg-gray-light hover:bg-secondary transition-all"
+      key={id}
     >
-      <span className="font-bold text-lg">{name}</span>
-      <span className="font-normal text-base">{convertDate(timestamp)}</span>
-    </a>
+      <span className="font-bold text-lg">{title}</span>
+      <span className="font-normal text-base">{convertDate(programDate)}</span>
+    </Link>
   );
 };
 

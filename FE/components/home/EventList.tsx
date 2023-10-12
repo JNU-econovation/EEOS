@@ -1,6 +1,4 @@
-"use client";
-
-import { summaryEvent } from "@/src/apis/event";
+import { summaryEvent } from "@/src/apis/event/type";
 import EventListItem from "./EventListItem";
 
 interface EventListProps {
@@ -11,12 +9,7 @@ const EventList = ({ events }: EventListProps) => {
   return (
     <div className="flex flex-col gap-5 w-full">
       {events.map((event) => (
-        <EventListItem
-          id={event.id}
-          eventStatus={event.eventStatus}
-          name={event.name}
-          timestamp={event.timestamp}
-        />
+        <EventListItem eventData={event} />
       ))}
     </div>
   );
