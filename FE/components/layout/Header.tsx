@@ -27,12 +27,11 @@ const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
           onClick={() => router.back()}
         />
       </div>
-      {/* <h1 className="font-extrabold text-2xl">EEOS</h1> */}
       <Image
-        src="./eeos_logo.svg"
+        src="/text_logo.svg"
         alt="logo"
-        width={44.5}
-        height={40}
+        width={64}
+        height={48}
         onClick={() => router.push("/")}
       />
       <div className="w-[10rem]">
