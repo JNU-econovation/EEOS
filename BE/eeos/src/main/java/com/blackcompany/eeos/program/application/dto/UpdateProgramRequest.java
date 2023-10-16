@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class CreateProgramRequest implements AbstractProgramRequest {
+public class UpdateProgramRequest implements AbstractProgramRequest {
 
 	private @NotNull String title;
 	private @NotNull String content;

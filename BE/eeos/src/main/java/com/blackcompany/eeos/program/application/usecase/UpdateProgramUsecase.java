@@ -5,13 +5,12 @@ import com.blackcompany.eeos.program.application.dto.suppport.AbstractProgramReq
 import org.springframework.stereotype.Component;
 
 @Component
-public interface CreateProgramUsecase {
-
+public interface UpdateProgramUsecase {
 	/**
-	 * 프로그램을 저장시킨다.
+	 * 프로그램을 수정한다.
 	 *
-	 * @param request 프로그램 저장을 하기 위한 request 객체
+	 * @param request programId, 프로그램 수정 하기 위한 request 객체
 	 * @return 프로그램 식별 id 전달
 	 */
-	CommandProgramResponse create(AbstractProgramRequest request);
+	CommandProgramResponse update(Long programId, AbstractProgramRequest request);
 }
