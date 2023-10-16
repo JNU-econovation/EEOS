@@ -1,8 +1,8 @@
-import { eventStatusKr, eventStatusOptionType } from "./../types/home/home";
+import { programStatusKr, programStatusOptionType } from "./../types/home/home";
 
-export const eventStatusList: eventStatusKr[] = ["진행 중", "종료"];
+export const programStatusList: programStatusKr[] = ["진행 중", "종료"];
 
-export const eventStatusOption: eventStatusOptionType = {
+export const programStatusOption: programStatusOptionType = {
   "진행 중": "ING",
   종료: "END",
 };

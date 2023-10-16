@@ -5,7 +5,7 @@ interface TitleProps {
   className?: string;
 }
 
-const Title = ({ children, className }: PropsWithChildren<TitleProps>) => {
+const Title = ({ children, className = "" }: PropsWithChildren<TitleProps>) => {
   return (
     <h1 className={`font-bold text-3xl text-black my-8 ${className}`}>
       {children}

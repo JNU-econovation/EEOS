@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const https = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
 });
 
 https.interceptors.request.use((config) => {

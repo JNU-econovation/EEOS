@@ -1,19 +1,19 @@
-import { summaryEvent } from "@/src/apis/event/type";
+import { summaryProgram } from "@/src/apis/types/program";
 import { convertDate } from "@/src/utils/date";
 import Link from "next/link";
 
-interface EventListItemProps {
-  eventData: summaryEvent;
+interface ProgramListItemProps {
+  programData: summaryProgram;
 }
 
-const EventListItem = ({ eventData }: EventListItemProps) => {
-  const { id, title, programDate } = eventData;
+const ProgramListItem = ({ programData }: ProgramListItemProps) => {
+  const { programId, title, programDate } = programData;
 
   return (
     <Link
-      href={`/detail/${id}`}
+      href={`/detail/${programId}`}
       className="flex justify-between items-center w-full rounded-lg px-8 py-6 bg-gray-light hover:bg-secondary transition-all"
-      key={id}
+      key={programId}
     >
       <span className="font-bold text-lg">{title}</span>
       <span className="font-normal text-base">{convertDate(programDate)}</span>
@@ -21,4 +21,4 @@ const EventListItem = ({ eventData }: EventListItemProps) => {
   );
 };
 
-export default EventListItem;
+export default ProgramListItem;
