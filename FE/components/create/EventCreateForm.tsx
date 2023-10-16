@@ -14,9 +14,9 @@ import {
   createTitleAtom,
 } from "@/src/stores/create";
 import { useMutation } from "@tanstack/react-query";
-import { createEvent } from "@/src/apis/event/event";
 import { useRouter } from "next/navigation";
 import Calendar from "./Calendar.component";
+import { createProgram } from "@/src/apis/program/program";
 
 const EventCreateForm = () => {
   const router = useRouter();
@@ -46,11 +46,11 @@ const EventCreateForm = () => {
   };
 
   const { mutate: createEventMutate } = useMutation(
-    () => createEvent({ title, content, programDate }),
+    () => createProgram({ title, content, programDate }),
     {
       onSettled: (data) => {
         onReset();
-        data && router.replace(`/detail/${data.id}`);
+        data && router.replace(`/detail/${data.programId}`);
       },
     }
   );
