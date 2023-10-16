@@ -2,6 +2,7 @@
   "name": "black_fe",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://bada308.github.io/black_company/FE",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,8 +12,13 @@
   "dependencies": {
     "@tanstack/react-query": "^4.35.7",
     "axios": "^1.5.1",
+    "date-fns": "^2.30.0",
+    "jotai": "^2.4.3",
+    "moment": "^2.29.4",
     "next": "latest",
     "react": "latest",
+    "react-calendar": "^4.6.0",
+    "react-day-picker": "^8.8.2",
     "react-dom": "latest"
   },
   "devDependencies": {

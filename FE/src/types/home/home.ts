@@ -1,6 +1,6 @@
-export type eventStatusEn = "ING" | "END";
-export type eventStatusKr = "진행 중" | "종료";
+export type programStatusEn = "ING" | "END";
+export type programStatusKr = "진행 중" | "종료";
 
-export type eventStatusOptionType = {
-  [key in eventStatusKr]: eventStatusEn;
+export type programStatusOptionType = {
+  [key in programStatusKr]: programStatusEn;
 };

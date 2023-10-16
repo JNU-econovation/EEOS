@@ -13,10 +13,9 @@ const Paginataion = ({
   setCurrentPage,
 }: PaginataionProps) => {
   const pageNumbers = calcPageNumbers(currentPage, totalPage);
-  const colorClass = "";
 
   return (
-    <div className="flex items-center gap-8 my-14">
+    <div className="flex items-center gap-8 my-14 w-full justify-center">
       <img
         src="/icons/left.svg"
         alt="이전 페이지"
