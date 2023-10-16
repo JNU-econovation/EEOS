@@ -1,8 +1,9 @@
 package com.blackcompany.eeos.program.application.dto.converter;
 
 import com.blackcompany.eeos.program.application.domain.ProgramModel;
+import com.blackcompany.eeos.program.application.dto.CommandProgramResponse;
 import com.blackcompany.eeos.program.application.dto.GetProgramResponse;
-import com.blackcompany.eeos.program.persistence.EventStatus;
+import com.blackcompany.eeos.program.application.model.EventStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,5 +17,9 @@ public class ProgramResponseConverter {
 				.programDate(target.getProgramDate())
 				.eventStatus(status.name())
 				.build();
+	}
+
+	public CommandProgramResponse from(Long id) {
+		return CommandProgramResponse.builder().id(id).build();
 	}
 }
