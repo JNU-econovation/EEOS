@@ -1,44 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { getProgramDetail, updateProgram } from "@/src/apis/program/program";
+import { useOutsideClick } from "@/src/hooks/useOutsideRef";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Input from "../common/Input";
 import { convertDate } from "@/src/utils/date";
-import { useOutsideClick } from "@/src/hooks/useOutsideRef";
-import Button from "../common/Button";
-import { useAtom } from "jotai";
-import {
-  createContentAtom,
-  createProgramDateAtom,
-  createTitleAtom,
-} from "@/src/stores/create";
-import { useMutation } from "@tanstack/react-query";
-import Calendar from "./Calendar.component";
-import { createProgram } from "@/src/apis/program/program";
 import MarkdownEditor from "../common/MarkdownEditor.component";
+import Calendar from "../create/Calendar.component";
+import Button from "../common/Button";
 import { useRouter } from "next/navigation";
 
-const EventCreateForm = () => {
-  const router = useRouter();
+interface ProgramEditFormProps {
+  programId: string;
+}
 
-  const [title, setTitle] = useAtom(createTitleAtom);
-  const [content, setContent] = useAtom(createContentAtom);
-  const [programDate, setProgramDate] = useAtom(createProgramDateAtom);
-  const [date, setDate] = useState<Date | undefined>(
-    new Date(parseInt(programDate))
-  );
+const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
+  const router = useRouter();
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  const programDate = date
+    ? date.getTime().toString()
+    : new Date().getTime().toString();
 
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
 
-  useEffect(() => {
-    date && console.log(date);
-    date && setProgramDate(date.getTime().toString());
-  }, [date]);
+  const { data, isLoading, isError } = useQuery(
+    ["ProgramInfo", programId],
+    () =>
+      getProgramDetail(programId).then((data) => {
+        setTitle(data.title);
+        setContent(data.content);
+        setDate(new Date(parseInt(data.programDate)));
+        return data;
+      })
+  );
+
+  const { mutate: updateProgramMutate } = useMutation(
+    () =>
+      updateProgram(programId, {
+        title,
+        content: content || "",
+        programDate,
+      }),
+    {
+      onSettled: (data) => {
+        data && router.replace(`/detail/${data.programId}`);
+      },
+    }
+  );
 
   const onReset = () => {
-    setTitle("");
-    setContent("");
-    setDate(new Date());
     router.push("/");
   };
 
@@ -48,18 +63,11 @@ const EventCreateForm = () => {
       alert("모든 항목을 입력해주세요.");
       return;
     }
-    createEventMutate();
+    updateProgramMutate();
   };
 
-  const { mutate: createEventMutate } = useMutation(
-    () => createProgram({ title, content: content || "", programDate }),
-    {
-      onSettled: (data) => {
-        onReset();
-        data && router.replace(`/detail/${data.programId}`);
-      },
-    }
-  );
+  if (isLoading) <div>Loading...</div>;
+  if (isError) <div>Error!</div>;
 
   return (
     <form
@@ -91,12 +99,12 @@ const EventCreateForm = () => {
       <MarkdownEditor
         id="content"
         value={content ? content : ""}
-        onChange={(e) => setContent(e)}
+        onChange={(e) => (e ? setContent(e) : setContent(""))}
         label="행사 내용"
       />
       <section className="flex gap-2 justify-end w-[50rem] mt-6">
         <Button color="primary" sizeType="base" leftIcon={false} type="submit">
-          생성
+          수정
         </Button>
         <Button color="gray" sizeType="base" leftIcon={false} onClick={onReset}>
           취소
@@ -106,4 +114,4 @@ const EventCreateForm = () => {
   );
 };
 
-export default EventCreateForm;
+export default ProgramEditForm;
