@@ -15,7 +15,7 @@ export const createProgram = async (body: createProgramRequest) => {
 
 /* 행사 수정 */
 export const updateProgram = async (
-  programId: number,
+  programId: string,
   body: updateProgramRequest
 ) => {
   const { data } = await https.put(`/programs/${programId}`, body);

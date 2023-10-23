@@ -1,3 +1,4 @@
+import { sortMembers } from "./../../utils/sort";
 import { https } from "..";
 import {
   attendStatusLower,
@@ -17,11 +18,11 @@ export const getDetailMembers = async (
   return data;
 };
 
-export const getEditMembers = async (programId: number) => {
+export const getEditMembers = async (programId: string) => {
   const { data } = await https.get<getEditMembersResponse>(
-    `/programs/${programId}/members/candidate`
+    `/attend/candidate/program/${programId}`
   );
-  return data;
+  return sortMembers(data);
 };
 
 export const editMembers = async (
@@ -29,7 +30,7 @@ export const editMembers = async (
   body: editMembersRequest
 ) => {
   const { data } = await https.post<editMembersResponse>(
-    `/programs/${programId}/attendStatus`,
+    `/attend/programs/${programId}`,
     body
   );
   return data;

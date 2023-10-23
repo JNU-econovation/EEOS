@@ -17,7 +17,7 @@ const config: Config = {
         paragraph: "#2D334A",
         primary: "#FFD803",
         secondary: "#E3F6F5",
-        soft_secondary: "#F7FCFB",
+        soft_secondary: "#F1FAFA",
         tertiary: "#BAE8E8",
         error: "#FF6464",
         gray: {
