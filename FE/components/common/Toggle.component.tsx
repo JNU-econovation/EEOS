@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useRef, useState } from "react";
 
 interface ToggleProps {
@@ -21,20 +22,33 @@ const Toggle = ({ active, onChange, disabled = false }: ToggleProps) => {
   const toggleLine = useRef<HTMLButtonElement>(null);
   const toggleCircle = useRef<HTMLDivElement>(null);
 
+  const toggleLineClass = classNames(
+    "w-12 h-7 rounded-full flex items-center transition duration-300 focus:outline-none shadow",
+    {
+      [activeClass.line]: active,
+      [unactiveClass.line]: !active,
+      [disabledClass]: disabled,
+    }
+  );
+
+  const toggleCircleClass = classNames(
+    "w-5 h-5 relative rounded-full transition-transform duration-500 transform bg-white",
+    {
+      [activeClass.circle]: active,
+      [unactiveClass.circle]: !active,
+    }
+  );
+
   return (
     <button
-      className={`w-12 h-7 rounded-full flex items-center transition duration-300 focus:outline-none shadow ${
-        active ? activeClass.line : unactiveClass.line
-      } ${disabled && disabledClass}`}
+      className={toggleLineClass}
       onClick={() => !disabled && onChange()}
       ref={toggleLine}
     >
       <div
         ref={toggleCircle}
         id="switch-toggle"
-        className={`w-5 h-5 relative rounded-full transition-transform duration-500 transform bg-white ${
-          active ? activeClass.circle : unactiveClass.circle
-        }`}
+        className={toggleCircleClass}
       ></div>
     </button>
   );

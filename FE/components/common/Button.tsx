@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { PropsWithChildren } from "react";
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
@@ -26,7 +27,12 @@ const Button = ({
   onClick,
   children,
 }: PropsWithChildren<ButtonProps>) => {
-  const btnStyle = `flex justify-center gap-2 ${btnType[color]} ${btnSize[sizeType]}`;
+  const btnStyle = classNames(
+    "flex justify-center gap-2",
+    btnType[color],
+    btnSize[sizeType]
+  );
+
   return (
     <button className={btnStyle} onClick={onClick} type={type}>
       {leftIcon ? (

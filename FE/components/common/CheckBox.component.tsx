@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Image from "next/image";
 
 interface CheckBoxProps {
@@ -11,13 +12,23 @@ const unCheckedClass = "bg-background border-gray-base";
 const disabledClass = "opacity-0 cursor-not-allowed";
 
 const CheckBox = ({ checked, onChange, disabled = false }: CheckBoxProps) => {
+  const checkboxClass = classNames(
+    "flex justify-center items-center w-6 h-6 rounded border-2 transition duration-100",
+    {
+      [checkedClass]: checked,
+      [unCheckedClass]: !checked,
+      [disabledClass]: disabled,
+    }
+  );
+
+  const handleChange = () => {
+    if (!disabled) {
+      onChange();
+    }
+  };
+
   return (
-    <div
-      onClick={() => !disabled && onChange()}
-      className={`flex justify-center items-center w-6 h-6 rounded border-2 transition duration-100 ${
-        checked ? checkedClass : unCheckedClass
-      } ${disabled && disabledClass}`}
-    >
+    <div onClick={handleChange} className={checkboxClass}>
       {checked && (
         <Image src={"/icons/check.svg"} alt="check" width={24} height={24} />
       )}

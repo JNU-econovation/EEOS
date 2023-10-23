@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
 
 interface TitleProps {
@@ -6,11 +7,11 @@ interface TitleProps {
 }
 
 const Title = ({ children, className = "" }: PropsWithChildren<TitleProps>) => {
-  return (
-    <h1 className={`font-bold text-3xl text-black my-8 ${className}`}>
-      {children}
-    </h1>
+  const titleStyle = classNames(
+    "font-bold text-3xl text-black my-8",
+    className
   );
+  return <h1 className={titleStyle}>{children}</h1>;
 };
 
 export default Title;
