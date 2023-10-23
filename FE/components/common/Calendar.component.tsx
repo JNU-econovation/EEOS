@@ -1,12 +1,10 @@
-import { useAtom } from "jotai";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import "./calendar.css";
-import { Dispatch } from "react";
+import "./styles/calendar.css";
 
 interface CalendarProps {
   programDate: Date | undefined;
-  setProgramDate: Dispatch<React.SetStateAction<Date | undefined>>;
+  setProgramDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }
 
 const Calendar = ({ programDate, setProgramDate }: CalendarProps) => {

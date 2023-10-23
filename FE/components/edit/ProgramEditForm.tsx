@@ -7,7 +7,7 @@ import { useState } from "react";
 import Input from "../common/Input";
 import { convertDate } from "@/src/utils/date";
 import MarkdownEditor from "../common/MarkdownEditor.component";
-import Calendar from "../create/Calendar.component";
+import Calendar from "../common/Calendar.component";
 import Button from "../common/Button";
 import { useRouter } from "next/navigation";
 

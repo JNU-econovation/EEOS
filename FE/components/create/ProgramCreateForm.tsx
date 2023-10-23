@@ -12,12 +12,12 @@ import {
   createTitleAtom,
 } from "@/src/stores/create";
 import { useMutation } from "@tanstack/react-query";
-import Calendar from "./Calendar.component";
+import Calendar from "../common/Calendar.component";
 import { createProgram } from "@/src/apis/program/program";
 import MarkdownEditor from "../common/MarkdownEditor.component";
 import { useRouter } from "next/navigation";
 
-const EventCreateForm = () => {
+const ProgramCreateForm = () => {
   const router = useRouter();
 
   const [title, setTitle] = useAtom(createTitleAtom);
@@ -48,10 +48,10 @@ const EventCreateForm = () => {
       alert("모든 항목을 입력해주세요.");
       return;
     }
-    createEventMutate();
+    createProgramMutate();
   };
 
-  const { mutate: createEventMutate } = useMutation(
+  const { mutate: createProgramMutate } = useMutation(
     () => createProgram({ title, content: content || "", programDate }),
     {
       onSettled: (data) => {
@@ -106,4 +106,4 @@ const EventCreateForm = () => {
   );
 };
 
-export default EventCreateForm;
+export default ProgramCreateForm;
