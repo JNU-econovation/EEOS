@@ -13,7 +13,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   return (
     <SubLayout right="btn">
       <ProgramInfo programId={programId} />
-      <section className="w-screen bg-soft_secondary flex flex-col gap-10 items-center py-16">
+      <section className="flex w-screen flex-col items-center gap-10 bg-soft_secondary py-16">
         <MemberList key="attend" programId={programId} attendStatus="attend" />
         <MemberList key="absent" programId={programId} attendStatus="absent" />
       </section>

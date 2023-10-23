@@ -19,7 +19,7 @@ const Textarea = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="border-2 border-gray-300 rounded-md p-2 shadow-sm focus:outline-none focus:border-tertiary w-full min-h-[16rem] resize-none"
+        className="min-h-[16rem] w-full resize-none rounded-md border-2 border-gray-300 p-2 shadow-sm focus:border-tertiary focus:outline-none"
       />
     </div>
   );

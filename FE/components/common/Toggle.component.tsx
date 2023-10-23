@@ -7,36 +7,25 @@ interface ToggleProps {
   disabled?: boolean;
 }
 
-const activeClass = {
-  line: "bg-primary",
-  circle: "translate-x-6",
-};
-
-const unactiveClass = {
-  line: "bg-gray-300",
-  circle: "translate-x-1",
-};
-const disabledClass = "opacity-0";
-
 const Toggle = ({ active, onChange, disabled = false }: ToggleProps) => {
   const toggleLine = useRef<HTMLButtonElement>(null);
   const toggleCircle = useRef<HTMLDivElement>(null);
 
   const toggleLineClass = classNames(
-    "w-12 h-7 rounded-full flex items-center transition duration-300 focus:outline-none shadow",
+    "flex h-7 w-12 items-center rounded-full shadow transition duration-300 focus:outline-none",
     {
-      [activeClass.line]: active,
-      [unactiveClass.line]: !active,
-      [disabledClass]: disabled,
-    }
+      "bg-primary": active,
+      "bg-gray-300": !active,
+      "opacity-0": disabled,
+    },
   );
 
   const toggleCircleClass = classNames(
-    "w-5 h-5 relative rounded-full transition-transform duration-500 transform bg-white",
+    "relative h-5 w-5 transform rounded-full bg-white transition-transform duration-500",
     {
-      [activeClass.circle]: active,
-      [unactiveClass.circle]: !active,
-    }
+      "translate-x-6": active,
+      "translate-x-1": !active,
+    },
   );
 
   return (

@@ -8,8 +8,8 @@ interface TitleProps {
 
 const Title = ({ children, className = "" }: PropsWithChildren<TitleProps>) => {
   const titleStyle = classNames(
-    "font-bold text-3xl text-black my-8",
-    className
+    "my-8 text-3xl font-bold text-black",
+    className,
   );
   return <h1 className={titleStyle}>{children}</h1>;
 };

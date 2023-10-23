@@ -36,7 +36,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
         setContent(data.content);
         setDate(new Date(parseInt(data.programDate)));
         return data;
-      })
+      }),
   );
 
   const { mutate: updateProgramMutate } = useMutation(
@@ -50,7 +50,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
       onSettled: (data) => {
         data && router.replace(`/detail/${data.programId}`);
       },
-    }
+    },
   );
 
   const onReset = () => {
@@ -71,7 +71,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
 
   return (
     <form
-      className="flex flex-col gap-4 w-full max-w-[50rem] mt-8"
+      className="mt-8 flex w-full max-w-[50rem] flex-col gap-4"
       onSubmit={onSubmit}
     >
       <Input
@@ -102,7 +102,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
         onChange={(e) => (e ? setContent(e) : setContent(""))}
         label="행사 내용"
       />
-      <section className="flex gap-2 justify-end w-[50rem] mt-6">
+      <section className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button color="primary" sizeType="base" leftIcon={false} type="submit">
           수정
         </Button>

@@ -15,7 +15,7 @@ interface ProgramInfoProps {
 const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   const { data, isLoading, isError } = useQuery(
     ["ProgramInfo", programId],
-    () => getProgramDetail(programId)
+    () => getProgramDetail(programId),
   );
 
   if (isLoading) {
@@ -27,15 +27,15 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex w-full flex-col items-center justify-center">
       <Title>{data.title}</Title>
-      <div className="flex w-full justify-between p-6 border-b-[1.5px]">
+      <div className="flex w-full justify-between border-b-[1.5px] p-6">
         <span className="text-lg">{convertDate(data.programDate)}</span>
         <Link href={`/edit/${programId}`}>
           <Image src="/icons/pencil.svg" alt="edit" width={20} height={20} />
         </Link>
       </div>
-      <div className="w-full min-h-[360px] my-10 px-6">
+      <div className="my-10 min-h-[360px] w-full px-6">
         <MDEditor.Markdown source={data.content} />
       </div>
     </div>

@@ -15,7 +15,7 @@ const Calendar = ({ programDate, setProgramDate }: CalendarProps) => {
       selected={programDate}
       onSelect={setProgramDate}
       disabled={disabledDays}
-      className="absolute top-[4.5rem] left-0 z-10 bg-background p-3 rounded-md shadow-md"
+      className="absolute left-0 top-[4.5rem] z-10 rounded-md bg-background p-3 shadow-md"
     />
   );
 };

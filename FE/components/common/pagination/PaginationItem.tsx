@@ -12,11 +12,11 @@ const PaginationItem = ({
   onClick,
 }: PropsWithChildren<PaginationItemProps>) => {
   const paginationItemStyle = classNames(
-    "w-8 h-8 flex justify-center items-center rounded-lg",
+    "flex h-8 w-8 items-center justify-center rounded-lg",
     {
       "bg-primary": type === "selected",
       "bg-background": type === "normal",
-    }
+    },
   );
 
   return (

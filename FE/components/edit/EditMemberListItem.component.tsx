@@ -17,8 +17,6 @@ const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
   const isRelated = attendStatus === "IRRELEVANT" ? false : true;
   const isAttend = attendStatus === "ATTEND" ? true : false;
 
-  console.log(data, isRelated, isAttend);
-
   const { mutate: updateMemberMutate } = useMutation(
     () =>
       editMembers(memberId, {
@@ -30,7 +28,7 @@ const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
           ? "ABSENT"
           : "IRRELEVANT",
       }),
-    { onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]) }
+    { onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]) },
   );
 
   const handleCheckBoxChange = () => {
@@ -41,7 +39,7 @@ const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
     updateMemberMutate();
   };
   return (
-    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 even:bg-background odd: bg-soft_secondary">
+    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 odd:bg-soft_secondary even:bg-background">
       <CheckBox checked={isRelated} onChange={handleCheckBoxChange} />
       <span className="font-bold">{name}</span>
       <span>{generation}</span>

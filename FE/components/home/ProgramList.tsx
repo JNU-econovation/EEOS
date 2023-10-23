@@ -7,7 +7,7 @@ interface ProgramListProps {
 
 const ProgramList = ({ programs }: ProgramListProps) => {
   return (
-    <div className="flex flex-col gap-5 w-full">
+    <div className="flex w-full flex-col gap-5">
       {programs.map((program) => (
         <ProgramListItem programData={program} />
       ))}

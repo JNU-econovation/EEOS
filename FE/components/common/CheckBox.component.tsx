@@ -13,12 +13,12 @@ const disabledClass = "opacity-0 cursor-not-allowed";
 
 const CheckBox = ({ checked, onChange, disabled = false }: CheckBoxProps) => {
   const checkboxClass = classNames(
-    "flex justify-center items-center w-6 h-6 rounded border-2 transition duration-100",
+    "flex h-6 w-6 items-center justify-center rounded border-2 transition duration-100",
     {
       [checkedClass]: checked,
       [unCheckedClass]: !checked,
       [disabledClass]: disabled,
-    }
+    },
   );
 
   const handleChange = () => {

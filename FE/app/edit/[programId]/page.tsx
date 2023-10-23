@@ -14,7 +14,6 @@ interface EditPageProps {
 
 const EditPage = ({ params }: EditPageProps) => {
   const { programId } = params;
-  const [checked, setChecked] = useState<boolean>(false);
   return (
     <SubLayout right="none">
       <Title>행사 정보 수정</Title>

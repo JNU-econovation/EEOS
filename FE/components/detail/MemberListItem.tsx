@@ -11,14 +11,14 @@ const MemberListItem = ({ memberData, attendStatus }: MemberListItemProps) => {
   const { memberId, generation, name } = memberData;
 
   const memberListItemClass = classNames(
-    "flex justify-center items-center w-[28px] h-[28px] rounded-full",
+    "flex h-[28px] w-[28px] items-center justify-center rounded-full",
     {
       "bg-tertiary": attendStatus === "attend",
-      "bg-error": attendStatus !== "absent",
-    }
+      "bg-error": attendStatus !== "attend",
+    },
   );
   return (
-    <div className="grid grid-cols-[3rem_7rem] px-6 py-5 border-b-[1px] border-gray-base m-2">
+    <div className="m-2 grid grid-cols-[3rem_7rem] border-b-[1px] border-gray-base px-6 py-5">
       <div className={memberListItemClass}>
         <Image src="/icons/check.svg" alt="check" width={20} height={20} />
       </div>

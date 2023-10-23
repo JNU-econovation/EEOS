@@ -30,7 +30,7 @@ const Button = ({
   const btnStyle = classNames(
     "flex justify-center gap-2",
     btnType[color],
-    btnSize[sizeType]
+    btnSize[sizeType],
   );
 
   return (

@@ -24,7 +24,7 @@ const ProgramCreateForm = () => {
   const [content, setContent] = useAtom(createContentAtom);
   const [programDate, setProgramDate] = useAtom(createProgramDateAtom);
   const [date, setDate] = useState<Date | undefined>(
-    new Date(parseInt(programDate))
+    new Date(parseInt(programDate)),
   );
 
   const [openCalender, setOpenCalender] = useState<boolean>(false);
@@ -58,12 +58,12 @@ const ProgramCreateForm = () => {
         onReset();
         data && router.replace(`/detail/${data.programId}`);
       },
-    }
+    },
   );
 
   return (
     <form
-      className="flex flex-col gap-4 w-full max-w-[50rem] mt-8"
+      className="mt-8 flex w-full max-w-[50rem] flex-col gap-4"
       onSubmit={onSubmit}
     >
       <Input
@@ -94,7 +94,7 @@ const ProgramCreateForm = () => {
         onChange={(e) => setContent(e)}
         label="행사 내용"
       />
-      <section className="flex gap-2 justify-end w-[50rem] mt-6">
+      <section className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button color="primary" sizeType="base" leftIcon={false} type="submit">
           생성
         </Button>
