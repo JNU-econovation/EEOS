@@ -15,16 +15,24 @@ interface HeaderProps {
 
 const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
   const router = useRouter();
+  const handleOnClickLeft = () => {
+    if (left === "user") {
+      console.log("구현 중...");
+    }
+    if (left === "left") {
+      router.back();
+    }
+  };
 
   return (
-    <header className="flex justify-between items-center w-full h-[5rem] px-[7.5rem] py-2 rounded-b-md shadow-sm sticky top-0 bg-background">
+    <header className="flex justify-between items-center w-full h-[5rem] px-[7.5rem] py-2 rounded-b-md shadow-sm sticky top-0 bg-background z-50">
       <div className="flex justify-center w-[10rem]">
         <Image
           src={`/icons/${left}.svg`}
-          alt="user icon"
+          alt={left}
           width={26}
           height={26}
-          onClick={() => router.back()}
+          onClick={handleOnClickLeft}
         />
       </div>
       <Image
