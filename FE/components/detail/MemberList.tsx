@@ -16,7 +16,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
     data: members,
     isLoading,
     isError,
-  } = useQuery(["memberDetailList"], () =>
+  } = useQuery(["memberDetailList", attendStatus], () =>
     getDetailMembers(parseInt(programId), attendStatus)
   );
 
@@ -30,7 +30,11 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
       </div>
       <div className="grid grid-cols-4 w-full">
         {members.map((member) => (
-          <MemberListItem memberData={member} attendStatus={attendStatus} />
+          <MemberListItem
+            key={member.memberId}
+            memberData={member}
+            attendStatus={attendStatus}
+          />
         ))}
       </div>
     </div>
