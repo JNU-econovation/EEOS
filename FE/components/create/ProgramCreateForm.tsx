@@ -1,33 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../common/Input";
 import { convertDate } from "@/src/utils/date";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
-import Textarea from "../common/Textarea";
 import Button from "../common/Button";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import {
   createContentAtom,
-  createDateAtom,
   createProgramDateAtom,
   createTitleAtom,
 } from "@/src/stores/create";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import Calendar from "./Calendar.component";
+import Calendar from "../common/Calendar.component";
 import { createProgram } from "@/src/apis/program/program";
+import MarkdownEditor from "../common/MarkdownEditor.component";
+import { useRouter } from "next/navigation";
 
-const EventCreateForm = () => {
+const ProgramCreateForm = () => {
   const router = useRouter();
 
   const [title, setTitle] = useAtom(createTitleAtom);
   const [content, setContent] = useAtom(createContentAtom);
-  const programDate = useAtomValue(createProgramDateAtom);
-  const setDate = useSetAtom(createDateAtom);
+  const [programDate, setProgramDate] = useAtom(createProgramDateAtom);
+  const [date, setDate] = useState<Date | undefined>(
+    new Date(parseInt(programDate))
+  );
 
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
+
+  useEffect(() => {
+    date && console.log(date);
+    date && setProgramDate(date.getTime().toString());
+  }, [date]);
 
   const onReset = () => {
     setTitle("");
@@ -42,11 +48,11 @@ const EventCreateForm = () => {
       alert("모든 항목을 입력해주세요.");
       return;
     }
-    createEventMutate();
+    createProgramMutate();
   };
 
-  const { mutate: createEventMutate } = useMutation(
-    () => createProgram({ title, content, programDate }),
+  const { mutate: createProgramMutate } = useMutation(
+    () => createProgram({ title, content: content || "", programDate }),
     {
       onSettled: (data) => {
         onReset();
@@ -78,14 +84,15 @@ const EventCreateForm = () => {
           value={convertDate(programDate)}
           placeholder="XXXX-XX-XX"
         />
-        {openCalender && <Calendar />}
+        {openCalender && (
+          <Calendar programDate={date} setProgramDate={setDate} />
+        )}
       </section>
-      <Textarea
-        id="event-title"
+      <MarkdownEditor
+        id="content"
+        value={content ? content : ""}
+        onChange={(e) => setContent(e)}
         label="행사 내용"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="행사 내용 입력"
       />
       <section className="flex gap-2 justify-end w-[50rem] mt-6">
         <Button color="primary" sizeType="base" leftIcon={false} type="submit">
@@ -99,4 +106,4 @@ const EventCreateForm = () => {
   );
 };
 
-export default EventCreateForm;
+export default ProgramCreateForm;
