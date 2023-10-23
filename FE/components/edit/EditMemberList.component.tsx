@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import { getEditMembers } from "@/src/apis/member/member";
 import { useQuery } from "@tanstack/react-query";
 import EditMemberListItem from "./EditMemberListItem.component";
