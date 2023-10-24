@@ -14,8 +14,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
     <SubLayout right="btn">
       <ProgramInfo programId={programId} />
       <section className="w-screen bg-soft_secondary flex flex-col gap-10 items-center py-16">
-        <MemberList programId={programId} attendStatus="attend" />
-        <MemberList programId={programId} attendStatus="absent" />
+        <MemberList key="attend" programId={programId} attendStatus="attend" />
+        <MemberList key="absent" programId={programId} attendStatus="absent" />
       </section>
     </SubLayout>
   );

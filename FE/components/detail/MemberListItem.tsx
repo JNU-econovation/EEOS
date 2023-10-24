@@ -7,7 +7,7 @@ interface MemberListItemProps {
 }
 
 const MemberListItem = ({ memberData, attendStatus }: MemberListItemProps) => {
-  const { generation, name } = memberData;
+  const { memberId, generation, name } = memberData;
   const color = attendStatus === "attend" ? "bg-tertiary" : "bg-error";
   return (
     <div className="grid grid-cols-[3rem_7rem] px-6 py-5 border-b-[1px] border-gray-base m-2">

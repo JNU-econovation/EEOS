@@ -1,8 +1,12 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-export const createTitleAtom = atom<string>("");
-export const createContentAtom = atom<string>("");
-export const createDateAtom = atom<Date>(new Date());
-export const createProgramDateAtom = atom<string>((get) =>
-  get(createDateAtom).getTime().toString()
+export const createTitleAtom = atomWithStorage<string>("title", "");
+export const createContentAtom = atomWithStorage<string | undefined>(
+  "content",
+  ""
+);
+const currentTime = new Date().getTime().toString();
+export const createProgramDateAtom = atomWithStorage<string>(
+  "programDate",
+  currentTime
 );
