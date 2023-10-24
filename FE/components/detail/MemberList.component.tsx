@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../common/LoadingSpinner";
 import MemberListItem from "./MemberListItem.component";
 import { getDetailMembers } from "@/src/apis/member/member";
 import { attendStatusLower } from "@/src/apis/types/member";
@@ -20,7 +21,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
     getDetailMembers(parseInt(programId), attendStatus),
   );
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   return (

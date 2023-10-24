@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "../common/Button.component";
 import Calendar from "../common/Calendar.component";
 import Input from "../common/Input.component";
+import LoadingSpinner from "../common/LoadingSpinner";
 import MarkdownEditor from "../common/MarkdownEditor.component";
 import { getProgramDetail, updateProgram } from "@/src/apis/program/program";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
@@ -66,7 +67,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
     updateProgramMutate();
   };
 
-  if (isLoading) <div>Loading...</div>;
+  if (isLoading) <LoadingSpinner />;
   if (isError) <div>Error!</div>;
 
   return (
