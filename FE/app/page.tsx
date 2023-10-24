@@ -1,20 +1,20 @@
 "use client";
 
-import Title from "@/components/common/Title";
-import EventList from "@/components/home/ProgramList";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import Tabs from "@/components/common/Tabs";
-import Paginataion from "@/components/common/pagination/Pagination";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import Paginataion from "@/components/common/pagination/Pagination.component";
+import Tabs from "@/components/common/Tabs.component";
+import Title from "@/components/common/Title.component";
+import ProgramList from "@/components/home/ProgramList";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 import { getProgramList } from "@/src/apis/program/program";
-import { programStatusKr } from "@/src/types/home/home";
-import ProgramList from "@/components/home/ProgramList";
 import {
   listSize,
   programStatusList,
   programStatusOption,
 } from "@/src/constants/home";
+import { programStatusKr } from "@/src/types/home/home";
 
 export default function Home() {
   const [programStatus, setProgramStatus] =
@@ -27,11 +27,11 @@ export default function Home() {
       getProgramList(
         programStatusOption[programStatus].toLowerCase(),
         listSize,
-        page
-      )
+        page,
+      ),
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <div>Error</div>;
 
   const { totalPage, programs } = data;

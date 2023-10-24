@@ -14,7 +14,7 @@ const Input = ({ id, label, value, onChange, placeholder }: InputProps) => {
         onChange={onChange}
         placeholder={placeholder}
         autoComplete="off"
-        className="border-2 border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:border-tertiary w-full"
+        className="w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-tertiary focus:outline-none"
       />
     </div>
   );

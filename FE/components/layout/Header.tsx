@@ -1,9 +1,9 @@
 "use client";
 
-import { PropsWithChildren, use } from "react";
-import Button from "../common/Button";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { PropsWithChildren } from "react";
+import Button from "../common/Button.component";
 
 export type headerLeft = "user" | "left";
 export type headerRight = "btn" | "none";
@@ -25,8 +25,8 @@ const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
   };
 
   return (
-    <header className="flex justify-between items-center w-full h-[5rem] px-[7.5rem] py-2 rounded-b-md shadow-sm sticky top-0 bg-background z-50">
-      <div className="flex justify-center w-[10rem]">
+    <header className="sticky top-0 z-50 flex h-[5rem] w-full items-center justify-between rounded-b-md bg-background px-[7.5rem] py-2 shadow-sm">
+      <div className="flex w-[10rem] justify-center">
         <Image
           src={`/icons/${left}.svg`}
           alt={left}

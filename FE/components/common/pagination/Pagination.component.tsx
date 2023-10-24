@@ -1,5 +1,5 @@
+import PaginationItem from "./PaginationItem.conponent";
 import { calcPageNumbers } from "@/src/utils/calcPageNumbers";
-import PaginationItem from "./PaginationItem";
 
 interface PaginataionProps {
   totalPage: number;
@@ -14,35 +14,30 @@ const Paginataion = ({
 }: PaginataionProps) => {
   const pageNumbers = calcPageNumbers(currentPage, totalPage);
 
+  const handleBackward = () => {
+    if (currentPage === 1) return;
+    setCurrentPage((prev) => prev - 1);
+  };
+
+  const handleForward = () => {
+    if (currentPage === totalPage) return;
+    setCurrentPage((prev) => prev + 1);
+  };
+
   return (
-    <div className="flex items-center gap-8 my-14 w-full justify-center">
-      <img
-        src="/icons/left.svg"
-        alt="이전 페이지"
-        onClick={() => {
-          if (currentPage === 1) return;
-          setCurrentPage((prev) => prev - 1);
-        }}
-      />
+    <div className="my-14 flex w-full items-center justify-center gap-8">
+      <img src="/icons/left.svg" alt="이전 페이지" onClick={handleBackward} />
       <div className="flex gap-4">
         {pageNumbers.map((number) => (
           <PaginationItem
-            type={number === currentPage ? "selected" : "normal"}
+            isSelected={number === currentPage}
             onClick={() => setCurrentPage(number)}
           >
             {number}
           </PaginationItem>
         ))}
       </div>
-
-      <img
-        src="/icons/right.svg"
-        alt="이후 페이지"
-        onClick={() => {
-          if (currentPage === totalPage) return;
-          setCurrentPage((prev) => prev + 1);
-        }}
-      />
+      <img src="/icons/right.svg" alt="이후 페이지" onClick={handleForward} />
     </div>
   );
 };
