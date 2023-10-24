@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import MDEditor from "@uiw/react-md-editor";
 import Image from "next/image";
 import Link from "next/link";
+import LoadingSpinner from "../common/LoadingSpinner";
 import Title from "../common/Title.component";
 import { getProgramDetail } from "@/src/apis/program/program";
 import { convertDate } from "@/src/utils/date";
@@ -18,7 +19,7 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
     () => getProgramDetail(programId),
   );
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <>Error!</>;
 
   return (

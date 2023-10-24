@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 import Paginataion from "@/components/common/pagination/Pagination.component";
 import Tabs from "@/components/common/Tabs.component";
 import Title from "@/components/common/Title.component";
@@ -30,7 +31,7 @@ export default function Home() {
       ),
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <div>Error</div>;
 
   const { totalPage, programs } = data;

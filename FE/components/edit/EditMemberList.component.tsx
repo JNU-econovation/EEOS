@@ -1,4 +1,7 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../common/LoadingSpinner";
 import EditMemberListItem from "./EditMemberListItem.component";
 import { getEditMembers } from "@/src/apis/member/member";
 
@@ -15,7 +18,7 @@ const EditMemberList = ({ programId }: EditMemberListProps) => {
     getEditMembers(programId),
   );
 
-  if (isLoading) return <>로딩중...</>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <>에러...</>;
 
   return (
