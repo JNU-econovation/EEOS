@@ -11,6 +11,7 @@ interface ProgramEditPageProps {
 
 const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
   const { programId } = params;
+
   return (
     <SubLayout right="none">
       <Title>행사 정보 수정</Title>
