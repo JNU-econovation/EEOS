@@ -1,14 +1,14 @@
-import MemberList from "@/components/detail/MemberList";
-import ProgramInfo from "@/components/detail/ProgramInfo";
+import MemberList from "@/components/detail/MemberList.component";
+import ProgramInfo from "@/components/detail/ProgramInfo.component";
 import SubLayout from "@/components/layout/SubLayout";
 
-interface DetailPageProps {
+interface ProgramDetailPageProps {
   params: {
     programId: string;
   };
 }
 
-const DetailPage = ({ params }: DetailPageProps) => {
+const ProgramDetailPage = ({ params }: ProgramDetailPageProps) => {
   const { programId } = params;
   return (
     <SubLayout right="btn">
@@ -21,4 +21,4 @@ const DetailPage = ({ params }: DetailPageProps) => {
   );
 };
 
-export default DetailPage;
+export default ProgramDetailPage;

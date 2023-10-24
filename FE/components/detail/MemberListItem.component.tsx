@@ -1,6 +1,6 @@
-import { attendStatusLower, defaultMember } from "@/src/apis/types/member";
 import classNames from "classnames";
 import Image from "next/image";
+import { attendStatusLower, defaultMember } from "@/src/apis/types/member";
 
 interface MemberListItemProps {
   memberData: defaultMember;
@@ -8,7 +8,7 @@ interface MemberListItemProps {
 }
 
 const MemberListItem = ({ memberData, attendStatus }: MemberListItemProps) => {
-  const { memberId, generation, name } = memberData;
+  const { generation, name } = memberData;
 
   const memberListItemClass = classNames(
     "flex h-[28px] w-[28px] items-center justify-center rounded-full",

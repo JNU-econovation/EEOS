@@ -1,7 +1,7 @@
-import Provider from "@/src/utils/provider";
-import "./globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
+import Provider from "@/src/utils/provider";
+import "./globals.css";
 
 const noto_sans = Noto_Sans({
   weight: ["300", "400", "700", "800", "900"],

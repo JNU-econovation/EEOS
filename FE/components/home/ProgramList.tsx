@@ -1,5 +1,5 @@
-import { summaryProgram } from "@/src/apis/types/program";
 import ProgramListItem from "./ProgramListItem";
+import { summaryProgram } from "@/src/apis/types/program";
 
 interface ProgramListProps {
   programs: summaryProgram[];

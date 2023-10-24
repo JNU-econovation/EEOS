@@ -1,7 +1,6 @@
-import { getEditMembers } from "@/src/apis/member/member";
 import { useQuery } from "@tanstack/react-query";
 import EditMemberListItem from "./EditMemberListItem.component";
-import { defaultMember } from "@/src/apis/types/member";
+import { getEditMembers } from "@/src/apis/member/member";
 
 interface EditMemberListProps {
   programId: string;

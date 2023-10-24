@@ -1,13 +1,6 @@
 import classNames from "classnames";
 import { PropsWithChildren } from "react";
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  color: "primary" | "gray";
-  sizeType: "sm" | "base" | "lg";
-  leftIcon: boolean;
-  type?: "button" | "submit" | "reset";
-}
-
 const btnType = {
   primary: "bg-primary text-paragraph",
   gray: "bg-gray-100 text-paragraph",
@@ -19,12 +12,19 @@ const btnSize = {
   lg: "py-3 px-5 rounded-lg min-w-[8rem]",
 };
 
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  color?: "primary" | "gray";
+  sizeType?: "sm" | "base" | "lg";
+  leftIcon?: boolean;
+  type?: "button" | "submit" | "reset";
+}
+
 const Button = ({
   type = "button",
   color = "primary",
   sizeType = "base",
   leftIcon = false,
-  onClick,
+  onClick = () => {},
   children,
 }: PropsWithChildren<ButtonProps>) => {
   const btnStyle = classNames(
@@ -35,11 +35,7 @@ const Button = ({
 
   return (
     <button className={btnStyle} onClick={onClick} type={type}>
-      {leftIcon ? (
-        <img src="/icons/plus.svg" alt="plus" width={"22px"} />
-      ) : (
-        <></>
-      )}
+      {leftIcon && <img src="/icons/plus.svg" alt="plus" width={"22px"} />}
       <span>{children}</span>
     </button>
   );

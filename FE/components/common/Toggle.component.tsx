@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { useRef, useState } from "react";
 
 interface ToggleProps {
   active: boolean;
@@ -8,9 +7,6 @@ interface ToggleProps {
 }
 
 const Toggle = ({ active, onChange, disabled = false }: ToggleProps) => {
-  const toggleLine = useRef<HTMLButtonElement>(null);
-  const toggleCircle = useRef<HTMLDivElement>(null);
-
   const toggleLineClass = classNames(
     "flex h-7 w-12 items-center rounded-full shadow transition duration-300 focus:outline-none",
     {
@@ -19,7 +15,6 @@ const Toggle = ({ active, onChange, disabled = false }: ToggleProps) => {
       "opacity-0": disabled,
     },
   );
-
   const toggleCircleClass = classNames(
     "relative h-5 w-5 transform rounded-full bg-white transition-transform duration-500",
     {
@@ -28,17 +23,13 @@ const Toggle = ({ active, onChange, disabled = false }: ToggleProps) => {
     },
   );
 
+  const handleToggleClick = () => {
+    !disabled && onChange();
+  };
+
   return (
-    <button
-      className={toggleLineClass}
-      onClick={() => !disabled && onChange()}
-      ref={toggleLine}
-    >
-      <div
-        ref={toggleCircle}
-        id="switch-toggle"
-        className={toggleCircleClass}
-      ></div>
+    <button className={toggleLineClass} onClick={handleToggleClick}>
+      <div className={toggleCircleClass}></div>
     </button>
   );
 };

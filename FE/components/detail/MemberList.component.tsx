@@ -1,9 +1,9 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import MemberListItem from "./MemberListItem.component";
 import { getDetailMembers } from "@/src/apis/member/member";
 import { attendStatusLower } from "@/src/apis/types/member";
-import { useQuery } from "@tanstack/react-query";
-import MemberListItem from "./MemberListItem";
 
 interface MemberListProps {
   programId: string;

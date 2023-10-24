@@ -1,6 +1,6 @@
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import "./styles/calendar.css";
+import "./styles/calendar.styles.css";
 
 interface CalendarProps {
   programDate: Date | undefined;
@@ -9,6 +9,7 @@ interface CalendarProps {
 
 const Calendar = ({ programDate, setProgramDate }: CalendarProps) => {
   const disabledDays = { before: new Date() };
+
   return (
     <DayPicker
       mode="single"

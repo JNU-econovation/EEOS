@@ -2,20 +2,20 @@ import classNames from "classnames";
 import { PropsWithChildren } from "react";
 
 interface PaginationItemProps {
-  type: "selected" | "normal";
+  isSelected: boolean;
   onClick: () => void;
 }
 
 const PaginationItem = ({
   children,
-  type,
+  isSelected,
   onClick,
 }: PropsWithChildren<PaginationItemProps>) => {
   const paginationItemStyle = classNames(
     "flex h-8 w-8 items-center justify-center rounded-lg",
     {
-      "bg-primary": type === "selected",
-      "bg-background": type === "normal",
+      "bg-primary": isSelected,
+      "bg-background": !isSelected,
     },
   );
 

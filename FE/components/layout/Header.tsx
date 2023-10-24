@@ -1,9 +1,9 @@
 "use client";
 
-import { PropsWithChildren } from "react";
-import Button from "../common/Button";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { PropsWithChildren } from "react";
+import Button from "../common/Button.component";
 
 export type headerLeft = "user" | "left";
 export type headerRight = "btn" | "none";

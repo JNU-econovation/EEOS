@@ -1,15 +1,15 @@
 "use client";
 
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Button from "../common/Button.component";
+import Calendar from "../common/Calendar.component";
+import Input from "../common/Input.component";
+import MarkdownEditor from "../common/MarkdownEditor.component";
 import { getProgramDetail, updateProgram } from "@/src/apis/program/program";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import Input from "../common/Input";
 import { convertDate } from "@/src/utils/date";
-import MarkdownEditor from "../common/MarkdownEditor.component";
-import Calendar from "../common/Calendar.component";
-import Button from "../common/Button";
-import { useRouter } from "next/navigation";
 
 interface ProgramEditFormProps {
   programId: string;
@@ -28,27 +28,25 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
 
-  const { data, isLoading, isError } = useQuery(
-    ["ProgramInfo", programId],
-    () =>
-      getProgramDetail(programId).then((data) => {
-        setTitle(data.title);
-        setContent(data.content);
-        setDate(new Date(parseInt(data.programDate)));
-        return data;
-      }),
+  const { isLoading, isError } = useQuery(["ProgramInfo", programId], () =>
+    getProgramDetail(programId).then((data) => {
+      setTitle(data.title);
+      setContent(data.content);
+      setDate(new Date(parseInt(data.programDate)));
+      return data;
+    }),
   );
 
   const { mutate: updateProgramMutate } = useMutation(
     () =>
       updateProgram(programId, {
         title,
-        content: content || "",
+        content: content,
         programDate,
       }),
     {
       onSettled: (data) => {
-        data && router.replace(`/detail/${data.programId}`);
+        data?.programId && router.replace(`/detail/${data.programId}`);
       },
     },
   );
@@ -103,10 +101,8 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
         label="행사 내용"
       />
       <section className="mt-6 flex w-[50rem] justify-end gap-2">
-        <Button color="primary" sizeType="base" leftIcon={false} type="submit">
-          수정
-        </Button>
-        <Button color="gray" sizeType="base" leftIcon={false} onClick={onReset}>
+        <Button type="submit">수정</Button>
+        <Button color="gray" onClick={onReset}>
           취소
         </Button>
       </section>
