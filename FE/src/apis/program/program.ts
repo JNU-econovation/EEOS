@@ -16,7 +16,7 @@ export const createProgram = async (body: createProgramRequest) => {
 /* 행사 수정 */
 export const updateProgram = async (
   programId: string,
-  body: updateProgramRequest
+  body: updateProgramRequest,
 ) => {
   const { data } = await https.put(`/programs/${programId}`, body);
   return data;
@@ -26,10 +26,10 @@ export const updateProgram = async (
 export const getProgramList = async (
   programStatus: string,
   size: number,
-  page: number
+  page: number,
 ) => {
   const response = await https.get<getProgramListResponse>(
-    `/programs?programStatus=${programStatus}&size=${size}&page=${page}`
+    `/programs?programStatus=${programStatus}&size=${size}&page=${page}`,
   );
   return response.data;
 };
@@ -37,7 +37,7 @@ export const getProgramList = async (
 /* 행사 상세 조회 */
 export const getProgramDetail = async (programId: string) => {
   const { data } = await https.get<getProgramDetailResponse>(
-    `/programs/${programId}`
+    `/programs/${programId}`,
   );
 
   return data;

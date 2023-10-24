@@ -1,9 +1,9 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import MemberListItem from "./MemberListItem.component";
 import { getDetailMembers } from "@/src/apis/member/member";
 import { attendStatusLower } from "@/src/apis/types/member";
-import { useQuery } from "@tanstack/react-query";
-import MemberListItem from "./MemberListItem";
 
 interface MemberListProps {
   programId: string;
@@ -17,18 +17,18 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
     isLoading,
     isError,
   } = useQuery(["memberDetailList", attendStatus], () =>
-    getDetailMembers(parseInt(programId), attendStatus)
+    getDetailMembers(parseInt(programId), attendStatus),
   );
 
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   return (
-    <div className="flex flex-col w-max_screen my-4 bg-background px-4">
-      <div className="flex justify-center py-6 border-b-[1.5px] border-stroke-light">
+    <div className="my-4 flex w-max_screen flex-col bg-background px-4">
+      <div className="flex justify-center border-b-[1.5px] border-stroke-light py-6">
         <span className="text-xl font-bold">{title}</span>
       </div>
-      <div className="grid grid-cols-4 w-full">
+      <div className="grid w-full grid-cols-4">
         {members.map((member) => (
           <MemberListItem
             key={member.memberId}

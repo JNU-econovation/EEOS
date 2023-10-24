@@ -1,24 +1,25 @@
-import MemberList from "@/components/detail/MemberList";
-import ProgramInfo from "@/components/detail/ProgramInfo";
+import MemberList from "@/components/detail/MemberList.component";
+import ProgramInfo from "@/components/detail/ProgramInfo.component";
 import SubLayout from "@/components/layout/SubLayout";
 
-interface DetailPageProps {
+interface ProgramDetailPageProps {
   params: {
     programId: string;
   };
 }
 
-const DetailPage = ({ params }: DetailPageProps) => {
+const ProgramDetailPage = ({ params }: ProgramDetailPageProps) => {
   const { programId } = params;
+
   return (
     <SubLayout right="btn">
       <ProgramInfo programId={programId} />
-      <section className="w-screen bg-soft_secondary flex flex-col gap-10 items-center py-16">
+      <div className="flex w-screen flex-col items-center gap-10 bg-soft_secondary py-16">
         <MemberList key="attend" programId={programId} attendStatus="attend" />
         <MemberList key="absent" programId={programId} attendStatus="absent" />
-      </section>
+      </div>
     </SubLayout>
   );
 };
 
-export default DetailPage;
+export default ProgramDetailPage;

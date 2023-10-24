@@ -2,7 +2,7 @@ const weekList = ["일", "월", "화", "수", "목", "금", "토"];
 
 export const convertDate = (
   timestamp: string,
-  type: "default" | "short" = "default"
+  type: "default" | "short" = "default",
 ) => {
   const date = new Date(parseInt(timestamp));
   const year = date.getFullYear();
