@@ -20,11 +20,9 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [date, setDate] = useState<Date | undefined>(new Date());
-
   const programDate = date
     ? date.getTime().toString()
     : new Date().getTime().toString();
-
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
 
@@ -51,7 +49,11 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
     },
   );
 
-  const onReset = () => {
+  const handleDateChange = (date: Date | undefined) => {
+    setDate(date);
+  };
+
+  const formReset = () => {
     router.push("/");
   };
 
@@ -79,7 +81,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="행사 이름 입력"
       />
-      <section
+      <div
         onClick={() => setOpenCalender(true)}
         className="relative"
         ref={calenderRef}
@@ -91,21 +93,21 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
           placeholder="XXXX-XX-XX"
         />
         {openCalender && (
-          <Calendar programDate={date} setProgramDate={setDate} />
+          <Calendar date={date} handleDateChange={handleDateChange} />
         )}
-      </section>
+      </div>
       <MarkdownEditor
         id="content"
         value={content ? content : ""}
         onChange={(e) => (e ? setContent(e) : setContent(""))}
         label="행사 내용"
       />
-      <section className="mt-6 flex w-[50rem] justify-end gap-2">
+      <div className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button type="submit">수정</Button>
-        <Button color="gray" onClick={onReset}>
+        <Button color="gray" onClick={formReset}>
           취소
         </Button>
-      </section>
+      </div>
     </form>
   );
 };

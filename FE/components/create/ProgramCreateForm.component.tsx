@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@/components/common/Button.component";
 import Calendar from "@/components/common/Calendar.component";
 import Input from "@/components/common/Input.component";
@@ -30,9 +30,10 @@ const ProgramCreateForm = () => {
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
 
-  useEffect(() => {
-    date && setProgramDate(date.getTime().toString());
-  }, [date]);
+  const handleDateChange = (date: Date | undefined) => {
+    setDate(date);
+    setProgramDate(date?.getTime().toString() || "");
+  };
 
   const { mutate: createProgramMutate } = useMutation(
     () => createProgram({ title, content: content || "", programDate }),
@@ -84,7 +85,7 @@ const ProgramCreateForm = () => {
           placeholder="XXXX-XX-XX"
         />
         {openCalender && (
-          <Calendar programDate={date} setProgramDate={setDate} />
+          <Calendar date={date} handleDateChange={handleDateChange} />
         )}
       </div>
       <MarkdownEditor
@@ -93,12 +94,12 @@ const ProgramCreateForm = () => {
         onChange={(e) => setContent(e)}
         label="행사 내용"
       />
-      <section className="mt-6 flex w-[50rem] justify-end gap-2">
+      <div className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button type="submit">생성</Button>
         <Button color="gray" onClick={formReset}>
           취소
         </Button>
-      </section>
+      </div>
     </form>
   );
 };
