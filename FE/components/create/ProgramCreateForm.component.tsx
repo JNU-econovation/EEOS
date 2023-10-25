@@ -9,6 +9,7 @@ import Calendar from "@/components/common/Calendar.component";
 import Input from "@/components/common/Input.component";
 import MarkdownEditor from "@/components/common/MarkdownEditor.component";
 import { createProgram } from "@/src/apis/program/program";
+import FORM_INFO from "@/src/constants/FORM_INFO";
 import ROUTES from "@/src/constants/ROUTES";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import {
@@ -68,11 +69,12 @@ const ProgramCreateForm = () => {
       onSubmit={handleSubmit}
     >
       <Input
-        id="event-title"
-        label="행사 이름"
+        id={FORM_INFO.PROGRAM.TITLE.id}
+        type={FORM_INFO.PROGRAM.TITLE.type}
+        label={FORM_INFO.PROGRAM.TITLE.label}
+        placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="행사 이름 입력"
       />
       <div
         onClick={() => setOpenCalender(true)}
@@ -80,20 +82,22 @@ const ProgramCreateForm = () => {
         ref={calenderRef}
       >
         <Input
-          id="event-date"
-          label="행사 일정"
+          id={FORM_INFO.PROGRAM.DATE.id}
+          type={FORM_INFO.PROGRAM.DATE.type}
+          label={FORM_INFO.PROGRAM.DATE.label}
+          placeholder={FORM_INFO.PROGRAM.DATE.placeholder}
           value={convertDate(programDate)}
-          placeholder="XXXX-XX-XX"
         />
         {openCalender && (
           <Calendar date={date} handleDateChange={handleDateChange} />
         )}
       </div>
       <MarkdownEditor
-        id="content"
+        id={FORM_INFO.PROGRAM.CONTENT.id}
+        label={FORM_INFO.PROGRAM.CONTENT.label}
+        placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
         value={content ? content : ""}
         onChange={(e) => setContent(e)}
-        label="행사 내용"
       />
       <div className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button type="submit">생성</Button>

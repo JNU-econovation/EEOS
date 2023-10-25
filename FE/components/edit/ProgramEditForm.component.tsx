@@ -9,6 +9,7 @@ import Input from "../common/Input.component";
 import LoadingSpinner from "../common/LoadingSpinner";
 import MarkdownEditor from "../common/MarkdownEditor.component";
 import { getProgramDetail, updateProgram } from "@/src/apis/program/program";
+import FORM_INFO from "@/src/constants/FORM_INFO";
 import ROUTES from "@/src/constants/ROUTES";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import { convertDate } from "@/src/utils/date";
@@ -77,11 +78,12 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
       onSubmit={onSubmit}
     >
       <Input
-        id="event-title"
-        label="행사 이름"
+        id={FORM_INFO.PROGRAM.TITLE.id}
+        type={FORM_INFO.PROGRAM.TITLE.type}
+        label={FORM_INFO.PROGRAM.TITLE.label}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="행사 이름 입력"
+        placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
       />
       <div
         onClick={() => setOpenCalender(true)}
@@ -89,20 +91,22 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
         ref={calenderRef}
       >
         <Input
-          id="event-date"
-          label="행사 일정"
+          id={FORM_INFO.PROGRAM.DATE.id}
+          type={FORM_INFO.PROGRAM.DATE.type}
+          label={FORM_INFO.PROGRAM.DATE.label}
           value={convertDate(programDate)}
-          placeholder="XXXX-XX-XX"
+          placeholder={FORM_INFO.PROGRAM.DATE.placeholder}
         />
         {openCalender && (
           <Calendar date={date} handleDateChange={handleDateChange} />
         )}
       </div>
       <MarkdownEditor
-        id="content"
+        id={FORM_INFO.PROGRAM.CONTENT.id}
         value={content ? content : ""}
         onChange={(e) => (e ? setContent(e) : setContent(""))}
-        label="행사 내용"
+        label={FORM_INFO.PROGRAM.CONTENT.label}
+        placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
       />
       <div className="mt-6 flex w-[50rem] justify-end gap-2">
         <Button type="submit">수정</Button>

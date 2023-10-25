@@ -6,6 +6,7 @@ interface MarkdownEditorProps {
   value: string;
   onChange: (value?: string) => void;
   label: string;
+  placeholder: string;
 }
 
 const MarkdownEditor = ({
@@ -13,6 +14,7 @@ const MarkdownEditor = ({
   value,
   onChange,
   label,
+  placeholder,
 }: MarkdownEditorProps) => {
   return (
     <div className="flex flex-col gap-2">
@@ -26,6 +28,7 @@ const MarkdownEditor = ({
         hideToolbar={true}
         visiableDragbar={false}
         height={400}
+        placeholder={placeholder}
       />
     </div>
   );
