@@ -4,8 +4,18 @@ import {
   editMembersRequest,
   editMembersResponse,
   getDetailMembersResponse,
+  getEditMembersResponse,
 } from "../types/member";
+import { sortMembers } from "./../../utils/sort";
 import API from "@/src/constants/API";
+
+export const getEditMembers = async (programId: number) => {
+  const { data } = await https<getEditMembersResponse>({
+    url: API.MEMBER.GET_ALL_MEMBERS + `/${programId}`,
+    method: "GET",
+  });
+  return sortMembers(data);
+};
 
 export const getDetailMembers = async (
   programId: number,
@@ -25,7 +35,7 @@ export const editMembers = async (
   body: editMembersRequest,
 ) => {
   const { data } = await https<editMembersResponse>({
-    url: API.MEMBER.GET_ALL_MEMBERS + `/${programId}`,
+    url: API.MEMBER.POST_ATTENDSTATUS + `/${programId}`,
     method: "POST",
     data: body,
   });
