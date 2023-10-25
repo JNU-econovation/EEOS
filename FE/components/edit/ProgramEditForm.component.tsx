@@ -9,6 +9,7 @@ import Input from "../common/Input.component";
 import LoadingSpinner from "../common/LoadingSpinner";
 import MarkdownEditor from "../common/MarkdownEditor.component";
 import { getProgramDetail, updateProgram } from "@/src/apis/program/program";
+import ROUTES from "@/src/constants/ROUTES";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import { convertDate } from "@/src/utils/date";
 
@@ -45,7 +46,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
       }),
     {
       onSettled: (data) => {
-        data?.programId && router.replace(`/detail/${data.programId}`);
+        data?.programId && router.replace(`${ROUTES.DETAIL}/${data.programId}`);
       },
     },
   );
@@ -55,7 +56,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
   };
 
   const formReset = () => {
-    router.push("/");
+    router.push(ROUTES.HOME);
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

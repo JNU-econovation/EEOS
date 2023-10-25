@@ -9,6 +9,7 @@ import Calendar from "@/components/common/Calendar.component";
 import Input from "@/components/common/Input.component";
 import MarkdownEditor from "@/components/common/MarkdownEditor.component";
 import { createProgram } from "@/src/apis/program/program";
+import ROUTES from "@/src/constants/ROUTES";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import {
   createContentAtom,
@@ -40,7 +41,7 @@ const ProgramCreateForm = () => {
     {
       onSettled: (data) => {
         formReset();
-        data && router.replace(`/detail/${data.programId}`);
+        data && router.replace(`${ROUTES.DETAIL}/${data.programId}`);
       },
     },
   );

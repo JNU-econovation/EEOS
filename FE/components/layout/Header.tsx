@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
 import Button from "../common/Button.component";
+import ROUTES from "@/src/constants/ROUTES";
 
 export type headerLeft = "user" | "left";
 export type headerRight = "btn" | "none";
@@ -40,7 +41,7 @@ const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
         alt="logo"
         width={64}
         height={48}
-        onClick={() => router.push("/")}
+        onClick={() => router.push(ROUTES.HOME)}
       />
       <div className="w-[10rem]">
         {right === "btn" && (
@@ -49,7 +50,7 @@ const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
             sizeType="base"
             leftIcon={true}
             children="행사 추가"
-            onClick={() => router.push("/create")}
+            onClick={() => router.push(ROUTES.CREATE)}
           />
         )}
       </div>
