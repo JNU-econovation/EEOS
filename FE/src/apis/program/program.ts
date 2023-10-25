@@ -8,9 +8,12 @@ import {
 } from "../types/program";
 import API from "@/src/constants/API";
 
-/* 행사 생성 */
 export const createProgram = async (body: createProgramRequest) => {
-  const { data } = await https.post<createProgramResponse>(API.PROGRAM, body);
+  const { data } = await https<createProgramResponse>({
+    url: API.PROGRAM,
+    method: "POST",
+    data: body,
+  });
   return data;
 };
 
@@ -19,7 +22,11 @@ export const updateProgram = async (
   programId: string,
   body: updateProgramRequest,
 ) => {
-  const { data } = await https.put(API.PROGRAM + `/${programId}`, body);
+  const { data } = await https<updateProgramRequest>({
+    url: API.PROGRAM + `/${programId}`,
+    method: "PUT",
+    data: body,
+  });
   return data;
 };
 
@@ -29,17 +36,21 @@ export const getProgramList = async (
   size: number,
   page: number,
 ) => {
-  const response = await https.get<getProgramListResponse>(API.PROGRAM, {
+  const { data } = await https<getProgramListResponse>({
+    url: API.PROGRAM,
+    method: "GET",
     params: { programStatus, size, page },
   });
-  return response.data;
+
+  return data;
 };
 
 /* 행사 상세 조회 */
 export const getProgramDetail = async (programId: string) => {
-  const { data } = await https.get<getProgramDetailResponse>(
-    API.PROGRAM + `/${programId}`,
-  );
+  const { data } = await https<getProgramDetailResponse>({
+    url: API.PROGRAM + `/${programId}`,
+    method: "GET",
+  });
 
   return data;
 };
