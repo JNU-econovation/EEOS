@@ -4,25 +4,18 @@ import {
   editMembersRequest,
   editMembersResponse,
   getDetailMembersResponse,
-  getEditMembersResponse,
 } from "../types/member";
-import { sortMembers } from "./../../utils/sort";
+import API from "@/src/constants/API";
 
 export const getDetailMembers = async (
   programId: number,
   attendStatus: attendStatusLower,
 ) => {
   const { data } = await https.get<getDetailMembersResponse>(
-    `/programs/${programId}/members?attendStatus=${attendStatus}`,
+    API.MEMBER.GET_MEMBER_LIST_BY_STATUS(programId),
+    { params: { attendStatus } },
   );
   return data;
-};
-
-export const getEditMembers = async (programId: string) => {
-  const { data } = await https.get<getEditMembersResponse>(
-    `/attend/candidate/program/${programId}`,
-  );
-  return sortMembers(data);
 };
 
 export const editMembers = async (
@@ -30,7 +23,7 @@ export const editMembers = async (
   body: editMembersRequest,
 ) => {
   const { data } = await https.post<editMembersResponse>(
-    `/attend/programs/${programId}`,
+    API.MEMBER.GET_ALL_MEMBERS + `/${programId}`,
     body,
   );
   return data;

@@ -60,7 +60,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
     router.push(ROUTES.HOME);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title || !content || !programDate) {
       alert("모든 항목을 입력해주세요.");
@@ -69,13 +69,13 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
     updateProgramMutate();
   };
 
-  if (isLoading) <LoadingSpinner />;
-  if (isError) <div>Error!</div>;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <div>Error!</div>;
 
   return (
     <form
       className="mt-8 flex w-full max-w-[50rem] flex-col gap-4"
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       <Input
         id={FORM_INFO.PROGRAM.TITLE.id}

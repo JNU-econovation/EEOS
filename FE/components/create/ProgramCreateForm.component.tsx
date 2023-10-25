@@ -28,14 +28,8 @@ const ProgramCreateForm = () => {
   const [date, setDate] = useState<Date | undefined>(
     new Date(parseInt(programDate)),
   );
-
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
-
-  const handleDateChange = (date: Date | undefined) => {
-    setDate(date);
-    setProgramDate(date?.getTime().toString() || "");
-  };
 
   const { mutate: createProgramMutate } = useMutation(
     () => createProgram({ title, content: content || "", programDate }),
@@ -46,6 +40,11 @@ const ProgramCreateForm = () => {
       },
     },
   );
+
+  const handleDateChange = (date: Date | undefined) => {
+    setDate(date);
+    setProgramDate(date?.getTime().toString() || "");
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
