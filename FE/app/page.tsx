@@ -8,7 +8,7 @@ import Tabs from "@/components/common/Tabs.component";
 import Title from "@/components/common/Title.component";
 import ProgramList from "@/components/home/ProgramList";
 import DefaultLayout from "@/components/layout/DefaultLayout";
-import { getProgramList } from "@/src/apis/program/program";
+import { getProgramList } from "@/src/apis/program";
 import {
   listSize,
   programStatusList,
