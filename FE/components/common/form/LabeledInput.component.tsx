@@ -2,7 +2,7 @@ interface InputProps extends React.HTMLProps<HTMLInputElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({
+const LabeledInput = ({
   id,
   label,
   value,
@@ -28,4 +28,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default LabeledInput;
