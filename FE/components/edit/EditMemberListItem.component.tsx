@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CheckBox from "../common/CheckBox.component";
 import Toggle from "../common/Toggle.component";
-import { editMembers } from "@/src/apis/member/member";
+import { updateMembers } from "@/src/apis/member";
 import { defaultMember } from "@/src/apis/types/member";
 
 interface EditMemberListItemProps {
@@ -19,7 +19,7 @@ const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
 
   const { mutate: updateMemberMutate } = useMutation(
     () =>
-      editMembers(memberId, {
+      updateMembers(memberId, {
         memberId: memberId,
         beforeAttendStatus: attendStatus,
         afterAttendStatus: getAfterAttendStatus(),

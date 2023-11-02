@@ -8,19 +8,19 @@ export interface defaultMember {
   attendStatus: attendStatus;
 }
 
-/* getDetailMembers */
-export type getDetailMembersResponse = defaultMember[];
+/* getMembersByStatus */
+export type getMembersByStatusResponse = defaultMember[];
 
-/* getEditMembers */
-export type getEditMembersResponse = defaultMember[];
+/* getAllMembers */
+export type getAllMembersResponse = defaultMember[];
 
-/* editMembers */
-export interface editMembersRequest {
+/* updateMembers */
+export interface updateMembersRequest {
   memberId: number;
   beforeAttendStatus: attendStatus;
   afterAttendStatus: attendStatus;
 }
 
-export interface editMembersResponse {
+export interface updateMembersResponse {
   programId: number;
 }

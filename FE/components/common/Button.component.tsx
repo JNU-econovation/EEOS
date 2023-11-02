@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Image from "next/image";
 import { PropsWithChildren } from "react";
 
 const btnType = {
@@ -35,7 +36,15 @@ const Button = ({
 
   return (
     <button className={btnStyle} onClick={onClick} type={type}>
-      {leftIcon && <img src="/icons/plus.svg" alt="plus" width={"22px"} />}
+      {leftIcon && (
+        <Image
+          src="/icons/plus.svg"
+          alt="plus"
+          width={22}
+          height={22}
+          className="hidden md:inline-block"
+        />
+      )}
       <span>{children}</span>
     </button>
   );

@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../common/LoadingSpinner";
 import EditMemberListItem from "./EditMemberListItem.component";
-import { getEditMembers } from "@/src/apis/member/member";
+import { getAllMembers } from "@/src/apis/member";
 
 interface EditMemberListProps {
   programId: string;
@@ -15,7 +15,7 @@ const EditMemberList = ({ programId }: EditMemberListProps) => {
     isLoading,
     isError,
   } = useQuery(["editEditMemberList", programId], () =>
-    getEditMembers(programId),
+    getAllMembers(programId),
   );
 
   if (isLoading) return <LoadingSpinner />;
