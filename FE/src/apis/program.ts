@@ -1,11 +1,11 @@
-import { https } from "..";
 import {
   createProgramRequest,
   createProgramResponse,
   getProgramDetailResponse,
   getProgramListResponse,
   updateProgramRequest,
-} from "../types/program";
+} from "./types/program";
+import { https } from ".";
 import API from "@/src/constants/API";
 
 export const createProgram = async (body: createProgramRequest) => {
@@ -17,12 +17,11 @@ export const createProgram = async (body: createProgramRequest) => {
   return data;
 };
 
-/* 행사 수정 */
 export const updateProgram = async (
   programId: string,
   body: updateProgramRequest,
 ) => {
-  const { data } = await https<updateProgramRequest>({
+  const { data } = await https({
     url: API.PROGRAM + `/${programId}`,
     method: "PUT",
     data: body,
@@ -30,7 +29,6 @@ export const updateProgram = async (
   return data;
 };
 
-/* 행사 리스트 조회 */
 export const getProgramList = async (
   programStatus: string,
   size: number,
@@ -45,7 +43,6 @@ export const getProgramList = async (
   return data;
 };
 
-/* 행사 상세 조회 */
 export const getProgramDetail = async (programId: string) => {
   const { data } = await https<getProgramDetailResponse>({
     url: API.PROGRAM + `/${programId}`,
