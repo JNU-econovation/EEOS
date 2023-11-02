@@ -1,0 +1,143 @@
+Index: app/src/main/java/com/example/eeos/ui/theme/Color.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos.ui.theme\n\nimport androidx.compose.ui.graphics.Color\n\nval Purple80 = Color(0xFFD0BCFF)\nval PurpleGrey80 = Color(0xFFCCC2DC)\nval Pink80 = Color(0xFFEFB8C8)\n\nval Purple40 = Color(0xFF6650a4)\nval PurpleGrey40 = Color(0xFF625b71)\nval Pink40 = Color(0xFF7D5260)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/eeos/ui/theme/Color.kt b/app/src/main/java/com/example/eeos/ui/theme/Color.kt
+--- a/app/src/main/java/com/example/eeos/ui/theme/Color.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/main/java/com/example/eeos/ui/theme/Color.kt	(date 1698893823018)
+@@ -8,4 +8,4 @@
+ 
+ val Purple40 = Color(0xFF6650a4)
+ val PurpleGrey40 = Color(0xFF625b71)
+-val Pink40 = Color(0xFF7D5260)
+\ No newline at end of file
++val Pink40 = Color(0xFF7D5260)
+Index: app/src/main/java/com/example/eeos/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos\n\nimport android.os.Bundle\nimport androidx.activity.ComponentActivity\nimport androidx.activity.compose.setContent\nimport androidx.compose.foundation.layout.fillMaxSize\nimport androidx.compose.material3.MaterialTheme\nimport androidx.compose.material3.Surface\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.tooling.preview.Preview\nimport com.example.eeos.ui.theme.EeosTheme\n\nclass MainActivity : ComponentActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContent {\n            EeosTheme {\n                // A surface container using the 'background' color from the theme\n                Surface(\n                    modifier = Modifier.fillMaxSize(),\n                    color = MaterialTheme.colorScheme.background\n                ) {\n                    Greeting(\"Android\")\n                }\n            }\n        }\n    }\n}\n@Composable\nfun Greeting(name: String, modifier: Modifier = Modifier) {\n    Text(\n        text = \"Hello $name!\",\n        modifier = modifier\n    )\n}\n@Preview(showBackground = true)\n@Composable\nfun GreetingPreview() {\n    EeosTheme {\n        Greeting(\"Android\")\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/eeos/MainActivity.kt b/app/src/main/java/com/example/eeos/MainActivity.kt
+--- a/app/src/main/java/com/example/eeos/MainActivity.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/main/java/com/example/eeos/MainActivity.kt	(date 1698893822999)
+@@ -28,6 +28,7 @@
+         }
+     }
+ }
++
+ @Composable
+ fun Greeting(name: String, modifier: Modifier = Modifier) {
+     Text(
+@@ -35,10 +36,11 @@
+         modifier = modifier
+     )
+ }
++
+ @Preview(showBackground = true)
+ @Composable
+ fun GreetingPreview() {
+     EeosTheme {
+         Greeting("Android")
+     }
+-}
+\ No newline at end of file
++}
+Index: app/src/androidTest/java/com/example/eeos/ExampleInstrumentedTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos\n\nimport androidx.test.platform.app.InstrumentationRegistry\nimport androidx.test.ext.junit.runners.AndroidJUnit4\n\nimport org.junit.Test\nimport org.junit.runner.RunWith\n\nimport org.junit.Assert.*\n\n/**\n * Instrumented test, which will execute on an Android device.\n *\n * See [testing documentation](http://d.android.com/tools/testing).\n */\n@RunWith(AndroidJUnit4::class)\nclass ExampleInstrumentedTest {\n    @Test\n    fun useAppContext() {\n        // Context of the app under test.\n        val appContext = InstrumentationRegistry.getInstrumentation().targetContext\n        assertEquals(\"com.example.eeos\", appContext.packageName)\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/example/eeos/ExampleInstrumentedTest.kt b/app/src/androidTest/java/com/example/eeos/ExampleInstrumentedTest.kt
+--- a/app/src/androidTest/java/com/example/eeos/ExampleInstrumentedTest.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/androidTest/java/com/example/eeos/ExampleInstrumentedTest.kt	(date 1698893822982)
+@@ -1,13 +1,11 @@
+ package com.example.eeos
+ 
+-import androidx.test.platform.app.InstrumentationRegistry
+ import androidx.test.ext.junit.runners.AndroidJUnit4
+-
++import androidx.test.platform.app.InstrumentationRegistry
++import org.junit.Assert.*
+ import org.junit.Test
+ import org.junit.runner.RunWith
+ 
+-import org.junit.Assert.*
+-
+ /**
+  * Instrumented test, which will execute on an Android device.
+  *
+@@ -21,4 +19,4 @@
+         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+         assertEquals("com.example.eeos", appContext.packageName)
+     }
+-}
+\ No newline at end of file
++}
+Index: app/src/test/java/com/example/eeos/ExampleUnitTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos\n\nimport org.junit.Test\n\nimport org.junit.Assert.*\n\n/**\n * Example local unit test, which will execute on the development machine (host).\n *\n * See [testing documentation](http://d.android.com/tools/testing).\n */\nclass ExampleUnitTest {\n    @Test\n    fun addition_isCorrect() {\n        assertEquals(4, 2 + 2)\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/example/eeos/ExampleUnitTest.kt b/app/src/test/java/com/example/eeos/ExampleUnitTest.kt
+--- a/app/src/test/java/com/example/eeos/ExampleUnitTest.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/test/java/com/example/eeos/ExampleUnitTest.kt	(date 1698893822912)
+@@ -1,8 +1,7 @@
+ package com.example.eeos
+ 
+-import org.junit.Test
+-
+ import org.junit.Assert.*
++import org.junit.Test
+ 
+ /**
+  * Example local unit test, which will execute on the development machine (host).
+@@ -14,4 +13,4 @@
+     fun addition_isCorrect() {
+         assertEquals(4, 2 + 2)
+     }
+-}
+\ No newline at end of file
++}
+Index: app/src/main/java/com/example/eeos/ui/theme/Theme.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos.ui.theme\n\nimport android.app.Activity\nimport android.os.Build\nimport androidx.compose.foundation.isSystemInDarkTheme\nimport androidx.compose.material3.MaterialTheme\nimport androidx.compose.material3.darkColorScheme\nimport androidx.compose.material3.dynamicDarkColorScheme\nimport androidx.compose.material3.dynamicLightColorScheme\nimport androidx.compose.material3.lightColorScheme\nimport androidx.compose.runtime.Composable\nimport androidx.compose.runtime.SideEffect\nimport androidx.compose.ui.graphics.toArgb\nimport androidx.compose.ui.platform.LocalContext\nimport androidx.compose.ui.platform.LocalView\nimport androidx.core.view.WindowCompat\n\nprivate val DarkColorScheme = darkColorScheme(\n    primary = Purple80,\n    secondary = PurpleGrey80,\n    tertiary = Pink80\n)\n\nprivate val LightColorScheme = lightColorScheme(\n    primary = Purple40,\n    secondary = PurpleGrey40,\n    tertiary = Pink40\n\n    /* Other default colors to override\n    background = Color(0xFFFFFBFE),\n    surface = Color(0xFFFFFBFE),\n    onPrimary = Color.White,\n    onSecondary = Color.White,\n    onTertiary = Color.White,\n    onBackground = Color(0xFF1C1B1F),\n    onSurface = Color(0xFF1C1B1F),\n    */\n)\n\n@Composable\nfun EeosTheme(\n    darkTheme: Boolean = isSystemInDarkTheme(),\n    // Dynamic color is available on Android 12+\n    dynamicColor: Boolean = true,\n    content: @Composable () -> Unit\n) {\n    val colorScheme = when {\n        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {\n            val context = LocalContext.current\n            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)\n        }\n\n        darkTheme -> DarkColorScheme\n        else -> LightColorScheme\n    }\n    val view = LocalView.current\n    if (!view.isInEditMode) {\n        SideEffect {\n            val window = (view.context as Activity).window\n            window.statusBarColor = colorScheme.primary.toArgb()\n            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme\n        }\n    }\n\n    MaterialTheme(\n        colorScheme = colorScheme,\n        typography = Typography,\n        content = content\n    )\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/eeos/ui/theme/Theme.kt b/app/src/main/java/com/example/eeos/ui/theme/Theme.kt
+--- a/app/src/main/java/com/example/eeos/ui/theme/Theme.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/main/java/com/example/eeos/ui/theme/Theme.kt	(date 1698893823050)
+@@ -67,4 +67,4 @@
+         typography = Typography,
+         content = content
+     )
+-}
+\ No newline at end of file
++}
+Index: app/src/main/java/com/example/eeos/ui/theme/Type.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eeos.ui.theme\n\nimport androidx.compose.material3.Typography\nimport androidx.compose.ui.text.TextStyle\nimport androidx.compose.ui.text.font.FontFamily\nimport androidx.compose.ui.text.font.FontWeight\nimport androidx.compose.ui.unit.sp\n\n// Set of Material typography styles to start with\nval Typography = Typography(\n    bodyLarge = TextStyle(\n        fontFamily = FontFamily.Default,\n        fontWeight = FontWeight.Normal,\n        fontSize = 16.sp,\n        lineHeight = 24.sp,\n        letterSpacing = 0.5.sp\n    )\n    /* Other default text styles to override\n    titleLarge = TextStyle(\n        fontFamily = FontFamily.Default,\n        fontWeight = FontWeight.Normal,\n        fontSize = 22.sp,\n        lineHeight = 28.sp,\n        letterSpacing = 0.sp\n    ),\n    labelSmall = TextStyle(\n        fontFamily = FontFamily.Default,\n        fontWeight = FontWeight.Medium,\n        fontSize = 11.sp,\n        lineHeight = 16.sp,\n        letterSpacing = 0.5.sp\n    )\n    */\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/eeos/ui/theme/Type.kt b/app/src/main/java/com/example/eeos/ui/theme/Type.kt
+--- a/app/src/main/java/com/example/eeos/ui/theme/Type.kt	(revision b728e6928e505c38a75a3659743b0bf4168b4458)
++++ b/app/src/main/java/com/example/eeos/ui/theme/Type.kt	(date 1698893823061)
+@@ -31,4 +31,4 @@
+         letterSpacing = 0.5.sp
+     )
+     */
+-)
+\ No newline at end of file
++)
