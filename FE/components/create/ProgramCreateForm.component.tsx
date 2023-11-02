@@ -1,38 +1,48 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Button from "@/components/common/Button.component";
-import Calendar from "@/components/common/Calendar.component";
-import Input from "@/components/common/Input.component";
-import MarkdownEditor from "@/components/common/MarkdownEditor.component";
-import { createProgram } from "@/src/apis/program/program";
-import FORM_INFO from "@/src/constants/FORM_INFO";
+import { useEffect, useState } from "react";
+import ProgramForm from "../common/form/ProgramForm.component";
+import { createProgram } from "@/src/apis/program";
 import ROUTES from "@/src/constants/ROUTES";
-import { useOutsideClick } from "@/src/hooks/useOutsideRef";
-import {
-  createContentAtom,
-  createProgramDateAtom,
-  createTitleAtom,
-} from "@/src/stores/create";
-import { convertDate } from "@/src/utils/date";
+import { getLocalStorage, setLocalStorage } from "@/src/utils/localStorage";
 
 const ProgramCreateForm = () => {
   const router = useRouter();
 
-  const [title, setTitle] = useAtom(createTitleAtom);
-  const [content, setContent] = useAtom(createContentAtom);
-  const [programDate, setProgramDate] = useAtom(createProgramDateAtom);
-  const [date, setDate] = useState<Date | undefined>(
-    new Date(parseInt(programDate)),
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [programDate, setProgramDate] = useState(
+    new Date().getTime().toString(),
   );
-  const [openCalender, setOpenCalender] = useState<boolean>(false);
-  const calenderRef = useOutsideClick(() => setOpenCalender(false));
+
+  useEffect(() => {
+    setTitle(getLocalStorage("title") || "");
+    setContent(getLocalStorage("content") || "");
+    setProgramDate(getLocalStorage("date") || new Date().getTime().toString());
+  }, []);
+
+  const defaultData = {
+    title,
+    setTitle: (title: string) => {
+      setTitle(title);
+      setLocalStorage("title", title);
+    },
+    content,
+    setContent: (content: string) => {
+      setContent(content);
+      setLocalStorage("content", content);
+    },
+    programDate,
+    setProgramDate: (date: string) => {
+      setProgramDate(date);
+      setLocalStorage("date", date);
+    },
+  };
 
   const { mutate: createProgramMutate } = useMutation(
-    () => createProgram({ title, content: content || "", programDate }),
+    () => createProgram({ title, content, programDate }),
     {
       onSettled: (data) => {
         formReset();
@@ -40,11 +50,6 @@ const ProgramCreateForm = () => {
       },
     },
   );
-
-  const handleDateChange = (date: Date | undefined) => {
-    setDate(date);
-    setProgramDate(date?.getTime().toString() || "");
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,55 +61,18 @@ const ProgramCreateForm = () => {
   };
 
   const formReset = () => {
-    setTitle("");
-    setContent("");
-    setDate(new Date());
-    router.push("/");
+    setLocalStorage("title", "");
+    setLocalStorage("content", "");
+    setLocalStorage("date", new Date().getTime().toString());
+    router.push(ROUTES.HOME);
   };
 
   return (
-    <form
-      className="mt-8 flex w-full max-w-[50rem] flex-col gap-4"
-      onSubmit={handleSubmit}
-    >
-      <Input
-        id={FORM_INFO.PROGRAM.TITLE.id}
-        type={FORM_INFO.PROGRAM.TITLE.type}
-        label={FORM_INFO.PROGRAM.TITLE.label}
-        placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <div
-        onClick={() => setOpenCalender(true)}
-        className="relative"
-        ref={calenderRef}
-      >
-        <Input
-          id={FORM_INFO.PROGRAM.DATE.id}
-          type={FORM_INFO.PROGRAM.DATE.type}
-          label={FORM_INFO.PROGRAM.DATE.label}
-          placeholder={FORM_INFO.PROGRAM.DATE.placeholder}
-          value={convertDate(programDate)}
-        />
-        {openCalender && (
-          <Calendar date={date} handleDateChange={handleDateChange} />
-        )}
-      </div>
-      <MarkdownEditor
-        id={FORM_INFO.PROGRAM.CONTENT.id}
-        label={FORM_INFO.PROGRAM.CONTENT.label}
-        placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
-        value={content ? content : ""}
-        onChange={(e) => setContent(e)}
-      />
-      <div className="mt-6 flex w-[50rem] justify-end gap-2">
-        <Button type="submit">생성</Button>
-        <Button color="gray" onClick={formReset}>
-          취소
-        </Button>
-      </div>
-    </form>
+    <ProgramForm
+      handleSubmit={handleSubmit}
+      formReset={formReset}
+      defaultData={defaultData}
+    />
   );
 };
 
