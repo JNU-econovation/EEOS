@@ -2,7 +2,6 @@
   "name": "black_fe",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://bada308.github.io/black_company/FE",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +13,7 @@
     "@uiw/react-md-editor": "v3.6.0",
     "axios": "^1.5.1",
     "classnames": "^2.3.2",
+    "date-fns": "^2.30.0",
     "jotai": "^2.4.3",
     "next": "latest",
     "next-remove-imports": "^1.0.12",
