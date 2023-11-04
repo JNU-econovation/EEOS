@@ -8,10 +8,10 @@ export interface defaultMember {
 }
 
 /* getMembersByStatus */
-export type getMembersByStatusResponse = defaultMember[];
+export type getMembersByStatusResponse = { data: defaultMember[] };
 
 /* getAllMembers */
-export type getAllMembersResponse = defaultMember[];
+export type getAllMembersResponse = { data: defaultMember[] };
 
 /* updateMembers */
 export interface updateMembersRequest {
@@ -21,5 +21,7 @@ export interface updateMembersRequest {
 }
 
 export interface updateMembersResponse {
-  programId: number;
+  data: {
+    programId: number;
+  };
 }

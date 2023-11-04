@@ -14,7 +14,8 @@ export const getAllMembers = async (programId: string) => {
     url: API.MEMBER.GET_ALL_MEMBERS + `/${programId}`,
     method: "GET",
   });
-  return sortMembers(data);
+
+  return sortMembers(data.data);
 };
 
 export const getMembersByStatus = async (
@@ -27,7 +28,7 @@ export const getMembersByStatus = async (
     params: { attendStatus },
   });
 
-  return data;
+  return data.data;
 };
 
 export const updateMembers = async (
@@ -39,5 +40,5 @@ export const updateMembers = async (
     method: "POST",
     data: body,
   });
-  return data;
+  return data.data;
 };
