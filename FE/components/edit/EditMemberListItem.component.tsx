@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import CheckBox from "../common/CheckBox.component";
 import Toggle from "../common/Toggle.component";
 import { updateMembers } from "@/src/apis/member";
@@ -8,18 +9,19 @@ import { defaultMember } from "@/src/apis/types/member";
 
 interface EditMemberListItemProps {
   data: defaultMember;
+  programId: string;
 }
 
-const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
+const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   const queryClient = useQueryClient();
 
   const { memberId, name, generation, attendStatus } = data;
-  const isRelated = attendStatus === "IRRELEVANT" ? false : true;
-  const isAttend = attendStatus === "ATTEND" ? true : false;
+  const [isRelated, setIsRelated] = useState(attendStatus !== "none");
+  const [isAttend, setIsAttend] = useState(attendStatus === "attend");
 
   const { mutate: updateMemberMutate } = useMutation(
     () =>
-      updateMembers(memberId, {
+      updateMembers(programId, {
         memberId: memberId,
         beforeAttendStatus: attendStatus,
         afterAttendStatus: getAfterAttendStatus(),
@@ -28,14 +30,16 @@ const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
   );
 
   const getAfterAttendStatus = () => {
-    if (isAttend) return "ATTEND";
-    if (isRelated) return "ABSENT";
-    return "IRRELEVANT";
+    if (isAttend) return "attend";
+    if (isRelated) return "absent";
+    return "none";
   };
   const handleCheckBoxChange = () => {
+    setIsRelated((prev) => !prev);
     updateMemberMutate();
   };
   const handleToggleChange = () => {
+    setIsAttend((prev) => !prev);
     updateMemberMutate();
   };
 

@@ -34,7 +34,11 @@ const EditMemberList = ({ programId }: EditMemberListProps) => {
           <span>참석 여부</span>
         </div>
         {members.map((member) => (
-          <EditMemberListItem key={member.memberId} data={member} />
+          <EditMemberListItem
+            key={member.memberId}
+            data={member}
+            programId={programId}
+          />
         ))}
       </div>
     </>

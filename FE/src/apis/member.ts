@@ -1,6 +1,6 @@
 import { sortMembers } from "../utils/sort";
 import {
-  attendStatusLower,
+  attendStatus,
   getAllMembersResponse,
   getMembersByStatusResponse,
   updateMembersRequest,
@@ -19,7 +19,7 @@ export const getAllMembers = async (programId: string) => {
 
 export const getMembersByStatus = async (
   programId: number,
-  attendStatus: attendStatusLower,
+  attendStatus: attendStatus,
 ) => {
   const { data } = await https<getMembersByStatusResponse>({
     url: API.MEMBER.GET_MEMBER_LIST_BY_STATUS(programId),
@@ -31,7 +31,7 @@ export const getMembersByStatus = async (
 };
 
 export const updateMembers = async (
-  programId: number,
+  programId: string,
   body: updateMembersRequest,
 ) => {
   const { data } = await https<updateMembersResponse>({

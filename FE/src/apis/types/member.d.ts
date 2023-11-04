@@ -1,5 +1,4 @@
-type attendStatus = "ATTEND" | "ABSENT" | "IRRELEVANT";
-type attendStatusLower = "attend" | "absent";
+type attendStatus = "attend" | "absent" | "none";
 
 export interface defaultMember {
   memberId: number;
