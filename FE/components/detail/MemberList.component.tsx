@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../common/LoadingSpinner";
 import MemberListItem from "./MemberListItem.component";
 import { getMembersByStatus } from "@/src/apis/member";
-import { attendStatusLower } from "@/src/apis/types/member";
+import { attendStatus } from "@/src/apis/types/member";
 
 interface MemberListProps {
   programId: string;
-  attendStatus: attendStatusLower;
+  attendStatus: attendStatus;
 }
 
 const MemberList = ({ programId, attendStatus }: MemberListProps) => {
@@ -25,7 +25,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   return (
-    <div className="w-custom my-4 flex  max-w-[300px] flex-col bg-background px-4 sm:max-w-[600px] lg:max-w-[900px]">
+    <div className="w-custom my-4 flex w-[300px] flex-col bg-background px-4 sm:w-[600px] lg:w-[900px]">
       <div className="flex justify-center border-b-[1.5px] border-stroke-light py-6">
         <span className="text-xl font-bold">{title}</span>
       </div>

@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import Image from "next/image";
-import { attendStatusLower, defaultMember } from "@/src/apis/types/member";
+import { attendStatus, defaultMember } from "@/src/apis/types/member";
 
 interface MemberListItemProps {
   memberData: defaultMember;
-  attendStatus: attendStatusLower;
+  attendStatus: attendStatus;
 }
 
 const MemberListItem = ({ memberData, attendStatus }: MemberListItemProps) => {
