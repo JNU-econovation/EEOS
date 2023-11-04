@@ -11,7 +11,9 @@ export interface defaultProgram {
 export interface createProgramRequest extends defaultProgram {}
 
 export interface createProgramResponse {
-  programId: number;
+  data: {
+    programId: number;
+  };
 }
 
 /* 행사 수정 */
@@ -23,13 +25,19 @@ export interface summaryProgram extends Omit<defaultProgram, "content"> {
   programStatus: programStatusEn;
 }
 
-export interface getProgramListResponse {
-  size: number;
-  page: number;
-  totalPage: number;
-  programs: summaryProgram[];
+export interface detailProgram extends summaryProgram {
+  content: string;
 }
 
-export interface getProgramDetailResponse extends summaryProgram {
-  content: string;
+export interface getProgramListResponse {
+  data: {
+    size: number;
+    page: number;
+    totalPage: number;
+    programs: summaryProgram[];
+  };
+}
+
+export interface getProgramDetailResponse {
+  data: detailProgram;
 }

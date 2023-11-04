@@ -27,7 +27,7 @@ const HomePage = () => {
       getProgramList(
         programStatusOption[programStatus].toLowerCase(),
         listSize,
-        page,
+        page - 1,
       ),
   );
 

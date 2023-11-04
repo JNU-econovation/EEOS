@@ -31,7 +31,7 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
           <Image src="/icons/pencil.svg" alt="edit" width={20} height={20} />
         </Link>
       </div>
-      <div className="my-10 min-h-[360px] w-full px-6">
+      <div className="my-10 min-h-[18rem] w-full px-6">
         <MDEditor.Markdown source={data.content} />
       </div>
     </div>

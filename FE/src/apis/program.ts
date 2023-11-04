@@ -14,7 +14,7 @@ export const createProgram = async (body: createProgramRequest) => {
     method: "POST",
     data: body,
   });
-  return data;
+  return data.data;
 };
 
 export const updateProgram = async (
@@ -26,7 +26,7 @@ export const updateProgram = async (
     method: "PUT",
     data: body,
   });
-  return data;
+  return data.data;
 };
 
 export const getProgramList = async (
@@ -40,7 +40,7 @@ export const getProgramList = async (
     params: { programStatus, size, page },
   });
 
-  return data;
+  return data.data;
 };
 
 export const getProgramDetail = async (programId: string) => {
@@ -49,5 +49,5 @@ export const getProgramDetail = async (programId: string) => {
     method: "GET",
   });
 
-  return data;
+  return data.data;
 };
