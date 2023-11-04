@@ -8,7 +8,7 @@ import Tabs from "@/components/common/Tabs.component";
 import Title from "@/components/common/Title.component";
 import ProgramList from "@/components/home/ProgramList";
 import DefaultLayout from "@/components/layout/DefaultLayout";
-import { getProgramList } from "@/src/apis/program/program";
+import { getProgramList } from "@/src/apis/program";
 import {
   listSize,
   programStatusList,
@@ -16,7 +16,7 @@ import {
 } from "@/src/constants/home";
 import { programStatusKr } from "@/src/types/home/home";
 
-export default function Home() {
+const HomePage = () => {
   const [programStatus, setProgramStatus] =
     useState<programStatusKr>("진행 중");
   const [page, setPage] = useState<number>(1);
@@ -52,4 +52,6 @@ export default function Home() {
       />
     </DefaultLayout>
   );
-}
+};
+
+export default HomePage;

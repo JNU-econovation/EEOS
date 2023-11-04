@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Title from "../common/Title.component";
-import { getProgramDetail } from "@/src/apis/program/program";
+import { getProgramDetail } from "@/src/apis/program";
 import { convertDate } from "@/src/utils/date";
 
 interface ProgramInfoProps {
