@@ -12,11 +12,11 @@ const ProgramListItem = ({ programData }: ProgramListItemProps) => {
   return (
     <Link
       href={`/detail/${programId}`}
-      className="flex w-full flex-col items-center justify-between gap-4 rounded-lg bg-gray-light px-8 py-6 transition-all hover:bg-secondary sm:flex-row"
+      className="flex w-full flex-col justify-between gap-6 rounded-lg bg-gray-light px-8 py-6 text-center transition-all hover:bg-secondary sm:flex-row sm:text-start"
       key={programId}
     >
-      <span className="text-lg font-bold">{title}</span>
-      <span className="text-base font-normal">{convertDate(programDate)}</span>
+      <p className="w-full truncate text-lg font-bold">{title}</p>
+      <p className="w-48 text-base font-normal">{convertDate(programDate)}</p>
     </Link>
   );
 };
