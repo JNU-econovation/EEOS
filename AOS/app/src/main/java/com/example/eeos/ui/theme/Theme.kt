@@ -64,7 +64,7 @@ fun EeosTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = eeosTypography,
         content = content
     )
 }
