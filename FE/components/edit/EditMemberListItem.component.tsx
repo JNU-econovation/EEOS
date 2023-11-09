@@ -22,17 +22,19 @@ const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   const { mutate: updateMemberMutate } = useMutation(
     () =>
       updateMembers(programId, {
-        memberId: memberId,
+        memberId,
         beforeAttendStatus: attendStatus,
         afterAttendStatus: getAfterAttendStatus(),
       }),
-    { onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]) },
+    {
+      onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]),
+    },
   );
 
   const getAfterAttendStatus = () => {
+    if (!isRelated) return "none";
     if (isAttend) return "attend";
-    if (isRelated) return "absent";
-    return "none";
+    return "absent";
   };
   const handleCheckBoxChange = () => {
     setIsRelated((prev) => !prev);
