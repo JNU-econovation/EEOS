@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">eeos</string>
+    <!--공통 화면 string 리소스-->
+    <string name="app_name">EEOS</string>
+
+
+
+    <!--Home 화면 string 리소스-->
+    <string name="home_program_list">행사 목록</string>
+
+    <string name="home_program_status_ongoing">진행 중</string>
+    <string name="home_program_status_ends">완료</string>
+
+    <string name="home_tab_presentation">주간 발표</string>
+    <string name="home_tab_leaders">회장단</string>
+    <string name="home_tab_party_department">행사부</string>
+    <string name="home_tab_others">기타 행사</string>
+
+
+
+    <!--Detail 화면 string 리소스-->
+    <string name="detail_participant">참석자</string>
+    <string name="detail_absentee">불참자</string>
+    <string name="detail_latecomer">지각자</string>
 </resources>
