@@ -27,7 +27,6 @@ fun MemberInfo(memberStatus: String, generation: Int, name: String) {
         )
         Spacer(modifier = Modifier.width(13.dp))
 
-
         Column(
             horizontalAlignment = Alignment.End
         ) {
@@ -36,7 +35,6 @@ fun MemberInfo(memberStatus: String, generation: Int, name: String) {
                 style = MaterialTheme.typography.labelSmall,
                 color = colorResource(id = R.color.paragraph)
             )
-
 
             Row {
                 Text(
