@@ -37,14 +37,14 @@ private fun TagChip(
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     val containerColor = if (isFocused) {
-        colorResource(R.color.secondary)
+        colorResource(R.color.background)
     } else {
-        colorResource(R.color.light_grey)
+        colorResource(R.color.paragraph)
     }
     val contentColor = if (isFocused) {
-        colorResource(R.color.tertiary_plus)
+        colorResource(R.color.background)
     } else {
-        colorResource(R.color.dark_grey)
+        colorResource(R.color.gray_500)
     }
 
     Button(
