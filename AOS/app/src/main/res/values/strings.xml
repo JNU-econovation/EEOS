@@ -41,4 +41,9 @@
     <string name="detail_bottom_sheet_check_attendance">출석 체크 해주세요!</string>
     <string name="detail_bottom_sheet_do_survey">수요 조사 해주세요!</string>
     <string name="detail_bottom_sheet_description">본인의 출석 상태를 선택해 주세요.</string>
+
+
+    <!--ContentDescriptions-->
+    <string name="home_dialog_logout_button">로그아웃 하기</string>
+
 </resources>
