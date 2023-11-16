@@ -9,13 +9,14 @@
     <!--Home Dialog Screen Dimensions-->
     <dimen name="size_member_status_dialog_background_width">300dp</dimen>
     <dimen name="size_member_status_dialog_background_height">238dp</dimen>
-    <dimen name="margin_member_status_dialog_background_top">19dp</dimen>
+    <dimen name="margin_member_status_dialog_background_top">17dp</dimen>
     <dimen name="margin_member_status_dialog_background_side">15dp</dimen>
-    <dimen name="margin_member_status_dialog_background_bottom">14dp</dimen>
+    <dimen name="margin_member_status_dialog_background_bottom">16dp</dimen>
 
+    <dimen name="margin_member_status_dialog_space_between_text_and_background">88dp</dimen>
+    <dimen name="margin_member_status_dialog_space_between_text_and_logout_btn">76dp</dimen>
     <dimen name="margin_member_status_dialog_space_between_texts">17dp</dimen>
     <dimen name="margin_member_status_dialog_space_between_text_and_status_button">15dp</dimen>
-    <dimen name="margin_member_status_dialog_space_between_text_and_logout_btn">76dp</dimen>
 
 
     <dimen name="size_member_status_dialog_button_width">127dp</dimen>
