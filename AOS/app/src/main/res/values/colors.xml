@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Basic Color-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
+
+
+    <!--Common Color-->
     <color name="background">#FFFFFFFE</color>
-    <color name="stroke">#FF272343</color>
     <color name="paragraph">#FF2D334A</color>
     <color name="highlight">#FFFFD803</color>
     <color name="secondary">#FFE3F6F5</color>
-    <color name="tertiary">#FFBAE8E8</color>
-    <color name="light_grey">#FFFAFAFA</color>
-    <color name="dark_grey">#FF595959</color>
     <color name="error">#FFFF6464</color>
-    <color name="gray">#FFD9D9D9</color>
-    <color name="soft_stroke">#FFA9A7B3</color>
-    <color name="tertiary_plus">#FF689696</color>
+
+
+    <!--Tertiary Color-->
+    <color name="tertiary">#FFBAE8E8</color>
+    <color name="tertiary_strong">#FF689696</color>
+
+
+    <!--Gray Color-->
+    <color name="gray_100">#FFFAFAFA</color>
+    <color name="gray_300">#FFD9D9D9</color>
+    <color name="gray_500">#FFA9A7B3</color>
+    <color name="gray_700">#FF595959</color>
+
+
+    <!--Stroke Color-->
+    <color name="stroke_300">#FFD4D3D9</color>
+    <color name="stroke_400">#FFA9A7B3</color>
+    <color name="stroke_800">#FF272343</color>
+
+
+    <!--Interaction Color-->
+    <color name="success">#FF00DE52</color>
+    <color name="success_light">#FFEEFAEE</color>
+
+    <color name="action">#FFEEFAEE</color>
+    <color name="action_light">#FFD4D3D9</color>
+
+    <color name="warning_strong">#FFD4D3D9</color>
+    <color name="warning">#FFD4D3D9</color>
+    <color name="warning_light">#FFD4D3D9</color>
+
+
+
 </resources>
