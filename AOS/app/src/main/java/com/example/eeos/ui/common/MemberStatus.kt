@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.eeos.R
 
-
 private val memberStatusList = listOf("AM", "RM", "CM", "OB")
 
 @Composable
@@ -35,21 +34,37 @@ fun MemberStatusButtons(
                 isSelected = memberStatusList[0] == memberStatus,
                 onClick = onClick
             )
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_member_status_dialog_button_horizontal_space)))
+            Spacer(
+                modifier = Modifier.width(
+                    dimensionResource(
+                        id = R.dimen.margin_member_status_dialog_button_horizontal_space
+                    )
+                )
+            )
             MemberStatusButton(
                 buttonText = memberStatusList[1],
                 isSelected = memberStatusList[1] == memberStatus,
                 onClick = onClick
             )
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_member_status_dialog_button_vertical_space)))
+        Spacer(
+            modifier = Modifier.height(
+                dimensionResource(id = R.dimen.margin_member_status_dialog_button_vertical_space)
+            )
+        )
         Row {
             MemberStatusButton(
                 buttonText = memberStatusList[2],
                 isSelected = memberStatusList[2] == memberStatus,
                 onClick = onClick
             )
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_member_status_dialog_button_horizontal_space)))
+            Spacer(
+                modifier = Modifier.width(
+                    dimensionResource(
+                        id = R.dimen.margin_member_status_dialog_button_horizontal_space
+                    )
+                )
+            )
             MemberStatusButton(
                 buttonText = memberStatusList[3],
                 isSelected = memberStatusList[3] == memberStatus,
@@ -79,7 +94,10 @@ private fun MemberStatusButton(
     Button(
         onClick = onClick,
         modifier = Modifier
-            .size(width = dimensionResource(id = R.dimen.size_member_status_dialog_button_width), height = dimensionResource(id = R.dimen.size_member_status_dialog_button_height)),
+            .size(
+                width = dimensionResource(id = R.dimen.size_member_status_dialog_button_width),
+                height = dimensionResource(id = R.dimen.size_member_status_dialog_button_height)
+            ),
         shape = RoundedCornerShape(7.87.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
@@ -107,7 +125,6 @@ private fun MemberStatusButtonsPreview() {
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

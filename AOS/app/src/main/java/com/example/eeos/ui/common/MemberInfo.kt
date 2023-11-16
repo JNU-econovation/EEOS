@@ -29,7 +29,13 @@ fun MemberInfo(
             painter = painterResource(id = R.drawable.common_mypage_button),
             contentDescription = "내 정보"
         )
-        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen_member_info_space_between_icon_and_text)))
+        Spacer(
+            modifier = Modifier.width(
+                dimensionResource(
+                    id = R.dimen.margin_common_screen_member_info_space_between_icon_and_text
+                )
+            )
+        )
 
         Column(
             horizontalAlignment = Alignment.End
@@ -46,7 +52,13 @@ fun MemberInfo(
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.paragraph)
                 )
-                Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen_member_info_space_between_texts)))
+                Spacer(
+                    modifier = Modifier.width(
+                        dimensionResource(
+                            id = R.dimen.margin_common_screen_member_info_space_between_texts
+                        )
+                    )
+                )
                 Text(
                     text = name,
                     style = MaterialTheme.typography.labelSmall,
