@@ -17,7 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.example.eeos.R
 
 @Composable
-fun MemberInfo(memberStatus: String, generation: Int, name: String) {
+fun MemberInfo(
+    memberStatus: String,
+    generation: Int,
+    name: String
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
