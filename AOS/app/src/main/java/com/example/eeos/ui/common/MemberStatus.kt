@@ -1,10 +1,12 @@
 package com.example.eeos.ui.common
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,25 +25,38 @@ private val memberStatusList = listOf("AM", "RM", "CM", "OB")
 
 @Composable
 fun MemberStatusButtons(
-    memberStatus: String
+    memberStatus: String,
+    onClick: () -> Unit
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        userScrollEnabled = false,
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.margin_member_status_dialog_vertical_space)),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.margin_member_status_dialog_horizontal_space)),
-        content = {
-            items(4) { index ->
-                MemberStatusButton(
-                    buttonText = memberStatusList[index],
-                    isSelected = memberStatusList[index] == memberStatus,
-                    onClick = {
-
-                    }
-                )
-            }
+    Column {
+        Row {
+            MemberStatusButton(
+                buttonText = memberStatusList[0],
+                isSelected = memberStatusList[0] == memberStatus,
+                onClick = onClick
+            )
+            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_member_status_dialog_button_horizontal_space)))
+            MemberStatusButton(
+                buttonText = memberStatusList[1],
+                isSelected = memberStatusList[1] == memberStatus,
+                onClick = onClick
+            )
         }
-    )
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_member_status_dialog_button_vertical_space)))
+        Row {
+            MemberStatusButton(
+                buttonText = memberStatusList[2],
+                isSelected = memberStatusList[2] == memberStatus,
+                onClick = onClick
+            )
+            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_member_status_dialog_button_horizontal_space)))
+            MemberStatusButton(
+                buttonText = memberStatusList[3],
+                isSelected = memberStatusList[3] == memberStatus,
+                onClick = onClick
+            )
+        }
+    }
 }
 
 @Composable
@@ -64,14 +79,14 @@ private fun MemberStatusButton(
     Button(
         onClick = onClick,
         modifier = Modifier
-            .size(width = 127.dp, height = 60.dp),
+            .size(width = dimensionResource(id = R.dimen.size_member_status_dialog_button_width), height = dimensionResource(id = R.dimen.size_member_status_dialog_button_height)),
         shape = RoundedCornerShape(7.87.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor
         ),
         border = BorderStroke(
-            width = 1.dp,
+            width = dimensionResource(id = R.dimen.size_member_status_dialog_button_stroke),
             color = contentColor
         )
     ) {
@@ -87,7 +102,8 @@ private fun MemberStatusButton(
 private fun MemberStatusButtonsPreview() {
     MaterialTheme {
         MemberStatusButtons(
-            memberStatus = "AM"
+            memberStatus = "AM",
+            onClick = {}
         )
     }
 }
