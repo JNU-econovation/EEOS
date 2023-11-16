@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.eeos.R
 
 @Composable
@@ -29,7 +29,7 @@ fun MemberInfo(
             painter = painterResource(id = R.drawable.common_mypage_button),
             contentDescription = "내 정보"
         )
-        Spacer(modifier = Modifier.width(13.dp))
+        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen_member_info_space_between_icon_and_text)))
 
         Column(
             horizontalAlignment = Alignment.End
@@ -46,7 +46,7 @@ fun MemberInfo(
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.paragraph)
                 )
-                Spacer(modifier = Modifier.width(3.dp))
+                Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen_member_info_space_between_texts)))
                 Text(
                     text = name,
                     style = MaterialTheme.typography.labelSmall,
