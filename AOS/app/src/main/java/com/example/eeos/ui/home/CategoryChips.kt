@@ -20,11 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun Category(chips: List<CategoryChipData>) {
+fun CategoryChips(chips: List<CategoryChipData>) {
     Row {
         chips.forEach { chip ->
             CategoryChip(
-                tagName = chip.categoryChipName,
+                chipName = chip.categoryChipName,
                 isSelected = chip.isChipSelected,
                 onClick = { /*ToDo*/ }
             )
@@ -39,7 +39,7 @@ fun Category(chips: List<CategoryChipData>) {
 
 @Composable
 private fun CategoryChip(
-    tagName: String,
+    chipName: String,
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
@@ -83,7 +83,7 @@ private fun CategoryChip(
         contentPadding = PaddingValues(dimensionResource(id = R.dimen.size_all_0dp))
     ) {
         Text(
-            text = tagName,
+            text = chipName,
             style = MaterialTheme.typography.labelMedium,
             textAlign = TextAlign.Center
         )
@@ -94,7 +94,7 @@ private fun CategoryChip(
 @Composable
 private fun TabPreview() {
     MaterialTheme {
-        Category(
+        CategoryChips(
             chips = listOf(CategoryChipData("전체", false), CategoryChipData("주간 발표", true)),
         )
     }
@@ -105,7 +105,7 @@ private fun TabPreview() {
 private fun ChipPreview() {
     MaterialTheme {
         CategoryChip(
-            tagName = "주간 발표",
+            chipName = "주간 발표",
             onClick = {},
             isSelected = true
         )
