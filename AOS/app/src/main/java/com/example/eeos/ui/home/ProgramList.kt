@@ -1,30 +1,25 @@
 package com.example.eeos.ui.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.eeos.R
 
 @Composable
 fun ProgramList(programList: List<ProgramData>) {
-    val spaceBetweenProgram = 12.dp
-
     Column {
         programList.forEach { program ->
             Program(program)
-            Spacer(modifier = Modifier.size(spaceBetweenProgram))
         }
     }
 }
@@ -32,44 +27,37 @@ fun ProgramList(programList: List<ProgramData>) {
 @Composable
 private fun Program(program: ProgramData) {
     val textColor = colorResource(R.color.paragraph)
-    val containerColor = colorResource(R.color.background)
-    val spaceBetweenText = 5.dp
 
-    Card(
-        modifier = Modifier.width(width = 318.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = containerColor,
-            contentColor = textColor
+    Column {
+        Divider(
+            thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
+            color = colorResource(id = R.color.stroke_400)
         )
-    ) {
-        Column {
-            Divider(
-                thickness = 1.5.dp,
-                color = colorResource(id = R.color.tertiary)
+        Column(
+            modifier = Modifier
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_home_screen_program_horizontal)
+                )
+                .size(
+                    width = dimensionResource(id = R.dimen.width_home_screen_program),
+                    height = dimensionResource(id = R.dimen.height_home_screen_program)
+                ),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = program.date,
+                style = MaterialTheme.typography.bodyMedium,
+                color = textColor
             )
-            Column(
-                modifier = Modifier
-                    .padding(
-                        start = 15.dp,
-                        top = 10.dp,
-                        bottom = 10.dp
-                    )
-            ) {
-                Text(
-                    text = program.date,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = textColor
+            Spacer(
+                modifier = Modifier.size(
+                    dimensionResource(id = R.dimen.margin_home_screen_space_between_program_texts)
                 )
-                Spacer(modifier = Modifier.size(spaceBetweenText))
-                Text(
-                    text = program.title,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = textColor
-                )
-            }
-            Divider(
-                thickness = 1.5.dp,
-                color = colorResource(id = R.color.tertiary)
+            )
+            Text(
+                text = program.title,
+                style = MaterialTheme.typography.titleSmall,
+                color = textColor
             )
         }
     }
