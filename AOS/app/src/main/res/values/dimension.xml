@@ -15,6 +15,9 @@
     <dimen name="width_home_screen_category_button">74dp</dimen>
     <dimen name="height_home_screen_category_button">33dp</dimen>
 
+    <dimen name="margin_home_screen_space_between_program_status">19dp</dimen>
+
+
     <dimen name="margin_home_screen_space_between_program_texts">7dp</dimen>
     <dimen name="width_home_screen_program">318dp</dimen>
     <dimen name="height_home_screen_program">94dp</dimen>
