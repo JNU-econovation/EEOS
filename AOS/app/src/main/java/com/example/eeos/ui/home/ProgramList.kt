@@ -36,7 +36,9 @@ private fun Program(program: ProgramData) {
         Column(
             modifier = Modifier
                 .padding(
-                    horizontal = dimensionResource(id = R.dimen.padding_home_screen_program_horizontal)
+                    horizontal = dimensionResource(
+                        id = R.dimen.padding_home_screen_program_horizontal
+                    )
                 )
                 .size(
                     width = dimensionResource(id = R.dimen.width_home_screen_program),
