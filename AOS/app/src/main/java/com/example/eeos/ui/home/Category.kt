@@ -1,8 +1,10 @@
 package com.example.eeos.ui.home
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -18,10 +20,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun Category(chips: List<String>) {
+fun Category(chips: List<CategoryChipData>) {
     Row {
-        chips.forEach { tag ->
-            CategoryChip(tagName = tag, onClick = { /*ToDo*/ })
+        chips.forEach { chip ->
+            CategoryChip(
+                tagName = chip.categoryChipName,
+                isSelected = chip.isChipSelected,
+                onClick = { /*ToDo*/ }
+            )
             Spacer(
                 modifier = Modifier.width(
                     dimensionResource(id = R.dimen.margin_home_screen_space_between_categories)
@@ -34,7 +40,7 @@ fun Category(chips: List<String>) {
 @Composable
 private fun CategoryChip(
     tagName: String,
-    isSelected: Boolean = false,
+    isSelected: Boolean,
     onClick: () -> Unit,
 ) {
     /*val interactionSource = remember { MutableInteractionSource() }
@@ -63,17 +69,22 @@ private fun CategoryChip(
     }
 
     Button(
+        modifier = Modifier.size(
+            width = dimensionResource(id = R.dimen.width_home_screen_category_button),
+            height = dimensionResource(id = R.dimen.height_home_screen_category_button)
+        ),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_corner_11dp)),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor
         ),
         onClick = onClick,
-        border = borderStroke
+        border = borderStroke,
+        contentPadding = PaddingValues(dimensionResource(id = R.dimen.size_all_0dp))
     ) {
         Text(
             text = tagName,
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelMedium,
             textAlign = TextAlign.Center
         )
     }
@@ -84,7 +95,7 @@ private fun CategoryChip(
 private fun TabPreview() {
     MaterialTheme {
         Category(
-            chips = listOf("주간 발표", "행사부"),
+            chips = listOf(CategoryChipData("전체", false), CategoryChipData("주간 발표", true)),
         )
     }
 }
