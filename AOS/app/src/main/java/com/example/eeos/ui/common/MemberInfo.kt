@@ -1,6 +1,7 @@
 package com.example.eeos.ui.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,14 +21,16 @@ import com.example.eeos.R
 fun MemberInfo(
     memberStatus: String,
     generation: Int,
-    name: String
+    name: String,
+    onClick: () -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = painterResource(id = R.drawable.common_mypage_button),
-            contentDescription = "내 정보"
+            contentDescription = "회원 상태 수정",
+            modifier = Modifier.clickable { onClick() }
         )
         Spacer(
             modifier = Modifier.width(
@@ -76,7 +79,8 @@ private fun MemberInfoPreview() {
         MemberInfo(
             memberStatus = "AM",
             generation = 24,
-            name = "인텔리"
+            name = "인텔리",
+            onClick = {}
         )
     }
 }
