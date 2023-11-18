@@ -86,7 +86,7 @@ fun MemberStatusDialog(
                         )
                         Icon(
                             painter = painterResource(
-                                R.drawable.member_status_dialog_logout_button_24dp
+                                R.drawable.memberstatusdialog_logoutbutton_24dp
                             ),
                             contentDescription = stringResource(
                                 id = R.string.home_dialog_logout_button
