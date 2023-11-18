@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramList(programList: List<ProgramData>) {
+fun ProgramLists(programLists: List<ProgramData>) {
     Column {
-        programList.forEach { program ->
+        programLists.forEach { program ->
             Program(program)
         }
     }
@@ -69,7 +69,7 @@ private fun Program(program: ProgramData) {
 @Composable
 private fun ProgramPreview() {
     MaterialTheme {
-        ProgramList(
+        ProgramLists(
             listOf(
                 ProgramData(date = "2023년 11월 06일 (월)", title = "오늘의 행사 두구두구"),
                 ProgramData(date = "2023년 11월 06일 (월)", title = "오늘의 행사 두구두구")
