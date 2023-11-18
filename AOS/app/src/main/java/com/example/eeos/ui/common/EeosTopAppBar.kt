@@ -19,6 +19,7 @@ fun EeosTopAppBar(
     memberStatus: String,
     generation: Int,
     name: String,
+    onClick: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -31,7 +32,8 @@ fun EeosTopAppBar(
             MemberInfo(
                 memberStatus = memberStatus,
                 generation = generation,
-                name = name
+                name = name,
+                onClick = onClick
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen)))
         }
@@ -45,7 +47,8 @@ private fun TopAppBarPreview() {
         EeosTopAppBar(
             memberStatus = "AM",
             generation = 24,
-            name = "인텔리"
+            name = "인텔리",
+            onClick = {}
         )
     }
 }
