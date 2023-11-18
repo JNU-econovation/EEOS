@@ -1,11 +1,13 @@
 package com.example.eeos.ui.home
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -21,7 +23,9 @@ import com.example.eeos.R
 
 @Composable
 fun CategoryChips(chips: List<CategoryChipData>) {
-    Row {
+    Row(
+        modifier = Modifier.horizontalScroll(rememberScrollState())
+    ) {
         chips.forEach { chip ->
             CategoryChip(
                 chipName = chip.categoryChipName,
