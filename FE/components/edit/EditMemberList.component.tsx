@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import CheckBox from "../common/CheckBox.component";
 import LoadingSpinner from "../common/LoadingSpinner";
 import EditMemberListItem from "./EditMemberListItem.component";
 import { getAllMembers } from "@/src/apis/member";
@@ -23,14 +24,12 @@ const EditMemberList = ({ programId }: EditMemberListProps) => {
 
   return (
     <>
-      <h2 className="mt-32 w-full border-t-2 px-2 pb-4 pt-8 text-2xl font-bold">
-        참석자 수정
-      </h2>
       <div className="mb-10 mt-4 w-full shadow-lg">
-        <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 bg-secondary px-10 py-3 text-sm">
-          <span>해당</span>
+        <div className="grid grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] justify-items-center gap-4 border-y-2 border-stroke-10 bg-gray-10 px-10 py-4 font-bold">
+          <CheckBox checked={true} onChange={() => {}} />
+          <span>상태</span>
           <span>이름</span>
-          <span>기수</span>
+          <span></span>
           <span>참석 여부</span>
         </div>
         {members.map((member) => (
