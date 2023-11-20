@@ -1,12 +1,10 @@
 "use client";
 
-
-import Button from "../common/Button.component";
-import ROUTES from "@/src/constants/ROUTES";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Button from "../common/Button.component";
+import ROUTES from "@/src/constants/ROUTES";
 
-// TODO: Header 바뀐 디자인 적용
 // TODO: 사용자 정보 확인 모달 추가
 const Header = () => {
   const router = useRouter();
