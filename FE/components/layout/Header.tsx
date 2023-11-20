@@ -1,58 +1,41 @@
 "use client";
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { PropsWithChildren } from "react";
+
 import Button from "../common/Button.component";
 import ROUTES from "@/src/constants/ROUTES";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-export type headerLeft = "user" | "left";
-export type headerRight = "btn" | "none";
-
-interface HeaderProps {
-  left: headerLeft;
-  right: headerRight;
-}
-
-const Header = ({ left, right }: PropsWithChildren<HeaderProps>) => {
+// TODO: Header 바뀐 디자인 적용
+// TODO: 사용자 정보 확인 모달 추가
+const Header = () => {
   const router = useRouter();
-  const handleOnClickLeft = () => {
-    if (left === "user") {
-      console.log("구현 중...");
-    }
-    if (left === "left") {
-      router.back();
-    }
-  };
+  const openUserModal = () => {};
 
   return (
-    <header className="sticky top-0 z-50 flex h-[5rem] w-full items-center justify-around rounded-b-md bg-background py-2 shadow-sm">
-      <div className="flex w-[10rem] justify-center">
-        <Image
-          src={`/icons/${left}.svg`}
-          alt={left}
-          width={26}
-          height={26}
-          onClick={handleOnClickLeft}
-        />
-      </div>
+    <header className="sticky top-0 z-50 flex w-full items-center justify-between rounded-b-xl bg-background px-32 py-5 shadow-sm">
       <Image
-        src="/text_logo.svg"
+        src="/eeos_logo.svg"
         alt="logo"
-        width={64}
-        height={48}
+        width={80}
+        height={36}
         onClick={() => router.push(ROUTES.HOME)}
       />
-      <div className="w-[10rem]">
-        {right === "btn" && (
-          <Button
-            color="primary"
-            sizeType="base"
-            leftIcon={true}
-            children="행사 추가"
-            onClick={() => router.push(ROUTES.CREATE)}
-          />
-        )}
+      <div className="flex items-center gap-8">
+        <Image
+          src="/icons/user.svg"
+          alt="사용자 정보 확인"
+          width={28}
+          height={28}
+          onClick={openUserModal}
+        />
+        <Button
+          color="primary"
+          sizeType="base"
+          leftIcon={true}
+          children="행사 추가"
+          onClick={() => router.push(ROUTES.CREATE)}
+        />
       </div>
     </header>
   );
