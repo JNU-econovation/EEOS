@@ -3,9 +3,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CheckBox from "../common/CheckBox.component";
-import Toggle from "../common/Toggle.component";
 import { updateMembers } from "@/src/apis/member";
 import { defaultMember } from "@/src/apis/types/member";
+import Toggle from "../common/toggle/Toggle.component";
 
 interface EditMemberListItemProps {
   data: defaultMember;
