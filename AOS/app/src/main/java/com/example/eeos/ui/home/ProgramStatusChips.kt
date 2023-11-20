@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -15,17 +18,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramStatusChips(chips: List<ProgramStatusChipData>) {
+fun ProgramStatusChips(programStatusChips: List<String>, selectedProgramStatus: MutableState<String>) {
     Row {
-        chips.forEach { chip ->
+        programStatusChips.forEach { chip ->
             ProgramStatusChip(
-                chipName = if (chip.isEnd) {
-                    stringResource(id = R.string.home_program_status_ends)
-                } else {
-                    stringResource(id = R.string.home_program_status_ing)
-                },
-                isSelected = chip.isSelected,
-                onClick = { /*ToDo*/ }
+                chipName = chip,
+                isSelected = chip == selectedProgramStatus.value,
+                onClick = { selectedProgramStatus.value = chip }
             )
             Spacer(
                 modifier = Modifier.width(
@@ -66,7 +65,11 @@ private fun ProgramStatusChip(
 private fun ProgramStatusChipsPreview() {
     MaterialTheme {
         ProgramStatusChips(
-            chips = listOf(ProgramStatusChipData(false, true), ProgramStatusChipData(true, false)),
+            programStatusChips = listOf(
+                stringResource(id = R.string.home_program_status_ing),
+                stringResource(id = R.string.home_program_status_ends)
+            ),
+            selectedProgramStatus = rememberSaveable { mutableStateOf("진행 중") }
         )
     }
 }

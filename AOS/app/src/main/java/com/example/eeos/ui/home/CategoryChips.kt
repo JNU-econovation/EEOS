@@ -14,23 +14,27 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun CategoryChips(chips: List<CategoryChipData>) {
+fun CategoryChips(categoryChips: List<String>, selectedCategory: MutableState<String>) {
     Row(
         modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
-        chips.forEach { chip ->
+        categoryChips.forEach { chipName ->
             CategoryChip(
-                chipName = chip.categoryChipName,
-                isSelected = chip.isChipSelected,
-                onClick = { /*ToDo*/ }
+                chipName = chipName,
+                isSelected = chipName == selectedCategory.value,
+                onClick = { selectedCategory.value = chipName }
             )
             Spacer(
                 modifier = Modifier.width(
@@ -99,7 +103,14 @@ private fun CategoryChip(
 private fun TabPreview() {
     MaterialTheme {
         CategoryChips(
-            chips = listOf(CategoryChipData("전체", false), CategoryChipData("주간 발표", true)),
+            categoryChips = listOf(
+                stringResource(R.string.home_tab_all),
+                stringResource(R.string.home_tab_presentation),
+                stringResource(R.string.home_tab_leaders),
+                stringResource(R.string.home_tab_party_department),
+                stringResource(R.string.home_tab_others)
+            ),
+            selectedCategory = rememberSaveable { mutableStateOf("전체") }
         )
     }
 }
