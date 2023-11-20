@@ -18,13 +18,13 @@ const CustomToggleItem = ({
   color = "default",
 }: CustomToggleItemProps) => {
   const itemStyle = classNames(
-    "flex transform cursor-pointer items-center justify-center rounded-3xl border-2 px-8 py-2 font-bold duration-300",
+    "flex transform cursor-pointer items-center justify-center rounded-3xl border-2 px-8 py-2 font-bold duration-200",
     itemColors[color],
   );
 
   return (
     <div className={itemStyle}>
-      <span className="transfro">{text}</span>
+      <span>{text}</span>
     </div>
   );
 };
