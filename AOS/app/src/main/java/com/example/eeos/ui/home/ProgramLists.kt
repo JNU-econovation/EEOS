@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,8 +19,8 @@ import com.example.eeos.R
 
 @Composable
 fun ProgramLists(programLists: List<ProgramData>) {
-    Column {
-        programLists.forEach { program ->
+    LazyColumn {
+        items(programLists) { program ->
             Program(program)
         }
     }
@@ -26,8 +28,6 @@ fun ProgramLists(programLists: List<ProgramData>) {
 
 @Composable
 private fun Program(program: ProgramData) {
-    val textColor = colorResource(R.color.paragraph)
-
     Column {
         Divider(
             thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
@@ -49,7 +49,7 @@ private fun Program(program: ProgramData) {
             Text(
                 text = program.date,
                 style = MaterialTheme.typography.bodyMedium,
-                color = textColor
+                color = colorResource(R.color.paragraph)
             )
             Spacer(
                 modifier = Modifier.size(
@@ -59,7 +59,7 @@ private fun Program(program: ProgramData) {
             Text(
                 text = program.title,
                 style = MaterialTheme.typography.titleSmall,
-                color = textColor
+                color = colorResource(R.color.paragraph)
             )
         }
     }
@@ -70,10 +70,7 @@ private fun Program(program: ProgramData) {
 private fun ProgramPreview() {
     MaterialTheme {
         ProgramLists(
-            listOf(
-                ProgramData(date = "2023년 11월 06일 (월)", title = "오늘의 행사 두구두구"),
-                ProgramData(date = "2023년 11월 06일 (월)", title = "오늘의 행사 두구두구")
-            )
+            listOf()
         )
     }
 }
