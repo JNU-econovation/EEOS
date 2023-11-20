@@ -14,7 +14,7 @@ const ProgramDetailPage = ({ params }: ProgramDetailPageProps) => {
   return (
     <DefaultLayout>
       <ProgramInfo programId={programId} />
-      <div className="mx-8 flex w-[98vw] flex-col items-center gap-10 bg-soft_secondary py-8">
+      <div className="mx-8 flex w-[98vw] flex-col items-center gap-10 bg-secondary-10 py-8">
         <MemberList key="attend" programId={programId} attendStatus="attend" />
         <MemberList key="absent" programId={programId} attendStatus="absent" />
       </div>

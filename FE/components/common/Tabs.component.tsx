@@ -10,7 +10,7 @@ const Tabs = <T extends string>({
   setSelected,
 }: TabsProps<T>) => {
   return (
-    <div className="mb-6 flex w-full justify-start gap-4 border-b-2 border-stroke-base px-2 py-4">
+    <div className="mb-6 flex w-full justify-start gap-4 border-b-2 border-stroke-30 px-2 py-4">
       {options.map((option) =>
         option === selected ? (
           <span className="text-xl font-bold">{option}</span>

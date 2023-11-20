@@ -7,18 +7,19 @@ interface MemberListItemProps {
   attendStatus: attendStatus;
 }
 
+// TODO: MemberListItem 바뀐 디자인 적용
 const MemberListItem = ({ memberData, attendStatus }: MemberListItemProps) => {
   const { generation, name } = memberData;
 
   const memberListItemClass = classNames(
     "flex h-[28px] w-[28px] items-center justify-center rounded-full",
     {
-      "bg-tertiary": attendStatus === "attend",
+      "bg-tertiary-100": attendStatus === "attend",
       "bg-error": attendStatus !== "attend",
     },
   );
   return (
-    <div className="m-2 grid grid-cols-[3rem_7rem] border-b-[1px] border-gray-base px-6 py-5">
+    <div className="m-2 grid grid-cols-[3rem_7rem] border-b-[1px] border-gray-20 px-6 py-5">
       <div className={memberListItemClass}>
         <Image src="/icons/check.svg" alt="check" width={20} height={20} />
       </div>

@@ -11,6 +11,7 @@ interface MemberListProps {
   attendStatus: attendStatus;
 }
 
+// TODO: MemberList 바뀐 디자인 적용
 const MemberList = ({ programId, attendStatus }: MemberListProps) => {
   const title = attendStatus === "attend" ? "참석자" : "불참자";
   const {
@@ -26,7 +27,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
 
   return (
     <div className="w-custom my-4 flex w-[300px] flex-col bg-background px-4 sm:w-[600px] lg:w-[900px]">
-      <div className="flex justify-center border-b-[1.5px] border-stroke-light py-6">
+      <div className="flex justify-center border-b-[1.5px] border-stroke-20 py-6">
         <span className="text-xl font-bold">{title}</span>
       </div>
       <div className="grid w-full grid-cols-1 justify-items-center gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

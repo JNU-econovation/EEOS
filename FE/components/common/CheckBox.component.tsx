@@ -12,7 +12,7 @@ const CheckBox = ({ checked, onChange, disabled = false }: CheckBoxProps) => {
     "flex h-6 w-6 items-center justify-center rounded border-2 transition duration-100",
     {
       "border-blue-500 bg-blue-500": checked,
-      "border-gray-base bg-background": !checked,
+      "border-gray-20 bg-background": !checked,
       "cursor-not-allowed opacity-0": disabled,
     },
   );

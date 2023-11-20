@@ -46,7 +46,7 @@ const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   };
 
   return (
-    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 odd:bg-soft_secondary even:bg-background">
+    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 odd:bg-secondary-10 even:bg-background">
       <CheckBox checked={isRelated} onChange={handleCheckBoxChange} />
       <span className="font-bold">{name}</span>
       <span>{generation}</span>
