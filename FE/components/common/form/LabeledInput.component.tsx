@@ -22,7 +22,7 @@ const LabeledInput = ({
         placeholder={placeholder}
         type={type}
         autoComplete="off"
-        className="w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-tertiary focus:outline-none"
+        className="w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-tertiary-10 focus:outline-none"
       />
     </div>
   );

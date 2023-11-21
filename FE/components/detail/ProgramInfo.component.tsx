@@ -13,6 +13,7 @@ interface ProgramInfoProps {
   programId: string;
 }
 
+// TODO: ProgramInfo 바뀐 디자인 적용 - Title 배치
 const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   const { data, isLoading, isError } = useQuery(
     ["ProgramInfo", programId],
@@ -23,9 +24,9 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   if (isError) return <>Error!</>;
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <Title>{data.title}</Title>
-      <div className="flex w-full justify-between border-b-[1.5px] p-6">
+    <div className="flex w-full flex-col justify-center">
+      <Title className="mb-3 mt-16">{data.title}</Title>
+      <div className="flex w-full justify-between border-b-[1.5px] border-gray-20 py-4">
         <span className="text-lg">{convertDate(data.programDate)}</span>
         <Link href={`/edit/${programId}`}>
           <Image src="/icons/pencil.svg" alt="edit" width={20} height={20} />
