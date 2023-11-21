@@ -15,7 +15,7 @@ const ErrorPage = () => {
       <Image src={ERROR.IMAGE_URL} alt="error" width={270} height={210.7} />
       <Link
         href={ROUTES.HOME}
-        className="border-b-[3px] border-stroke-base text-lg font-extrabold"
+        className="border-b-[3px] border-stroke-30 text-lg font-extrabold"
       >
         {ERROR.BUTTON_TEXT}
       </Link>

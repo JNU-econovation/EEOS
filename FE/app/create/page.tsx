@@ -1,13 +1,13 @@
 import Title from "@/components/common/Title.component";
 import ProgramCreateForm from "@/components/create/ProgramCreateForm.component";
-import SubLayout from "@/components/layout/SubLayout";
+import DefaultLayout from "@/components/layout/DefaultLayout";
 
 const ProgramCreatePage = () => {
   return (
-    <SubLayout right="none">
+    <DefaultLayout>
       <Title>행사 생성</Title>
       <ProgramCreateForm />
-    </SubLayout>
+    </DefaultLayout>
   );
 };
 
