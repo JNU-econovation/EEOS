@@ -17,8 +17,8 @@ const config: Config = {
         paragraph: "#2D334A",
         primary: "#FFD803",
         error: "#FF6464",
-        stroke: { 
-          10: "#D4D3D9", 
+        stroke: {
+          10: "#D4D3D9",
           20: "#A9A7B3",
           30: "#272343",
         },
@@ -26,7 +26,7 @@ const config: Config = {
           10: "#F1FAFA",
           20: "#E3F6F5",
         },
-        tertiary: { 
+        tertiary: {
           10: "#BAE8E8",
           20: "#689696",
         },
@@ -44,11 +44,12 @@ const config: Config = {
         success: {
           10: "#EEFAEE",
           20: "#00DE52",
+          30: "#00A500",
         },
         action: {
           10: "#FFE9E4",
           20: "#FF6530",
-        }
+        },
       },
     },
   },
