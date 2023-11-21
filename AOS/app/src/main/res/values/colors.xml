@@ -40,9 +40,9 @@
     <color name="action">#FFEEFAEE</color>
     <color name="action_light">#FFD4D3D9</color>
 
-    <color name="warning_strong">#FFD4D3D9</color>
-    <color name="warning">#FFD4D3D9</color>
-    <color name="warning_light">#FFD4D3D9</color>
+    <color name="warning_strong">#FFEFB300</color>
+    <color name="warning">#FFFFC51A</color>
+    <color name="warning_light">#FFFFF7E2</color>
 
 
 

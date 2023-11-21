@@ -27,7 +27,6 @@
     <dimen name="padding_home_screen_program_horizontal">28dp</dimen>
 
 
-
     <!--Home Dialog Screen Dimensions-->
     <dimen name="size_member_status_dialog_background_width">300dp</dimen>
     <dimen name="size_member_status_dialog_background_height">238dp</dimen>
@@ -40,7 +39,6 @@
     <dimen name="margin_member_status_dialog_space_between_texts">17dp</dimen>
     <dimen name="margin_member_status_dialog_space_between_text_and_status_button">15dp</dimen>
 
-
     <dimen name="size_member_status_dialog_button_width">127dp</dimen>
     <dimen name="size_member_status_dialog_button_height">60dp</dimen>
     <dimen name="size_member_status_dialog_button_stroke">1dp</dimen>
@@ -49,14 +47,21 @@
 
 
     <!--Detail Screen Dimensions-->
+    <dimen name="width_detail_screen_space_category_chip">85dp</dimen>
+    <dimen name="height_detail_screen_space_category_chip">30dp</dimen>
+
+    <dimen name="margin_detail_screen_space_between_tag_and_post_title">10dp</dimen>
+    <dimen name="margin_detail_screen_space_between_subtitle_and_divider">10dp</dimen>
+    <dimen name="margin_detail_screen_space_post_content_vertical">10dp</dimen>
+
     <dimen name="margin_detail_screen_space_between_title_and_icon">5dp</dimen>
     <dimen name="margin_detail_screen_divider_vertical">10dp</dimen>
     <dimen name="margin_detail_screen_space_between_member_list_content">4dp</dimen>
     <dimen name="margin_detail_screen_space_between_member_list_generation_and_name">5dp</dimen>
 
 
-
     <!--CornerSize-->
+    <dimen name="size_corner_10dp">10dp</dimen>
     <dimen name="size_corner_11dp">11dp</dimen>
     <dimen name="size_corner_20dp">20dp</dimen>
 
@@ -68,7 +73,9 @@
     <dimen name="width_stroke_1.5dp">1.5dp</dimen>
 
 
+
     <!--PaddingValues-->
+    <dimen name="padding_values_0dp">0dp</dimen>
     <dimen name="padding_values_15dp">15dp</dimen>
 
 
