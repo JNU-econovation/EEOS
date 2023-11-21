@@ -1,4 +1,4 @@
-type attendStatus = "attend" | "absent" | "none";
+type attendStatus = "attend" | "absent" | "none" | "perceive" | "noResponse";
 
 export interface defaultMember {
   memberId: number;
