@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,51 +23,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramDetail(
-    title: String,
-    date: String,
-    content: String,
-    category: String
-) {
+fun ProgramDetail() {
     Column {
         Column(
             horizontalAlignment = Alignment.Start
         ) {
-            Category(tagName = category)
+            Category()
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_between_tag_and_post_title)))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Text(
-                text = date,
-                style = MaterialTheme.typography.bodyLarge
-            )
+            Title()
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_between_subtitle_and_divider)))
         }
-
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Divider(
+                modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
                 thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
                 color = colorResource(id = R.color.stroke_400)
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)))
-            Text(
-                text = content,
-                style = MaterialTheme.typography.bodySmall
-            )
+            Content()
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)))
         }
     }
 }
 
 @Composable
-private fun Category(
-    tagName: String
-) {
+private fun Category() {
     val containerColor = colorResource(R.color.warning_light)
     val contentColor = colorResource(R.color.warning_strong)
 
@@ -95,32 +78,47 @@ private fun Category(
         ),
     ) {
         Text(
-            text = tagName,
+            text = "주간 발표", /* ToDo */
             style = MaterialTheme.typography.labelSmall,
             color = colorResource(R.color.warning_strong)
         )
     }
 }
 
+@Composable
+private fun Title() {
+    Text(
+        text = "10월 2주차 주간 발표",/* ToDo */
+        style = MaterialTheme.typography.headlineMedium
+    )
+    Text(
+        text = "2023년 10월 6일 (일)",/* ToDo */
+        style = MaterialTheme.typography.bodyLarge
+    )
+}
+
+@Composable
+private fun Content() {
+    Text(
+        text = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리\n" +
+                "나라만세 무궁화 삼천리 화려강산\n" +
+                "일시 : 10월 6일 (일)\n" +
+                "발표팀\n" +
+                "A팀\n" +
+                "팀쿠키\n" +
+                "도참없\n" +
+                "잉여\n" +
+                "더지\n" +
+                "kipi\n" +
+                "발표 자료는 16시까지 깃허브에 업로드 부탁드립니다.",/* ToDo */
+        style = MaterialTheme.typography.bodySmall
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun ProgramDetailPreview() {
     MaterialTheme {
-        ProgramDetail(
-            title = "10월 2주차 주간 발표",
-            date = "2023년 10월 6일 (일)",
-            content = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리\n" +
-                    "나라만세 무궁화 삼천리 화려강산\n" +
-                    "일시 : 10월 6일 (일)\n" +
-                    "발표팀\n" +
-                    "A팀\n" +
-                    "팀쿠키\n" +
-                    "도참없\n" +
-                    "잉여\n" +
-                    "더지\n" +
-                    "kipi\n" +
-                    "발표 자료는 16시까지 깃허브에 업로드 부탁드립니다.",
-            category = "주간 발표"
-        )
+        ProgramDetail()
     }
 }
