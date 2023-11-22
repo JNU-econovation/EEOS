@@ -10,8 +10,7 @@ import FORM_INFO from "@/src/constants/FORM_INFO";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import { convertDate } from "@/src/utils/date";
 
-// TODO: 행사 카테고리 추가
-// TODO: 수요조사 등록하기 추가
+// FIXME: 임시저장이 서버로 넘어가면 jotai로 관리 X
 interface ProgramFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formReset?: () => void;
@@ -45,8 +44,8 @@ const ProgramForm = ({
   );
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
-  const [selectedCategory, setSelectedCategory] =
-    useState<programCategory>("weekly");
+  const [category, setCategory] = useState<programCategory>("weekly");
+  const [isDemand, setIsDemand] = useState<boolean>(false);
 
   const handleDateChange = (date: Date | undefined) => {
     setDate(date);
@@ -60,14 +59,28 @@ const ProgramForm = ({
       className="mb-12 mt-8 flex w-full flex-col gap-6"
       onSubmit={handleSubmit}
     >
-      <LabeledInput
-        id={FORM_INFO.PROGRAM.TITLE.id}
-        type={FORM_INFO.PROGRAM.TITLE.type}
-        label={FORM_INFO.PROGRAM.TITLE.label}
-        placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <div className="relative">
+        <div className="absolute right-0 top-0 flex gap-2">
+          <label className="text-sm font-bold">수요조사 등록하기</label>
+          <input
+            type="checkbox"
+            className="accent-primary"
+            checked={isDemand}
+            onChange={() => setIsDemand((prev) => !prev)}
+          />
+        </div>
+        <LabeledInput
+          id={FORM_INFO.PROGRAM.TITLE.id}
+          type={FORM_INFO.PROGRAM.TITLE.type}
+          label={FORM_INFO.PROGRAM.TITLE.label}
+          placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
+          value={isDemand ? `[수요조사] ${title}` : title}
+          onChange={(e) =>
+            setTitle(e.target.value.replace(/^\[수요조사\] /, ""))
+          }
+        />
+      </div>
+
       <div className="flex gap-8">
         <div
           onClick={() => setOpenCalender(true)}
@@ -85,12 +98,8 @@ const ProgramForm = ({
             <Calendar date={date} handleDateChange={handleDateChange} />
           )}
         </div>
-        <ProgramCategoryTab
-          selected={selectedCategory}
-          onSelect={setSelectedCategory}
-        />
+        <ProgramCategoryTab selected={category} onSelect={setCategory} />
       </div>
-
       <MarkdownEditor
         id={FORM_INFO.PROGRAM.CONTENT.id}
         label={FORM_INFO.PROGRAM.CONTENT.label}
