@@ -1,0 +1,13 @@
+.w-md-editor {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  box-shadow: none;
+}
+
+.w-md-editor:focus-within {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(186 232 232 / var(--tw-border-opacity));
+}
