@@ -52,31 +52,61 @@
 
     <dimen name="margin_detail_screen_space_between_tag_and_post_title">10dp</dimen>
     <dimen name="margin_detail_screen_space_between_subtitle_and_divider">10dp</dimen>
+    <dimen name="width_detail_screen_divider">350dp</dimen>
     <dimen name="margin_detail_screen_space_post_content_vertical">10dp</dimen>
+    <dimen name="margin_detail_screen_space_between_content_and_attendance">16dp</dimen>
 
     <dimen name="margin_detail_screen_space_between_title_and_icon">5dp</dimen>
-    <dimen name="margin_detail_screen_divider_vertical">10dp</dimen>
-    <dimen name="margin_detail_screen_space_between_member_list_content">4dp</dimen>
+    <dimen name="margin_detail_screen_divider_top">10dp</dimen>
+    <dimen name="margin_detail_screen_divider_bottom">20dp</dimen>
+    <dimen name="margin_detail_screen_space_between_member_list_content">16dp</dimen>
     <dimen name="margin_detail_screen_space_between_member_list_generation_and_name">5dp</dimen>
+    <dimen name="margin_detail_screen_space_between_attendance">30dp</dimen>
+
+
+    <!--Detail Bottom Sheet Dimensions-->
+    <dimen name="height_detail_screen_sheet_peek_height">110dp</dimen>
+
+    <dimen name="margin_detail_screen_space_bar_vertical">7dp</dimen>
+    <dimen name="margin_detail_screen_space_attend_status_vertical">12dp</dimen>
+    <dimen name="margin_detail_screen_space_description_vertical">12dp</dimen>
+
+    <dimen name="margin_detail_screen_space_between_info_and_chip">12dp</dimen>
+
+    <dimen name="width_detail_bottom_sheet_short_button">86dp</dimen>
+    <dimen name="height_detail_bottom_sheet_short_button">40dp</dimen>
+    <dimen name="width_detail_bottom_sheet_long_button">200dp</dimen>
+    <dimen name="height_detail_bottom_sheet_long_button">43dp</dimen>
+
+    <dimen name="margin_detail_screen_space_attend_status_buttons_vertical">30dp</dimen>
+
+
 
 
     <!--CornerSize-->
     <dimen name="size_corner_10dp">10dp</dimen>
     <dimen name="size_corner_11dp">11dp</dimen>
     <dimen name="size_corner_20dp">20dp</dimen>
+    <dimen name="size_corner_25dp">25dp</dimen>
+
 
 
     <!--StrokeWidth-->
     <dimen name="width_stroke_0.3dp">0.3dp</dimen>
     <dimen name="width_stroke_0.7dp">0.7dp</dimen>
     <dimen name="width_stroke_1dp">1dp</dimen>
+    <dimen name="width_stroke_1.2dp">1.2dp</dimen>
     <dimen name="width_stroke_1.5dp">1.5dp</dimen>
 
 
 
     <!--PaddingValues-->
     <dimen name="padding_values_0dp">0dp</dimen>
+    <dimen name="padding_values_7dp">7dp</dimen>
+    <dimen name="padding_values_10dp">10dp</dimen>
     <dimen name="padding_values_15dp">15dp</dimen>
+    <dimen name="padding_values_30dp">30dp</dimen>
+    <dimen name="padding_values_35dp">35dp</dimen>
 
 
 </resources>
