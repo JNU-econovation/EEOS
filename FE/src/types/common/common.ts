@@ -1,4 +1,4 @@
-export interface toggleOption {
+export interface badgeOption {
   text: string;
-  color: "green" | "yellow" | "red" | "default";
+  color: "green" | "yellow" | "red" | "gray" | "teal";
 }
