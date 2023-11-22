@@ -1,9 +1,9 @@
 import AttendStatusBadge from "./AttendStatusBadge.component";
-import { toggleOption } from "@/src/types/common/common";
+import { badgeOption } from "@/src/types/common/common";
 
 interface AttendStatusSelectorProps {
   selectedValue: string;
-  options: toggleOption[];
+  options: badgeOption[];
   onSelect: (value: string) => void;
 }
 const AttendStatusSelector = ({
@@ -11,7 +11,7 @@ const AttendStatusSelector = ({
   options,
   onSelect,
 }: AttendStatusSelectorProps) => {
-  const handleClick = (value: toggleOption) => {
+  const handleClick = (value: badgeOption) => {
     value.text !== selectedValue && onSelect(value.text);
   };
 
