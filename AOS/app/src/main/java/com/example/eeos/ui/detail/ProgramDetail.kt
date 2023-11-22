@@ -61,7 +61,7 @@ private fun Category() {
             )
             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.size_corner_10dp))),
         onClick = {},
-        enabled = true,
+        enabled = false,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,

@@ -26,11 +26,10 @@ import com.example.eeos.R
 
 @Composable
 fun MemberStatusDialog(
-    memberInfo: String,
-    doLogout: () -> Unit,
-    onStatusBtnClick: () -> Unit
+    onStatusBtnClick: () -> Unit,
+    onDismissRequest: () -> Unit
 ) {
-    Dialog(onDismissRequest = { /*TODO*/ }) {
+    Dialog(onDismissRequest = onDismissRequest) {
         Card(
             modifier = Modifier
                 .size(
@@ -74,7 +73,7 @@ fun MemberStatusDialog(
                             )
                         )
                         Text(
-                            text = memberInfo,
+                            text = "/* ToDo */",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Spacer(
@@ -92,7 +91,7 @@ fun MemberStatusDialog(
                                 id = R.string.home_dialog_logout_button
                             ),
                             modifier = Modifier.clickable {
-                                doLogout()
+                                /* ToDo */
                             }
                         )
                     }
@@ -138,9 +137,8 @@ fun MemberStatusDialog(
 private fun MemberStatusDialogPreview() {
     MaterialTheme {
         MemberStatusDialog(
-            memberInfo = "24기 장현지",
-            doLogout = {},
-            onStatusBtnClick = {}
+            onStatusBtnClick = {},
+            onDismissRequest = {}
         )
     }
 }

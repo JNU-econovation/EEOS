@@ -18,7 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramStatusChips(programStatusChips: List<String>, selectedProgramStatus: MutableState<String>) {
+fun ProgramStatusChips(
+    programStatusChips: List<String>,
+    selectedProgramStatus: MutableState<String>
+) {
     Row {
         programStatusChips.forEach { chip ->
             ProgramStatusChip(

@@ -22,7 +22,12 @@ import com.example.eeos.R
 import com.example.eeos.ui.common.EeosTopAppBar
 
 val programLists: List<ProgramData> = listOf(
-    ProgramData(date = "2023년 11월 06일 (월)", title = "오늘의 행사 두구두구", category = "주간 발표", isEnd = false),
+    ProgramData(
+        date = "2023년 11월 06일 (월)",
+        title = "오늘의 행사 두구두구",
+        category = "주간 발표",
+        isEnd = false
+    ),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,13 +45,12 @@ fun HomeScreen() {
         stringResource(id = R.string.home_program_status_ends)
     )
 
-    val selectedCategory = rememberSaveable { mutableStateOf( categoryChips[0] ) }
-    val selectedProgramStatus = rememberSaveable { mutableStateOf( programStatusChips[0] ) }
+    val selectedCategory = rememberSaveable { mutableStateOf(categoryChips[0]) }
+    val selectedProgramStatus = rememberSaveable { mutableStateOf(programStatusChips[0]) }
 
     Scaffold(
         topBar = {
-            EeosTopAppBar(memberStatus = "AM", generation = 24, name = "장현지") {
-            }
+            EeosTopAppBar()
         }
     ) { innerPadding ->
         Row(
@@ -79,7 +83,10 @@ fun HomeScreen() {
                         )
                     )
                 )
-                ProgramStatusChips(programStatusChips = programStatusChips, selectedProgramStatus = selectedProgramStatus)
+                ProgramStatusChips(
+                    programStatusChips = programStatusChips,
+                    selectedProgramStatus = selectedProgramStatus
+                )
                 Spacer(
                     modifier = Modifier.height(
                         height = dimensionResource(
