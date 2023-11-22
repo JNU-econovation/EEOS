@@ -1,12 +1,17 @@
 import { useState } from "react";
 import Button from "../Button.component";
 import Calendar from "../Calendar.component";
-import MarkdownEditor from "../MarkdownEditor.component";
+import MarkdownEditor from "../markdown/MarkdownEditor.component";
 import LabeledInput from "./LabeledInput.component";
+import ProgramCategoryTab, {
+  programCategory,
+} from "./ProgramCategoryTab.component";
 import FORM_INFO from "@/src/constants/FORM_INFO";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import { convertDate } from "@/src/utils/date";
 
+// TODO: 행사 카테고리 추가
+// TODO: 수요조사 등록하기 추가
 interface ProgramFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formReset?: () => void;
@@ -40,6 +45,8 @@ const ProgramForm = ({
   );
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
+  const [selectedCategory, setSelectedCategory] =
+    useState<programCategory>("weekly");
 
   const handleDateChange = (date: Date | undefined) => {
     setDate(date);
@@ -49,19 +56,22 @@ const ProgramForm = ({
   };
 
   return (
-    <div className="w-full max-w-xs md:max-w-lg lg:max-w-2xl">
-      <form className="mt-8 flex w-full flex-col gap-4" onSubmit={handleSubmit}>
-        <LabeledInput
-          id={FORM_INFO.PROGRAM.TITLE.id}
-          type={FORM_INFO.PROGRAM.TITLE.type}
-          label={FORM_INFO.PROGRAM.TITLE.label}
-          placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <form
+      className="mb-12 mt-8 flex w-full flex-col gap-6"
+      onSubmit={handleSubmit}
+    >
+      <LabeledInput
+        id={FORM_INFO.PROGRAM.TITLE.id}
+        type={FORM_INFO.PROGRAM.TITLE.type}
+        label={FORM_INFO.PROGRAM.TITLE.label}
+        placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <div className="flex gap-8">
         <div
           onClick={() => setOpenCalender(true)}
-          className="relative"
+          className="relative w-full"
           ref={calenderRef}
         >
           <LabeledInput
@@ -75,23 +85,28 @@ const ProgramForm = ({
             <Calendar date={date} handleDateChange={handleDateChange} />
           )}
         </div>
-        <MarkdownEditor
-          id={FORM_INFO.PROGRAM.CONTENT.id}
-          label={FORM_INFO.PROGRAM.CONTENT.label}
-          placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
-          value={content}
-          onChange={(e) => setContent(e || "")}
+        <ProgramCategoryTab
+          selected={selectedCategory}
+          onSelect={setSelectedCategory}
         />
-        <div className="mt-6 flex w-full justify-end gap-2">
-          <Button type="submit">{submitText}</Button>
-          {formReset && (
-            <Button color="gray" onClick={formReset}>
-              취소
-            </Button>
-          )}
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <MarkdownEditor
+        id={FORM_INFO.PROGRAM.CONTENT.id}
+        label={FORM_INFO.PROGRAM.CONTENT.label}
+        placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
+        value={content}
+        onChange={(e) => setContent(e || "")}
+      />
+      <div className="mt-6 flex w-full justify-end gap-2">
+        <Button type="submit">{submitText}</Button>
+        {formReset && (
+          <Button color="gray" onClick={formReset}>
+            취소
+          </Button>
+        )}
+      </div>
+    </form>
   );
 };
 export default ProgramForm;
