@@ -34,11 +34,12 @@
 
 
     <!--Interaction Color-->
+    <color name="success_strong">#FF00A500</color>
     <color name="success">#FF00DE52</color>
     <color name="success_light">#FFEEFAEE</color>
 
-    <color name="action">#FFEEFAEE</color>
-    <color name="action_light">#FFD4D3D9</color>
+    <color name="action">#FFFF6530</color>
+    <color name="action_light">#FFFFE9E4</color>
 
     <color name="warning_strong">#FFEFB300</color>
     <color name="warning">#FFFFC51A</color>
