@@ -34,7 +34,7 @@ const MarkdownEditor = ({
             id={id}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="scrollbar-hide h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none"
+            className="scrollbar-none h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none"
             placeholder={placeholder}
             onKeyDown={(e) => {
               if (e.key === "Tab") {
@@ -53,7 +53,7 @@ const MarkdownEditor = ({
         {viewType === "preview" && (
           <MarkdownViewer
             value={value}
-            className="scrollbar-hide h-[32rem] w-full"
+            className="scrollbar-none h-[32rem] w-full"
           />
         )}
       </div>

@@ -16,7 +16,7 @@ export const attendStatusList: badgeOption[] = [
 interface MemberTableItemProps {
   data: defaultMember;
   isEdit: boolean;
-  setMemberList: React.Dispatch<React.SetStateAction<defaultMember[]>>;
+  setMemberList: () => void;
 }
 
 const MemberTableItem = ({
@@ -37,9 +37,9 @@ const MemberTableItem = ({
   const handleSelectChange = (value: string) => {
     if (typeof value === "string") return;
     setSelectedAttendStatus(value);
+    console.log(memberId);
+    setMemberList();
   };
-
-  console.log(selectedAttendStatus);
 
   return (
     <div className="grid h-20 grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10">
