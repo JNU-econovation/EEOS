@@ -1,11 +1,14 @@
 import CheckBox from "../CheckBox.component";
 import ActiveStatusTab from "./ActiveStatusTab.component";
+import MemberTableItem from "./MemberTableItem.component";
+import { defaultMember } from "@/src/apis/types/member";
 
 interface MemberTableProps {
-  children: React.ReactNode;
+  members: defaultMember[];
+  isEdit: boolean;
 }
 
-const MemberTable = ({ children }: MemberTableProps) => {
+const MemberTable = ({ members, isEdit }: MemberTableProps) => {
   return (
     <div className="mt-12 flex w-full flex-col gap-6">
       <ActiveStatusTab />
@@ -17,7 +20,14 @@ const MemberTable = ({ children }: MemberTableProps) => {
           <span></span>
           <span>참석 여부</span>
         </div>
-        {children}
+        {members.map((member) => (
+          <MemberTableItem
+            key={member.memberId}
+            data={member}
+            isEdit={isEdit}
+            setMemberList={() => {}}
+          />
+        ))}
       </div>
     </div>
   );
