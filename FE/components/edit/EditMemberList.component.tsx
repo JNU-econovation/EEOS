@@ -6,6 +6,8 @@ import LoadingSpinner from "../common/LoadingSpinner";
 import EditMemberListItem from "./EditMemberListItem.component";
 import { getAllMembers } from "@/src/apis/member";
 
+// FIXME: Create 페이지에서도 재사용 가능하도록 수정
+// TODO: 사용자 직급 Tab 추가
 interface EditMemberListProps {
   programId: string;
 }

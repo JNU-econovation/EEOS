@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import LoadingSpinner from "../common/LoadingSpinner";
-import MarkdownViewer from "../common/MarkdownViewer.component";
+import MarkdownViewer from "../common/markdown/MarkdownViewer.component";
 import Title from "../common/Title.component";
 import { getProgramDetail } from "@/src/apis/program";
 import { convertDate } from "@/src/utils/date";
@@ -13,7 +13,6 @@ interface ProgramInfoProps {
   programId: string;
 }
 
-// TODO: ProgramInfo 바뀐 디자인 적용 - Title 배치
 const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   const { data, isLoading, isError } = useQuery(
     ["ProgramInfo", programId],

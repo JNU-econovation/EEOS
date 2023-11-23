@@ -17,7 +17,7 @@ interface MemberListProps {
 const MemberList = ({ programId, attendStatus }: MemberListProps) => {
   const { text, color, icon } = ATTEND_STATUS.TITLE_STYLE[attendStatus];
   const iconClass = classNames(
-    "flex items-center justify-center rounded-full p-1",
+    "flex h-fit w-fit items-center justify-center rounded-full p-1",
     color,
   );
 
@@ -33,7 +33,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   return (
-    <div className="w-custom my-4 flex h-fit w-[300px] flex-col bg-background px-4 sm:w-[600px] lg:w-[900px]">
+    <div className="w-custom my-6 flex h-fit w-full flex-col px-4">
       <div className="flex items-center justify-between border-b-[1px] border-stroke-20 p-4">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold">{text}</span>
@@ -43,7 +43,7 @@ const MemberList = ({ programId, attendStatus }: MemberListProps) => {
         </div>
         <span className="text-stroke-60 text-sm">{members.length}명</span>
       </div>
-      <div className="grid w-full grid-cols-1 justify-items-center gap-x-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="grid w-full auto-cols-auto justify-items-center gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {members.map((member) => (
           <MemberListItem key={member.memberId} memberData={member} />
         ))}

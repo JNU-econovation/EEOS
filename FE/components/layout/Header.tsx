@@ -18,6 +18,7 @@ const Header = () => {
         width={80}
         height={36}
         onClick={() => router.push(ROUTES.HOME)}
+        className="cursor-pointer"
       />
       <div className="flex items-center gap-8">
         <Image
@@ -26,6 +27,7 @@ const Header = () => {
           width={28}
           height={28}
           onClick={openUserModal}
+          className="cursor-pointer"
         />
         <Button
           color="primary"
