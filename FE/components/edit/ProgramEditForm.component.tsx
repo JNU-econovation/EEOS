@@ -23,11 +23,11 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
 
   const defaultData = {
     title,
-    setTitle,
+    setTitle: (title: string) => setTitle(title),
     content,
-    setContent,
+    setContent: (content: string) => setContent(content),
     programDate,
-    setProgramDate,
+    setProgramDate: (date: string) => setProgramDate(date),
   };
 
   const { isLoading, isError } = useQuery(["ProgramInfo", programId], () =>
