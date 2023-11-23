@@ -32,7 +32,7 @@ const CustomTabItem = ({
       "opacity-50": disable,
       "rounded-xl": rounded,
       "rounded-md": !rounded,
-      "min-w-[4.5rem] px-3 py-2 text-xs": size === "sm",
+      "min-w-[4.25rem] px-2 py-[0.3rem] text-xs": size === "sm",
       "min-w-[5rem] px-3 py-2 text-sm": size === "md",
       "min-w-[5.5rem] px-4 py-3 text-base": size === "lg",
     },
