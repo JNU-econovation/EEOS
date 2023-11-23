@@ -11,7 +11,7 @@ const Header = () => {
   const openUserModal = () => {};
 
   return (
-    <header className="sticky top-0 z-50 flex w-full items-center justify-between rounded-b-xl bg-background px-32 py-5 shadow-sm">
+    <header className="sticky top-0 z-50 flex w-full items-center justify-between rounded-b-xl bg-background px-32 py-4 shadow-sm">
       <Image
         src="/eeos_logo.svg"
         alt="logo"
