@@ -34,7 +34,7 @@ const CustomTabItem = ({
       "rounded-md": !rounded,
       "min-w-[4.5rem] px-3 py-2 text-xs": size === "sm",
       "min-w-[5rem] px-3 py-2 text-sm": size === "md",
-      "px-4 py-3 text-base": size === "lg",
+      "min-w-[5.5rem] px-4 py-3 text-base": size === "lg",
     },
   );
 
