@@ -18,7 +18,7 @@ const MemberTable = ({ members, isEdit }: MemberTableProps) => {
           <span>상태</span>
           <span>이름</span>
           <span></span>
-          <span>참석 여부</span>
+          <span>{isEdit ? "참석 여부" : ""}</span>
         </div>
         {members.map((member) => (
           <MemberTableItem
