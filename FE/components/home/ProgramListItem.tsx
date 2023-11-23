@@ -12,7 +12,7 @@ const ProgramListItem = ({ programData }: ProgramListItemProps) => {
   return (
     <Link
       href={`/detail/${programId}`}
-      className="flex w-full flex-col justify-between gap-6 rounded-lg bg-gray-light px-8 py-6 text-center transition-all hover:bg-secondary sm:flex-row sm:text-start"
+      className="flex w-full flex-col items-center justify-between gap-4 rounded-lg bg-gray-10 px-8 py-6 transition-all hover:bg-secondary-20 sm:flex-row"
       key={programId}
     >
       <p className="w-full truncate text-lg font-bold">{title}</p>

@@ -46,10 +46,11 @@ const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   };
 
   return (
-    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 odd:bg-soft_secondary even:bg-background">
+    <div className="grid h-20 grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10">
       <CheckBox checked={isRelated} onChange={handleCheckBoxChange} />
-      <span className="font-bold">{name}</span>
       <span>{generation}</span>
+      <span className="font-bold">{name}</span>
+      <span></span>
       <Toggle
         active={isAttend}
         onChange={handleToggleChange}
