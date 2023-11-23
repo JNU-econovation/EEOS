@@ -1,11 +1,6 @@
+import classNames from "classnames";
+import Image from "next/image";
 import { PropsWithChildren } from "react";
-
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  color: "primary" | "gray";
-  sizeType: "sm" | "base" | "lg";
-  leftIcon: boolean;
-  type?: "button" | "submit" | "reset";
-}
 
 const btnType = {
   primary: "bg-primary text-paragraph",
@@ -18,21 +13,37 @@ const btnSize = {
   lg: "py-3 px-5 rounded-lg min-w-[8rem]",
 };
 
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  color?: "primary" | "gray";
+  sizeType?: "sm" | "base" | "lg";
+  leftIcon?: boolean;
+  type?: "button" | "submit" | "reset";
+}
+
 const Button = ({
   type = "button",
   color = "primary",
   sizeType = "base",
   leftIcon = false,
-  onClick,
+  onClick = () => {},
   children,
 }: PropsWithChildren<ButtonProps>) => {
-  const btnStyle = `flex justify-center gap-2 ${btnType[color]} ${btnSize[sizeType]}`;
+  const btnStyle = classNames(
+    "flex justify-center gap-2",
+    btnType[color],
+    btnSize[sizeType],
+  );
+
   return (
     <button className={btnStyle} onClick={onClick} type={type}>
-      {leftIcon ? (
-        <img src="/icons/plus.svg" alt="plus" width={"22px"} />
-      ) : (
-        <></>
+      {leftIcon && (
+        <Image
+          src="/icons/plus.svg"
+          alt="plus"
+          width={22}
+          height={22}
+          className="hidden md:inline-block"
+        />
       )}
       <span>{children}</span>
     </button>

@@ -1,12 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import Title from "../common/Title";
-import { getProgramDetail } from "@/src/apis/program/program";
 import Image from "next/image";
-import { convertDate } from "@/src/utils/date";
 import Link from "next/link";
-import MDEditor from "@uiw/react-md-editor";
+import LoadingSpinner from "../common/LoadingSpinner";
+import MarkdownViewer from "../common/MarkdownViewer.component";
+import Title from "../common/Title.component";
+import { getProgramDetail } from "@/src/apis/program";
+import { convertDate } from "@/src/utils/date";
 
 interface ProgramInfoProps {
   programId: string;
@@ -15,28 +16,23 @@ interface ProgramInfoProps {
 const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   const { data, isLoading, isError } = useQuery(
     ["ProgramInfo", programId],
-    () => getProgramDetail(programId)
+    () => getProgramDetail(programId),
   );
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error!</div>;
-  }
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <>Error!</>;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex w-full flex-col items-center justify-center">
       <Title>{data.title}</Title>
-      <div className="flex w-full justify-between p-6 border-b-[1.5px]">
+      <div className="flex w-full justify-between border-b-[1.5px] p-6">
         <span className="text-lg">{convertDate(data.programDate)}</span>
         <Link href={`/edit/${programId}`}>
           <Image src="/icons/pencil.svg" alt="edit" width={20} height={20} />
         </Link>
       </div>
-      <div className="w-full min-h-[360px] my-10 px-6">
-        <MDEditor.Markdown source={data.content} />
+      <div className="my-10 min-h-[18rem] w-full px-6">
+        <MarkdownViewer value={data.content} />
       </div>
     </div>
   );
