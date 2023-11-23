@@ -7,5 +7,5 @@ data class MemberData(
 )
 
 enum class AttendStatus {
-    ATTEND, ABSENT, NONE
+    ATTEND, ABSENT, PERCEIVE, NO_RESPONSE, NON_RELATED
 }
