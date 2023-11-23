@@ -16,7 +16,7 @@ const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   const queryClient = useQueryClient();
 
   const { memberId, name, generation, attendStatus } = data;
-  const [isRelated, setIsRelated] = useState(attendStatus !== "none");
+  const [isRelated, setIsRelated] = useState(attendStatus !== "nonRelated");
   const [isAttend, setIsAttend] = useState(attendStatus === "attend");
 
   const { mutate: updateMemberMutate } = useMutation(
@@ -32,7 +32,7 @@ const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   );
 
   const getAfterAttendStatus = () => {
-    if (!isRelated) return "none";
+    if (!isRelated) return "nonRelated";
     if (isAttend) return "attend";
     return "absent";
   };
