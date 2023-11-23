@@ -26,7 +26,7 @@ const CustomTabItem = ({
   onClick = () => {},
 }: CustomTabItemProps) => {
   const tabItemClass = classNames(
-    "flex h-fit w-fit items-center justify-center border-2 font-bold",
+    "flex h-fit w-fit cursor-pointer items-center justify-center border-2 font-bold",
     customTabItemStyle[color],
     {
       "opacity-50": disable,
