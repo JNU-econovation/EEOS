@@ -74,6 +74,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
       handleSubmit={handleSubmit}
       formReset={formReset}
       defaultData={defaultData}
+      isEdit={true}
     />
   );
 };

@@ -2,10 +2,13 @@ import { useState } from "react";
 import Button from "../Button.component";
 import Calendar from "../Calendar.component";
 import MarkdownEditor from "../markdown/MarkdownEditor.component";
+import MemberTable from "../memberTable/MemberTable.component";
+import MemberTableItem from "../memberTable/MemberTableItem.component";
 import LabeledInput from "./LabeledInput.component";
 import ProgramCategoryTab, {
   programCategory,
 } from "./ProgramCategoryTab.component";
+import { defaultMember } from "@/src/apis/types/member";
 import FORM_INFO from "@/src/constants/FORM_INFO";
 import { useOutsideClick } from "@/src/hooks/useOutsideRef";
 import { convertDate } from "@/src/utils/date";
@@ -29,13 +32,23 @@ interface ProgramFormProps {
       | ((v: string) => void);
   };
   submitText?: string;
+  isEdit: boolean;
 }
+
+const memberList: defaultMember[] = [
+  { memberId: 1, name: "김민수", generation: "1", attendStatus: "attend" },
+  { memberId: 2, name: "김민수", generation: "1", attendStatus: "attend" },
+  { memberId: 3, name: "김민수", generation: "1", attendStatus: "attend" },
+  { memberId: 4, name: "김민수", generation: "1", attendStatus: "attend" },
+  { memberId: 5, name: "김민수", generation: "1", attendStatus: "attend" },
+];
 
 const ProgramForm = ({
   handleSubmit,
   formReset,
   defaultData,
   submitText = "제출",
+  isEdit,
 }: ProgramFormProps) => {
   const { title, setTitle, content, setContent, programDate, setProgramDate } =
     defaultData;
@@ -46,6 +59,7 @@ const ProgramForm = ({
   const calenderRef = useOutsideClick(() => setOpenCalender(false));
   const [category, setCategory] = useState<programCategory>("weekly");
   const [isDemand, setIsDemand] = useState<boolean>(false);
+  const [members, setMembers] = useState(memberList);
 
   const handleDateChange = (date: Date | undefined) => {
     setDate(date);
@@ -80,7 +94,6 @@ const ProgramForm = ({
           }
         />
       </div>
-
       <div className="flex gap-8">
         <div
           onClick={() => setOpenCalender(true)}
@@ -107,6 +120,15 @@ const ProgramForm = ({
         value={content}
         onChange={(e) => setContent(e || "")}
       />
+      <MemberTable>
+        {members.map((member) => (
+          <MemberTableItem
+            data={member}
+            isEdit={isEdit}
+            setMemberList={setMembers}
+          />
+        ))}
+      </MemberTable>
       <div className="mt-6 flex w-full justify-end gap-2">
         <Button type="submit">{submitText}</Button>
         {formReset && (
