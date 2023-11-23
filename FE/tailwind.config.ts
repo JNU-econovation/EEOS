@@ -51,6 +51,6 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [import("tailwind-scrollbar")],
 };
 export default config;
