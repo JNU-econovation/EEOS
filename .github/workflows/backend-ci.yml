@@ -5,10 +5,10 @@ name: Backend CI
 # main 브랜치에 push, PR이 되었을 때 workflow 실행
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main","be" ]
     paths : 'BE/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main","be" ]
     paths : 'BE/**'
 
 defaults:
