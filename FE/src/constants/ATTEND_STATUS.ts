@@ -1,3 +1,5 @@
+// FIXME: {type, text, color, icon}[]의 형태로 바꾸기
+
 const TITLE_STYLE: {
   [key: string]: { text: string; color: string; icon: string };
 } = {

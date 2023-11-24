@@ -23,9 +23,9 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <>Error!</>;
 
+  // FIXME: text props로 받아서 사용
   return (
     <div className="flex w-full flex-col justify-center pt-12">
-      // FIXME: text props로 받아서 사용
       <CustomTabItem text="주간발표" size="sm" color="yellow" rounded />
       <Title className="my-3">{data.title}</Title>
       <div className="flex w-full justify-between border-b-[1.5px] border-gray-20 py-4">
