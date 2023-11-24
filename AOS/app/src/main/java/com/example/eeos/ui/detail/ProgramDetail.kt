@@ -1,8 +1,10 @@
 package com.example.eeos.ui.detail
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -29,21 +31,52 @@ fun ProgramDetail() {
             horizontalAlignment = Alignment.Start
         ) {
             Category()
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_between_tag_and_post_title)))
+            Spacer(
+                modifier = Modifier.height(
+                    dimensionResource(
+                        id = R.dimen.margin_detail_screen_space_between_tag_and_post_title
+                    )
+                )
+            )
             Title()
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_between_subtitle_and_divider)))
+            Spacer(
+                modifier = Modifier.height(
+                    dimensionResource(
+                        id = R.dimen.margin_detail_screen_space_between_subtitle_and_divider
+                    )
+                )
+            )
         }
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column {
             Divider(
-                modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
+                modifier = Modifier.width(
+                    dimensionResource(id = R.dimen.width_detail_screen_divider)
+                ),
                 thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
                 color = colorResource(id = R.color.stroke_400)
             )
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)))
-            Content()
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)))
+            Spacer(
+                modifier = Modifier.height(
+                    dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)
+                )
+            )
+            Row(
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Spacer(
+                    modifier = Modifier.width(
+                        dimensionResource(
+                            id = R.dimen.margin_detail_screen_space_post_content_horizontal
+                        )
+                    )
+                )
+                Content()
+            }
+            Spacer(
+                modifier = Modifier.height(
+                    dimensionResource(id = R.dimen.margin_detail_screen_space_post_content_vertical)
+                )
+            )
         }
     }
 }
@@ -88,11 +121,16 @@ private fun Category() {
 @Composable
 private fun Title() {
     Text(
-        text = "10월 2주차 주간 발표",/* ToDo */
+        text = "10월 2주차 주간 발표", /* ToDo */
         style = MaterialTheme.typography.headlineMedium
     )
+    Spacer(
+        modifier = Modifier.height(
+            dimensionResource(id = R.dimen.margin_detail_screen_space_between_title_and_subtitle)
+        )
+    )
     Text(
-        text = "2023년 10월 6일 (일)",/* ToDo */
+        text = "2023년 10월 6일 (일)", /* ToDo */
         style = MaterialTheme.typography.bodyLarge
     )
 }
@@ -110,7 +148,7 @@ private fun Content() {
                 "잉여\n" +
                 "더지\n" +
                 "kipi\n" +
-                "발표 자료는 16시까지 깃허브에 업로드 부탁드립니다.",/* ToDo */
+                "발표 자료는 16시까지 깃허브에 업로드 부탁드립니다.", /* ToDo */
         style = MaterialTheme.typography.bodySmall
     )
 }
