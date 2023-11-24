@@ -6,10 +6,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +54,10 @@ fun EeosTopAppBar() {
                 onClick = { memberStatusDialogState.value = true }
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen)))
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = colorResource(id = R.color.background)
+        )
     )
 }
 

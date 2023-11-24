@@ -28,6 +28,18 @@ val programLists: List<ProgramData> = listOf(
         category = "주간 발표",
         isEnd = false
     ),
+    ProgramData(
+        date = "2023년 11월 06일 (월)",
+        title = "오늘의 행사 두구두구",
+        category = "주간 발표",
+        isEnd = false
+    ),
+    ProgramData(
+        date = "2023년 11월 06일 (월)",
+        title = "오늘의 행사 두구두구",
+        category = "주간 발표",
+        isEnd = false
+    ),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +63,8 @@ fun HomeScreen() {
     Scaffold(
         topBar = {
             EeosTopAppBar()
-        }
+        },
+        containerColor = colorResource(id = R.color.background)
     ) { innerPadding ->
         Row(
             modifier = Modifier.padding(innerPadding)
