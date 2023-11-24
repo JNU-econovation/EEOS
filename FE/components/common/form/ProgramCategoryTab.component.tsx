@@ -29,7 +29,6 @@ const ProgramCategoryTab = ({
           <CustomTabItem
             text={option.text}
             size="md"
-            rounded
             color={selected === option.type ? "yellow" : "gray"}
             onClick={() => onSelect(option.type)}
           />
