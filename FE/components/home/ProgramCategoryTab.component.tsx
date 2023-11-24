@@ -1,27 +1,28 @@
-import CustomTabItem from "../CustomTabItem";
+import CustomTabItem from "../common/CustomTabItem";
 
-interface ActiveStatusTabProps {
+interface ProgramCategoryTabProps {
   selected: string;
   options: { text: string; type: string }[];
   onSelect: (value: string) => void;
 }
 
-const ActiveStatusTab = ({
+const ProgramCategoryTab = ({
   selected,
   options,
   onSelect,
-}: ActiveStatusTabProps) => {
+}: ProgramCategoryTabProps) => {
   return (
-    <div className="flex gap-3">
+    <div className="mb-4 flex w-full gap-4">
       {options.map((option) => (
         <CustomTabItem
           text={option.text}
           size="lg"
-          color={selected === option.type ? "teal" : "gray"}
+          rounded
+          color={selected === option.type ? "navy" : "white"}
           onClick={() => onSelect(option.type)}
         />
       ))}
     </div>
   );
 };
-export default ActiveStatusTab;
+export default ProgramCategoryTab;
