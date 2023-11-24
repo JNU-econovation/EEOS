@@ -61,7 +61,6 @@ fun AttendStatusChip(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun AttendStatusChipPreview() {
