@@ -42,7 +42,7 @@ fun EeosTopAppBar() {
     TopAppBar(
         title = {
             Image(
-                painter = painterResource(id = R.drawable.common_logo),
+                painter = painterResource(id = R.drawable.eeos_logo_monogram),
                 contentDescription = ""
             )
         },

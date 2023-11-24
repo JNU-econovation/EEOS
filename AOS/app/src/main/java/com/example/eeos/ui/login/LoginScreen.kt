@@ -22,7 +22,7 @@ fun LoginScreen() {
     ) {
         Column {
             Image(
-                painter = painterResource(id = R.drawable.splash_logo_default),
+                painter = painterResource(id = R.drawable.eeos_logo_symbol),
                 contentDescription = "Logo of EEOS",
                 modifier = Modifier.size(
                     dimensionResource(id = R.dimen.size_common_screen_logo_120dp)
