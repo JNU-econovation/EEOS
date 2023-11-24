@@ -1,5 +1,6 @@
 package com.example.eeos.ui.detail
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,9 +12,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+
+@Composable
+fun SheetDragHandle() {
+    Column {
+        Spacer(
+            modifier = Modifier.height(
+                dimensionResource(id = R.dimen.margin_detail_screen_space_bar_top)
+            )
+        )
+        Image(
+            painterResource(id = R.drawable.detail_bottom_sheet_drag_handle),
+            stringResource(R.string.detail_bottom_sheet_drag_handle_description)
+        )
+        Spacer(
+            modifier = Modifier.height(
+                dimensionResource(id = R.dimen.margin_detail_screen_space_bar_bottom)
+            )
+        )
+    }
+}
 
 @Composable
 fun BottomSheetContents() {
@@ -30,12 +52,16 @@ fun BottomSheetContents() {
         ) { RequestAttendCheckChip() }
         Spacer(
             modifier = Modifier.height(
-                height = dimensionResource(id = R.dimen.margin_detail_screen_space_between_info_and_chip)
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_info_and_chip
+                )
             )
         )
         Spacer(
             modifier = Modifier.height(
-                height = dimensionResource(id = R.dimen.margin_detail_screen_space_description_vertical)
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_description_vertical
+                )
             )
         )
         Text(
@@ -45,13 +71,17 @@ fun BottomSheetContents() {
         )
         Spacer(
             modifier = Modifier.height(
-                height = dimensionResource(id = R.dimen.margin_detail_screen_space_description_vertical)
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_description_vertical
+                )
             )
         )
         AttendStatusButtons()
         Spacer(
             modifier = Modifier.height(
-                height = dimensionResource(id = R.dimen.margin_detail_screen_space_attend_status_buttons_vertical)
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_attend_status_buttons_vertical
+                )
             )
         )
     }
