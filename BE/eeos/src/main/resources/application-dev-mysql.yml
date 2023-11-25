@@ -1,11 +1,11 @@
 spring:
   config:
     activate:
-      on-profile: local-mysql
+      on-profile: dev-mysql
   datasource:
-    url: jdbc:mysql://localhost:13308/eeos?allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
-    username: root
-    password: root
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
