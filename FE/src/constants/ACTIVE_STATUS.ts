@@ -1,4 +1,4 @@
-const ACTIVE_STATUS = [
+const CATEGORY = [
   {
     text: "All",
     type: "all",
@@ -21,5 +21,7 @@ const ACTIVE_STATUS = [
   },
 ];
 
-Object.freeze(ACTIVE_STATUS);
-export default ACTIVE_STATUS;
+const LABEL = "본인의 회원 상태를 선택해주세요.";
+
+Object.freeze(CATEGORY);
+export default { CATEGORY, LABEL };
