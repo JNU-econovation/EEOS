@@ -3,15 +3,13 @@
 import { useState } from "react";
 import AttendStatusSelector from "../attendStatus/AttendStatusSelector.component";
 import CheckBox from "../CheckBox.component";
-import { attendStatus, defaultMember } from "@/src/apis/types/member";
+import { defaultMember } from "@/src/apis/types/member";
 import ATTEND_STATUS from "@/src/constants/ATTEND_STATUS";
 import { badgeOption } from "@/src/types/common/common";
 
-export const attendStatusList: badgeOption[] = [
-  ATTEND_STATUS.BADGE_STYLE.attend,
-  ATTEND_STATUS.BADGE_STYLE.perceive,
-  ATTEND_STATUS.BADGE_STYLE.absent,
-];
+export const attendStatusList: badgeOption[] = ATTEND_STATUS.BADGE_STYLE.filter(
+  (style) => style.type !== "nonRelated" && style.type !== "nonResponse",
+);
 
 interface MemberTableItemProps {
   data: defaultMember;
@@ -28,17 +26,19 @@ const MemberTableItem = ({
   const [isRelated, setIsRelated] = useState(
     data.attendStatus !== "nonRelated",
   );
-  const [selectedAttendStatus, setSelectedAttendStatus] =
-    useState<attendStatus>(data.attendStatus);
+
+  const [selectedAttendStatus, setSelectedAttendStatus] = useState<string>(
+    data.attendStatus,
+  );
 
   const handleCheckBoxChange = () => {
     setIsRelated((prev) => !prev);
   };
-  const handleSelectChange = (value: string) => {
-    if (typeof value === "string") return;
+
+  const handleChangeAttendStatus = (value: string) => {
     setSelectedAttendStatus(value);
-    console.log(memberId);
     setMemberList();
+    console.log(memberId);
   };
 
   return (
@@ -51,7 +51,7 @@ const MemberTableItem = ({
         <AttendStatusSelector
           selectedValue={selectedAttendStatus}
           options={attendStatusList}
-          onSelect={handleSelectChange}
+          onSelect={handleChangeAttendStatus}
         />
       )}
     </div>

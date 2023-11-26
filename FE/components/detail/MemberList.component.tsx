@@ -15,7 +15,9 @@ interface MemberListProps {
 }
 
 const MemberList = ({ programId, attendStatus }: MemberListProps) => {
-  const { text, color, icon } = ATTEND_STATUS.TITLE_STYLE[attendStatus];
+  const { text, color, icon } = ATTEND_STATUS.TITLE_STYLE.filter(
+    (style) => style.type === attendStatus,
+  )[0];
   const iconClass = classNames(
     "flex h-fit w-fit items-center justify-center rounded-full p-1",
     color,

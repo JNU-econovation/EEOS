@@ -1,5 +1,4 @@
 import Title from "@/components/common/Title.component";
-import EditMemberList from "@/components/edit/EditMemberList.component";
 import ProgramEditForm from "@/components/edit/ProgramEditForm.component";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 
@@ -16,7 +15,6 @@ const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
     <DefaultLayout>
       <Title className="w-full">행사 수정</Title>
       <ProgramEditForm programId={programId} />
-      <EditMemberList programId={programId} />
     </DefaultLayout>
   );
 };

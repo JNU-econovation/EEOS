@@ -23,16 +23,8 @@ interface ProgramFormProps {
   };
   submitText?: string;
   isEdit: boolean;
+  memberList: defaultMember[];
 }
-
-// FIXME: memberList props로 받아오기
-const memberList: defaultMember[] = [
-  { memberId: 1, name: "김민수", generation: "1", attendStatus: "attend" },
-  { memberId: 2, name: "김민수", generation: "1", attendStatus: "attend" },
-  { memberId: 3, name: "김민수", generation: "1", attendStatus: "attend" },
-  { memberId: 4, name: "김민수", generation: "1", attendStatus: "attend" },
-  { memberId: 5, name: "김민수", generation: "1", attendStatus: "attend" },
-];
 
 const ProgramForm = ({
   handleSubmit,
@@ -40,6 +32,7 @@ const ProgramForm = ({
   defaultData,
   submitText = "제출",
   isEdit,
+  memberList,
 }: ProgramFormProps) => {
   const { title, setTitle, content, setContent, programDate, setProgramDate } =
     defaultData;
