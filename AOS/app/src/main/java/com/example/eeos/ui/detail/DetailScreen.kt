@@ -33,7 +33,14 @@ fun DetailScreen() {
             topEnd = dimensionResource(id = R.dimen.size_corner_25dp)
         ),
         sheetContainerColor = colorResource(id = R.color.background),
-        sheetContentColor = colorResource(id = R.color.paragraph)
+        sheetContentColor = colorResource(id = R.color.paragraph),
+        sheetShadowElevation = dimensionResource(
+            id = R.dimen.height_detail_screen_sheet_sheet_shadow_elevation
+        ),
+        sheetDragHandle = {
+            SheetDragHandle()
+        },
+        containerColor = colorResource(id = R.color.background)
     ) {
         DetailScreenContent()
     }
@@ -55,7 +62,9 @@ private fun DetailScreenContent() {
             ProgramDetail()
             Spacer(
                 modifier = Modifier.height(
-                    height = dimensionResource(id = R.dimen.margin_detail_screen_space_between_content_and_attendance)
+                    height = dimensionResource(
+                        id = R.dimen.margin_detail_screen_space_between_content_and_attendance
+                    )
                 )
             )
             MemberLists()

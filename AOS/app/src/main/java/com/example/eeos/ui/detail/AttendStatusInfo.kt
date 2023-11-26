@@ -28,10 +28,15 @@ fun AttendStatusInfo(
             style = MaterialTheme.typography.titleSmall,
             color = colorResource(R.color.paragraph)
         )
-        Spacer(modifier = Modifier.width(width = dimensionResource(id = R.dimen.margin_detail_screen_space_between_info_and_chip)))
+        Spacer(
+            modifier = Modifier.width(
+                width = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_info_and_chip
+                )
+            )
+        )
         attendStatusChip()
     }
-
 }
 
 @Preview(showBackground = true)

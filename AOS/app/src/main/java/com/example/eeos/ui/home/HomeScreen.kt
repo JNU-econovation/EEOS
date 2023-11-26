@@ -28,11 +28,25 @@ val programLists: List<ProgramData> = listOf(
         category = "주간 발표",
         isEnd = false
     ),
+    ProgramData(
+        date = "2023년 11월 06일 (월)",
+        title = "오늘의 행사 두구두구",
+        category = "주간 발표",
+        isEnd = false
+    ),
+    ProgramData(
+        date = "2023년 11월 06일 (월)",
+        title = "오늘의 행사 두구두구",
+        category = "주간 발표",
+        isEnd = false
+    ),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onProgramClick: () -> Unit
+) {
     val categoryChips: List<String> = listOf(
         stringResource(R.string.home_tab_all),
         stringResource(R.string.home_tab_presentation),
@@ -51,7 +65,8 @@ fun HomeScreen() {
     Scaffold(
         topBar = {
             EeosTopAppBar()
-        }
+        },
+        containerColor = colorResource(id = R.color.background)
     ) { innerPadding ->
         Row(
             modifier = Modifier.padding(innerPadding)
@@ -94,7 +109,10 @@ fun HomeScreen() {
                         )
                     )
                 )
-                ProgramLists(programLists)
+                ProgramLists(
+                    programLists = programLists,
+                    onProgramClick = onProgramClick
+                )
             }
             Spacer(
                 modifier = Modifier.width(
@@ -109,6 +127,8 @@ fun HomeScreen() {
 @Composable
 private fun HomeScreenPreview() {
     MaterialTheme {
-        HomeScreen()
+        HomeScreen(
+            onProgramClick = {}
+        )
     }
 }
