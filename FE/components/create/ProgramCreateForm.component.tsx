@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProgramForm from "../common/form/ProgramForm.component";
 import { createProgram } from "@/src/apis/program";
+import { defaultMember } from "@/src/apis/types/member";
 import ROUTES from "@/src/constants/ROUTES";
 import { getLocalStorage, setLocalStorage } from "@/src/utils/localStorage";
 
@@ -41,6 +42,34 @@ const ProgramCreateForm = () => {
     },
   };
 
+  const memberList: defaultMember[] = [
+    {
+      memberId: 1,
+      name: "김민수",
+      generation: "24",
+      attendStatus: "attend",
+    },
+    {
+      memberId: 2,
+      name: "고구마",
+      generation: "25",
+      attendStatus: "attend",
+    },
+
+    {
+      memberId: 3,
+      name: "강바다",
+      generation: "25",
+      attendStatus: "attend",
+    },
+    {
+      memberId: 4,
+      name: "감자",
+      generation: "23",
+      attendStatus: "attend",
+    },
+  ];
+
   const { mutate: createProgramMutate } = useMutation(
     () => createProgram({ title, content, programDate }),
     {
@@ -73,6 +102,7 @@ const ProgramCreateForm = () => {
       formReset={formReset}
       defaultData={defaultData}
       isEdit={false}
+      memberList={memberList}
     />
   );
 };

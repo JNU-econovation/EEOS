@@ -19,7 +19,7 @@ const MemberTable = ({ members, isEdit }: MemberTableProps) => {
     <div className="mt-12 flex w-full flex-col gap-6">
       <ActiveStatusTab
         selected={activeStatus}
-        options={ACTIVE_STATUS}
+        options={ACTIVE_STATUS.CATEGORY}
         onSelect={(v) => setActiveStatus(v)}
       />
       <div>

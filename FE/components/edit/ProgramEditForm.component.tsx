@@ -1,10 +1,11 @@
 "use client";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueries } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ProgramForm from "../common/form/ProgramForm.component";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { getAllMembers } from "@/src/apis/member";
 import { getProgramDetail, updateProgram } from "@/src/apis/program";
 import ROUTES from "@/src/constants/ROUTES";
 
@@ -30,14 +31,27 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
     setProgramDate: (date: string) => setProgramDate(date),
   };
 
-  const { isLoading, isError } = useQuery(["ProgramInfo", programId], () =>
-    getProgramDetail(programId).then((data) => {
-      setTitle(data.title);
-      setContent(data.content);
-      setProgramDate(data.programDate);
-      return data;
-    }),
-  );
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ["ProgramInfo", programId],
+        queryFn: () =>
+          getProgramDetail(programId).then((data) => {
+            setTitle(data.title);
+            setContent(data.content);
+            setProgramDate(data.programDate);
+            return data;
+          }),
+      },
+      {
+        queryKey: ["editEditMemberList", programId],
+        queryFn: () => getAllMembers(programId),
+      },
+    ],
+  });
+
+  const { data: members, isLoading, isError } = results[1];
+  console.log(members);
 
   const { mutate: updateProgramMutate } = useMutation(
     () =>
@@ -67,7 +81,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <div>Error!</div>;
+  if (isError) return <>에러...</>;
 
   return (
     <ProgramForm
@@ -75,6 +89,7 @@ const ProgramEditForm = ({ programId }: ProgramEditFormProps) => {
       formReset={formReset}
       defaultData={defaultData}
       isEdit={true}
+      memberList={members}
     />
   );
 };
