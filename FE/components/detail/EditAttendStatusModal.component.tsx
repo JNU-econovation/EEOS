@@ -14,9 +14,11 @@ const EditAttendStatusModal = () => {
 
   // FIXME: react-query로 변경
   const name = "25기 강바다";
-  const attendStatus = "attend";
+  const [attendStatus, setAttendStatus] = useState("nonRelated");
 
-  const { text, color } = ATTEND_STATUS.BADGE_STYLE[attendStatus];
+  const { text, color } = ATTEND_STATUS.BADGE_STYLE.filter(
+    (style) => style.type === attendStatus,
+  )[0];
 
   const modalClassName = classNames(
     "z-1 fixed flex h-60 w-full flex-col items-center justify-center gap-11 rounded-t-3xl border-t-2 border-gray-10 bg-background shadow-2xl transition-all duration-500",
@@ -35,11 +37,11 @@ const EditAttendStatusModal = () => {
         <p className="text-lg font-semibold">{name}</p>
         <AttendStatusBadge text={text} color={color} />
       </div>
-      <p>본인의 출석 상태를 선택해주세요.</p>
+      <p>{ATTEND_STATUS.LABEL}</p>
       <AttendStatusSelector
         selectedValue={attendStatus}
         options={attendStatusList}
-        onSelect={() => {}}
+        onSelect={(v) => setAttendStatus(v)}
       />
     </div>
   );
