@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.eeos.ui.detail.DetailScreen
+import com.example.eeos.navigation.EEOSNavGraph
 import com.example.eeos.ui.home.ProgramLists
 import com.example.eeos.ui.theme.EeosTheme
 
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EeosTheme {
-                DetailScreen()
+                EEOSNavGraph()
             }
         }
     }
@@ -25,7 +25,8 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     EeosTheme {
         ProgramLists(
-            listOf()
+            programLists = listOf(),
+            onProgramClick = {}
         )
     }
 }

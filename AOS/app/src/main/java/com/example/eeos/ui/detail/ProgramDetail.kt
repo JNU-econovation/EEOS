@@ -71,6 +71,13 @@ fun ProgramDetail() {
                     )
                 )
                 Content()
+                Spacer(
+                    modifier = Modifier.width(
+                        dimensionResource(
+                            id = R.dimen.margin_detail_screen_space_post_content_horizontal
+                        )
+                    )
+                )
             }
             Spacer(
                 modifier = Modifier.height(
@@ -138,18 +145,15 @@ private fun Title() {
 @Composable
 private fun Content() {
     Text(
-        text = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리\n" +
-                "나라만세 무궁화 삼천리 화려강산\n" +
-                "일시 : 10월 6일 (일)\n" +
-                "발표팀\n" +
-                "A팀\n" +
-                "팀쿠키\n" +
-                "도참없\n" +
-                "잉여\n" +
-                "더지\n" +
-                "kipi\n" +
-                "발표 자료는 16시까지 깃허브에 업로드 부탁드립니다.", /* ToDo */
-        style = MaterialTheme.typography.bodySmall
+        text = "샘플 텍스트"/* ToDo */,
+        style = MaterialTheme.typography.bodySmall,
+        modifier = Modifier.width(
+            width = dimensionResource(id = R.dimen.width_detail_screen_divider) - dimensionResource(
+                id = R.dimen.margin_detail_screen_space_post_content_horizontal
+            ) - dimensionResource(
+                id = R.dimen.margin_detail_screen_space_post_content_horizontal
+            )
+        )
     )
 }
 
