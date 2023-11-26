@@ -1,27 +1,24 @@
-"use client";
-
-import Title from "@/components/common/Title";
+import Title from "@/components/common/Title.component";
 import EditMemberList from "@/components/edit/EditMemberList.component";
-import ProgramEditForm from "@/components/edit/ProgramEditForm";
-import SubLayout from "@/components/layout/SubLayout";
-import { useState } from "react";
+import ProgramEditForm from "@/components/edit/ProgramEditForm.component";
+import DefaultLayout from "@/components/layout/DefaultLayout";
 
-interface EditPageProps {
+interface ProgramEditPageProps {
   params: {
     programId: string;
   };
 }
 
-const EditPage = ({ params }: EditPageProps) => {
+const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
   const { programId } = params;
-  const [checked, setChecked] = useState<boolean>(false);
+
   return (
-    <SubLayout right="none">
+    <DefaultLayout>
       <Title>행사 정보 수정</Title>
       <ProgramEditForm programId={programId} />
       <EditMemberList programId={programId} />
-    </SubLayout>
+    </DefaultLayout>
   );
 };
 
-export default EditPage;
+export default ProgramEditPage;

@@ -1,5 +1,4 @@
-type attendStatus = "ATTEND" | "ABSENT" | "IRRELEVANT";
-type attendStatusLower = "attend" | "absent";
+type attendStatus = "attend" | "absent" | "none" | "perceive" | "noResponse";
 
 export interface defaultMember {
   memberId: number;
@@ -8,19 +7,21 @@ export interface defaultMember {
   attendStatus: attendStatus;
 }
 
-/* getDetailMembers */
-export type getDetailMembersResponse = defaultMember[];
+/* getMembersByStatus */
+export type getMembersByStatusResponse = { data: defaultMember[] };
 
-/* getEditMembers */
-export type getEditMembersResponse = defaultMember[];
+/* getAllMembers */
+export type getAllMembersResponse = { data: defaultMember[] };
 
-/* editMembers */
-export interface editMembersRequest {
+/* updateMembers */
+export interface updateMembersRequest {
   memberId: number;
   beforeAttendStatus: attendStatus;
   afterAttendStatus: attendStatus;
 }
 
-export interface editMembersResponse {
-  programId: number;
+export interface updateMembersResponse {
+  data: {
+    programId: number;
+  };
 }
