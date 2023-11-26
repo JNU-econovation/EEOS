@@ -1,5 +1,6 @@
 package com.example.eeos.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,16 +19,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramLists(programLists: List<ProgramData>) {
+fun ProgramLists(programLists: List<ProgramData>, onProgramClick: () -> Unit) {
     LazyColumn {
         items(programLists) { program ->
-            Program(program)
+            Program(program, onProgramClick)
         }
     }
 }
 
 @Composable
-private fun Program(program: ProgramData) {
+private fun Program(program: ProgramData, onProgramClick: () -> Unit) {
     Column {
         Divider(
             thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
@@ -43,7 +44,8 @@ private fun Program(program: ProgramData) {
                 .size(
                     width = dimensionResource(id = R.dimen.width_home_screen_program),
                     height = dimensionResource(id = R.dimen.height_home_screen_program)
-                ),
+                )
+                .clickable { onProgramClick(/* TODO : programId 넘겨주기*/) },
             verticalArrangement = Arrangement.Center
         ) {
             Text(
@@ -70,7 +72,8 @@ private fun Program(program: ProgramData) {
 private fun ProgramPreview() {
     MaterialTheme {
         ProgramLists(
-            listOf()
+            programLists = listOf(),
+            onProgramClick = {}
         )
     }
 }

@@ -68,7 +68,6 @@ fun AttendStatusButton(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun AttendStatusButtonPreview() {

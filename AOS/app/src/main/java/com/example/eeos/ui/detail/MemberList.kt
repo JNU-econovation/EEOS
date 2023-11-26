@@ -15,6 +15,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
@@ -28,7 +29,6 @@ data class Attendance(
     val painter: Painter,
     val memberList: List<MemberData>
 )
-
 
 val sampleMemberList: List<MemberData> = listOf(
     MemberData(24, "인텔리", attendStatus = AttendStatus.ATTEND),
@@ -77,7 +77,9 @@ fun MemberLists() {
             )
             Spacer(
                 modifier = Modifier.height(
-                    height = dimensionResource(id = R.dimen.margin_detail_screen_space_between_attendance)
+                    height = dimensionResource(
+                        id = R.dimen.margin_detail_screen_space_between_attendance
+                    )
                 )
             )
         }
@@ -91,32 +93,59 @@ private fun MemberList(
     memberList: List<MemberData>
 ) {
     Column {
-        Row {
+        Row(
+            modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = colorResource(R.color.paragraph)
+                )
+                Spacer(
+                    modifier = Modifier.size(
+                        dimensionResource(
+                            id = R.dimen.margin_detail_screen_space_between_title_and_icon
+                        )
+                    )
+                )
+                Image(
+                    painter = painter,
+                    contentDescription = "",
+                )
+            }
             Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                color = colorResource(R.color.paragraph)
-            )
-            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.margin_detail_screen_space_between_title_and_icon)))
-            Image(
-                painter = painter,
-                contentDescription = "",
+                text = "20명",
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.gray_500)
             )
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_divider_top)))
+        Spacer(
+            modifier = Modifier.height(
+                dimensionResource(id = R.dimen.margin_detail_screen_divider_top)
+            )
+        )
         Divider(
             modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
             thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
             color = colorResource(id = R.color.stroke_400)
         )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_detail_screen_divider_bottom)))
-
+        Spacer(
+            modifier = Modifier.height(
+                dimensionResource(id = R.dimen.margin_detail_screen_divider_bottom)
+            )
+        )
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
             userScrollEnabled = false,
-            contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.padding_values_15dp)),
+            contentPadding = PaddingValues(
+                horizontal = dimensionResource(id = R.dimen.padding_values_15dp)
+            ),
             verticalArrangement = Arrangement.spacedBy(
                 dimensionResource(
                     id = R.dimen.margin_detail_screen_space_between_member_list_content

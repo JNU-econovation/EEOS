@@ -1,14 +1,14 @@
-import Title from "@/components/common/Title";
-import SubLayout from "@/components/layout/SubLayout";
-import EventCreateForm from "@/components/create/EventCreateForm";
+import Title from "@/components/common/Title.component";
+import ProgramCreateForm from "@/components/create/ProgramCreateForm.component";
+import DefaultLayout from "@/components/layout/DefaultLayout";
 
-const CreatePage = () => {
+const ProgramCreatePage = () => {
   return (
-    <SubLayout right="none">
+    <DefaultLayout>
       <Title>행사 생성</Title>
-      <EventCreateForm />
-    </SubLayout>
+      <ProgramCreateForm />
+    </DefaultLayout>
   );
 };
 
-export default CreatePage;
+export default ProgramCreatePage;

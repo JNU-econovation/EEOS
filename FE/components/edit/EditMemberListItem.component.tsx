@@ -1,50 +1,56 @@
 "use client";
 
-import { defaultMember } from "@/src/apis/types/member";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import CheckBox from "../common/CheckBox.component";
 import Toggle from "../common/Toggle.component";
-import { useState } from "react";
-import { editMembers } from "@/src/apis/member/member";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateMembers } from "@/src/apis/member";
+import { defaultMember } from "@/src/apis/types/member";
 
 interface EditMemberListItemProps {
   data: defaultMember;
+  programId: string;
 }
 
-const EditMemberListItem = ({ data }: EditMemberListItemProps) => {
+const EditMemberListItem = ({ data, programId }: EditMemberListItemProps) => {
   const queryClient = useQueryClient();
-  const { memberId, name, generation, attendStatus } = data;
-  const isRelated = attendStatus === "IRRELEVANT" ? false : true;
-  const isAttend = attendStatus === "ATTEND" ? true : false;
 
-  console.log(data, isRelated, isAttend);
+  const { memberId, name, generation, attendStatus } = data;
+  const [isRelated, setIsRelated] = useState(attendStatus !== "none");
+  const [isAttend, setIsAttend] = useState(attendStatus === "attend");
 
   const { mutate: updateMemberMutate } = useMutation(
     () =>
-      editMembers(memberId, {
-        memberId: memberId,
+      updateMembers(programId, {
+        memberId,
         beforeAttendStatus: attendStatus,
-        afterAttendStatus: isAttend
-          ? "ATTEND"
-          : isRelated
-          ? "ABSENT"
-          : "IRRELEVANT",
+        afterAttendStatus: getAfterAttendStatus(),
       }),
-    { onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]) }
+    {
+      onSettled: () => queryClient.invalidateQueries(["editEditMemberList"]),
+    },
   );
 
+  const getAfterAttendStatus = () => {
+    if (!isRelated) return "none";
+    if (isAttend) return "attend";
+    return "absent";
+  };
   const handleCheckBoxChange = () => {
+    setIsRelated((prev) => !prev);
+    updateMemberMutate();
+  };
+  const handleToggleChange = () => {
+    setIsAttend((prev) => !prev);
     updateMemberMutate();
   };
 
-  const handleToggleChange = () => {
-    updateMemberMutate();
-  };
   return (
-    <div className="grid grid-cols-[4.5rem_6.75rem_1fr_4rem] gap-4 px-10 py-7 even:bg-background odd: bg-soft_secondary">
+    <div className="grid h-20 grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10">
       <CheckBox checked={isRelated} onChange={handleCheckBoxChange} />
-      <span className="font-bold">{name}</span>
       <span>{generation}</span>
+      <span className="font-bold">{name}</span>
+      <span></span>
       <Toggle
         active={isAttend}
         onChange={handleToggleChange}

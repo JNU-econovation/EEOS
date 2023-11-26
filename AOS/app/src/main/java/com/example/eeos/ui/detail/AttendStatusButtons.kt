@@ -62,7 +62,6 @@ private fun AbsentButton(onClick: () -> Unit) {
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun AttendStatusButtonsPreview() {

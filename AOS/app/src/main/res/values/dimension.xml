@@ -12,8 +12,8 @@
 
 
     <!--Home Screen Dimensions-->
-    <dimen name="margin_home_screen_category_vertical">15dp</dimen>
-    <dimen name="margin_home_screen_program_status_vertical">19dp</dimen>
+    <dimen name="margin_home_screen_category_vertical">25dp</dimen>
+    <dimen name="margin_home_screen_program_status_vertical">29dp</dimen>
 
     <dimen name="margin_home_screen_space_between_categories">10dp</dimen>
     <dimen name="width_home_screen_category_button">74dp</dimen>
@@ -50,10 +50,12 @@
     <dimen name="width_detail_screen_space_category_chip">85dp</dimen>
     <dimen name="height_detail_screen_space_category_chip">30dp</dimen>
 
-    <dimen name="margin_detail_screen_space_between_tag_and_post_title">10dp</dimen>
+    <dimen name="margin_detail_screen_space_between_tag_and_post_title">13dp</dimen>
+    <dimen name="margin_detail_screen_space_between_title_and_subtitle">10dp</dimen>
     <dimen name="margin_detail_screen_space_between_subtitle_and_divider">10dp</dimen>
     <dimen name="width_detail_screen_divider">350dp</dimen>
-    <dimen name="margin_detail_screen_space_post_content_vertical">10dp</dimen>
+    <dimen name="margin_detail_screen_space_post_content_vertical">20dp</dimen>
+    <dimen name="margin_detail_screen_space_post_content_horizontal">20dp</dimen>
     <dimen name="margin_detail_screen_space_between_content_and_attendance">16dp</dimen>
 
     <dimen name="margin_detail_screen_space_between_title_and_icon">5dp</dimen>
@@ -65,9 +67,11 @@
 
 
     <!--Detail Bottom Sheet Dimensions-->
-    <dimen name="height_detail_screen_sheet_peek_height">110dp</dimen>
+    <dimen name="height_detail_screen_sheet_peek_height">95dp</dimen>
+    <dimen name="height_detail_screen_sheet_sheet_shadow_elevation">20dp</dimen>
 
-    <dimen name="margin_detail_screen_space_bar_vertical">7dp</dimen>
+    <dimen name="margin_detail_screen_space_bar_top">7dp</dimen>
+    <dimen name="margin_detail_screen_space_bar_bottom">20dp</dimen>
     <dimen name="margin_detail_screen_space_attend_status_vertical">12dp</dimen>
     <dimen name="margin_detail_screen_space_description_vertical">12dp</dimen>
 
