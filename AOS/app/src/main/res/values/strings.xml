@@ -1,0 +1,52 @@
+<resources>
+    <!--공통 화면 string 리소스-->
+    <string name="app_name">EEOS</string>
+
+
+
+    <!--Home 화면 string 리소스-->
+    <string name="home_program_list">행사 목록</string>
+
+    <string name="home_program_status_ing">진행 중</string>
+    <string name="home_program_status_ends">완료</string>
+
+    <string name="home_tab_all">전체</string>
+    <string name="home_tab_presentation">주간 발표</string>
+    <string name="home_tab_leaders">회장단</string>
+    <string name="home_tab_party_department">행사부</string>
+    <string name="home_tab_others">기타 행사</string>
+
+
+
+    <!--Home Dialog 화면 string 리소스-->
+    <string name="home_dialog_description">본인의 회원 상태를 선택해 주세요.</string>
+    <string name="home_dialog_member_status_am">AM</string>
+    <string name="home_dialog_member_status_rm">RM&amp;DM</string>
+    <string name="home_dialog_member_status_cm">CM</string>
+    <string name="home_dialog_member_status_ob">OB</string>
+
+
+
+    <!--Detail 화면 string 리소스-->
+    <string name="detail_attendees">참석</string>
+    <string name="detail_absentees">불참</string>
+    <string name="detail_latecomers">지각</string>
+    <string name="detail_undefined">미정</string>
+
+
+
+    <!--Detail BottomSheet 화면 string 리소스-->
+    <string name="detail_bottom_sheet_member_name">%1$s 님</string>
+    <string name="detail_bottom_sheet_irrelevant">본 행사와 관련 없음</string>
+    <string name="detail_bottom_sheet_check_attendance">출석 체크 해주세요!</string>
+    <string name="detail_bottom_sheet_do_survey">수요 조사 해주세요!</string>
+    <string name="detail_bottom_sheet_description">본인의 출석 상태를 선택해 주세요.</string>
+
+
+    <!--ContentDescriptions-->
+    <string name="home_dialog_logout_button">로그아웃 하기</string>
+
+    <string name="detail_bottom_sheet_drag_handle_description">Bottom Sheet를 올리면 출석 상태를 선택할 수 있습니다.</string>
+
+
+</resources>

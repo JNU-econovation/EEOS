@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Basic Dimensions-->
+    <dimen name="size_all_0dp">0dp</dimen>
+
+
+    <!--Common Screen Dimensions-->
+    <dimen name="size_common_screen_logo_120dp">120dp</dimen>
+    <dimen name="margin_common_screen">16dp</dimen>
+    <dimen name="margin_common_screen_member_info_space_between_icon_and_text">13dp</dimen>
+    <dimen name="margin_common_screen_member_info_space_between_texts">3dp</dimen>
+
+
+    <!--Home Screen Dimensions-->
+    <dimen name="margin_home_screen_category_vertical">25dp</dimen>
+    <dimen name="margin_home_screen_program_status_vertical">29dp</dimen>
+
+    <dimen name="margin_home_screen_space_between_categories">10dp</dimen>
+    <dimen name="width_home_screen_category_button">74dp</dimen>
+    <dimen name="height_home_screen_category_button">33dp</dimen>
+
+    <dimen name="margin_home_screen_space_between_program_status">19dp</dimen>
+
+    <dimen name="margin_home_screen_space_between_program_texts">7dp</dimen>
+    <dimen name="width_home_screen_program">318dp</dimen>
+    <dimen name="height_home_screen_program">94dp</dimen>
+    <dimen name="padding_home_screen_program_horizontal">28dp</dimen>
+
+
+    <!--Home Dialog Screen Dimensions-->
+    <dimen name="size_member_status_dialog_background_width">300dp</dimen>
+    <dimen name="size_member_status_dialog_background_height">238dp</dimen>
+    <dimen name="margin_member_status_dialog_background_top">17dp</dimen>
+    <dimen name="margin_member_status_dialog_background_side">15dp</dimen>
+    <dimen name="margin_member_status_dialog_background_bottom">16dp</dimen>
+
+    <dimen name="margin_member_status_dialog_space_between_text_and_background">88dp</dimen>
+    <dimen name="margin_member_status_dialog_space_between_text_and_logout_btn">76dp</dimen>
+    <dimen name="margin_member_status_dialog_space_between_texts">17dp</dimen>
+    <dimen name="margin_member_status_dialog_space_between_text_and_status_button">15dp</dimen>
+
+    <dimen name="size_member_status_dialog_button_width">127dp</dimen>
+    <dimen name="size_member_status_dialog_button_height">60dp</dimen>
+    <dimen name="size_member_status_dialog_button_stroke">1dp</dimen>
+    <dimen name="margin_member_status_dialog_button_vertical_space">14dp</dimen>
+    <dimen name="margin_member_status_dialog_button_horizontal_space">15dp</dimen>
+
+
+    <!--Detail Screen Dimensions-->
+    <dimen name="width_detail_screen_space_category_chip">85dp</dimen>
+    <dimen name="height_detail_screen_space_category_chip">30dp</dimen>
+
+    <dimen name="margin_detail_screen_space_between_tag_and_post_title">13dp</dimen>
+    <dimen name="margin_detail_screen_space_between_title_and_subtitle">10dp</dimen>
+    <dimen name="margin_detail_screen_space_between_subtitle_and_divider">10dp</dimen>
+    <dimen name="width_detail_screen_divider">350dp</dimen>
+    <dimen name="margin_detail_screen_space_post_content_vertical">20dp</dimen>
+    <dimen name="margin_detail_screen_space_post_content_horizontal">20dp</dimen>
+    <dimen name="margin_detail_screen_space_between_content_and_attendance">16dp</dimen>
+
+    <dimen name="margin_detail_screen_space_between_title_and_icon">5dp</dimen>
+    <dimen name="margin_detail_screen_divider_top">10dp</dimen>
+    <dimen name="margin_detail_screen_divider_bottom">20dp</dimen>
+    <dimen name="margin_detail_screen_space_between_member_list_content">16dp</dimen>
+    <dimen name="margin_detail_screen_space_between_member_list_generation_and_name">5dp</dimen>
+    <dimen name="margin_detail_screen_space_between_attendance">30dp</dimen>
+    <dimen name="height_detail_screen_space_bottom">95dp</dimen>
+
+
+    <!--Detail Bottom Sheet Dimensions-->
+    <dimen name="height_detail_screen_sheet_peek_height">95dp</dimen>
+    <dimen name="height_detail_screen_sheet_sheet_shadow_elevation">20dp</dimen>
+
+    <dimen name="margin_detail_screen_space_bar_top">7dp</dimen>
+    <dimen name="margin_detail_screen_space_bar_bottom">20dp</dimen>
+    <dimen name="margin_detail_screen_space_attend_status_vertical">12dp</dimen>
+    <dimen name="margin_detail_screen_space_description_vertical">12dp</dimen>
+
+    <dimen name="margin_detail_screen_space_between_info_and_chip">12dp</dimen>
+
+    <dimen name="width_detail_bottom_sheet_short_button">86dp</dimen>
+    <dimen name="height_detail_bottom_sheet_short_button">40dp</dimen>
+    <dimen name="width_detail_bottom_sheet_long_button">200dp</dimen>
+    <dimen name="height_detail_bottom_sheet_long_button">43dp</dimen>
+
+    <dimen name="margin_detail_screen_space_attend_status_buttons_vertical">30dp</dimen>
+
+
+
+
+    <!--CornerSize-->
+    <dimen name="size_corner_10dp">10dp</dimen>
+    <dimen name="size_corner_11dp">11dp</dimen>
+    <dimen name="size_corner_20dp">20dp</dimen>
+    <dimen name="size_corner_25dp">25dp</dimen>
+
+
+
+    <!--StrokeWidth-->
+    <dimen name="width_stroke_0.3dp">0.3dp</dimen>
+    <dimen name="width_stroke_0.7dp">0.7dp</dimen>
+    <dimen name="width_stroke_1dp">1dp</dimen>
+    <dimen name="width_stroke_1.2dp">1.2dp</dimen>
+    <dimen name="width_stroke_1.5dp">1.5dp</dimen>
+
+
+
+    <!--PaddingValues-->
+    <dimen name="padding_values_0dp">0dp</dimen>
+    <dimen name="padding_values_7dp">7dp</dimen>
+    <dimen name="padding_values_10dp">10dp</dimen>
+    <dimen name="padding_values_15dp">15dp</dimen>
+    <dimen name="padding_values_30dp">30dp</dimen>
+    <dimen name="padding_values_35dp">35dp</dimen>
+
+
+</resources>
