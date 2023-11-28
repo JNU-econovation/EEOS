@@ -1,5 +1,8 @@
 package com.blackcompany.eeos.program.application.domain;
 
+import com.blackcompany.eeos.attend.application.exception.NotFoundStatusException;
+import java.util.Arrays;
+
 public enum ProgramStatus {
 	ACTIVE("active"),
 	END("end");
@@ -10,7 +13,10 @@ public enum ProgramStatus {
 		this.status = status;
 	}
 
-	public static boolean isSameStatus(String source, ProgramStatus expected) {
-		return expected.status.equals(source);
+	public static ProgramStatus getStatus(String source) {
+		return Arrays.stream(ProgramStatus.values())
+				.filter(status -> status.status.equals(source))
+				.findAny()
+				.orElseThrow(NotFoundStatusException::new);
 	}
 }

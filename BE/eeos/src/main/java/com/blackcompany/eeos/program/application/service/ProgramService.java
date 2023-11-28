@@ -1,7 +1,7 @@
 package com.blackcompany.eeos.program.application.service;
 
-import com.blackcompany.eeos.attend.application.exception.NotFoundStatusException;
 import com.blackcompany.eeos.attend.application.service.CandidateService;
+import com.blackcompany.eeos.common.utils.DateConverter;
 import com.blackcompany.eeos.program.application.domain.ProgramModel;
 import com.blackcompany.eeos.program.application.domain.ProgramStatus;
 import com.blackcompany.eeos.program.application.dto.CommandProgramResponse;
@@ -15,6 +15,7 @@ import com.blackcompany.eeos.program.application.dto.converter.ProgramResponseCo
 import com.blackcompany.eeos.program.application.exception.NotFoundProgramException;
 import com.blackcompany.eeos.program.application.model.converter.ProgramEntityConverter;
 import com.blackcompany.eeos.program.application.model.converter.ProgramRequestConverter;
+import com.blackcompany.eeos.program.application.support.ProgramStatusFactory;
 import com.blackcompany.eeos.program.application.usecase.CreateProgramUsecase;
 import com.blackcompany.eeos.program.application.usecase.GetProgramUsecase;
 import com.blackcompany.eeos.program.application.usecase.GetProgramsUsecase;
@@ -23,7 +24,7 @@ import com.blackcompany.eeos.program.persistence.ProgramEntity;
 import com.blackcompany.eeos.program.persistence.ProgramRepository;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,6 +41,7 @@ public class ProgramService
 	private final ProgramRepository programRepository;
 	private final CandidateService candidateService;
 	private final ProgramPageResponseConverter pageResponseConverter;
+	private final ProgramStatusFactory programStatusFactory;
 
 	@Override
 	public CommandProgramResponse create(CreateProgramRequest request) {
@@ -58,7 +60,7 @@ public class ProgramService
 				programRepository.findById(id).orElseThrow(NotFoundProgramException::new);
 
 		ProgramModel model = entityConverter.from(programEntity);
-		return responseConverter.from(model, model.calculateEventStatus());
+		return responseConverter.from(model, model.calculate());
 	}
 
 	@Override
@@ -71,21 +73,15 @@ public class ProgramService
 	}
 
 	@Override
-	public PageResponse<GetProgramsResponse> getProgram(String status, int size, int page) {
-		LocalDate currentDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
-		Timestamp now = Timestamp.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+	public PageResponse<GetProgramsResponse> getPrograms(String status, int size, int page) {
+		Timestamp now = DateConverter.toEpochSecond(LocalDate.now());
 		PageRequest pageRequest = PageRequest.of(page, size);
 
-		if (ProgramStatus.isSameStatus(status, ProgramStatus.ACTIVE)) {
-			Page<ProgramEntity> pages = programRepository.findAllByIng(now, pageRequest);
-			return pageResponseConverter.from(pages);
-		}
-		if (ProgramStatus.isSameStatus(status, ProgramStatus.END)) {
-			Page<ProgramEntity> pages = programRepository.findAllByEnd(now, pageRequest);
-			return pageResponseConverter.from(pages);
-		}
+		Map<ProgramStatus, ProgramStateService> programStatusStrategy = programStatusFactory.make();
 
-		throw new NotFoundStatusException();
+		ProgramStateService programStateService =
+				programStatusStrategy.get(ProgramStatus.getStatus(status));
+		Page<ProgramEntity> pages = programStateService.getPages(now, pageRequest);
+		return pageResponseConverter.from(pages);
 	}
 }
