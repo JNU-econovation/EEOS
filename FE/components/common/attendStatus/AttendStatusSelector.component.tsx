@@ -12,7 +12,7 @@ const AttendStatusSelector = ({
   onSelect,
 }: AttendStatusSelectorProps) => {
   const handleClick = (value: badgeOption) => {
-    value.text !== selectedValue && onSelect(value.text);
+    value.type !== selectedValue && onSelect(value.type);
   };
 
   return (
@@ -22,7 +22,7 @@ const AttendStatusSelector = ({
           <AttendStatusBadge
             key={option.text}
             text={option.text}
-            color={selectedValue === option.text ? option.color : "gray"}
+            color={selectedValue === option.type ? option.color : "gray"}
           />
         </div>
       ))}

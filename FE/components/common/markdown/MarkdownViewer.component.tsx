@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import remarkGfm from "remark-gfm";
-import "./styles/markdown-editor.styles.css";
+import "../styles/markdown-editor.styles.css";
 
 const MarkdownViewer = ({
   value,
