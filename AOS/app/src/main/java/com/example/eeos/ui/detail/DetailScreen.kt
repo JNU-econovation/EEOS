@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -48,6 +50,7 @@ fun DetailScreen() {
 
 @Composable
 private fun DetailScreenContent() {
+    val state = rememberScrollState()
     Row(
         modifier = Modifier
             .fillMaxSize(),
@@ -58,7 +61,9 @@ private fun DetailScreenContent() {
                 width = dimensionResource(id = R.dimen.margin_common_screen)
             )
         )
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(state)
+        ) {
             ProgramDetail()
             Spacer(
                 modifier = Modifier.height(
@@ -68,6 +73,11 @@ private fun DetailScreenContent() {
                 )
             )
             MemberLists()
+            Spacer(
+                modifier = Modifier.height(
+                    dimensionResource(R.dimen.height_detail_screen_space_bottom)
+                )
+            )
         }
         Spacer(
             modifier = Modifier.width(

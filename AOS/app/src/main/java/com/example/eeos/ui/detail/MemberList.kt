@@ -3,14 +3,11 @@ package com.example.eeos.ui.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,6 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.example.eeos.ui.util.NonLazyGrid
 
 data class Attendance(
     val attendance: String,
@@ -139,48 +137,38 @@ private fun MemberList(
             )
         )
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+        NonLazyGrid(
+            columns = 3,
+            itemCount = memberList.size,
             modifier = Modifier.width(dimensionResource(id = R.dimen.width_detail_screen_divider)),
-            userScrollEnabled = false,
-            contentPadding = PaddingValues(
-                horizontal = dimensionResource(id = R.dimen.padding_values_15dp)
-            ),
-            verticalArrangement = Arrangement.spacedBy(
-                dimensionResource(
-                    id = R.dimen.margin_detail_screen_space_between_member_list_content
-                )
-            ),
-            horizontalArrangement = Arrangement.spacedBy(
-                dimensionResource(
-                    id = R.dimen.margin_detail_screen_space_between_member_list_content
-                )
-            ),
         ) {
-            items(memberList.size) { member ->
-                Row(
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = memberList[member].generation.toString() + "기",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = colorResource(id = R.color.paragraph)
-                    )
-                    Spacer(
-                        modifier = Modifier.width(
-                            dimensionResource(
-                                id = R.dimen.margin_detail_screen_space_between_member_list_generation_and_name
-                            )
-                        )
-                    )
-                    Text(
-                        text = memberList[member].name,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = colorResource(id = R.color.paragraph)
-                    )
-                }
-            }
+            Member(memberList[it])
         }
+    }
+}
+
+@Composable
+private fun Member(member: MemberData) {
+    Row(
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = member.generation.toString() + "기",
+            style = MaterialTheme.typography.bodySmall,
+            color = colorResource(id = R.color.paragraph)
+        )
+        Spacer(
+            modifier = Modifier.width(
+                dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_member_list_generation_and_name
+                )
+            )
+        )
+        Text(
+            text = member.name,
+            style = MaterialTheme.typography.bodySmall,
+            color = colorResource(id = R.color.paragraph)
+        )
     }
 }
 
