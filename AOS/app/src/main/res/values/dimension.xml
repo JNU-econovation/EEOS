@@ -64,6 +64,7 @@
     <dimen name="margin_detail_screen_space_between_member_list_content">16dp</dimen>
     <dimen name="margin_detail_screen_space_between_member_list_generation_and_name">5dp</dimen>
     <dimen name="margin_detail_screen_space_between_attendance">30dp</dimen>
+    <dimen name="height_detail_screen_space_bottom">95dp</dimen>
 
 
     <!--Detail Bottom Sheet Dimensions-->
