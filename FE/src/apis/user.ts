@@ -1,4 +1,9 @@
-import { ActiveStatus, AttendStatus, MyInfo } from "../types/member";
+import {
+  ActiveStatus,
+  AttendStatus,
+  MyActiveStatusInfo,
+  MyAttendStatusInfo,
+} from "../types/member";
 import { https } from ".";
 
 /**
@@ -6,7 +11,7 @@ import { https } from ".";
  */
 
 interface GetMyAttendStatusResponse {
-  data: AttendStatus;
+  data: MyAttendStatusInfo;
 }
 
 export const getMyAttendStatus = async (programId: string) => {
@@ -43,7 +48,7 @@ export const putMyAttendStatus = async (
  */
 
 interface GetMyActiveStatusResponse {
-  data: MyInfo;
+  data: MyActiveStatusInfo;
 }
 
 export const getMyActiveStatus = async () => {
@@ -63,7 +68,7 @@ interface PutMyActiveStatusRequest {
 }
 
 interface PutMyActiveStatusResponse {
-  data: MyInfo;
+  data: MyActiveStatusInfo;
 }
 
 export const putMyActiveStatus = async (body: PutMyActiveStatusRequest) => {
