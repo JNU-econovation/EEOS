@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProgramForm from "../common/form/ProgramForm.component";
 import { createProgram } from "@/src/apis/program";
+import { defaultMember } from "@/src/apis/types/member";
 import ROUTES from "@/src/constants/ROUTES";
-import { MemberInfo } from "@/src/types/member";
 import { getLocalStorage, setLocalStorage } from "@/src/utils/localStorage";
 
 const ProgramCreateForm = () => {
@@ -42,35 +42,30 @@ const ProgramCreateForm = () => {
     },
   };
 
-  const memberList: MemberInfo[] = [
+  const memberList: defaultMember[] = [
     {
-      memberId: "1",
-      name: "스티브",
-      activeStatus: "am",
+      memberId: 1,
+      name: "김민수",
+      generation: "24",
       attendStatus: "attend",
     },
     {
-      memberId: "2",
-      name: "김만두",
-      activeStatus: "am",
-      attendStatus: "absent",
+      memberId: 2,
+      name: "고구마",
+      generation: "25",
+      attendStatus: "attend",
+    },
+
+    {
+      memberId: 3,
+      name: "강바다",
+      generation: "25",
+      attendStatus: "attend",
     },
     {
-      memberId: "3",
-      name: "김즈우",
-      activeStatus: "am",
-      attendStatus: "perceive",
-    },
-    {
-      memberId: "4",
-      name: "김오션",
-      activeStatus: "am",
-      attendStatus: "nonResponse",
-    },
-    {
-      memberId: "5",
-      name: "인텔리",
-      activeStatus: "am",
+      memberId: 4,
+      name: "감자",
+      generation: "23",
       attendStatus: "attend",
     },
   ];

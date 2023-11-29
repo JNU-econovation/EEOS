@@ -7,8 +7,8 @@ import ProgramCategoryTab, {
 } from "./ProgramCategoryTab.component";
 import ProgramDateInput from "./ProgramDateInput.component";
 import ProgramTitleAndDemandInput from "./ProgramTitleAndDemandInput.component";
+import { defaultMember } from "@/src/apis/types/member";
 import FORM_INFO from "@/src/constants/FORM_INFO";
-import { MemberInfo } from "@/src/types/member";
 
 interface ProgramFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -23,7 +23,7 @@ interface ProgramFormProps {
   };
   submitText?: string;
   isEdit: boolean;
-  memberList: MemberInfo[];
+  memberList: defaultMember[];
 }
 
 const ProgramForm = ({

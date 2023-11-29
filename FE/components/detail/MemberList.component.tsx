@@ -6,12 +6,12 @@ import Image from "next/image";
 import LoadingSpinner from "../common/LoadingSpinner";
 import MemberListItem from "./MemberListItem.component";
 import { getMembersByStatus } from "@/src/apis/member";
+import { attendStatus } from "@/src/apis/types/member";
 import ATTEND_STATUS from "@/src/constants/ATTEND_STATUS";
-import { AttendStatus } from "@/src/types/member";
 
 interface MemberListProps {
   programId: string;
-  attendStatus: AttendStatus;
+  attendStatus: attendStatus;
 }
 
 const MemberList = ({ programId, attendStatus }: MemberListProps) => {
