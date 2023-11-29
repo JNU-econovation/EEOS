@@ -1,6 +1,6 @@
 package com.blackcompany.eeos.program.presentation.annotation;
 
-import com.blackcompany.eeos.common.support.converter.DateConverter;
+import com.blackcompany.eeos.common.utils.DateConverter;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -23,9 +23,6 @@ public class OverDateValidator implements ConstraintValidator<OverDate, Timestam
 		LocalDate now = LocalDate.now();
 		LocalDate requestDate = DateConverter.toLocalDate(value.getTime());
 
-		if (now.isAfter(requestDate)) {
-			return false;
-		}
-		return true;
+		return now.isBefore(requestDate) || now.isEqual(requestDate);
 	}
 }
