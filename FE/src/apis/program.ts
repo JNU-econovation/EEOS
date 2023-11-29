@@ -18,7 +18,7 @@ interface GetProgramByIdResponse {
 
 export const getProgramById = async (programId: number) => {
   const { data } = await https<GetProgramByIdResponse>({
-    url: API.PROGRAM.GET(programId),
+    url: API.PROGRAM.DETAIL(programId),
   });
   return data.data;
 };
@@ -37,7 +37,7 @@ export const getProgramList = async (
   page: number,
 ) => {
   const { data } = await https<GetProgramListResponse>({
-    url: API.PROGRAM.GET_LIST,
+    url: API.PROGRAM.LIST,
     method: "GET",
     params: {
       category,
