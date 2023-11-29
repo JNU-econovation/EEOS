@@ -11,5 +11,13 @@ const MEMBER = {
   PROGRAM: (programId: number) => `/programs/${programId}/members`,
 };
 
+const USER = {
+  ATTEND_STATUS: (programId: number) =>
+    `/programs/${programId}/members/attendStatus`,
+  ACTIVE_STATUS: "/members/activeStatus",
+};
+
+Object.freeze(PROGRAM);
 Object.freeze(MEMBER);
-export default { PROGRAM, MEMBER };
+Object.freeze(USER);
+export default { PROGRAM, MEMBER, USER };

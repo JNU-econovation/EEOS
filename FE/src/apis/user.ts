@@ -1,3 +1,4 @@
+import API from "../constants/API";
 import {
   ActiveStatus,
   AttendStatus,
@@ -14,9 +15,9 @@ interface GetMyAttendStatusResponse {
   data: MyAttendStatusInfo;
 }
 
-export const getMyAttendStatus = async (programId: string) => {
+export const getMyAttendStatus = async (programId: number) => {
   const { data } = await https<GetMyAttendStatusResponse>({
-    url: `programs/${programId}/members/attendStatus`,
+    url: API.USER.ATTEND_STATUS(programId),
     method: "GET",
   });
   return data.data;
@@ -32,11 +33,11 @@ interface PutMyAttendStatusRequest {
 }
 
 export const putMyAttendStatus = async (
-  programId: string,
+  programId: number,
   body: PutMyAttendStatusRequest,
 ) => {
   const { data } = await https({
-    url: `programs/${programId}/members/attendStatus`,
+    url: API.USER.ATTEND_STATUS(programId),
     method: "PUT",
     data: body,
   });
@@ -53,7 +54,7 @@ interface GetMyActiveStatusResponse {
 
 export const getMyActiveStatus = async () => {
   const { data } = await https<GetMyActiveStatusResponse>({
-    url: "members/activeStatus",
+    url: API.USER.ACTIVE_STATUS,
     method: "GET",
   });
   return data.data;
@@ -73,7 +74,7 @@ interface PutMyActiveStatusResponse {
 
 export const putMyActiveStatus = async (body: PutMyActiveStatusRequest) => {
   const { data } = await https<PutMyActiveStatusResponse>({
-    url: "members/activeStatus",
+    url: API.USER.ACTIVE_STATUS,
     method: "PUT",
     data: body,
   });
