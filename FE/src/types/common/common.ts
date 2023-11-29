@@ -1,7 +1,7 @@
-import { attendStatus } from "@/src/apis/types/member";
+import { AttendStatus } from "../member";
 
 export interface badgeOption {
   text: string;
   color: "green" | "yellow" | "red" | "gray" | "teal";
-  type: attendStatus;
+  type: AttendStatus;
 }

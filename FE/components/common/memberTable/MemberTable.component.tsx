@@ -4,11 +4,11 @@ import { useState } from "react";
 import CheckBox from "../CheckBox.component";
 import ActiveStatusTab from "./ActiveStatusTab.component";
 import MemberTableItem from "./MemberTableItem.component";
-import { defaultMember } from "@/src/apis/types/member";
 import ACTIVE_STATUS from "@/src/constants/ACTIVE_STATUS";
+import { MemberInfo } from "@/src/types/member";
 
 interface MemberTableProps {
-  members: defaultMember[];
+  members: MemberInfo[];
   isEdit: boolean;
 }
 
