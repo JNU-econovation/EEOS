@@ -1,4 +1,10 @@
-const PROGRAM = "/programs";
+const PROGRAM = {
+  GET_LIST: "/programs",
+  CREATE: "/programs",
+  UPDATE: (programId: number) => `/programs/${programId}`,
+  DELETE: (programId: number) => `/programs/${programId}`,
+  GET: (programId: number) => `/programs/${programId}`,
+};
 
 const MEMBER = {
   UPDATE_ATTENDSTATUS: "/attend/programs",

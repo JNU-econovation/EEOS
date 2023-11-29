@@ -2,6 +2,7 @@
  * 프로그램 정보 조회
  */
 
+import API from "../constants/API";
 import { AttendStatus } from "../types/member";
 import {
   ProgramCategory,
@@ -15,9 +16,9 @@ interface GetProgramByIdResponse {
   data: ProgramInfo;
 }
 
-export const getProgramById = async (programId: string) => {
+export const getProgramById = async (programId: number) => {
   const { data } = await https<GetProgramByIdResponse>({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.GET(programId),
   });
   return data.data;
 };
@@ -36,7 +37,7 @@ export const getProgramList = async (
   page: number,
 ) => {
   const { data } = await https<GetProgramListResponse>({
-    url: "programs",
+    url: API.PROGRAM.GET_LIST,
     method: "GET",
     params: {
       category,
@@ -52,9 +53,9 @@ export const getProgramList = async (
  * 프로그램 삭제
  */
 
-export const deleteProgram = async (programId: string) => {
+export const deleteProgram = async (programId: number) => {
   const { data } = await https({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.DELETE(programId),
     method: "DELETE",
   });
   return data.data;
@@ -70,7 +71,7 @@ interface PostProgramRequest extends Omit<ProgramInfo, "programId"> {
 
 export const postProgram = async (body: PostProgramRequest) => {
   const { data } = await https({
-    url: "programs",
+    url: API.PROGRAM.CREATE,
     method: "POST",
     data: body,
   });
@@ -90,11 +91,11 @@ interface PatchProgramRequest extends Omit<ProgramInfo, "programId"> {
 }
 
 export const patchProgram = async (
-  programId: string,
+  programId: number,
   body: PatchProgramRequest,
 ) => {
   const { data } = await https({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.UPDATE(programId),
     method: "PATCH",
     data: body,
   });
