@@ -1,9 +1,9 @@
 // FIXME: {type, text, color, icon}[]의 형태로 바꾸기
 
-import { attendStatus } from "../apis/types/member";
+import { AttendStatus } from "../types/member";
 
 interface badgeStyle {
-  type: attendStatus;
+  type: AttendStatus;
   text: string;
   color: "gray" | "green" | "yellow" | "red" | "teal";
 }
