@@ -1,6 +1,9 @@
 import classNames from "classnames";
+import { TabColor } from "@/src/types/common/common";
 
-const customTabItemStyle = {
+const customTabItemStyle: {
+  [key in TabColor]: string;
+} = {
   gray: "bg-gray-10 text-gray-30 border-gray-20",
   yellow: "bg-warning-10 text-warning-30 border-warning-30",
   teal: "bg-secondary-20 text-tertiary-20 border-tertiary-20",
@@ -12,7 +15,7 @@ interface CustomTabItemProps {
   text: string;
   rounded?: boolean;
   disable?: boolean;
-  color?: "gray" | "yellow" | "teal" | "white" | "navy";
+  color?: TabColor;
   size: "sm" | "md" | "lg";
   onClick?: () => void;
 }

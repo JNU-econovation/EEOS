@@ -1,4 +1,5 @@
 import CustomTabItem from "../common/CustomTabItem";
+import { TabColor } from "@/src/types/common/common";
 
 interface ActiveStatusTabProps {
   selected: string;
@@ -11,13 +12,17 @@ const ActiveStatusTab = ({
   options,
   onSelect,
 }: ActiveStatusTabProps) => {
+  const getColor = (type: string): TabColor => {
+    return type === selected ? "teal" : "gray";
+  };
+
   return (
     <div className="flex w-52 flex-wrap items-center justify-center gap-3">
       {options.map((option) => (
         <CustomTabItem
           text={option.text}
           size="lg"
-          color={selected === option.type ? "teal" : "gray"}
+          color={getColor(option.type)}
           onClick={() => onSelect(option.type)}
         />
       ))}
