@@ -1,53 +1,64 @@
+/**
+ * 프로그램 정보 조회
+ */
+
 import {
-  createProgramRequest,
-  createProgramResponse,
-  getProgramDetailResponse,
-  getProgramListResponse,
-  updateProgramRequest,
-} from "./types/program";
+  ProgramCategory,
+  ProgramInfo,
+  ProgramListInfo,
+  ProgramStatus,
+} from "../types/program";
 import { https } from ".";
-import API from "@/src/constants/API";
 
-export const createProgram = async (body: createProgramRequest) => {
-  const { data } = await https<createProgramResponse>({
-    url: API.PROGRAM,
-    method: "POST",
-    data: body,
+interface GetProgramByIdResponse {
+  data: ProgramInfo;
+}
+
+export const getProgramById = async (programId: string) => {
+  const { data } = await https<GetProgramByIdResponse>({
+    url: `programs/${programId}`,
   });
   return data.data;
 };
 
-export const updateProgram = async (
-  programId: string,
-  body: updateProgramRequest,
-) => {
-  const { data } = await https({
-    url: API.PROGRAM + `/${programId}`,
-    method: "PUT",
-    data: body,
-  });
-  return data.data;
-};
+/**
+ * 프로그램 리스트 조회
+ */
 
+interface GetProgramListResponse {
+  data: ProgramListInfo[];
+}
 export const getProgramList = async (
-  programStatus: string,
+  category: ProgramCategory,
+  programStatus: ProgramStatus,
   size: number,
   page: number,
 ) => {
-  const { data } = await https<getProgramListResponse>({
-    url: API.PROGRAM,
+  const { data } = await https<GetProgramListResponse>({
+    url: "programs",
     method: "GET",
-    params: { programStatus, size, page },
+    params: {
+      category,
+      programStatus,
+      size,
+      page,
+    },
   });
-
   return data.data;
 };
 
-export const getProgramDetail = async (programId: string) => {
-  const { data } = await https<getProgramDetailResponse>({
-    url: API.PROGRAM + `/${programId}`,
-    method: "GET",
-  });
+/**
+ * 프로그램 삭제
+ */
 
+export const deleteProgram = async (programId: string) => {
+  const { data } = await https({
+    url: `programs/${programId}`,
+    method: "DELETE",
+  });
   return data.data;
 };
+
+/**
+ * 행사 생성 및 수정은 api 완성되면 추가
+ */
