@@ -7,7 +7,7 @@ import {
 } from "@/src/types/member";
 
 export class MemberInfoDto {
-  public readonly memberId: string;
+  public readonly memberId: number;
   public readonly name: string;
   public readonly attendStatus: AttendStatus;
   public readonly activeStatus: ActiveStatus;
@@ -21,7 +21,7 @@ export class MemberInfoDto {
 }
 
 export class MemberAttendStatusInfoDto {
-  public readonly memberId: string;
+  public readonly memberId: number;
   public readonly name: string;
   public readonly attendStatus: AttendStatus;
 
@@ -33,7 +33,7 @@ export class MemberAttendStatusInfoDto {
 }
 
 export class MemberActiveStatusInfoDto {
-  public readonly memberId: string;
+  public readonly memberId: number;
   public readonly name: string;
   public readonly activeStatus: ActiveStatus;
 

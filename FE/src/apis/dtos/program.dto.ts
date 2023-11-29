@@ -8,15 +8,15 @@ import {
 } from "@/src/types/program";
 
 export class ProgramIdDto {
-  public readonly programId: string;
+  public readonly programId: number;
 
-  constructor(data: { programId: string }) {
+  constructor(data: { programId: number }) {
     this.programId = data.programId;
   }
 }
 
 export class ProgramInfoDto {
-  public readonly programId: string;
+  public readonly programId: number;
   public readonly title: string;
   public readonly deadLine: string;
   public readonly content: string;
@@ -36,7 +36,7 @@ export class ProgramInfoDto {
 }
 
 export class ProgramSimpleInfoDto {
-  public readonly programId: string;
+  public readonly programId: number;
   public readonly title: string;
   public readonly deadLine: string;
   public readonly category: ProgramCategory;
