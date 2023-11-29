@@ -1,7 +1,6 @@
 import {
   ProgramType,
   ProgramSimpleInfo,
-  ProgramListInfo,
   ProgramInfo,
   ProgramStatus,
   ProgramCategory,
@@ -35,7 +34,7 @@ export class ProgramInfoDto {
   }
 }
 
-export class ProgramSimpleInfoDto {
+class ProgramSimpleInfoDto {
   public readonly programId: number;
   public readonly title: string;
   public readonly deadLine: string;
@@ -59,7 +58,12 @@ export class ProgramListDto {
   public readonly totalPage: number;
   public readonly programs: ProgramSimpleInfoDto[];
 
-  constructor(data: ProgramListInfo) {
+  constructor(data: {
+    size: number;
+    page: number;
+    totalPage: number;
+    programs: ProgramSimpleInfo[];
+  }) {
     this.size = data.size;
     this.page = data.page;
     this.totalPage = data.totalPage;

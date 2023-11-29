@@ -4,12 +4,12 @@
 
 import API from "../constants/API";
 import { AttendStatus } from "../types/member";
+import { ProgramCategory, ProgramInfo, ProgramStatus } from "../types/program";
 import {
-  ProgramCategory,
-  ProgramInfo,
-  ProgramListInfo,
-  ProgramStatus,
-} from "../types/program";
+  ProgramIdDto,
+  ProgramInfoDto,
+  ProgramListDto,
+} from "./dtos/program.dto";
 import { https } from ".";
 
 interface GetProgramByIdResponse {
@@ -20,23 +20,20 @@ export const getProgramById = async (programId: number) => {
   const { data } = await https<GetProgramByIdResponse>({
     url: API.PROGRAM.DETAIL(programId),
   });
-  return data.data;
+  return new ProgramInfoDto(data.data);
 };
 
 /**
  * 프로그램 리스트 조회
  */
 
-interface GetProgramListResponse {
-  data: ProgramListInfo[];
-}
 export const getProgramList = async (
   category: ProgramCategory,
   programStatus: ProgramStatus,
   size: number,
   page: number,
 ) => {
-  const { data } = await https<GetProgramListResponse>({
+  const { data } = await https({
     url: API.PROGRAM.LIST,
     method: "GET",
     params: {
@@ -46,7 +43,7 @@ export const getProgramList = async (
       page,
     },
   });
-  return data.data;
+  return new ProgramListDto(data.data);
 };
 
 /**
@@ -75,7 +72,7 @@ export const postProgram = async (body: PostProgramRequest) => {
     method: "POST",
     data: body,
   });
-  return data.data;
+  return new ProgramIdDto(data.data);
 };
 
 /**
@@ -99,5 +96,5 @@ export const patchProgram = async (
     method: "PATCH",
     data: body,
   });
-  return data.data;
+  return new ProgramIdDto(data.data);
 };
