@@ -7,7 +7,7 @@ export type AttendStatus =
   | "nonRelated";
 
 export interface MemberInfo {
-  memberId: string;
+  memberId: number;
   name: string;
   attendStatus: AttendStatus;
   activeStatus: ActiveStatus;
