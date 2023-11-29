@@ -6,7 +6,10 @@ const PROGRAM = {
   DETAIL: (programId: number) => `/programs/${programId}`,
 };
 
-const MEMBER = {};
+const MEMBER = {
+  LIST: "/members",
+  PROGRAM: (programId: number) => `/programs/${programId}/members`,
+};
 
 Object.freeze(MEMBER);
 export default { PROGRAM, MEMBER };

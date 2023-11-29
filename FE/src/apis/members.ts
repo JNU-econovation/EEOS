@@ -1,3 +1,4 @@
+import API from "../constants/API";
 import {
   ActiveStatus,
   AttendStatus,
@@ -19,7 +20,7 @@ export const getMembersByActiveStatus = async (
   activeStatus: ActiveStatus | "all",
 ) => {
   const { data } = await https<GetMembersByActiveStatusResponse>({
-    url: "members",
+    url: API.MEMBER.LIST,
     method: "GET",
     params: { activeStatus },
   });
@@ -36,11 +37,11 @@ interface GetProgramMembersByActiveStatusResponse {
 }
 
 export const getProgramMembersByActiveStatus = async (
-  programId: string,
+  programId: number,
   activeStatus: ActiveStatus | "all",
 ) => {
   const { data } = await https<GetProgramMembersByActiveStatusResponse>({
-    url: `programs/${programId}/members`,
+    url: API.MEMBER.PROGRAM(programId),
     method: "GET",
     params: { activeStatus },
   });
@@ -57,11 +58,11 @@ interface GetProgramMembersByAttendStatusResponse {
 }
 
 export const getProgramMembersByAttendStatus = async (
-  programId: string,
+  programId: number,
   attendStatus: AttendStatus,
 ) => {
   const { data } = await https<GetProgramMembersByAttendStatusResponse>({
-    url: `programs/${programId}/members`,
+    url: API.MEMBER.PROGRAM(programId),
     method: "GET",
     params: { attendStatus },
   });
