@@ -67,5 +67,3 @@ export const getProgramMembersByAttendStatus = async (
   });
   return data.data;
 };
-
-// TODO: 프로그램 대상자 선정 & 사용자 출석 정보 변경 api 나오면 추가

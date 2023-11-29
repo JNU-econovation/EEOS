@@ -2,6 +2,7 @@
  * 프로그램 정보 조회
  */
 
+import { AttendStatus } from "../types/member";
 import {
   ProgramCategory,
   ProgramInfo,
@@ -60,5 +61,42 @@ export const deleteProgram = async (programId: string) => {
 };
 
 /**
- * 행사 생성 및 수정은 api 완성되면 추가
+ * 프로그램 생성 및 대상자 선정
  */
+
+interface PostProgramRequest extends Omit<ProgramInfo, "programId"> {
+  members: { memberId: string }[];
+}
+
+export const postProgram = async (body: PostProgramRequest) => {
+  const { data } = await https({
+    url: "programs",
+    method: "POST",
+    data: body,
+  });
+  return data.data;
+};
+
+/**
+ * 프로그램 수정 및 참여 대상자/참여 상태 수정
+ */
+
+interface PatchProgramRequest extends Omit<ProgramInfo, "programId"> {
+  members: {
+    memberId: string;
+    beforeAttendStatus: AttendStatus;
+    afterAttendStatus: AttendStatus;
+  }[];
+}
+
+export const patchProgram = async (
+  programId: string,
+  body: PatchProgramRequest,
+) => {
+  const { data } = await https({
+    url: `programs/${programId}`,
+    method: "PATCH",
+    data: body,
+  });
+  return data.data;
+};
