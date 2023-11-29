@@ -8,8 +8,15 @@ export interface ProgramInfo {
   deadLine: string;
   content: string;
   category: ProgramCategory;
-  programstatus: ProgramStatus;
+  programStatus: ProgramStatus;
   type: ProgramType;
 }
 
-export interface ProgramListInfo extends Omit<ProgramInfo, "content"> {}
+export interface ProgramSimpleInfo extends Omit<ProgramInfo, "content"> {}
+
+export interface ProgramListInfo {
+  size: number;
+  page: number;
+  totalPage: number;
+  programs: ProgramSimpleInfo[];
+}
