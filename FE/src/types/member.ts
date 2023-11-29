@@ -19,7 +19,7 @@ export interface MemberAttendStatusInfo
 export interface MemberActiveStatusInfo
   extends Omit<MemberInfo, "attendStatus"> {}
 
-export interface MyActiveStatusInfo
+export interface UserActiveStatusInfo
   extends Omit<MemberInfo, "memberId" | "attendStatus"> {}
-export interface MyAttendStatusInfo
+export interface UserAttendStatusInfo
   extends Omit<MemberInfo, "memberId" | "activeStatus"> {}
