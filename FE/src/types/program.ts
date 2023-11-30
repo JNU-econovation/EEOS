@@ -3,7 +3,7 @@ export type ProgramStatus = "active" | "end";
 export type ProgramType = "demand" | "notification";
 
 export interface ProgramInfo {
-  programId: string;
+  programId: number;
   title: string;
   deadLine: string;
   content: string;

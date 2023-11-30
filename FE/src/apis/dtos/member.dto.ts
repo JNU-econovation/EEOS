@@ -6,8 +6,8 @@ import {
   MemberAttendStatusInfo,
 } from "@/src/types/member";
 
-export class MemberInfoDto {
-  public readonly memberId: string;
+class MemberInfoDto {
+  public readonly memberId: number;
   public readonly name: string;
   public readonly attendStatus: AttendStatus;
   public readonly activeStatus: ActiveStatus;
@@ -20,8 +20,8 @@ export class MemberInfoDto {
   }
 }
 
-export class MemberAttendStatusInfoDto {
-  public readonly memberId: string;
+class MemberAttendStatusInfoDto {
+  public readonly memberId: number;
   public readonly name: string;
   public readonly attendStatus: AttendStatus;
 
@@ -32,8 +32,8 @@ export class MemberAttendStatusInfoDto {
   }
 }
 
-export class MemberActiveStatusInfoDto {
-  public readonly memberId: string;
+class MemberActiveStatusInfoDto {
+  public readonly memberId: number;
   public readonly name: string;
   public readonly activeStatus: ActiveStatus;
 
@@ -47,23 +47,27 @@ export class MemberActiveStatusInfoDto {
 export class MemberListDto {
   public readonly members: MemberInfoDto[];
 
-  constructor(data: MemberInfo[]) {
-    this.members = data.map((member) => new MemberInfoDto(member));
+  constructor(data: { members: MemberInfo[] }) {
+    this.members = data.members.map((member) => new MemberInfoDto(member));
   }
 }
 
 export class MemberAttendStatusListDto {
   public readonly members: MemberAttendStatusInfoDto[];
 
-  constructor(data: MemberAttendStatusInfo[]) {
-    this.members = data.map((member) => new MemberAttendStatusInfoDto(member));
+  constructor(data: { members: MemberAttendStatusInfo[] }) {
+    this.members = data.members.map(
+      (member) => new MemberAttendStatusInfoDto(member),
+    );
   }
 }
 
 export class MemberActiveStatusListDto {
   public readonly members: MemberActiveStatusInfoDto[];
 
-  constructor(data: MemberActiveStatusInfo[]) {
-    this.members = data.map((member) => new MemberActiveStatusInfoDto(member));
+  constructor(data: { members: MemberActiveStatusInfo[] }) {
+    this.members = data.members.map(
+      (member) => new MemberActiveStatusInfoDto(member),
+    );
   }
 }

@@ -1,25 +1,25 @@
 import {
   ActiveStatus,
   AttendStatus,
-  MyActiveStatusInfo,
-  MyAttendStatusInfo,
+  UserActiveStatusInfo,
+  UserAttendStatusInfo,
 } from "@/src/types/member";
 
-export class MyAttendStatusInfoDto {
+export class UserAttendStatusInfoDto {
   public readonly name: string;
   public readonly attendStatus: AttendStatus;
 
-  constructor(data: MyAttendStatusInfo) {
+  constructor(data: UserAttendStatusInfo) {
     this.name = data.name;
     this.attendStatus = data.attendStatus;
   }
 }
 
-export class MyActiveStatusInfoDto {
+export class UserActiveStatusInfoDto {
   public readonly name: string;
   public readonly activeStatus: ActiveStatus;
 
-  constructor(data: MyActiveStatusInfo) {
+  constructor(data: UserActiveStatusInfo) {
     this.name = data.name;
     this.activeStatus = data.activeStatus;
   }

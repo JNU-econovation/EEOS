@@ -2,41 +2,39 @@
  * 프로그램 정보 조회
  */
 
+import API from "../constants/API";
 import { AttendStatus } from "../types/member";
+import { ProgramCategory, ProgramInfo, ProgramStatus } from "../types/program";
 import {
-  ProgramCategory,
-  ProgramInfo,
-  ProgramListInfo,
-  ProgramStatus,
-} from "../types/program";
+  ProgramIdDto,
+  ProgramInfoDto,
+  ProgramListDto,
+} from "./dtos/program.dto";
 import { https } from ".";
 
 interface GetProgramByIdResponse {
   data: ProgramInfo;
 }
 
-export const getProgramById = async (programId: string) => {
+export const getProgramById = async (programId: number) => {
   const { data } = await https<GetProgramByIdResponse>({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.DETAIL(programId),
   });
-  return data.data;
+  return new ProgramInfoDto(data.data);
 };
 
 /**
  * 프로그램 리스트 조회
  */
 
-interface GetProgramListResponse {
-  data: ProgramListInfo[];
-}
 export const getProgramList = async (
   category: ProgramCategory,
   programStatus: ProgramStatus,
   size: number,
   page: number,
 ) => {
-  const { data } = await https<GetProgramListResponse>({
-    url: "programs",
+  const { data } = await https({
+    url: API.PROGRAM.LIST,
     method: "GET",
     params: {
       category,
@@ -45,16 +43,16 @@ export const getProgramList = async (
       page,
     },
   });
-  return data.data;
+  return new ProgramListDto(data.data);
 };
 
 /**
  * 프로그램 삭제
  */
 
-export const deleteProgram = async (programId: string) => {
+export const deleteProgram = async (programId: number) => {
   const { data } = await https({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.DELETE(programId),
     method: "DELETE",
   });
   return data.data;
@@ -70,11 +68,11 @@ interface PostProgramRequest extends Omit<ProgramInfo, "programId"> {
 
 export const postProgram = async (body: PostProgramRequest) => {
   const { data } = await https({
-    url: "programs",
+    url: API.PROGRAM.CREATE,
     method: "POST",
     data: body,
   });
-  return data.data;
+  return new ProgramIdDto(data.data);
 };
 
 /**
@@ -90,13 +88,13 @@ interface PatchProgramRequest extends Omit<ProgramInfo, "programId"> {
 }
 
 export const patchProgram = async (
-  programId: string,
+  programId: number,
   body: PatchProgramRequest,
 ) => {
   const { data } = await https({
-    url: `programs/${programId}`,
+    url: API.PROGRAM.UPDATE(programId),
     method: "PATCH",
     data: body,
   });
-  return data.data;
+  return new ProgramIdDto(data.data);
 };

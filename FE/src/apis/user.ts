@@ -1,25 +1,21 @@
+import API from "../constants/API";
+import { ActiveStatus, AttendStatus } from "../types/member";
 import {
-  ActiveStatus,
-  AttendStatus,
-  MyActiveStatusInfo,
-  MyAttendStatusInfo,
-} from "../types/member";
+  UserActiveStatusInfoDto,
+  UserAttendStatusInfoDto,
+} from "./dtos/user.dto";
 import { https } from ".";
 
 /**
  * 본인의 출석 상태 조회
  */
 
-interface GetMyAttendStatusResponse {
-  data: MyAttendStatusInfo;
-}
-
-export const getMyAttendStatus = async (programId: string) => {
-  const { data } = await https<GetMyAttendStatusResponse>({
-    url: `programs/${programId}/members/attendStatus`,
+export const getMyAttendStatus = async (programId: number) => {
+  const { data } = await https({
+    url: API.USER.ATTEND_STATUS(programId),
     method: "GET",
   });
-  return data.data;
+  return new UserAttendStatusInfoDto(data.data);
 };
 
 /**
@@ -32,11 +28,11 @@ interface PutMyAttendStatusRequest {
 }
 
 export const putMyAttendStatus = async (
-  programId: string,
+  programId: number,
   body: PutMyAttendStatusRequest,
 ) => {
   const { data } = await https({
-    url: `programs/${programId}/members/attendStatus`,
+    url: API.USER.ATTEND_STATUS(programId),
     method: "PUT",
     data: body,
   });
@@ -47,16 +43,12 @@ export const putMyAttendStatus = async (
  * 본인의 회원 상태 조회
  */
 
-interface GetMyActiveStatusResponse {
-  data: MyActiveStatusInfo;
-}
-
 export const getMyActiveStatus = async () => {
-  const { data } = await https<GetMyActiveStatusResponse>({
-    url: "members/activeStatus",
+  const { data } = await https({
+    url: API.USER.ACTIVE_STATUS,
     method: "GET",
   });
-  return data.data;
+  return new UserActiveStatusInfoDto(data.data);
 };
 
 /**
@@ -67,15 +59,11 @@ interface PutMyActiveStatusRequest {
   activeStatus: ActiveStatus;
 }
 
-interface PutMyActiveStatusResponse {
-  data: MyActiveStatusInfo;
-}
-
 export const putMyActiveStatus = async (body: PutMyActiveStatusRequest) => {
-  const { data } = await https<PutMyActiveStatusResponse>({
-    url: "members/activeStatus",
+  const { data } = await https({
+    url: API.USER.ACTIVE_STATUS,
     method: "PUT",
     data: body,
   });
-  return data.data;
+  return new UserActiveStatusInfoDto(data.data);
 };
