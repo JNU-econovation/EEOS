@@ -5,7 +5,7 @@ import DefaultLayout from "@/components/layout/DefaultLayout";
 const ProgramCreatePage = () => {
   return (
     <DefaultLayout>
-      <Title>행사 생성</Title>
+      <Title className="w-full">행사 생성</Title>
       <ProgramCreateForm />
     </DefaultLayout>
   );

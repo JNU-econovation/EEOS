@@ -3,8 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import CustomTabItem from "../common/CustomTabItem";
 import LoadingSpinner from "../common/LoadingSpinner";
-import MarkdownViewer from "../common/MarkdownViewer.component";
+import MarkdownViewer from "../common/markdown/MarkdownViewer.component";
 import Title from "../common/Title.component";
 import { getProgramDetail } from "@/src/apis/program";
 import { convertDate } from "@/src/utils/date";
@@ -13,7 +14,6 @@ interface ProgramInfoProps {
   programId: string;
 }
 
-// TODO: ProgramInfo 바뀐 디자인 적용 - Title 배치
 const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   const { data, isLoading, isError } = useQuery(
     ["ProgramInfo", programId],
@@ -23,9 +23,11 @@ const ProgramInfo = ({ programId }: ProgramInfoProps) => {
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <>Error!</>;
 
+  // FIXME: text props로 받아서 사용
   return (
-    <div className="flex w-full flex-col justify-center">
-      <Title className="mb-3 mt-16">{data.title}</Title>
+    <div className="flex w-full flex-col justify-center pt-12">
+      <CustomTabItem text="주간발표" size="sm" color="yellow" rounded />
+      <Title className="my-3">{data.title}</Title>
       <div className="flex w-full justify-between border-b-[1.5px] border-gray-20 py-4">
         <span className="text-lg">{convertDate(data.programDate)}</span>
         <Link href={`/edit/${programId}`}>

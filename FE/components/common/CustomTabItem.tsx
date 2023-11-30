@@ -14,6 +14,7 @@ interface CustomTabItemProps {
   disable?: boolean;
   color?: "gray" | "yellow" | "teal" | "white" | "navy";
   size: "sm" | "md" | "lg";
+  onClick?: () => void;
 }
 
 const CustomTabItem = ({
@@ -22,23 +23,29 @@ const CustomTabItem = ({
   disable = false,
   color = "gray",
   size,
+  onClick = () => {},
 }: CustomTabItemProps) => {
   const tabItemClass = classNames(
-    "h-fit w-fit border-2 font-bold",
+    "flex h-fit w-fit cursor-pointer items-center justify-center border-2 font-semibold",
     customTabItemStyle[color],
     {
       "opacity-50": disable,
-      "rounded-xl": rounded,
-      "rounded-md": !rounded,
-      "px-3 py-2 text-sm": size === "sm",
-      "px-4 py-2 text-base": size === "md",
-      "px-5 py-3 text-lg": size === "lg",
+      "rounded-2xl": rounded,
+      "rounded-lg": !rounded,
+      "min-w-[4.25rem] px-2 py-[0.3rem] text-xs": size === "sm",
+      "min-w-[5rem] px-3 py-2 text-sm": size === "md",
+      "min-w-[6rem] px-4 py-2 text-base": size === "lg",
     },
   );
 
+  const handleClick = () => {
+    if (disable) return;
+    onClick();
+  };
+
   return (
-    <div className={tabItemClass}>
-      <span>{text}</span>
+    <div className={tabItemClass} onClick={handleClick}>
+      <p>{text}</p>
     </div>
   );
 };
