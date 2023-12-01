@@ -8,7 +8,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseGetProgramListsDto(
+data class ResponseGetProgramListDto(
     @SerialName("size")
     val size: Int,
     @SerialName("page")

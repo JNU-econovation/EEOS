@@ -6,7 +6,7 @@ import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
-import com.example.eeos.data.model.remote.response.ResponseGetProgramListsDto
+import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
 import com.example.eeos.data.model.remote.response.ResponsePutAttendStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
 import com.example.eeos.data.service.ProgramService
@@ -25,8 +25,8 @@ class ProgramDataSource @Inject constructor(
         programStatus: ProgramStatus,
         size: Int,
         page: Int
-    ): BaseResponse<ResponseGetProgramListsDto> =
-        programService.getProgramLists(
+    ): BaseResponse<ResponseGetProgramListDto> =
+        programService.getProgramList(
             category = category,
             programStatus = programStatus,
             size = size,
