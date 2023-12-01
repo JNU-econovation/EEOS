@@ -4,9 +4,10 @@ import com.example.eeos.consts.AttendStatus
 import com.example.eeos.consts.Category
 import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
+import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
-import com.example.eeos.data.model.remote.response.ResponseGetProgramListsDto
+import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
 import com.example.eeos.data.model.remote.response.ResponsePutAttendStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
 import retrofit2.http.Body
@@ -22,18 +23,23 @@ interface ProgramService {
     ): BaseResponse<ResponseGetProgramDetailDto>
 
     @GET("programs")
-    suspend fun getProgramLists(
+    suspend fun getProgramList(
         @Query("category") category: Category,
         @Query("programStatus") programStatus: ProgramStatus,
         @Query("size") size: Int,
         @Query("page") page: Int
-    ): BaseResponse<ResponseGetProgramListsDto>
+    ): BaseResponse<ResponseGetProgramListDto>
 
     @PUT("programs/{programId}/members/attendStatus")
     suspend fun putAttendStatus(
         @Path(value = "programId") programId: Int,
         @Body requestPutAttendStatusDto: RequestPutAttendStatusDto
     ): BaseResponse<ResponsePutAttendStatusDto>
+
+    @GET("programs/{programId}/members/attendStatus")
+    suspend fun getAttendStatus(
+        @Path(value = "programId") programId: Int,
+    ): BaseResponse<ResponseGetAttendStatusDto>
 
     @GET("programs/{programId}/members")
     suspend fun getMemberList(

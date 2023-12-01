@@ -12,4 +12,10 @@ data class ResponseGetActiveStatusDto(
     @Contextual
     @SerialName("activeStatus")
     val activeStatus: ActiveStatus
-)
+) {
+    fun toActiveStatus(): com.example.eeos.domain.model.ActiveStatus =
+        com.example.eeos.domain.model.ActiveStatus(
+            name = name,
+            activeStatus = activeStatus
+        )
+}

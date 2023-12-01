@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.eeos.ui.detail.DetailScreen
-import com.example.eeos.ui.home.HomeScreen
-import com.example.eeos.ui.login.LoginScreen
+import com.example.eeos.presentation.detail.DetailScreen
+import com.example.eeos.presentation.home.HomeScreen
+import com.example.eeos.presentation.login.LoginScreen
 
 @Composable
 fun EEOSNavGraph(
