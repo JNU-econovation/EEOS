@@ -1,4 +1,4 @@
-package com.example.eeos.ui.detail
+package com.example.eeos.presentation.detail
 
 data class MemberData(
     val generation: Int,

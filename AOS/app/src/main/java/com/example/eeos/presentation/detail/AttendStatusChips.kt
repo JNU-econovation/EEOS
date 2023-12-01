@@ -1,4 +1,4 @@
-package com.example.eeos.ui.detail
+package com.example.eeos.presentation.detail
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

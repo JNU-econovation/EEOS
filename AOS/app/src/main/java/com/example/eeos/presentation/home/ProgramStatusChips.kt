@@ -1,4 +1,4 @@
-package com.example.eeos.ui.home
+package com.example.eeos.presentation.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row

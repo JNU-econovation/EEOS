@@ -1,4 +1,4 @@
-package com.example.eeos.ui.home
+package com.example.eeos.presentation.home
 
 data class ProgramData(
     val date: String,

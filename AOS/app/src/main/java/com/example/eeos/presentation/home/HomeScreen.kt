@@ -1,4 +1,4 @@
-package com.example.eeos.ui.home
+package com.example.eeos.presentation.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +19,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
-import com.example.eeos.ui.common.EeosTopAppBar
+import com.example.eeos.presentation.common.EeosTopAppBar
 
 val programLists: List<ProgramData> = listOf(
     ProgramData(

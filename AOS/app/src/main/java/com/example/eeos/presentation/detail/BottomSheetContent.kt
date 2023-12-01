@@ -1,4 +1,4 @@
-package com.example.eeos.ui.detail
+package com.example.eeos.presentation.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

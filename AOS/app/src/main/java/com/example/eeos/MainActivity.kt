@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.navigation.EEOSNavGraph
-import com.example.eeos.ui.home.ProgramLists
-import com.example.eeos.ui.theme.EeosTheme
+import com.example.eeos.presentation.home.ProgramLists
+import com.example.eeos.presentation.theme.EeosTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

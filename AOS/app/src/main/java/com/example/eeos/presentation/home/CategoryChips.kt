@@ -1,4 +1,4 @@
-package com.example.eeos.ui.home
+package com.example.eeos.presentation.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll

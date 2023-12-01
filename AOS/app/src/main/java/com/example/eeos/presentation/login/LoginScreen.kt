@@ -1,4 +1,4 @@
-package com.example.eeos.ui.login
+package com.example.eeos.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

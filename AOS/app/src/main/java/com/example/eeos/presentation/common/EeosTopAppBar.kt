@@ -1,4 +1,4 @@
-package com.example.eeos.ui.common
+package com.example.eeos.presentation.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
