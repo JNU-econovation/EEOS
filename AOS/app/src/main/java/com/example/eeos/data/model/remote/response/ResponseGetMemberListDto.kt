@@ -1,6 +1,7 @@
 package com.example.eeos.data.model.remote.response
 
 import com.example.eeos.consts.AttendStatus
+import com.example.eeos.domain.model.Member
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,4 +21,11 @@ data class ResponseGetMemberListDto(
         @SerialName("attendStatus")
         val attendStatus: AttendStatus
     )
+
+    fun toMemberList(): List<Member> = members.map { member ->
+        Member(
+            name = member.name,
+            attendStatus = member.attendStatus
+        )
+    }
 }

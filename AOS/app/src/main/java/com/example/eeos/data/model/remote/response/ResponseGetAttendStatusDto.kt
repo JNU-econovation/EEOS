@@ -11,5 +11,11 @@ data class ResponseGetAttendStatusDto(
     val name: String,
     @Contextual
     @SerialName("activeStatus")
-    val activeStatus: AttendStatus
-)
+    val attendStatus: AttendStatus
+) {
+    fun toAttendStatus(): com.example.eeos.domain.model.AttendStatus =
+        com.example.eeos.domain.model.AttendStatus(
+            name = name,
+            attendStatus = attendStatus
+        )
+}

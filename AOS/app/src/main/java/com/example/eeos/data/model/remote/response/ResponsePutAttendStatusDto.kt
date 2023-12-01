@@ -11,5 +11,5 @@ data class ResponsePutAttendStatusDto(
     val name: String,
     @Contextual
     @SerialName("activeStatus")
-    val activeStatus: AttendStatus
+    val attendStatus: AttendStatus
 )
