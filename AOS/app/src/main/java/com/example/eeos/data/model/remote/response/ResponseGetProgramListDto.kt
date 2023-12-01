@@ -3,6 +3,7 @@ package com.example.eeos.data.model.remote.response
 import com.example.eeos.consts.Category
 import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.consts.ProgramType
+import com.example.eeos.domain.model.Program
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -36,4 +37,15 @@ data class ResponseGetProgramListDto(
         @SerialName("type")
         val type: ProgramType
     )
+
+    fun toProgramList(): List<Program> = programs.map { program ->
+        Program(
+            programId = program.programId,
+            title = program.title,
+            deadLine = program.deadLine,
+            category = program.category,
+            programStatus = program.programStatus,
+            type = program.type
+        )
+    }
 }
