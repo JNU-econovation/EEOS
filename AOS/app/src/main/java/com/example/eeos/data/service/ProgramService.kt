@@ -4,6 +4,7 @@ import com.example.eeos.consts.AttendStatus
 import com.example.eeos.consts.Category
 import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
+import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
@@ -34,6 +35,11 @@ interface ProgramService {
         @Path(value = "programId") programId: Int,
         @Body requestPutAttendStatusDto: RequestPutAttendStatusDto
     ): BaseResponse<ResponsePutAttendStatusDto>
+
+    @GET("programs/{programId}/members/attendStatus")
+    suspend fun getAttendStatus(
+        @Path(value = "programId") programId: Int,
+    ): BaseResponse<ResponseGetAttendStatusDto>
 
     @GET("programs/{programId}/members")
     suspend fun getMemberList(

@@ -45,6 +45,15 @@ class ProgramRepositoryImpl @Inject constructor(
             ).data
         }
 
+    override suspend fun getAttendStatus(
+        programId: Int
+    ): Result<com.example.eeos.domain.model.AttendStatus> =
+        runCatching {
+            programDataSource.getAttendStatus(
+                programId = programId
+            ).data!!.toAttendStatus()
+        }
+
     override suspend fun getMemberList(
         programId: Int,
         attendStatus: AttendStatus

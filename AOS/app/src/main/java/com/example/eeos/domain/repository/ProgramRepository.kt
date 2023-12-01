@@ -25,6 +25,10 @@ interface ProgramRepository {
         requestPutAttendStatusDto: RequestPutAttendStatusDto
     ): Result<Unit>
 
+    suspend fun getAttendStatus(
+        programId: Int
+    ): Result<com.example.eeos.domain.model.AttendStatus>
+
     suspend fun getMemberList(
         programId: Int,
         attendStatus: AttendStatus

@@ -4,6 +4,7 @@ import com.example.eeos.consts.AttendStatus
 import com.example.eeos.consts.Category
 import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
+import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
@@ -40,6 +41,13 @@ class ProgramDataSource @Inject constructor(
         programService.putAttendStatus(
             programId = programId,
             requestPutAttendStatusDto = requestPutAttendStatusDto
+        )
+
+    suspend fun getAttendStatus(
+        programId: Int
+    ): BaseResponse<ResponseGetAttendStatusDto> =
+        programService.getAttendStatus(
+            programId = programId
         )
 
     suspend fun getMemberList(
