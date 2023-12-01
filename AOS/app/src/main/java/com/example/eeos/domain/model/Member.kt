@@ -1,7 +1,8 @@
 package com.example.eeos.domain.model
 
+import com.example.eeos.consts.AttendStatus
+
 data class Member(
-    val memberId: Int,
     val name: String,
     val attendStatus: AttendStatus
 )
