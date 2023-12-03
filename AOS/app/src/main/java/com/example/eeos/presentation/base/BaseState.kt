@@ -1,15 +1,15 @@
 package com.example.eeos.presentation.base
 
-sealed interface UiState<out T> {
-    object Uninitialized : UiState<Nothing>
+sealed interface BaseState<out T> {
+    object Uninitialized : BaseState<Nothing>
 
-    object Loading : UiState<Nothing>
+    object Loading : BaseState<Nothing>
 
     data class Success<T>(
         val data: T
-    ) : UiState<T>
+    ) : BaseState<T>
 
     data class Failure(
         val message: String
-    ) : UiState<Nothing>
+    ) : BaseState<Nothing>
 }
