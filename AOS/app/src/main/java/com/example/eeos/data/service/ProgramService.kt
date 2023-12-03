@@ -1,8 +1,6 @@
 package com.example.eeos.data.service
 
 import com.example.eeos.consts.AttendStatus
-import com.example.eeos.consts.Category
-import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
@@ -24,8 +22,8 @@ interface ProgramService {
 
     @GET("programs")
     suspend fun getProgramList(
-        @Query("category") category: Category,
-        @Query("programStatus") programStatus: ProgramStatus,
+        @Query("category") category: String,
+        @Query("programStatus") programStatus: String,
         @Query("size") size: Int,
         @Query("page") page: Int
     ): BaseResponse<ResponseGetProgramListDto>

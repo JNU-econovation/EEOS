@@ -1,8 +1,6 @@
 package com.example.eeos.data.repository
 
 import com.example.eeos.consts.AttendStatus
-import com.example.eeos.consts.Category
-import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.source.ProgramDataSource
 import com.example.eeos.domain.model.Member
@@ -20,8 +18,8 @@ class ProgramRepositoryImpl @Inject constructor(
         }
 
     override suspend fun getProgramList(
-        category: Category,
-        programStatus: ProgramStatus,
+        category: String,
+        programStatus: String,
         size: Int,
         page: Int
     ): Result<List<Program>> =
