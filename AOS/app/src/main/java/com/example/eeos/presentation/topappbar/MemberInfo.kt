@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.common
+package com.example.eeos.presentation.topappbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
