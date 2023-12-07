@@ -20,7 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
-import com.example.eeos.presentation.util.NonLazyGrid
+import com.example.eeos.presentation.util.ComponentUtil.NonLazyGrid
 
 data class Attendance(
     val attendance: String,
