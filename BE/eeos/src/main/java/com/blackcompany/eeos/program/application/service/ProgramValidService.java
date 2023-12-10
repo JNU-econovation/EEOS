@@ -13,7 +13,7 @@ public class ProgramValidService {
 
 	public void validate(Long programId) {
 		if (!programRepository.existsById(programId)) {
-			throw new NotFoundProgramException(programId);
+			throw new NotFoundProgramException();
 		}
 	}
 }

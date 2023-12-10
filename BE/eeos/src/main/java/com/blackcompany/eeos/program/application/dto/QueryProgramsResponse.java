@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class GetProgramResponse implements AbstractResponseDto {
+public class QueryProgramsResponse implements AbstractResponseDto {
 
 	private Long programId;
 	private String title;
 	private Timestamp programDate;
 	private String content;
-	private String eventStatus;
 }

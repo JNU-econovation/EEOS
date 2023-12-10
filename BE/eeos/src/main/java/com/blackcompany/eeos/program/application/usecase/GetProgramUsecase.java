@@ -1,9 +1,7 @@
 package com.blackcompany.eeos.program.application.usecase;
 
-import com.blackcompany.eeos.program.application.dto.GetProgramResponse;
-import org.springframework.stereotype.Component;
+import com.blackcompany.eeos.program.application.dto.QueryProgramResponse;
 
-@Component
 public interface GetProgramUsecase {
-	GetProgramResponse getProgram(Long id);
+	QueryProgramResponse getProgram(Long id);
 }
