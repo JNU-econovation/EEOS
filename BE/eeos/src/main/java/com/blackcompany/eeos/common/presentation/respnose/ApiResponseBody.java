@@ -9,7 +9,6 @@ public class ApiResponseBody {
 	@AllArgsConstructor
 	public static class FailureBody implements Serializable {
 
-		private String status;
 		private String code;
 		private String message;
 	}

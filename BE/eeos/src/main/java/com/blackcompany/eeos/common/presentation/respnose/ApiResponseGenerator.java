@@ -47,21 +47,22 @@ public class ApiResponseGenerator {
 	}
 
 	public static ApiResponse<ApiResponseBody.FailureBody> fail(
-			final String message, final String code, final HttpStatus httpStatus) {
+			final String message, final HttpStatus status) {
 		return new ApiResponse<>(
-				new ApiResponseBody.FailureBody(httpStatus.name(), code, message), httpStatus);
+				new ApiResponseBody.FailureBody(String.valueOf(status.value()), message), status);
 	}
 
 	public static ApiResponse<ApiResponseBody.FailureBody> fail(
-			final String status, final String code, final String message, final HttpStatus httpStatus) {
-		return new ApiResponse<>(new ApiResponseBody.FailureBody(status, code, message), httpStatus);
+			final String code, final String message, final HttpStatus status) {
+		return new ApiResponse<>(new ApiResponseBody.FailureBody(code, message), status);
 	}
 
 	public static ApiResponse<ApiResponseBody.FailureBody> fail(
-			BindingResult bindingResult, final String code, final HttpStatus httpStatus) {
+			BindingResult bindingResult, final HttpStatus status) {
 		return new ApiResponse<>(
-				new ApiResponseBody.FailureBody(httpStatus.name(), code, createErrorMessage(bindingResult)),
-				httpStatus);
+				new ApiResponseBody.FailureBody(
+						String.valueOf(status.value()), createErrorMessage(bindingResult)),
+				status);
 	}
 
 	private static String createErrorMessage(BindingResult bindingResult) {

@@ -5,11 +5,10 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public class BusinessException extends RuntimeException {
-	private final String code;
 	private final HttpStatus httpStatus;
 
-	public BusinessException(String code, HttpStatus httpStatus) {
-		this.code = code;
+	public BusinessException(String message, HttpStatus httpStatus) {
+		super(message);
 		this.httpStatus = httpStatus;
 	}
 }
