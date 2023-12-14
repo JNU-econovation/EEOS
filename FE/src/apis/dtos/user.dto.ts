@@ -3,7 +3,7 @@ import {
   AttendStatus,
   UserActiveStatusInfo,
   UserAttendStatusInfo,
-} from "@/src/types/member";
+} from "@/types/member";
 
 export class UserAttendStatusInfoDto {
   public readonly name: string;
