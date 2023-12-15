@@ -10,7 +10,7 @@ const tabAlign = {
 export interface TabProps<T> {
   options: TabOption<T>[];
   selected: T;
-  setSelected: (selected: T) => void;
+  onItemClick: (selected: T) => void;
   size: keyof typeof tabSizes;
   baseColor: keyof typeof tabColors;
   pointColor: keyof typeof tabColors;
@@ -21,7 +21,7 @@ export interface TabProps<T> {
 const Tab = <T,>({
   options,
   selected,
-  setSelected,
+  onItemClick,
   size,
   baseColor,
   pointColor,
@@ -33,10 +33,6 @@ const Tab = <T,>({
     return option.type === selected ? pointColor : baseColor;
   };
 
-  const handleSelect = (type: T) => {
-    setSelected(type);
-  };
-
   return (
     <div className={tabStyle}>
       {options.map((option: TabOption<T>) => (
@@ -44,7 +40,7 @@ const Tab = <T,>({
           color={getColor(option)}
           size={size}
           text={option.text}
-          onClick={() => handleSelect(option.type)}
+          onClick={() => onItemClick(option.type)}
           rounded={rounded}
         />
       ))}
