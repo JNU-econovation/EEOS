@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
+import ROUTES from "@/constants/ROUTES";
 import {
   GetProgramListRequest,
   PatchProgramRequest,
@@ -9,9 +11,8 @@ import {
   getProgramList,
   patchProgram,
   postProgram,
-} from "../apis/program";
-import API from "../constants/API";
-import ROUTES from "@/constants/ROUTES";
+} from "@/apis/program";
+import API from "@/constants/API";
 
 interface CreateProgram {
   programData: PostProgramRequest;

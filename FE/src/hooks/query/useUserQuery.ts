@@ -1,14 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getMyActiveStatus,
   getMyAttendStatus,
   putMyActiveStatus,
   putMyAttendStatus,
-} from "../apis/user";
-import API from "../constants/API";
-import { ActiveStatus, AttendStatus } from "../types/member";
-
-const queryClient = useQueryClient();
+} from "@/apis/user";
+import API from "@/constants/API";
+import { ActiveStatus, AttendStatus } from "@/types/member";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetMyActiveStatus = () => {
   return useQuery({
@@ -42,6 +40,8 @@ export const usePutMyAttendStatus = ({
   beforeAttendStatus,
   afterAttendStatus,
 }: PutMyAttendStatus) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: [API.USER.ATTEND_STATUS],
     mutationFn: () =>

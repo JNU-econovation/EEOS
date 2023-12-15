@@ -4,7 +4,7 @@ import {
   ProgramInfo,
   ProgramStatus,
   ProgramCategory,
-} from "@/src/types/program";
+} from "@/types/program";
 
 export class ProgramIdDto {
   public readonly programId: number;
