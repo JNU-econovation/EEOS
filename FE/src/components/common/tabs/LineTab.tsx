@@ -26,6 +26,10 @@ const LineTab = <T,>({
     return option.type === selected ? potionColor : baseColor;
   };
 
+  const handleSelect = (type: T) => {
+    setSelected(type);
+  };
+
   return (
     <div className="flex gap-4">
       {options.map((option: Option<T>) => (
@@ -34,7 +38,7 @@ const LineTab = <T,>({
           size={size}
           rounded
           text={option.text}
-          onClick={() => setSelected(option.type)}
+          onClick={() => handleSelect(option.type)}
         />
       ))}
     </div>
