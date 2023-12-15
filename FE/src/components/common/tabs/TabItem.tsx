@@ -16,9 +16,9 @@ export const tabSizes = {
 
 interface Props {
   color: keyof typeof tabColors;
-  rounded: boolean;
   size: keyof typeof tabSizes;
   text: string;
+  rounded?: boolean;
   onClick?: () => void;
 }
 const TabItem = ({ color, rounded, size, text, onClick }: Props) => {
@@ -27,7 +27,7 @@ const TabItem = ({ color, rounded, size, text, onClick }: Props) => {
     tabColors[color],
     tabSizes[size],
     {
-      "rounded-full": rounded,
+      "rounded-2xl": rounded,
       "rounded-md": !rounded,
     },
   );

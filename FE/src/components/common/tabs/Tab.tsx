@@ -1,11 +1,6 @@
 import classNames from "classnames";
 import TabItem, { tabColors, tabSizes } from "./TabItem";
-
-// TODO: Option 타입 밖으로 빼기
-interface Option<T> {
-  type: T;
-  text: string;
-}
+import { TabOption } from "@/types/tab";
 
 const tabAlign = {
   line: "flex gap-4",
@@ -13,13 +8,14 @@ const tabAlign = {
 };
 
 export interface TabProps<T> {
-  options: Option<T>[];
+  options: TabOption<T>[];
   selected: T;
   setSelected: (selected: T) => void;
   size: keyof typeof tabSizes;
   baseColor: keyof typeof tabColors;
-  potionColor: keyof typeof tabColors;
+  pointColor: keyof typeof tabColors;
   align: keyof typeof tabAlign;
+  rounded?: boolean;
 }
 
 const Tab = <T,>({
@@ -28,12 +24,13 @@ const Tab = <T,>({
   setSelected,
   size,
   baseColor,
-  potionColor,
+  pointColor,
   align,
+  rounded,
 }: TabProps<T>) => {
   const tabStyle = classNames(tabAlign[align]);
-  const getColor = (option: Option<T>) => {
-    return option.type === selected ? potionColor : baseColor;
+  const getColor = (option: TabOption<T>) => {
+    return option.type === selected ? pointColor : baseColor;
   };
 
   const handleSelect = (type: T) => {
@@ -42,13 +39,13 @@ const Tab = <T,>({
 
   return (
     <div className={tabStyle}>
-      {options.map((option: Option<T>) => (
+      {options.map((option: TabOption<T>) => (
         <TabItem
           color={getColor(option)}
           size={size}
-          rounded
           text={option.text}
           onClick={() => handleSelect(option.type)}
+          rounded={rounded}
         />
       ))}
     </div>
