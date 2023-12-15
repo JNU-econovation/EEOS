@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 import ROUTES from "@/constants/ROUTES";
@@ -13,6 +13,7 @@ import {
   postProgram,
 } from "@/apis/program";
 import API from "@/constants/API";
+import { useEffect } from "react";
 
 interface CreateProgram {
   programData: PostProgramRequest;
@@ -63,8 +64,23 @@ export const useGetProgramList = ({
   size,
   page,
 }: GetProgramListRequest) => {
-  return useQuery({
+  const queryClient = useQueryClient();
+
+  const result = useQuery({
     queryKey: [API.PROGRAM.LIST, category, programStatus, size, page],
     queryFn: () => getProgramList({ category, programStatus, size, page }),
+    select: (data) => ({
+      totalPage: data.totalPage,
+      programs: data.programs,
+    }),
   });
+
+  useEffect(() => {
+    queryClient.setQueryData(
+      [API.PROGRAM.LIST, category, programStatus, size, page],
+      result.data,
+    );
+  }, [result]);
+
+  return result;
 };
