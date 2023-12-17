@@ -3,11 +3,11 @@ import classNames from "classnames";
 interface PaginationItemProps {
   isSelected: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  number: number;
 }
 
 const PaginationItem = ({
-  children,
+  number,
   isSelected,
   onClick,
 }: PaginationItemProps) => {
@@ -21,7 +21,7 @@ const PaginationItem = ({
 
   return (
     <div onClick={onClick} className={paginationItemStyle}>
-      {children}
+      {number}
     </div>
   );
 };
