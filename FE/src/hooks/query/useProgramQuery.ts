@@ -1,6 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-
 import ROUTES from "@/constants/ROUTES";
 import {
   GetProgramListRequest,
@@ -14,6 +13,8 @@ import {
 } from "@/apis/program";
 import API from "@/constants/API";
 import { useEffect } from "react";
+import { useSetAtom } from "jotai";
+import { totalPageAtom } from "@/storages/main.atom";
 
 interface CreateProgram {
   programData: PostProgramRequest;
@@ -64,7 +65,7 @@ export const useGetProgramList = ({
   size,
   page,
 }: GetProgramListRequest) => {
-  const queryClient = useQueryClient();
+  const setTotalPage = useSetAtom(totalPageAtom);
 
   const result = useQuery({
     queryKey: [API.PROGRAM.LIST, category, programStatus, size, page],
@@ -76,10 +77,9 @@ export const useGetProgramList = ({
   });
 
   useEffect(() => {
-    queryClient.setQueryData(
-      [API.PROGRAM.LIST, category, programStatus, size, page],
-      result.data,
-    );
+    if (result.data) {
+      setTotalPage(result.data.totalPage);
+    }
   }, [result]);
 
   return result;
