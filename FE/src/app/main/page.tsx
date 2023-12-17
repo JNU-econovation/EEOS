@@ -4,41 +4,63 @@ import Paginataion from "@/components/common/pagination/Pagination";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
 import ProgramList from "@/components/main/ProgramList";
-import ProgramListSkeleton from "@/components/main/ProgramList.loader";
+import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
-import {
-  pageAtom,
-  programCategoryAtom,
-  programStatusAtom,
-  totalPageAtom,
-} from "@/storages/main.atom";
+import { totalPageAtom } from "@/storages/main.atom";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
 import { useAtom, useAtomValue } from "jotai";
-import { Suspense } from "react";
+import qs from "qs";
+import { useEffect, useState } from "react";
 
 const MainPage = () => {
-  const [category, setCategory] = useAtom(programCategoryAtom);
-  const [status, setStatus] = useAtom(programStatusAtom);
-  const [page, setPage] = useAtom(pageAtom);
+  const [queryValue, setQueryValue] = useState(MAIN.DEFAULT_QUERY);
   const totalPage = useAtomValue(totalPageAtom);
 
+  useEffect(() => {
+    setQueryValue({
+      ...MAIN.DEFAULT_QUERY,
+      ...qs.parse(window.location.search, {
+        ignoreQueryPrefix: true,
+      }),
+    });
+  }, []);
+
+  useEffect(() => {
+    window.history.replaceState(
+      {},
+      "",
+      `?category=${queryValue.category}&status=${queryValue.status}&page=${queryValue.page}`,
+    );
+  }, [queryValue]);
+
   const handleSetCategory = (category: ProgramCategoryWithAll) => {
-    setCategory(category);
+    setQueryValue({
+      ...queryValue,
+      category,
+      page: 1,
+    });
   };
 
   const handleSetStatus = (status: ProgramStatus) => {
-    setStatus(status);
+    setQueryValue({
+      ...queryValue,
+      status,
+      page: 1,
+    });
   };
 
   const handleSetPage = (page: number) => {
-    setPage(page);
+    setQueryValue({
+      ...queryValue,
+      page,
+    });
   };
 
   return (
     <div className="w-full space-y-8">
       <Tab<ProgramCategoryWithAll>
         options={PROGRAM.CATEGORY_TAB_WITH_ALL}
-        selected={category}
+        selected={queryValue.category}
         onItemClick={(v) => handleSetCategory(v)}
         size="lg"
         baseColor="white"
@@ -47,15 +69,17 @@ const MainPage = () => {
       />
       <TextTab<ProgramStatus>
         options={PROGRAM.STATUS_TAB}
-        selected={status}
+        selected={queryValue.status}
         onClick={(v) => handleSetStatus(v)}
       />
-      <Suspense fallback={<ProgramListSkeleton />}>
-        <ProgramList category={category} programStatus={status} page={page} />
-      </Suspense>
+      <ProgramList
+        category={queryValue.category}
+        programStatus={queryValue.status}
+        page={queryValue.page}
+      />
       <Paginataion
         totalPage={totalPage}
-        currentPage={page}
+        currentPage={queryValue.page}
         onChange={(v) => handleSetPage(v)}
       />
     </div>
