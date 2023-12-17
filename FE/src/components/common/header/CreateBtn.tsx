@@ -9,7 +9,13 @@ const CreateBtn = () => {
   return (
     <Link href={ROUTES.CREATE}>
       <Button color="primary" size="md">
-        <Image src="/icons/plus.svg" alt="행사 추가" width={20} height={20} />
+        <Image
+          src="/icons/plus.svg"
+          alt="행사 추가"
+          width={20}
+          height={20}
+          className="h-[20px] w-[20px]"
+        />
         {CREATE}
       </Button>
     </Link>

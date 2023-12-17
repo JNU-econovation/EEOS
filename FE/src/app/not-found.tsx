@@ -12,9 +12,15 @@ const NotFound = () => {
           <span className="text-lg font-normal">{description}</span>
         ))}
       </div>
-      <Image src={ERROR.IMAGE_URL} alt="error" width={270} height={210.7} />
+      <Image
+        src={ERROR.IMAGE_URL}
+        alt="error"
+        width={270}
+        height={210.7}
+        className="h-[210.7px] w-[270px]"
+      />
       <Link
-        href={ROUTES.HOME}
+        href={ROUTES.MAIN}
         className="border-b-[3px] border-stroke-30 text-lg font-extrabold"
       >
         {ERROR.BUTTON_TEXT}

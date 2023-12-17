@@ -22,6 +22,7 @@ const UserBtn = () => {
         alt="사용자 정보 확인"
         width={28}
         height={28}
+        className="h-[28px] w-[28px]"
       />
       {isOpen && (
         <Suspense fallback={<UserInfoModalSkeleton />}>
