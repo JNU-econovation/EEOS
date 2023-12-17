@@ -34,7 +34,7 @@ export class ProgramInfoDto {
   }
 }
 
-class ProgramSimpleInfoDto {
+export class ProgramSimpleInfoDto {
   public readonly programId: number;
   public readonly title: string;
   public readonly deadLine: string;
