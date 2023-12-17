@@ -8,11 +8,12 @@ import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
 import { totalPageAtom } from "@/storages/main.atom";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import qs from "qs";
 import { useEffect, useState } from "react";
 
 const MainPage = () => {
+  const [finished, setFinished] = useState(false);
   const [queryValue, setQueryValue] = useState(MAIN.DEFAULT_QUERY);
   const totalPage = useAtomValue(totalPageAtom);
 
@@ -23,9 +24,11 @@ const MainPage = () => {
         ignoreQueryPrefix: true,
       }),
     });
+    setFinished(true);
   }, []);
 
   useEffect(() => {
+    if (!finished) return;
     window.history.replaceState(
       {},
       "",
@@ -79,7 +82,7 @@ const MainPage = () => {
       />
       <Paginataion
         totalPage={totalPage}
-        currentPage={queryValue.page}
+        currentPage={+queryValue.page}
         onChange={(v) => handleSetPage(v)}
       />
     </div>
