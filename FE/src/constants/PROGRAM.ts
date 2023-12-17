@@ -1,4 +1,8 @@
-import { ProgramCategory, ProgramCategoryWithAll } from "@/types/program";
+import {
+  ProgramCategory,
+  ProgramCategoryWithAll,
+  ProgramStatus,
+} from "@/types/program";
 import { TabOption } from "@/types/tab";
 
 const LIST_SIZE = 6;
@@ -30,4 +34,13 @@ const CATEGORY_TAB_WITH_ALL: TabOption<ProgramCategoryWithAll>[] = [
   ...CATEGORY_TAB,
 ];
 
-export default { LIST_SIZE, CATEGORY_TAB, CATEGORY_TAB_WITH_ALL };
+const STATUS_TAB: TabOption<ProgramStatus>[] = [
+  { type: "active", text: "진행중" },
+  { type: "end", text: "종료" },
+];
+
+Object.freeze(CATEGORY_TAB);
+Object.freeze(CATEGORY_TAB_WITH_ALL);
+Object.freeze(STATUS_TAB);
+
+export default { LIST_SIZE, CATEGORY_TAB, CATEGORY_TAB_WITH_ALL, STATUS_TAB };
