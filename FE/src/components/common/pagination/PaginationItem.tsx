@@ -13,16 +13,13 @@ const PaginationItem = ({
 }: PaginationItemProps) => {
   const paginationItemStyle = classNames(
     "flex h-8 w-8 items-center justify-center rounded-lg",
-    {
-      "bg-primary": isSelected,
-      "bg-background": !isSelected,
-    },
+    isSelected ? "bg-primary" : "bg-background",
   );
 
   return (
-    <div onClick={onClick} className={paginationItemStyle}>
+    <button onClick={onClick} className={paginationItemStyle}>
       {number}
-    </div>
+    </button>
   );
 };
 

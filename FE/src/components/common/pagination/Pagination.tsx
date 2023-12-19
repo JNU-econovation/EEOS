@@ -27,7 +27,14 @@ const Paginataion = ({
 
   return (
     <div className="my-14 flex w-full items-center justify-center gap-8">
-      <img src="/icons/left.svg" alt="이전 페이지" onClick={handleBackward} />
+      <Image
+        src="/icons/left.svg"
+        alt="이전 페이지"
+        onClick={handleBackward}
+        width={20}
+        height={20}
+        className="h-[20px] w-[20px]"
+      />
       <div className="hidden gap-4 md:flex">
         {pageNumbers.map((number) => (
           <PaginationItem
