@@ -1,3 +1,4 @@
+import { FormType } from "./../types/form";
 const PROGRAM = {
   TITLE: {
     id: "program_title",
@@ -21,5 +22,15 @@ const PROGRAM = {
 
 const DEMAND_PREFIX = "[수요조사]";
 
+type SubmitText = {
+  [key in FormType]: string;
+};
+
+const SUBMIT_TEXT: SubmitText = {
+  create: "생성",
+  edit: "수정",
+};
+
 Object.freeze(PROGRAM);
-export default { PROGRAM, DEMAND_PREFIX };
+Object.freeze(SUBMIT_TEXT);
+export default { PROGRAM, DEMAND_PREFIX, SUBMIT_TEXT };
