@@ -5,12 +5,16 @@ import ProgramListItem from "./ProgramListItem";
 import ProgramListLoader from "./ProgramList.loader";
 
 interface ProgramListProps {
-  category: ProgramCategoryWithAll;
-  programStatus: ProgramStatus;
-  page: number;
+  category?: ProgramCategoryWithAll;
+  programStatus?: ProgramStatus;
+  page?: number;
 }
 
-const ProgramList = ({ category, programStatus, page }: ProgramListProps) => {
+const ProgramList = ({
+  category = "all",
+  programStatus = "active",
+  page = 1,
+}: ProgramListProps) => {
   const {
     data: programListData,
     isLoading,
