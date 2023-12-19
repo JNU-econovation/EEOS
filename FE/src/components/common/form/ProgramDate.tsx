@@ -5,17 +5,14 @@ import { useState } from "react";
 import LabeledInput from "./LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { convertDate } from "@/utils/convert";
-import Calendar from "../Calendar";
+import Calendar from "../calendar/Calendar";
 
-interface ProgramDateInputProps {
+interface ProgramDateProps {
   programDate: string;
   setProgramDate: (date: string) => void;
 }
 
-const ProgramDateInput = ({
-  programDate,
-  setProgramDate,
-}: ProgramDateInputProps) => {
+const ProgramDate = ({ programDate, setProgramDate }: ProgramDateProps) => {
   const [openCalender, setOpenCalender] = useState<boolean>(false);
   const calenderRef = useOutsideRef(() => setOpenCalender(false));
   const [date, setDate] = useState<Date | undefined>(
@@ -48,4 +45,4 @@ const ProgramDateInput = ({
     </div>
   );
 };
-export default ProgramDateInput;
+export default ProgramDate;
