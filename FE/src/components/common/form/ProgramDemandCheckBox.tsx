@@ -1,3 +1,5 @@
+"use client";
+
 interface ProgramDemandCheckBoxProps {
   disabled: boolean;
   isDemand: boolean;
