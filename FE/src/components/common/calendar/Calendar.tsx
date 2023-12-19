@@ -1,6 +1,6 @@
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import "./styles/calendar.styles.css";
+import "./calendar.styles.css";
 
 interface CalendarProps {
   date: Date | undefined;
