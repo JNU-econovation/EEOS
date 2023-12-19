@@ -1,11 +1,11 @@
 import Button from "../Button";
 
-interface FormButtonProps {
+interface FormBtnProps {
   submitText: string;
   formReset: () => void;
 }
 
-const FormButton = ({ submitText, formReset = () => {} }: FormButtonProps) => {
+const FormBtn = ({ submitText, formReset = () => {} }: FormBtnProps) => {
   return (
     <div className="mt-6 flex w-full justify-end gap-2">
       <Button type="submit">{submitText}</Button>
@@ -15,4 +15,4 @@ const FormButton = ({ submitText, formReset = () => {} }: FormButtonProps) => {
     </div>
   );
 };
-export default FormButton;
+export default FormBtn;
