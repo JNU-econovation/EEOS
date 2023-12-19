@@ -1,7 +1,7 @@
 import { ERROR } from "@/constants/ERROR";
 import ROUTES from "@/constants/ROUTES";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/common/Link";
 
 const NotFound = () => {
   return (
