@@ -1,17 +1,24 @@
 import { ActiveStatus, ActiveStatusWithAll } from "@/types/member";
 import { TabOption } from "@/types/tab";
 
-const TAB: TabOption<ActiveStatus>[] = [
-  { type: "am", text: "AM" },
-  { type: "rm", text: "RM" },
-  { type: "cm", text: "CM" },
-  { type: "ob", text: "OB" },
-];
+type ActiveStatusTab = {
+  [key in ActiveStatus]: TabOption<ActiveStatus>;
+};
+type ActiveStatusWithAllTab = {
+  [key in ActiveStatusWithAll]: TabOption<ActiveStatusWithAll>;
+};
 
-const TAB_WITH_ALL: TabOption<ActiveStatusWithAll>[] = [
+const TAB: ActiveStatusTab = {
+  am: { type: "am", text: "AM" },
+  rm: { type: "rm", text: "RM" },
+  cm: { type: "cm", text: "CM" },
+  ob: { type: "ob", text: "OB" },
+};
+
+const TAB_WITH_ALL: ActiveStatusWithAllTab = {
   ...TAB,
-  { type: "all", text: "All" },
-];
+  all: { type: "all", text: "All" },
+};
 
 Object.freeze(TAB);
 Object.freeze(TAB_WITH_ALL);
