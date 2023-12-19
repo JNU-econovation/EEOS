@@ -1,8 +1,6 @@
+import ProgramCreateForm from "@/components/programCreate/ProgramCreateForm";
+
 const ProgramCreatePage = () => {
-  return (
-    <div>
-      <h1>Program Create Page</h1>
-    </div>
-  );
+  return <ProgramCreateForm />;
 };
 export default ProgramCreatePage;
