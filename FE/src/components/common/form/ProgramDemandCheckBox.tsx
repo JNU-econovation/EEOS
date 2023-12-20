@@ -3,7 +3,7 @@
 interface ProgramDemandCheckBoxProps {
   disabled: boolean;
   isDemand: boolean;
-  onClick: (v: boolean) => void;
+  onClick: () => void;
 }
 
 const ProgramDemandCheckBox = ({
@@ -21,7 +21,7 @@ const ProgramDemandCheckBox = ({
             type="checkbox"
             className="accent-primary"
             checked={isDemand}
-            onChange={() => onClick(!isDemand)}
+            onChange={onClick}
           />
         </div>
       )}
