@@ -2,20 +2,23 @@
 
 import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import CheckBox from "../common/CheckBox";
-import { MemberActiveStatusInfoDto } from "@/apis/dtos/member.dto";
+import { ActiveStatus } from "@/types/member";
 
 interface CreateMemberTableItemProps {
-  data: MemberActiveStatusInfoDto;
+  memberId: number;
+  name: string;
+  activeStatus: ActiveStatus;
   members: Set<number>;
   setMembers: (members: Set<number>) => void;
 }
 
 const CreateMemberTableItem = ({
-  data,
+  memberId,
+  name,
+  activeStatus,
   members,
   setMembers,
 }: CreateMemberTableItemProps) => {
-  const { memberId, name, activeStatus } = data;
   const isRelated = members.has(memberId);
 
   const handleCheckBoxChange = () => {
