@@ -11,32 +11,56 @@ import FormBtn from "./FormBtn";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { FormType } from "@/types/form";
 import MarkdownEditor from "../markdown/MarkdownEditor";
+import { ProgramFormData } from "@/hooks/useProgramFormData";
 
 interface ProgramFormProps {
+  formData: ProgramFormData;
   formType: FormType;
 }
 
 const ProgramForm = ({
   children,
+  formData,
   formType,
 }: PropsWithChildren<ProgramFormProps>) => {
-  const demandDisabled = formType === "edit";
+  const {
+    title,
+    setTitle,
+    deadLine,
+    setDeadLine,
+    category,
+    setCategory,
+    type,
+    setType,
+    content,
+    setContent,
+    reset,
+  } = formData;
+  const isDemand = type === "demand";
+  const demandCheckBoxDisabled = formType === "edit";
+
+  const handleChangeType = () => {
+    setType(isDemand ? "notification" : "demand");
+  };
 
   return (
     <form className="space-y-6">
-      <ProgramTitle title={"test"} setTitle={() => {}}>
+      <ProgramTitle title={title} setTitle={(v) => setTitle(v)}>
         <ProgramDemandCheckBox
-          disabled={demandDisabled}
-          isDemand={true}
-          onClick={() => {}}
+          disabled={demandCheckBoxDisabled}
+          isDemand={isDemand}
+          onClick={() => handleChangeType()}
         />
       </ProgramTitle>
       <div className="flex items-end gap-8">
-        <ProgramDate programDate={"123456789"} setProgramDate={() => {}} />
+        <ProgramDate
+          programDate={deadLine}
+          setProgramDate={(v) => setDeadLine(v)}
+        />
         <Tab<ProgramCategory>
           options={Object.values(PROGRAM.CATEGORY_TAB)}
-          selected={"weekly"}
-          onItemClick={() => {}}
+          selected={category}
+          onItemClick={(v) => setCategory(v)}
           size="lg"
           baseColor="gray"
           pointColor="yellow"
@@ -47,14 +71,11 @@ const ProgramForm = ({
         id={FORM_INFO.PROGRAM.CONTENT.id}
         label={FORM_INFO.PROGRAM.CONTENT.label}
         placeholder={FORM_INFO.PROGRAM.CONTENT.placeholder}
-        value={"test"}
-        onChange={() => {}}
+        value={content}
+        onChange={(v) => setContent(v)}
       />
       {children}
-      <FormBtn
-        submitText={FORM_INFO.SUBMIT_TEXT[formType]}
-        formReset={() => {}}
-      />
+      <FormBtn submitText={FORM_INFO.SUBMIT_TEXT[formType]} formReset={reset} />
     </form>
   );
 };
