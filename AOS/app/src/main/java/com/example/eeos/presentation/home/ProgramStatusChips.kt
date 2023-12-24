@@ -20,14 +20,18 @@ import com.example.eeos.R
 @Composable
 fun ProgramStatusChips(
     programStatusChips: List<String>,
-    selectedProgramStatus: MutableState<String>
+    selectedProgramStatus: MutableState<String>,
+    onProgramStatusClick: () -> Unit
 ) {
     Row {
         programStatusChips.forEach { chip ->
             ProgramStatusChip(
                 chipName = chip,
                 isSelected = chip == selectedProgramStatus.value,
-                onClick = { selectedProgramStatus.value = chip }
+                onProgramStatusClick = {
+                    selectedProgramStatus.value = chip
+                    onProgramStatusClick()
+                }
             )
             Spacer(
                 modifier = Modifier.width(
@@ -42,7 +46,7 @@ fun ProgramStatusChips(
 private fun ProgramStatusChip(
     chipName: String,
     isSelected: Boolean,
-    onClick: () -> Unit,
+    onProgramStatusClick: () -> Unit,
 ) {
     /*val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()*/
@@ -58,7 +62,7 @@ private fun ProgramStatusChip(
         color = textColor,
         style = MaterialTheme.typography.titleSmall,
         modifier = Modifier.clickable {
-            onClick()
+            onProgramStatusClick()
         }
     )
 }
@@ -72,7 +76,8 @@ private fun ProgramStatusChipsPreview() {
                 stringResource(id = R.string.home_program_status_ing),
                 stringResource(id = R.string.home_program_status_ends)
             ),
-            selectedProgramStatus = rememberSaveable { mutableStateOf("진행 중") }
+            selectedProgramStatus = rememberSaveable { mutableStateOf("진행 중") },
+            onProgramStatusClick = {}
         )
     }
 }
@@ -83,7 +88,7 @@ private fun ProgramStatusChipPreview() {
     MaterialTheme {
         ProgramStatusChip(
             chipName = "주간 발표",
-            onClick = {},
+            onProgramStatusClick = {},
             isSelected = true
         )
     }
