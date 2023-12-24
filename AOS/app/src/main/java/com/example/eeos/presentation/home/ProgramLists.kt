@@ -17,9 +17,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.example.eeos.domain.model.Program
 
 @Composable
-fun ProgramLists(programLists: List<ProgramData>, onProgramClick: () -> Unit) {
+fun ProgramLists(programLists: List<Program>, onProgramClick: (Int) -> Unit) {
     LazyColumn {
         items(programLists) { program ->
             Program(program, onProgramClick)
@@ -28,7 +29,7 @@ fun ProgramLists(programLists: List<ProgramData>, onProgramClick: () -> Unit) {
 }
 
 @Composable
-private fun Program(program: ProgramData, onProgramClick: () -> Unit) {
+private fun Program(program: Program, onProgramClick: (Int) -> Unit) {
     Column {
         Divider(
             thickness = dimensionResource(id = R.dimen.width_stroke_0_7dp),
@@ -45,11 +46,11 @@ private fun Program(program: ProgramData, onProgramClick: () -> Unit) {
                     width = dimensionResource(id = R.dimen.width_home_screen_program),
                     height = dimensionResource(id = R.dimen.height_home_screen_program)
                 )
-                .clickable { onProgramClick(/* TODO : programId 넘겨주기*/) },
+                .clickable { onProgramClick(program.programId) },
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = program.date,
+                text = program.deadLine,
                 style = MaterialTheme.typography.bodyMedium,
                 color = colorResource(R.color.paragraph)
             )
