@@ -25,12 +25,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun ProgramDetail() {
+fun ProgramDetail(
+    category: String,
+    title: String,
+    deadLine: String,
+    content: String
+) {
     Column {
         Column(
             horizontalAlignment = Alignment.Start
         ) {
-            Category()
+            Category(category)
             Spacer(
                 modifier = Modifier.height(
                     dimensionResource(
@@ -38,7 +43,7 @@ fun ProgramDetail() {
                     )
                 )
             )
-            Title()
+            Title(title, deadLine)
             Spacer(
                 modifier = Modifier.height(
                     dimensionResource(
@@ -70,7 +75,7 @@ fun ProgramDetail() {
                         )
                     )
                 )
-                Content()
+                Content(content)
                 Spacer(
                     modifier = Modifier.width(
                         dimensionResource(
@@ -89,7 +94,7 @@ fun ProgramDetail() {
 }
 
 @Composable
-private fun Category() {
+private fun Category(category: String) {
     val containerColor = colorResource(R.color.warning_light)
     val contentColor = colorResource(R.color.warning_strong)
 
@@ -118,7 +123,7 @@ private fun Category() {
         ),
     ) {
         Text(
-            text = "주간 발표", /* ToDo */
+            text = category,
             style = MaterialTheme.typography.labelSmall,
             color = colorResource(R.color.warning_strong)
         )
@@ -126,9 +131,9 @@ private fun Category() {
 }
 
 @Composable
-private fun Title() {
+private fun Title(title: String, deadLine: String) {
     Text(
-        text = "10월 2주차 주간 발표", /* ToDo */
+        text = title,
         style = MaterialTheme.typography.headlineMedium
     )
     Spacer(
@@ -137,15 +142,15 @@ private fun Title() {
         )
     )
     Text(
-        text = "2023년 10월 6일 (일)", /* ToDo */
+        text = deadLine,
         style = MaterialTheme.typography.bodyLarge
     )
 }
 
 @Composable
-private fun Content() {
+private fun Content(content: String) {
     Text(
-        text = "샘플 텍스트"/* ToDo */,
+        text = content,
         style = MaterialTheme.typography.bodySmall,
         modifier = Modifier.width(
             width = dimensionResource(id = R.dimen.width_detail_screen_divider) - dimensionResource(
@@ -161,6 +166,11 @@ private fun Content() {
 @Composable
 private fun ProgramDetailPreview() {
     MaterialTheme {
-        ProgramDetail()
+        ProgramDetail(
+            category = "주간 발표",
+            title = "10월 2주차 주간 발표",
+            deadLine = "2023년 10월 6일 (일)",
+            content = "샘플 텍스트"
+        )
     }
 }

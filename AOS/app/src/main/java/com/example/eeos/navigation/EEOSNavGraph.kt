@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.eeos.presentation.detail.DetailScreen
+import com.example.eeos.presentation.detail.DetailViewModel
 import com.example.eeos.presentation.home.HomeScreen
 import com.example.eeos.presentation.home.HomeViewModel
 import com.example.eeos.presentation.login.LoginScreen
@@ -58,7 +59,19 @@ fun EEOSNavGraph(
                 }
             )
         ) {
-            DetailScreen()
+            val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG)
+            val detailViewModel = hiltViewModel<DetailViewModel>()
+
+            if (programId != null) {
+                detailViewModel.getProgramDetail(programId)
+            } else {
+                /* TODO */
+            }
+
+            val detailUiState = detailViewModel.detailUiState.collectAsState()
+            DetailScreen(
+                detailUiState = detailUiState
+            )
         }
     }
 }

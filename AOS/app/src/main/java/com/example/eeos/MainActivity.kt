@@ -27,8 +27,11 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     EeosTheme {
         ProgramLists(
+            loading = false,
+            empty = false,
             programLists = listOf(),
-            onProgramClick = {}
+            onProgramClick = {},
+            loadMorePrograms = {}
         )
     }
 }
