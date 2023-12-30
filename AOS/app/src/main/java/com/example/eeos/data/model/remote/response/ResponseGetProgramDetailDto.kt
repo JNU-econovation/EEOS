@@ -1,8 +1,5 @@
 package com.example.eeos.data.model.remote.response
 
-import com.example.eeos.consts.Category
-import com.example.eeos.consts.ProgramStatus
-import com.example.eeos.consts.ProgramType
 import com.example.eeos.domain.model.ProgramDetail
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
@@ -20,13 +17,13 @@ data class ResponseGetProgramDetailDto(
     val content: String,
     @Contextual
     @SerialName("category")
-    val category: Category,
+    val category: String,
     @SerialName("programStatus")
     @Contextual
-    val programStatus: ProgramStatus,
+    val programStatus: String,
     @Contextual
     @SerialName("type")
-    val type: ProgramType
+    val type: String
 ) {
     fun toProgramDetail(): ProgramDetail = ProgramDetail(
         title = title,

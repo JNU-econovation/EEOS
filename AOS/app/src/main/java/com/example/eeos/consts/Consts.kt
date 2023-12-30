@@ -1,5 +1,20 @@
 package com.example.eeos.consts
 
+val category = listOf("all", "weekly", "president", "event", " etc")
+val programStatus = listOf("active", "end")
+
+val categoryChips: List<String> = listOf(
+    "전체",
+    "주간 발표",
+    "회장단",
+    "행사부",
+    "기타 행사"
+)
+val programStatusChips: List<String> = listOf(
+    "진행 중",
+    "완료"
+)
+
 object ActiveStatus {
     const val am = "am"
     const val rm = "rm"

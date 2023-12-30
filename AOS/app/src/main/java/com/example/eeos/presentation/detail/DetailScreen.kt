@@ -19,7 +19,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
-import com.example.eeos.presentation.common.EeosTopAppBar
+import com.example.eeos.presentation.topappbar.EeosTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

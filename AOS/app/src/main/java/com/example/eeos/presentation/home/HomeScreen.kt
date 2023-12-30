@@ -1,16 +1,18 @@
 package com.example.eeos.presentation.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -18,55 +20,30 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
-import com.example.eeos.presentation.common.EeosTopAppBar
+import com.example.eeos.consts.category
+import com.example.eeos.consts.categoryChips
+import com.example.eeos.consts.programStatus
+import com.example.eeos.consts.programStatusChips
+import com.example.eeos.presentation.topappbar.EeosTopAppBar
 
-val programLists: List<ProgramData> = listOf(
-    ProgramData(
-        date = "2023년 11월 06일 (월)",
-        title = "오늘의 행사 두구두구",
-        category = "주간 발표",
-        isEnd = false
-    ),
-    ProgramData(
-        date = "2023년 11월 06일 (월)",
-        title = "오늘의 행사 두구두구",
-        category = "주간 발표",
-        isEnd = false
-    ),
-    ProgramData(
-        date = "2023년 11월 06일 (월)",
-        title = "오늘의 행사 두구두구",
-        category = "주간 발표",
-        isEnd = false
-    ),
-)
-
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomeScreen(
-    onProgramClick: () -> Unit
+    homeUiState: State<HomeUiState>,
+    loadProgramList: (String, String, Int) -> Unit,
+    onProgramClick: (Int) -> Unit,
+    refreshProgramList: () -> Unit,
 ) {
-    val categoryChips: List<String> = listOf(
-        stringResource(R.string.home_tab_all),
-        stringResource(R.string.home_tab_presentation),
-        stringResource(R.string.home_tab_leaders),
-        stringResource(R.string.home_tab_party_department),
-        stringResource(R.string.home_tab_others)
-    )
-    val programStatusChips: List<String> = listOf(
-        stringResource(id = R.string.home_program_status_ing),
-        stringResource(id = R.string.home_program_status_ends)
-    )
-
     val selectedCategory = rememberSaveable { mutableStateOf(categoryChips[0]) }
     val selectedProgramStatus = rememberSaveable { mutableStateOf(programStatusChips[0]) }
+    val page = rememberSaveable { mutableStateOf(0) }
 
     Scaffold(
         topBar = {
             EeosTopAppBar()
-        },
-        containerColor = colorResource(id = R.color.background)
+        }, containerColor = colorResource(id = R.color.background)
     ) { innerPadding ->
         Row(
             modifier = Modifier.padding(innerPadding)
@@ -89,7 +66,19 @@ fun HomeScreen(
                         )
                     )
                 )
-                CategoryChips(categoryChips = categoryChips, selectedCategory = selectedCategory)
+                CategoryChips(
+                    categoryChips = categoryChips,
+                    selectedCategory = selectedCategory,
+                    onCategoryChipClick = {
+                        refreshProgramList()
+                        page.value = 0
+                        loadProgramList(
+                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
+                            page.value,
+                        )
+                    }
+                )
 
                 Spacer(
                     modifier = Modifier.height(
@@ -100,7 +89,16 @@ fun HomeScreen(
                 )
                 ProgramStatusChips(
                     programStatusChips = programStatusChips,
-                    selectedProgramStatus = selectedProgramStatus
+                    selectedProgramStatus = selectedProgramStatus,
+                    onProgramStatusClick = {
+                        refreshProgramList()
+                        page.value = 0
+                        loadProgramList(
+                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
+                            page.value,
+                        )
+                    }
                 )
                 Spacer(
                     modifier = Modifier.height(
@@ -110,9 +108,19 @@ fun HomeScreen(
                     )
                 )
                 ProgramLists(
-                    programLists = programLists,
-                    onProgramClick = onProgramClick
+                    loading = homeUiState.value.isLoading,
+                    empty = homeUiState.value.isEmpty,
+                    programLists = homeUiState.value.programList,
+                    onProgramClick = onProgramClick,
+                    loadMorePrograms = {
+                        loadProgramList(
+                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
+                            ++page.value
+                        )
+                    }
                 )
+
             }
             Spacer(
                 modifier = Modifier.width(
@@ -128,7 +136,10 @@ fun HomeScreen(
 private fun HomeScreenPreview() {
     MaterialTheme {
         HomeScreen(
-            onProgramClick = {}
+            homeUiState = hiltViewModel<HomeViewModel>().homeUiState.collectAsState(),
+            loadProgramList = { p1, p2, p3 -> },
+            onProgramClick = { p1 -> },
+            refreshProgramList = {},
         )
     }
 }
