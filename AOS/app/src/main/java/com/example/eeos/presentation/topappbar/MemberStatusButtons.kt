@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.common
+package com.example.eeos.presentation.topappbar
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
