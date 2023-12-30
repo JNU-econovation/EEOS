@@ -26,7 +26,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 
 @Composable
-fun CategoryChips(categoryChips: List<String>, selectedCategory: MutableState<String>) {
+fun CategoryChips(
+    categoryChips: List<String>,
+    selectedCategory: MutableState<String>,
+    onCategoryChipClick: () -> Unit
+) {
     Row(
         modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
@@ -34,7 +38,11 @@ fun CategoryChips(categoryChips: List<String>, selectedCategory: MutableState<St
             CategoryChip(
                 chipName = chipName,
                 isSelected = chipName == selectedCategory.value,
-                onClick = { selectedCategory.value = chipName }
+                onCategoryChipClick = {
+                    selectedCategory.value = chipName
+                    onCategoryChipClick()
+                }
+
             )
             Spacer(
                 modifier = Modifier.width(
@@ -49,7 +57,7 @@ fun CategoryChips(categoryChips: List<String>, selectedCategory: MutableState<St
 private fun CategoryChip(
     chipName: String,
     isSelected: Boolean,
-    onClick: () -> Unit,
+    onCategoryChipClick: () -> Unit,
 ) {
     /*val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()*/
@@ -86,7 +94,7 @@ private fun CategoryChip(
             containerColor = containerColor,
             contentColor = contentColor
         ),
-        onClick = onClick,
+        onClick = onCategoryChipClick,
         border = borderStroke,
         contentPadding = PaddingValues(dimensionResource(id = R.dimen.size_all_0dp))
     ) {
@@ -110,7 +118,8 @@ private fun TabPreview() {
                 stringResource(R.string.home_tab_party_department),
                 stringResource(R.string.home_tab_others)
             ),
-            selectedCategory = rememberSaveable { mutableStateOf("전체") }
+            selectedCategory = rememberSaveable { mutableStateOf("전체") },
+            onCategoryChipClick = {}
         )
     }
 }
@@ -121,7 +130,7 @@ private fun ChipPreview() {
     MaterialTheme {
         CategoryChip(
             chipName = "주간 발표",
-            onClick = {},
+            onCategoryChipClick = {},
             isSelected = true
         )
     }

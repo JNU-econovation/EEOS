@@ -1,7 +1,9 @@
 package com.example.eeos.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.eeos.presentation.detail.DetailScreen
 import com.example.eeos.presentation.home.HomeScreen
+import com.example.eeos.presentation.home.HomeViewModel
 import com.example.eeos.presentation.login.LoginScreen
 
 @Composable
@@ -37,8 +40,13 @@ fun EEOSNavGraph(
         composable(
             EEOSDestinations.HOME_ROUTE
         ) {
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+            val homeUiState = homeViewModel.homeUiState.collectAsState()
             HomeScreen(
-                onProgramClick = { navActions.navigateToProgramDetail(1) }
+                homeUiState = homeUiState,
+                loadProgramList = { category, programStatus, page -> (homeViewModel::getProgramList)(category, programStatus, page) },
+                onProgramClick = { programId -> navActions.navigateToProgramDetail(programId) },
+                refreshProgramList = { (homeViewModel::refreshProgramList)() }
             )
         }
 
