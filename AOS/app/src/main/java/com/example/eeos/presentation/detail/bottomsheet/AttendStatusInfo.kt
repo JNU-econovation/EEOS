@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +12,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.example.eeos.presentation.detail.AttendStatus
+import com.example.eeos.presentation.detail.MemberData
 
 @Composable
 fun AttendStatusInfo(

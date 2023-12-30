@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -16,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.example.eeos.presentation.detail.AttendStatus
+import com.example.eeos.presentation.detail.MemberData
 
 @Composable
 fun SheetDragHandle() {

@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row

@@ -1,7 +1,7 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -14,37 +14,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import com.example.eeos.R
 
 @Composable
-fun AttendStatusButton(
+fun AttendStatusChip(
     buttonText: String,
     contentColor: Color,
     containerColor: Color,
-    backgroundColor: Color,
-    isSelected: Boolean,
-    onClick: () -> Unit,
+    isContentLong: Boolean
 ) {
-    val contentColor = if (isSelected) {
-        contentColor
+    val dpSize = if (isContentLong) {
+        DpSize(
+            width = dimensionResource(id = R.dimen.width_detail_bottom_sheet_long_button),
+            height = dimensionResource(id = R.dimen.height_detail_bottom_sheet_long_button)
+        )
     } else {
-        colorResource(R.color.gray_500)
-    }
-    val containerColor = if (isSelected) {
-        containerColor
-    } else {
-        backgroundColor
-    }
-    val strokeColor = if (isSelected) {
-        contentColor
-    } else {
-        colorResource(R.color.transparent)
+        DpSize(
+            width = dimensionResource(id = R.dimen.width_detail_bottom_sheet_short_button),
+            height = dimensionResource(id = R.dimen.height_detail_bottom_sheet_short_button)
+        )
     }
 
     Button(
         modifier = Modifier
+            .size(dpSize)
             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.size_corner_20dp))),
-        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,
@@ -53,12 +48,10 @@ fun AttendStatusButton(
         ),
         border = BorderStroke(
             width = dimensionResource(id = R.dimen.width_stroke_1_2dp),
-            color = strokeColor
+            color = contentColor
         ),
-        contentPadding = PaddingValues(
-            horizontal = dimensionResource(id = R.dimen.padding_values_35dp),
-            vertical = dimensionResource(id = R.dimen.padding_values_15dp)
-        ),
+        enabled = false,
+        onClick = {}
     ) {
         Text(
             text = buttonText,
@@ -70,15 +63,13 @@ fun AttendStatusButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun AttendStatusButtonPreview() {
+private fun AttendStatusChipPreview() {
     MaterialTheme {
-        AttendStatusButton(
-            buttonText = "수요조사에 참여해주세요.",
+        AttendStatusChip(
+            buttonText = "수요조사 해주세요!",
             contentColor = colorResource(R.color.success_strong),
             containerColor = colorResource(R.color.success_light),
-            backgroundColor = colorResource(R.color.gray_100),
-            isSelected = true,
-            onClick = {},
+            isContentLong = true
         )
     }
 }
