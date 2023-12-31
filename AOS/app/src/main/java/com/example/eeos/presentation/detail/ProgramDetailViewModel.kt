@@ -3,18 +3,17 @@ package com.example.eeos.presentation.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eeos.consts.categoryChips
-import com.example.eeos.domain.model.Member
 import com.example.eeos.domain.repository.ProgramRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
-data class DetailUiState(
+data class ProgramDetailUiState(
     val isError: Boolean = false,
     val isLoading: Boolean = false,
 
@@ -22,18 +21,13 @@ data class DetailUiState(
     val title: String = "",
     val deadLine: String = "",
     val content: String = "",
-
-    val attendMembers: List<Member>? = null,
-    val absentMembers: List<Member>? = null,
-    val perceiveMembers: List<Member>? = null,
-    val nonResponseMembers: List<Member>? = null
 )
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+class ProgramDetailViewModel @Inject constructor(
     private val programRepository: ProgramRepository
-): ViewModel() {
-    private val _detailUiState = MutableStateFlow(DetailUiState())
+) : ViewModel() {
+    private val _detailUiState = MutableStateFlow(ProgramDetailUiState())
     val detailUiState = _detailUiState.asStateFlow()
 
     fun getProgramDetail(programId: Int) {
@@ -41,7 +35,11 @@ class DetailViewModel @Inject constructor(
             programRepository.getProgramDetail(programId)
                 .onSuccess { programDetail ->
                     val category = categoryAdjustment(programDetail.category)
-                    val title = if (programDetail.type == "demand") { titleAdjustment(programDetail.title) } else { programDetail.title}
+                    val title = if (programDetail.type == "demand") {
+                        titleAdjustment(
+                            programDetail.title
+                        )
+                    } else { programDetail.title }
                     val deadLine = deadLineAdjustment(programDetail.deadLine)
 
                     _detailUiState.update { currentState ->

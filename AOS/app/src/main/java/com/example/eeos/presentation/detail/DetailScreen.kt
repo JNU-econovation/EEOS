@@ -29,7 +29,8 @@ import com.example.eeos.presentation.topappbar.EeosTopAppBar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    detailUiState: State<DetailUiState>,
+    detailUiState: State<ProgramDetailUiState>,
+    memberUiState: State<MemberAttendanceUiState>
 ) {
     BottomSheetScaffold(
         sheetContent = { BottomSheetContents() },
@@ -52,14 +53,16 @@ fun DetailScreen(
         containerColor = colorResource(id = R.color.background)
     ) {
         DetailScreenContent(
-            detailUiState = detailUiState
+            detailUiState = detailUiState,
+            memberUiState = memberUiState
         )
     }
 }
 
 @Composable
 private fun DetailScreenContent(
-    detailUiState: State<DetailUiState>
+    detailUiState: State<ProgramDetailUiState>,
+    memberUiState: State<MemberAttendanceUiState>
 ) {
     val state = rememberScrollState()
     Row(
@@ -81,7 +84,6 @@ private fun DetailScreenContent(
                 deadLine = detailUiState.value.deadLine,
                 content = detailUiState.value.content
             )
-
             Spacer(
                 modifier = Modifier.height(
                     height = dimensionResource(
@@ -90,7 +92,7 @@ private fun DetailScreenContent(
                 )
             )
             MemberLists(
-
+                memberUiState = memberUiState
             )
             Spacer(
                 modifier = Modifier.height(
@@ -111,7 +113,8 @@ private fun DetailScreenContent(
 private fun DetailScreenPreview() {
     MaterialTheme {
         DetailScreen(
-            detailUiState = hiltViewModel<DetailViewModel>().detailUiState.collectAsState(),
+            detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
+            memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState()
         )
     }
 }

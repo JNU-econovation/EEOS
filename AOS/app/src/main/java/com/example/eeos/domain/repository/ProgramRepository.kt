@@ -1,6 +1,5 @@
 package com.example.eeos.domain.repository
 
-import com.example.eeos.consts.AttendStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.domain.model.Member
 import com.example.eeos.domain.model.Program
@@ -29,6 +28,6 @@ interface ProgramRepository {
 
     suspend fun getMemberList(
         programId: Int,
-        attendStatus: AttendStatus
+        attendStatus: String
     ): Result<List<Member>>
 }

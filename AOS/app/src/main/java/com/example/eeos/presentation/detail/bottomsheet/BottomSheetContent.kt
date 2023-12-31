@@ -16,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
-import com.example.eeos.presentation.detail.AttendStatus
-import com.example.eeos.presentation.detail.MemberData
+import com.example.eeos.consts.AttendStatus
+import com.example.eeos.domain.model.Member
 
 @Composable
 fun SheetDragHandle() {
@@ -46,10 +46,9 @@ fun BottomSheetContents() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AttendStatusInfo(
-            memberInfo = MemberData(
-                generation = 24,
-                name = "장현지",
-                attendStatus = AttendStatus.NO_RESPONSE
+            memberInfo = Member(
+                name = "24기 장현지",
+                attendStatus = AttendStatus.nonResponse
             )
         ) { RequestAttendCheckChip() }
         Spacer(
