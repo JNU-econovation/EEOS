@@ -20,13 +20,13 @@ fun AttendStatusInfo(
     memberInfo: Member,
     attendStatusChip: @Composable () -> Unit
 ) {
-    val infoText = "$${memberInfo.name} 님"
+    val userName = "${memberInfo.name} 님"
 
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = infoText,
+            text = userName,
             style = MaterialTheme.typography.titleSmall,
             color = colorResource(R.color.paragraph)
         )

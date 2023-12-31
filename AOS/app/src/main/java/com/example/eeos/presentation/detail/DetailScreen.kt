@@ -24,16 +24,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
 import com.example.eeos.presentation.detail.bottomsheet.BottomSheetContents
 import com.example.eeos.presentation.detail.bottomsheet.SheetDragHandle
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusUiState
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.topappbar.EeosTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     detailUiState: State<ProgramDetailUiState>,
-    memberUiState: State<MemberAttendanceUiState>
+    memberUiState: State<MemberAttendanceUiState>,
+    attendanceUiState: State<UserAttendStatusUiState>
 ) {
     BottomSheetScaffold(
-        sheetContent = { BottomSheetContents() },
+        sheetContent = {
+            BottomSheetContents(
+                programDetailUiState = detailUiState,
+                attendanceUiState = attendanceUiState
+            )
+        },
         topBar = {
             EeosTopAppBar()
         },
@@ -114,7 +122,8 @@ private fun DetailScreenPreview() {
     MaterialTheme {
         DetailScreen(
             detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
-            memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState()
+            memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
+            attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState()
         )
     }
 }

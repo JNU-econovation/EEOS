@@ -14,6 +14,7 @@ import com.example.eeos.consts.AttendStatus
 import com.example.eeos.presentation.detail.DetailScreen
 import com.example.eeos.presentation.detail.MemberAttendanceViewModel
 import com.example.eeos.presentation.detail.ProgramDetailViewModel
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.home.HomeScreen
 import com.example.eeos.presentation.home.HomeViewModel
 import com.example.eeos.presentation.login.LoginScreen
@@ -70,6 +71,7 @@ fun EEOSNavGraph(
             val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG)
             val programDetailViewModel = hiltViewModel<ProgramDetailViewModel>()
             val memberAttendanceViewModel = hiltViewModel<MemberAttendanceViewModel>()
+            val userAttendanceViewModel = hiltViewModel<UserAttendStatusViewModel>()
 
             if (programId != null) {
                 programDetailViewModel.getProgramDetail(programId)
@@ -78,16 +80,20 @@ fun EEOSNavGraph(
                 memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.absent)
                 memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.perceive)
                 memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.nonResponse)
+
+                userAttendanceViewModel.getUserAttendStatus(programId)
             } else {
                 /* TODO */
             }
 
             val programDetailUiState = programDetailViewModel.detailUiState.collectAsState()
             val memberAttendanceUiState = memberAttendanceViewModel.memberDetailUiState.collectAsState()
+            val userAttendanceUiState = userAttendanceViewModel.userAttendStatusUiState.collectAsState()
 
             DetailScreen(
                 detailUiState = programDetailUiState,
-                memberUiState = memberAttendanceUiState
+                memberUiState = memberAttendanceUiState,
+                attendanceUiState = userAttendanceUiState
             )
         }
     }

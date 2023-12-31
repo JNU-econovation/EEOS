@@ -21,6 +21,7 @@ data class ProgramDetailUiState(
     val title: String = "",
     val deadLine: String = "",
     val content: String = "",
+    val programType: String = ""
 )
 
 @HiltViewModel
@@ -47,7 +48,8 @@ class ProgramDetailViewModel @Inject constructor(
                             category = category,
                             title = title,
                             deadLine = deadLine,
-                            content = programDetail.content
+                            content = programDetail.content,
+                            programType = programDetail.type
                         )
                     }
                 }
