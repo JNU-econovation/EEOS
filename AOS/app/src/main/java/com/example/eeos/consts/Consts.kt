@@ -46,3 +46,10 @@ object AttendStatus {
     const val nonResponse = "nonResponse"
     const val nonRelated = "nonRelated"
 }
+
+object AttendStatusBtn {
+    const val attend = "attend"
+    const val absent = "absent"
+    const val perceive = "perceive"
+    const val nonResponse = "nonResponse"
+}

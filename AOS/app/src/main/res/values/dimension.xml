@@ -85,10 +85,21 @@
 
     <dimen name="margin_detail_screen_space_attend_status_buttons_vertical">30dp</dimen>
 
+    <!--Attend Status Confirm Dialog Dimensions-->
+    <dimen name="height_confirm_dialog">121dp</dimen>
+    <dimen name="width_confirm_dialog">300dp</dimen>
+
+    <dimen name="margin_confirm_dialog_buttons_right">104dp</dimen>
+
+    <dimen name="width_confirm_dialog_button">80dp</dimen>
+    <dimen name="height_confirm_dialog_button">35dp</dimen>
+    <dimen name="margin_confirm_dialog_between_buttons">10dp</dimen>
+
 
 
 
     <!--CornerSize-->
+    <dimen name="size_corner_7dp">7dp</dimen>
     <dimen name="size_corner_10dp">10dp</dimen>
     <dimen name="size_corner_11dp">11dp</dimen>
     <dimen name="size_corner_20dp">20dp</dimen>
