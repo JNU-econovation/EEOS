@@ -27,11 +27,14 @@ import com.example.eeos.consts.categoryChips
 import com.example.eeos.consts.programStatus
 import com.example.eeos.consts.programStatusChips
 import com.example.eeos.presentation.topappbar.EeosTopAppBar
+import com.example.eeos.presentation.topappbar.TopAppBarUiState
+import com.example.eeos.presentation.topappbar.TopAppBarViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomeScreen(
     homeUiState: State<HomeUiState>,
+    topAppBarUiState: State<TopAppBarUiState>,
     loadProgramList: (String, String, Int) -> Unit,
     onProgramClick: (Int) -> Unit,
     refreshProgramList: () -> Unit,
@@ -42,7 +45,9 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            EeosTopAppBar()
+            EeosTopAppBar(
+                topAppBarUiState = topAppBarUiState
+            )
         },
         containerColor = colorResource(id = R.color.background)
     ) { innerPadding ->
@@ -137,6 +142,7 @@ private fun HomeScreenPreview() {
     MaterialTheme {
         HomeScreen(
             homeUiState = hiltViewModel<HomeViewModel>().homeUiState.collectAsState(),
+            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
             loadProgramList = { p1, p2, p3 -> },
             onProgramClick = { p1 -> },
             refreshProgramList = {},

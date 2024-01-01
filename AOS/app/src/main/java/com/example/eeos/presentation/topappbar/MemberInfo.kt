@@ -20,7 +20,6 @@ import com.example.eeos.R
 @Composable
 fun MemberInfo(
     memberStatus: String,
-    generation: Int,
     name: String,
     onClick: () -> Unit
 ) {
@@ -51,18 +50,6 @@ fun MemberInfo(
 
             Row {
                 Text(
-                    text = generation.toString() + "기",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = colorResource(id = R.color.paragraph)
-                )
-                Spacer(
-                    modifier = Modifier.width(
-                        dimensionResource(
-                            id = R.dimen.margin_common_screen_member_info_space_between_texts
-                        )
-                    )
-                )
-                Text(
                     text = name,
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.paragraph)
@@ -78,8 +65,7 @@ private fun MemberInfoPreview() {
     MaterialTheme {
         MemberInfo(
             memberStatus = "AM",
-            generation = 24,
-            name = "인텔리",
+            name = "24기 인텔리",
             onClick = {}
         )
     }

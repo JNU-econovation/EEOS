@@ -18,6 +18,7 @@ import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewMode
 import com.example.eeos.presentation.home.HomeScreen
 import com.example.eeos.presentation.home.HomeViewModel
 import com.example.eeos.presentation.login.LoginScreen
+import com.example.eeos.presentation.topappbar.TopAppBarViewModel
 
 @Composable
 fun EEOSNavGraph(
@@ -44,16 +45,21 @@ fun EEOSNavGraph(
         composable(
             EEOSDestinations.HOME_ROUTE
         ) {
+            val topAppBarViewModel = hiltViewModel<TopAppBarViewModel>()
             val homeViewModel = hiltViewModel<HomeViewModel>()
+
+            val topAppBarUiState = topAppBarViewModel.topAppBarUiState.collectAsState()
             val homeUiState = homeViewModel.homeUiState.collectAsState()
+
             HomeScreen(
                 homeUiState = homeUiState,
+                topAppBarUiState = topAppBarUiState,
                 loadProgramList = { category, programStatus, page ->
                     (homeViewModel::getProgramList)(
-                    category,
-                    programStatus,
-                    page
-                )
+                        category,
+                        programStatus,
+                        page
+                    )
                 },
                 onProgramClick = { programId -> navActions.navigateToProgramDetail(programId) },
                 refreshProgramList = { (homeViewModel::refreshProgramList)() }
@@ -68,7 +74,10 @@ fun EEOSNavGraph(
                 }
             )
         ) {
-            val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 /* TODO */
+            val programId =
+                it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 /* TODO */
+
+            val topAppBarViewModel = hiltViewModel<TopAppBarViewModel>()
             val programDetailViewModel = hiltViewModel<ProgramDetailViewModel>()
             val memberAttendanceViewModel = hiltViewModel<MemberAttendanceViewModel>()
             val userAttendanceViewModel = hiltViewModel<UserAttendStatusViewModel>()
@@ -86,20 +95,24 @@ fun EEOSNavGraph(
                 /* TODO */
             }
 
+            val topAppBarUiState = topAppBarViewModel.topAppBarUiState.collectAsState()
             val programDetailUiState = programDetailViewModel.detailUiState.collectAsState()
-            val memberAttendanceUiState = memberAttendanceViewModel.memberDetailUiState.collectAsState()
-            val userAttendanceUiState = userAttendanceViewModel.userAttendStatusUiState.collectAsState()
+            val memberAttendanceUiState =
+                memberAttendanceViewModel.memberDetailUiState.collectAsState()
+            val userAttendanceUiState =
+                userAttendanceViewModel.userAttendStatusUiState.collectAsState()
 
             DetailScreen(
                 detailUiState = programDetailUiState,
                 memberUiState = memberAttendanceUiState,
                 attendanceUiState = userAttendanceUiState,
+                topAppBarUiState = topAppBarUiState,
                 putUserAttendStatus = { afterAttendStatus ->
                     (userAttendanceViewModel::putUserAttendStatus)(
-                    programId,
-                    userAttendanceUiState.value.userAttendStatus,
-                    afterAttendStatus
-                )
+                        programId,
+                        userAttendanceUiState.value.userAttendStatus,
+                        afterAttendStatus
+                    )
                 }
             )
         }

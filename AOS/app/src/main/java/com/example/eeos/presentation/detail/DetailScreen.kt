@@ -27,6 +27,8 @@ import com.example.eeos.presentation.detail.bottomsheet.SheetDragHandle
 import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusUiState
 import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.topappbar.EeosTopAppBar
+import com.example.eeos.presentation.topappbar.TopAppBarUiState
+import com.example.eeos.presentation.topappbar.TopAppBarViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,6 +36,7 @@ fun DetailScreen(
     detailUiState: State<ProgramDetailUiState>,
     memberUiState: State<MemberAttendanceUiState>,
     attendanceUiState: State<UserAttendStatusUiState>,
+    topAppBarUiState: State<TopAppBarUiState>,
     putUserAttendStatus: (String) -> Unit
 ) {
     BottomSheetScaffold(
@@ -45,7 +48,7 @@ fun DetailScreen(
             )
         },
         topBar = {
-            EeosTopAppBar()
+            EeosTopAppBar(topAppBarUiState = topAppBarUiState)
         },
         sheetPeekHeight = dimensionResource(id = R.dimen.height_detail_screen_sheet_peek_height),
         sheetShape = RoundedCornerShape(
@@ -126,6 +129,7 @@ private fun DetailScreenPreview() {
             detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
             memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
+            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
             putUserAttendStatus = { p -> }
         )
     }
