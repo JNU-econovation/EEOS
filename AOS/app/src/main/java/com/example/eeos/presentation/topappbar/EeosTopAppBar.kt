@@ -30,7 +30,9 @@ fun EeosTopAppBar(
     }
 
     if (memberStatusDialogState.value) {
-        MemberStatusDialog(
+        ActiveStatusDialog(
+            name = topAppBarUiState.value.name,
+            activeStatus = topAppBarUiState.value.activeStatus,
             onStatusBtnClick = {},
             onDismissRequest = { memberStatusDialogState.value = false }
         )

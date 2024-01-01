@@ -18,12 +18,15 @@
 
 
 
-    <!--Home Dialog 화면 string 리소스-->
-    <string name="home_dialog_description">본인의 회원 상태를 선택해 주세요.</string>
-    <string name="home_dialog_member_status_am">AM</string>
-    <string name="home_dialog_member_status_rm">RM&amp;DM</string>
-    <string name="home_dialog_member_status_cm">CM</string>
-    <string name="home_dialog_member_status_ob">OB</string>
+    <!--Active Status Dialog 화면 string 리소스-->
+    <string name="active_status_dialog_description">본인의 회원 상태를 선택해 주세요.</string>
+    <string name="active_status_dialog_member_status_am">AM</string>
+    <string name="active_status_dialog_member_status_rm">RM&amp;DM</string>
+    <string name="active_status_dialog_member_status_cm">CM</string>
+    <string name="active_status_dialog_member_status_ob">OB</string>
+
+    <string name="active_status_dialog_save_active_status">회원 상태 저장</string>
+    <string name="active_status_dialog_logout">로그아웃</string>
 
 
 
@@ -52,7 +55,7 @@
 
 
     <!--ContentDescriptions-->
-    <string name="home_dialog_logout_button">로그아웃 하기</string>
+    <string name="home_dialog_x_button">다이얼로그 끄기</string>
 
     <string name="detail_bottom_sheet_drag_handle_description">Bottom Sheet를 올리면 출석 상태를 선택할 수 있습니다.</string>
 

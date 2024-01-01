@@ -19,19 +19,18 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.eeos.R
-
-private val memberStatusList = listOf("AM", "RM", "CM", "OB")
+import com.example.eeos.consts.MemberStatus
 
 @Composable
-fun MemberStatusButtons(
+fun ActiveStatusButtons(
     memberStatus: String,
     onClick: () -> Unit
 ) {
     Column {
         Row {
             MemberStatusButton(
-                buttonText = memberStatusList[0],
-                isSelected = memberStatusList[0] == memberStatus,
+                buttonText = MemberStatus.AM,
+                isSelected = MemberStatus.AM == memberStatus,
                 onClick = onClick
             )
             Spacer(
@@ -42,8 +41,8 @@ fun MemberStatusButtons(
                 )
             )
             MemberStatusButton(
-                buttonText = memberStatusList[1],
-                isSelected = memberStatusList[1] == memberStatus,
+                buttonText = MemberStatus.RM,
+                isSelected = MemberStatus.RM == memberStatus,
                 onClick = onClick
             )
         }
@@ -54,8 +53,8 @@ fun MemberStatusButtons(
         )
         Row {
             MemberStatusButton(
-                buttonText = memberStatusList[2],
-                isSelected = memberStatusList[2] == memberStatus,
+                buttonText = MemberStatus.CM,
+                isSelected = MemberStatus.CM == memberStatus,
                 onClick = onClick
             )
             Spacer(
@@ -66,8 +65,8 @@ fun MemberStatusButtons(
                 )
             )
             MemberStatusButton(
-                buttonText = memberStatusList[3],
-                isSelected = memberStatusList[3] == memberStatus,
+                buttonText = MemberStatus.OB,
+                isSelected = MemberStatus.OB == memberStatus,
                 onClick = onClick
             )
         }
@@ -119,7 +118,7 @@ private fun MemberStatusButton(
 @Composable
 private fun MemberStatusButtonsPreview() {
     MaterialTheme {
-        MemberStatusButtons(
+        ActiveStatusButtons(
             memberStatus = "AM",
             onClick = {}
         )
