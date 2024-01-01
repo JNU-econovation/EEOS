@@ -23,7 +23,8 @@ import com.example.eeos.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EeosTopAppBar(
-    topAppBarUiState: State<TopAppBarUiState>
+    topAppBarUiState: State<TopAppBarUiState>,
+    putActiveStatus: (String) -> Unit
 ) {
     val memberStatusDialogState = remember {
         mutableStateOf(false)
@@ -33,7 +34,7 @@ fun EeosTopAppBar(
         ActiveStatusDialog(
             name = topAppBarUiState.value.name,
             activeStatus = topAppBarUiState.value.activeStatus,
-            onStatusBtnClick = {},
+            onSaveStatusBtnClick = { putActiveStatus(topAppBarUiState.value.activeStatus) },
             onDismissRequest = { memberStatusDialogState.value = false }
         )
     }
@@ -47,8 +48,7 @@ fun EeosTopAppBar(
         },
         actions = {
             MemberInfo(
-                memberStatus = topAppBarUiState.value.activeStatus,
-                name = topAppBarUiState.value.name,
+                topAppBarUiState = topAppBarUiState,
                 onClick = { memberStatusDialogState.value = true }
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_common_screen)))
@@ -64,7 +64,8 @@ fun EeosTopAppBar(
 private fun TopAppBarPreview() {
     MaterialTheme {
         EeosTopAppBar(
-            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState()
+            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
+            putActiveStatus = { p -> }
         )
     }
 }

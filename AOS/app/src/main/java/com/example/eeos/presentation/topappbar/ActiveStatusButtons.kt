@@ -13,6 +13,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -24,14 +26,15 @@ import com.example.eeos.consts.MemberStatus
 @Composable
 fun ActiveStatusButtons(
     memberStatus: String,
-    onClick: () -> Unit
 ) {
+    val tempActiveStatus = remember { mutableStateOf(memberStatus) }
+
     Column {
         Row {
             MemberStatusButton(
                 buttonText = MemberStatus.AM,
-                isSelected = MemberStatus.AM == memberStatus,
-                onClick = onClick
+                isSelected = MemberStatus.AM == tempActiveStatus.value,
+                onClick = { tempActiveStatus.value = MemberStatus.AM }
             )
             Spacer(
                 modifier = Modifier.width(
@@ -42,8 +45,8 @@ fun ActiveStatusButtons(
             )
             MemberStatusButton(
                 buttonText = MemberStatus.RM,
-                isSelected = MemberStatus.RM == memberStatus,
-                onClick = onClick
+                isSelected = MemberStatus.RM == tempActiveStatus.value,
+                onClick = { tempActiveStatus.value = MemberStatus.RM }
             )
         }
         Spacer(
@@ -54,8 +57,8 @@ fun ActiveStatusButtons(
         Row {
             MemberStatusButton(
                 buttonText = MemberStatus.CM,
-                isSelected = MemberStatus.CM == memberStatus,
-                onClick = onClick
+                isSelected = MemberStatus.CM == tempActiveStatus.value,
+                onClick = { tempActiveStatus.value = MemberStatus.CM }
             )
             Spacer(
                 modifier = Modifier.width(
@@ -66,8 +69,8 @@ fun ActiveStatusButtons(
             )
             MemberStatusButton(
                 buttonText = MemberStatus.OB,
-                isSelected = MemberStatus.OB == memberStatus,
-                onClick = onClick
+                isSelected = MemberStatus.OB == tempActiveStatus.value,
+                onClick = { tempActiveStatus.value = MemberStatus.OB }
             )
         }
     }
@@ -114,13 +117,12 @@ private fun MemberStatusButton(
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 private fun MemberStatusButtonsPreview() {
     MaterialTheme {
         ActiveStatusButtons(
             memberStatus = "AM",
-            onClick = {}
         )
     }
 }

@@ -29,7 +29,7 @@ import com.example.eeos.R
 fun ActiveStatusDialog(
     name: String,
     activeStatus: String,
-    onStatusBtnClick: () -> Unit,
+    onSaveStatusBtnClick: () -> Unit,
     onDismissRequest: () -> Unit
 ) {
     Dialog(onDismissRequest = onDismissRequest) {
@@ -107,14 +107,14 @@ fun ActiveStatusDialog(
                         dimensionResource(id = R.dimen.margin_member_status_dialog_space_between_text_and_status_button)
                     )
                 )
-                ActiveStatusButtons(activeStatus, onStatusBtnClick)
+                ActiveStatusButtons(activeStatus)
                 Spacer(
                     modifier = Modifier.height(
                         dimensionResource(id = R.dimen.margin_active_status_dialog_between_status_button_and_long_button)
                     )
                 )
                 SaveActiveStatusButton(
-                    onClick = {}
+                    onClick = onSaveStatusBtnClick
                 )
                 Spacer(
                     modifier = Modifier.height(
@@ -136,7 +136,7 @@ private fun MemberStatusDialogPreview() {
         ActiveStatusDialog(
             name = "24기 장현지",
             activeStatus = "AM",
-            onStatusBtnClick = {},
+            onSaveStatusBtnClick = {},
             onDismissRequest = {}
         )
     }

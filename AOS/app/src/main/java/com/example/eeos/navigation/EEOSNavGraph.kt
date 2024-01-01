@@ -62,7 +62,8 @@ fun EEOSNavGraph(
                     )
                 },
                 onProgramClick = { programId -> navActions.navigateToProgramDetail(programId) },
-                refreshProgramList = { (homeViewModel::refreshProgramList)() }
+                refreshProgramList = { (homeViewModel::refreshProgramList)() },
+                putActiveStatus = { activeStatus -> (topAppBarViewModel::putActiveStatus)(activeStatus)}
             )
         }
 
@@ -113,7 +114,8 @@ fun EEOSNavGraph(
                         userAttendanceUiState.value.userAttendStatus,
                         afterAttendStatus
                     )
-                }
+                },
+                putActiveStatus = { activeStatus -> (topAppBarViewModel::putActiveStatus)(activeStatus)}
             )
         }
     }

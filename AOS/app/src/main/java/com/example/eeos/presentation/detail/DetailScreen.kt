@@ -37,7 +37,8 @@ fun DetailScreen(
     memberUiState: State<MemberAttendanceUiState>,
     attendanceUiState: State<UserAttendStatusUiState>,
     topAppBarUiState: State<TopAppBarUiState>,
-    putUserAttendStatus: (String) -> Unit
+    putUserAttendStatus: (String) -> Unit,
+    putActiveStatus: (String) -> Unit
 ) {
     BottomSheetScaffold(
         sheetContent = {
@@ -48,7 +49,10 @@ fun DetailScreen(
             )
         },
         topBar = {
-            EeosTopAppBar(topAppBarUiState = topAppBarUiState)
+            EeosTopAppBar(
+                topAppBarUiState = topAppBarUiState,
+                putActiveStatus = putActiveStatus
+            )
         },
         sheetPeekHeight = dimensionResource(id = R.dimen.height_detail_screen_sheet_peek_height),
         sheetShape = RoundedCornerShape(
@@ -130,7 +134,8 @@ private fun DetailScreenPreview() {
             memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
             topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
-            putUserAttendStatus = { p -> }
+            putUserAttendStatus = { p -> },
+            putActiveStatus = { p -> }
         )
     }
 }

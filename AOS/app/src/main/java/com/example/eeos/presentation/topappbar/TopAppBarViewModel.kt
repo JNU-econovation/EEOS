@@ -2,6 +2,7 @@ package com.example.eeos.presentation.topappbar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
 import com.example.eeos.domain.repository.InfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +42,38 @@ class TopAppBarViewModel @Inject constructor(
                             activeStatus = userInfo.activeStatus
                         )
                     }
+                }
+                .onFailure { exception ->
+                    when (exception) {
+                        is HttpException -> {
+                            _topAppBarUiState.update { currentState ->
+                                currentState.copy(
+                                    isEmpty = true
+                                )
+                            }
+                        }
+
+                        is IOException -> {
+                            _topAppBarUiState.update { currentState ->
+                                currentState.copy(
+                                    isEmpty = true
+                                )
+                            }
+                        }
+                    }
+                }
+        }
+    }
+
+    fun putActiveStatus(activeStatus: String) {
+        viewModelScope.launch {
+            infoRepository.putActiveStatus(
+                RequestPutActiveStatusDto(
+                    activeStatus = activeStatus
+                )
+            )
+                .onSuccess {
+                    getActiveStatus()
                 }
                 .onFailure { exception ->
                     when (exception) {

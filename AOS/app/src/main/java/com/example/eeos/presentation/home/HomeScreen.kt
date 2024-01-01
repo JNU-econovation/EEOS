@@ -38,6 +38,7 @@ fun HomeScreen(
     loadProgramList: (String, String, Int) -> Unit,
     onProgramClick: (Int) -> Unit,
     refreshProgramList: () -> Unit,
+    putActiveStatus: (String) -> Unit
 ) {
     val selectedCategory = rememberSaveable { mutableStateOf(categoryChips[0]) }
     val selectedProgramStatus = rememberSaveable { mutableStateOf(programStatusChips[0]) }
@@ -46,7 +47,8 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             EeosTopAppBar(
-                topAppBarUiState = topAppBarUiState
+                topAppBarUiState = topAppBarUiState,
+                putActiveStatus = putActiveStatus
             )
         },
         containerColor = colorResource(id = R.color.background)
@@ -146,6 +148,7 @@ private fun HomeScreenPreview() {
             loadProgramList = { p1, p2, p3 -> },
             onProgramClick = { p1 -> },
             refreshProgramList = {},
+            putActiveStatus = { p -> }
         )
     }
 }
