@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,7 +18,7 @@ fun AttendChip() {
 }
 
 @Composable
-fun LateComerChip() {
+fun PercipientChip() {
     AttendStatusChip(
         buttonText = stringResource(R.string.detail_latecomers),
         contentColor = colorResource(R.color.warning_strong),
@@ -42,7 +42,7 @@ fun RequestSurveyChip() {
     AttendStatusChip(
         buttonText = stringResource(R.string.detail_bottom_sheet_do_survey),
         contentColor = colorResource(R.color.tertiary_strong),
-        containerColor = colorResource(R.color.tertiary),
+        containerColor = colorResource(R.color.secondary),
         isContentLong = true
     )
 }

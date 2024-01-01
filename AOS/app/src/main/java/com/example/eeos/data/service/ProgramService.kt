@@ -1,6 +1,5 @@
 package com.example.eeos.data.service
 
-import com.example.eeos.consts.AttendStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
@@ -42,6 +41,6 @@ interface ProgramService {
     @GET("programs/{programId}/members")
     suspend fun getMemberList(
         @Path(value = "programId") programId: Int,
-        @Query("attendStatus") attendStatus: AttendStatus
+        @Query("attendStatus") attendStatus: String
     ): BaseResponse<ResponseGetMemberListDto>
 }

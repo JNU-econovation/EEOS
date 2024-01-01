@@ -7,11 +7,11 @@ import com.example.eeos.consts.programStatus
 import com.example.eeos.domain.model.Program
 import com.example.eeos.domain.repository.ProgramRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 

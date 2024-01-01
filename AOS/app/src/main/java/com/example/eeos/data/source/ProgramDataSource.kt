@@ -1,6 +1,5 @@
 package com.example.eeos.data.source
 
-import com.example.eeos.consts.AttendStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
@@ -50,7 +49,7 @@ class ProgramDataSource @Inject constructor(
 
     suspend fun getMemberList(
         programId: Int,
-        attendStatus: AttendStatus
+        attendStatus: String
     ): BaseResponse<ResponseGetMemberListDto> =
         programService.getMemberList(
             programId = programId,

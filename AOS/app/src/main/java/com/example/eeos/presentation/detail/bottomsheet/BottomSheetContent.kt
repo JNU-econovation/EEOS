@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -15,7 +17,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
+import com.example.eeos.consts.AttendStatus
+import com.example.eeos.domain.model.Member
+import com.example.eeos.presentation.detail.ProgramDetailUiState
+import com.example.eeos.presentation.detail.ProgramDetailViewModel
 
 @Composable
 fun SheetDragHandle() {
@@ -38,18 +45,34 @@ fun SheetDragHandle() {
 }
 
 @Composable
-fun BottomSheetContents() {
+fun BottomSheetContents(
+    programDetailUiState: State<ProgramDetailUiState>,
+    attendanceUiState: State<UserAttendStatusUiState>,
+    putUserAttendStatus: (String) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AttendStatusInfo(
-            memberInfo = MemberData(
-                generation = 24,
-                name = "장현지",
-                attendStatus = AttendStatus.NO_RESPONSE
+            memberInfo = Member(
+                name = attendanceUiState.value.userName,
+                attendStatus = attendanceUiState.value.userAttendStatus
             )
-        ) { RequestAttendCheckChip() }
+        ) {
+            when (attendanceUiState.value.userAttendStatus) {
+                AttendStatus.attend -> AttendChip()
+                AttendStatus.absent -> AbsentChip()
+                AttendStatus.perceive -> PercipientChip()
+                AttendStatus.nonRelated -> NonRelatedChip()
+                AttendStatus.nonResponse ->
+                    if (programDetailUiState.value.programType == "demand") {
+                        RequestSurveyChip()
+                    } else {
+                        RequestAttendCheckChip()
+                    }
+            }
+        }
         Spacer(
             modifier = Modifier.height(
                 height = dimensionResource(
@@ -76,7 +99,10 @@ fun BottomSheetContents() {
                 )
             )
         )
-        AttendStatusButtons()
+        AttendStatusButtons(
+            attendanceUiState = attendanceUiState,
+            putUserAttendStatus = putUserAttendStatus
+        )
         Spacer(
             modifier = Modifier.height(
                 height = dimensionResource(
@@ -91,6 +117,10 @@ fun BottomSheetContents() {
 @Composable
 private fun BottomSheetContentsPreview() {
     MaterialTheme {
-        BottomSheetContents()
+        BottomSheetContents(
+            attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
+            programDetailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
+            putUserAttendStatus = { p -> }
+        )
     }
 }

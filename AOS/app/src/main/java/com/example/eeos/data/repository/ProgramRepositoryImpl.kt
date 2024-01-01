@@ -1,6 +1,5 @@
 package com.example.eeos.data.repository
 
-import com.example.eeos.consts.AttendStatus
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
 import com.example.eeos.data.source.ProgramDataSource
 import com.example.eeos.domain.model.Member
@@ -54,7 +53,7 @@ class ProgramRepositoryImpl @Inject constructor(
 
     override suspend fun getMemberList(
         programId: Int,
-        attendStatus: AttendStatus
+        attendStatus: String
     ): Result<List<Member>> =
         runCatching {
             programDataSource.getMemberList(

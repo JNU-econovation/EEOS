@@ -10,7 +10,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.eeos.consts.AttendStatus
 import com.example.eeos.presentation.detail.DetailScreen
+import com.example.eeos.presentation.detail.MemberAttendanceViewModel
+import com.example.eeos.presentation.detail.ProgramDetailViewModel
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.home.HomeScreen
 import com.example.eeos.presentation.home.HomeViewModel
 import com.example.eeos.presentation.login.LoginScreen
@@ -44,7 +48,13 @@ fun EEOSNavGraph(
             val homeUiState = homeViewModel.homeUiState.collectAsState()
             HomeScreen(
                 homeUiState = homeUiState,
-                loadProgramList = { category, programStatus, page -> (homeViewModel::getProgramList)(category, programStatus, page) },
+                loadProgramList = { category, programStatus, page ->
+                    (homeViewModel::getProgramList)(
+                    category,
+                    programStatus,
+                    page
+                )
+                },
                 onProgramClick = { programId -> navActions.navigateToProgramDetail(programId) },
                 refreshProgramList = { (homeViewModel::refreshProgramList)() }
             )
@@ -58,7 +68,40 @@ fun EEOSNavGraph(
                 }
             )
         ) {
-            DetailScreen()
+            val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 /* TODO */
+            val programDetailViewModel = hiltViewModel<ProgramDetailViewModel>()
+            val memberAttendanceViewModel = hiltViewModel<MemberAttendanceViewModel>()
+            val userAttendanceViewModel = hiltViewModel<UserAttendStatusViewModel>()
+
+            if (programId != null) {
+                programDetailViewModel.getProgramDetail(programId)
+
+                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.attend)
+                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.absent)
+                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.perceive)
+                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.nonResponse)
+
+                userAttendanceViewModel.getUserAttendStatus(programId)
+            } else {
+                /* TODO */
+            }
+
+            val programDetailUiState = programDetailViewModel.detailUiState.collectAsState()
+            val memberAttendanceUiState = memberAttendanceViewModel.memberDetailUiState.collectAsState()
+            val userAttendanceUiState = userAttendanceViewModel.userAttendStatusUiState.collectAsState()
+
+            DetailScreen(
+                detailUiState = programDetailUiState,
+                memberUiState = memberAttendanceUiState,
+                attendanceUiState = userAttendanceUiState,
+                putUserAttendStatus = { afterAttendStatus ->
+                    (userAttendanceViewModel::putUserAttendStatus)(
+                    programId,
+                    userAttendanceUiState.value.userAttendStatus,
+                    afterAttendStatus
+                )
+                }
+            )
         }
     }
 }
