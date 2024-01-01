@@ -43,7 +43,8 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             EeosTopAppBar()
-        }, containerColor = colorResource(id = R.color.background)
+        },
+        containerColor = colorResource(id = R.color.background)
     ) { innerPadding ->
         Row(
             modifier = Modifier.padding(innerPadding)
@@ -120,7 +121,6 @@ fun HomeScreen(
                         )
                     }
                 )
-
             }
             Spacer(
                 modifier = Modifier.width(

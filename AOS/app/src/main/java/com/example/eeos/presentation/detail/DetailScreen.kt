@@ -14,18 +14,36 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
+import com.example.eeos.presentation.detail.bottomsheet.BottomSheetContents
+import com.example.eeos.presentation.detail.bottomsheet.SheetDragHandle
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusUiState
+import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.topappbar.EeosTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen() {
+fun DetailScreen(
+    detailUiState: State<ProgramDetailUiState>,
+    memberUiState: State<MemberAttendanceUiState>,
+    attendanceUiState: State<UserAttendStatusUiState>,
+    putUserAttendStatus: (String) -> Unit
+) {
     BottomSheetScaffold(
-        sheetContent = { BottomSheetContents() },
+        sheetContent = {
+            BottomSheetContents(
+                programDetailUiState = detailUiState,
+                attendanceUiState = attendanceUiState,
+                putUserAttendStatus = putUserAttendStatus
+            )
+        },
         topBar = {
             EeosTopAppBar()
         },
@@ -44,12 +62,18 @@ fun DetailScreen() {
         },
         containerColor = colorResource(id = R.color.background)
     ) {
-        DetailScreenContent()
+        DetailScreenContent(
+            detailUiState = detailUiState,
+            memberUiState = memberUiState
+        )
     }
 }
 
 @Composable
-private fun DetailScreenContent() {
+private fun DetailScreenContent(
+    detailUiState: State<ProgramDetailUiState>,
+    memberUiState: State<MemberAttendanceUiState>
+) {
     val state = rememberScrollState()
     Row(
         modifier = Modifier
@@ -64,7 +88,12 @@ private fun DetailScreenContent() {
         Column(
             modifier = Modifier.verticalScroll(state)
         ) {
-            ProgramDetail()
+            ProgramDetail(
+                category = detailUiState.value.category,
+                title = detailUiState.value.title,
+                deadLine = detailUiState.value.deadLine,
+                content = detailUiState.value.content
+            )
             Spacer(
                 modifier = Modifier.height(
                     height = dimensionResource(
@@ -72,7 +101,9 @@ private fun DetailScreenContent() {
                     )
                 )
             )
-            MemberLists()
+            MemberLists(
+                memberUiState = memberUiState
+            )
             Spacer(
                 modifier = Modifier.height(
                     dimensionResource(R.dimen.height_detail_screen_space_bottom)
@@ -91,6 +122,11 @@ private fun DetailScreenContent() {
 @Composable
 private fun DetailScreenPreview() {
     MaterialTheme {
-        DetailScreen()
+        DetailScreen(
+            detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
+            memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
+            attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
+            putUserAttendStatus = { p -> }
+        )
     }
 }

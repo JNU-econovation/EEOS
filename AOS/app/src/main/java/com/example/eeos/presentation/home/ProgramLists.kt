@@ -35,7 +35,7 @@ fun ProgramLists(
 ) {
     val programListState = rememberLazyListState()
 
-    if(programLists != null) {
+    if (programLists != null) {
         LazyColumn(state = programListState) {
             items(programLists) { program ->
                 Program(program, onProgramClick)
@@ -43,10 +43,9 @@ fun ProgramLists(
         }
     }
 
-    programListState.OnBottomReached (
+    programListState.OnBottomReached(
         loadMorePrograms = loadMorePrograms
     )
-
 }
 
 @Composable
@@ -91,13 +90,13 @@ private fun Program(program: Program, onProgramClick: (Int) -> Unit) {
 
 @Composable
 private fun LazyListState.OnBottomReached(
-    loadMorePrograms : () -> Unit
+    loadMorePrograms: () -> Unit
 ) {
     val shouldLoadMore = remember {
         derivedStateOf {
             val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull() ?: return@derivedStateOf true
 
-            lastVisibleItem.index == layoutInfo.totalItemsCount -1
+            lastVisibleItem.index == layoutInfo.totalItemsCount - 1
         }
     }
 

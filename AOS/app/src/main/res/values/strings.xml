@@ -43,6 +43,14 @@
     <string name="detail_bottom_sheet_description">본인의 출석 상태를 선택해 주세요.</string>
 
 
+
+    <!--Attend Status Confirm Dialog-->
+    <string name="confirm_dialog_container">출석 상태가 "%1$s"으로 변경됩니다.</string>
+    <string name="confirm_dialog_button_text_dismiss">취소</string>
+    <string name="confirm_dialog_button_text_confirm">확인</string>
+
+
+
     <!--ContentDescriptions-->
     <string name="home_dialog_logout_button">로그아웃 하기</string>
 

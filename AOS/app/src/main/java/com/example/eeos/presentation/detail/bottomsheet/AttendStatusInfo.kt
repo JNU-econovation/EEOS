@@ -1,4 +1,4 @@
-package com.example.eeos.presentation.detail
+package com.example.eeos.presentation.detail.bottomsheet
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,19 +12,21 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.example.eeos.consts.AttendStatus
+import com.example.eeos.domain.model.Member
 
 @Composable
 fun AttendStatusInfo(
-    memberInfo: MemberData,
+    memberInfo: Member,
     attendStatusChip: @Composable () -> Unit
 ) {
-    val infoText = "${memberInfo.generation}기 ${memberInfo.name} 님"
+    val userName = "${memberInfo.name} 님"
 
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = infoText,
+            text = userName,
             style = MaterialTheme.typography.titleSmall,
             color = colorResource(R.color.paragraph)
         )
@@ -44,10 +46,9 @@ fun AttendStatusInfo(
 private fun AttendStatusInfoPreview() {
     MaterialTheme {
         AttendStatusInfo(
-            memberInfo = MemberData(
-                generation = 24,
-                name = "장현지",
-                attendStatus = AttendStatus.NO_RESPONSE
+            memberInfo = Member(
+                name = "24기 장현지",
+                attendStatus = AttendStatus.nonResponse
             )
         ) {
             AttendChip()

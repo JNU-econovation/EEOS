@@ -1,6 +1,6 @@
 package com.example.eeos.data.model.remote.response
 
-import com.example.eeos.consts.AttendStatus
+import com.example.eeos.domain.model.AttendStatus
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,10 +11,10 @@ data class ResponseGetAttendStatusDto(
     val name: String,
     @Contextual
     @SerialName("activeStatus")
-    val attendStatus: AttendStatus
+    val attendStatus: String
 ) {
-    fun toAttendStatus(): com.example.eeos.domain.model.AttendStatus =
-        com.example.eeos.domain.model.AttendStatus(
+    fun toAttendStatus(): AttendStatus =
+        AttendStatus(
             name = name,
             attendStatus = attendStatus
         )

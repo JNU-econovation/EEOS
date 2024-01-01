@@ -1,6 +1,5 @@
 package com.example.eeos.data.model.remote.request
 
-import com.example.eeos.consts.AttendStatus
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,8 +8,8 @@ import kotlinx.serialization.Serializable
 data class RequestPutAttendStatusDto(
     @Contextual
     @SerialName("beforeAttendStatus")
-    val beforeAttendStatus: AttendStatus,
+    val beforeAttendStatus: String,
     @Contextual
     @SerialName("afterAttendStatus")
-    val afterAttendStatus: AttendStatus
+    val afterAttendStatus: String
 )
