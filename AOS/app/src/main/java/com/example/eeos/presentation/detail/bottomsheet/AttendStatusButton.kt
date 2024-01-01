@@ -22,20 +22,20 @@ fun AttendStatusButton(
     contentColor: Color,
     containerColor: Color,
     backgroundColor: Color,
-    isSelected: Boolean,
+    selectedAttendStatus: String?,
     onClick: () -> Unit,
 ) {
-    val contentColor = if (isSelected) {
+    val contentColor = if (selectedAttendStatus == buttonText) {
         contentColor
     } else {
         colorResource(R.color.gray_500)
     }
-    val containerColor = if (isSelected) {
+    val containerColor = if (selectedAttendStatus == buttonText) {
         containerColor
     } else {
         backgroundColor
     }
-    val strokeColor = if (isSelected) {
+    val strokeColor = if (selectedAttendStatus == buttonText) {
         contentColor
     } else {
         colorResource(R.color.transparent)
@@ -77,7 +77,7 @@ private fun AttendStatusButtonPreview() {
             contentColor = colorResource(R.color.success_strong),
             containerColor = colorResource(R.color.success_light),
             backgroundColor = colorResource(R.color.gray_100),
-            isSelected = true,
+            selectedAttendStatus = /*rememberSaveable { mutableStateOf("참석") }*/"참석",
             onClick = {},
         )
     }

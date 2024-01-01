@@ -28,7 +28,8 @@ import com.example.eeos.R
 @Composable
 fun ConfirmAttendStatusDialog(
     onConfirmRequest: () -> Unit,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    attendStatus: String
 ) {
     Dialog(
         onDismissRequest = onDismissRequest
@@ -56,16 +57,27 @@ fun ConfirmAttendStatusDialog(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = String.format(stringResource(R.string.confirm_dialog_container), "/* TODO */"),
+                    text = String.format(
+                        stringResource(R.string.confirm_dialog_container),
+                        attendStatus
+                    ),
                     style = MaterialTheme.typography.bodySmall
                 )
                 Row {
-                    Spacer(modifier = Modifier.width(dimensionResource(R.dimen.margin_confirm_dialog_buttons_right)))
+                    Spacer(
+                        modifier = Modifier.width(
+                            dimensionResource(R.dimen.margin_confirm_dialog_buttons_right)
+                        )
+                    )
                     ConfirmDialogButton(
                         onClick = onDismissRequest,
                         innerText = stringResource(R.string.confirm_dialog_button_text_dismiss)
                     )
-                    Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_confirm_dialog_between_buttons)))
+                    Spacer(
+                        modifier = Modifier.width(
+                            dimensionResource(id = R.dimen.margin_confirm_dialog_between_buttons)
+                        )
+                    )
                     ConfirmDialogButton(
                         onClick = onConfirmRequest,
                         innerText = stringResource(R.string.confirm_dialog_button_text_confirm)
@@ -127,7 +139,8 @@ private fun ConfirmAttendStatusDialogPreview() {
     MaterialTheme {
         ConfirmAttendStatusDialog(
             onConfirmRequest = {},
-            onDismissRequest = {}
+            onDismissRequest = {},
+            attendStatus = "\"출석\""
         )
     }
 }

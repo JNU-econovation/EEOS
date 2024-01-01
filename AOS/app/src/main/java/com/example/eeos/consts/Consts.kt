@@ -47,9 +47,9 @@ object AttendStatus {
     const val nonRelated = "nonRelated"
 }
 
-object AttendStatusBtn {
-    const val attend = "attend"
-    const val absent = "absent"
-    const val perceive = "perceive"
-    const val nonResponse = "nonResponse"
-}
+val attendStatusMap = mapOf(
+    "attend" to "참석",
+    "absent" to "불참",
+    "perceive" to "지각",
+    "nonResponse" to "미정"
+)

@@ -33,13 +33,15 @@ import com.example.eeos.presentation.topappbar.EeosTopAppBar
 fun DetailScreen(
     detailUiState: State<ProgramDetailUiState>,
     memberUiState: State<MemberAttendanceUiState>,
-    attendanceUiState: State<UserAttendStatusUiState>
+    attendanceUiState: State<UserAttendStatusUiState>,
+    putUserAttendStatus: (String) -> Unit
 ) {
     BottomSheetScaffold(
         sheetContent = {
             BottomSheetContents(
                 programDetailUiState = detailUiState,
-                attendanceUiState = attendanceUiState
+                attendanceUiState = attendanceUiState,
+                putUserAttendStatus = putUserAttendStatus
             )
         },
         topBar = {
@@ -123,7 +125,8 @@ private fun DetailScreenPreview() {
         DetailScreen(
             detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
             memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
-            attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState()
+            attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
+            putUserAttendStatus = { p -> }
         )
     }
 }

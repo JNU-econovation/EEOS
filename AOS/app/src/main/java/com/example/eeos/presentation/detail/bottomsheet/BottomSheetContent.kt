@@ -47,7 +47,8 @@ fun SheetDragHandle() {
 @Composable
 fun BottomSheetContents(
     programDetailUiState: State<ProgramDetailUiState>,
-    attendanceUiState: State<UserAttendStatusUiState>
+    attendanceUiState: State<UserAttendStatusUiState>,
+    putUserAttendStatus: (String) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -59,16 +60,13 @@ fun BottomSheetContents(
                 attendStatus = attendanceUiState.value.userAttendStatus
             )
         ) {
-            when(attendanceUiState.value.userAttendStatus) {
+            when (attendanceUiState.value.userAttendStatus) {
                 AttendStatus.attend -> AttendChip()
                 AttendStatus.absent -> AbsentChip()
                 AttendStatus.perceive -> PercipientChip()
                 AttendStatus.nonRelated -> NonRelatedChip()
-            }
-
-            when(attendanceUiState.value.userAttendStatus) {
                 AttendStatus.nonResponse ->
-                    if(programDetailUiState.value.programType == "demand") {
+                    if (programDetailUiState.value.programType == "demand") {
                         RequestSurveyChip()
                     } else {
                         RequestAttendCheckChip()
@@ -101,7 +99,10 @@ fun BottomSheetContents(
                 )
             )
         )
-        AttendStatusButtons()
+        AttendStatusButtons(
+            attendanceUiState = attendanceUiState,
+            putUserAttendStatus = putUserAttendStatus
+        )
         Spacer(
             modifier = Modifier.height(
                 height = dimensionResource(
@@ -118,7 +119,8 @@ private fun BottomSheetContentsPreview() {
     MaterialTheme {
         BottomSheetContents(
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
-            programDetailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState()
+            programDetailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
+            putUserAttendStatus = { p -> }
         )
     }
 }

@@ -42,7 +42,7 @@ fun RequestSurveyChip() {
     AttendStatusChip(
         buttonText = stringResource(R.string.detail_bottom_sheet_do_survey),
         contentColor = colorResource(R.color.tertiary_strong),
-        containerColor = colorResource(R.color.tertiary),
+        containerColor = colorResource(R.color.secondary),
         isContentLong = true
     )
 }

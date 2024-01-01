@@ -68,7 +68,7 @@ fun EEOSNavGraph(
                 }
             )
         ) {
-            val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG)
+            val programId = it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 /* TODO */
             val programDetailViewModel = hiltViewModel<ProgramDetailViewModel>()
             val memberAttendanceViewModel = hiltViewModel<MemberAttendanceViewModel>()
             val userAttendanceViewModel = hiltViewModel<UserAttendStatusViewModel>()
@@ -93,7 +93,14 @@ fun EEOSNavGraph(
             DetailScreen(
                 detailUiState = programDetailUiState,
                 memberUiState = memberAttendanceUiState,
-                attendanceUiState = userAttendanceUiState
+                attendanceUiState = userAttendanceUiState,
+                putUserAttendStatus = { afterAttendStatus ->
+                    (userAttendanceViewModel::putUserAttendStatus)(
+                    programId,
+                    userAttendanceUiState.value.userAttendStatus,
+                    afterAttendStatus
+                )
+                }
             )
         }
     }
