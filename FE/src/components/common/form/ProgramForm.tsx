@@ -11,31 +11,32 @@ import FormBtn from "./FormBtn";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { FormType } from "@/types/form";
 import MarkdownEditor from "../markdown/MarkdownEditor";
-import { ProgramFormData } from "@/hooks/useProgramFormData";
+import {
+  ProgramFormData,
+  ProgramFormDataAction,
+} from "@/hooks/useProgramFormData";
 
-interface ProgramFormProps {
-  formData: ProgramFormData;
+interface ProgramFormProps extends ProgramFormData, ProgramFormDataAction {
   formType: FormType;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ProgramForm = ({
   children,
-  formData,
   formType,
+  title,
+  setTitle,
+  deadLine,
+  setDeadLine,
+  category,
+  setCategory,
+  type,
+  setType,
+  content,
+  setContent,
+  reset,
+  onSubmit,
 }: PropsWithChildren<ProgramFormProps>) => {
-  const {
-    title,
-    setTitle,
-    deadLine,
-    setDeadLine,
-    category,
-    setCategory,
-    type,
-    setType,
-    content,
-    setContent,
-    reset,
-  } = formData;
   const isDemand = type === "demand";
   const demandCheckBoxDisabled = formType === "edit";
 
@@ -44,7 +45,7 @@ const ProgramForm = ({
   };
 
   return (
-    <form className="space-y-6">
+    <form className="space-y-6" onSubmit={onSubmit}>
       <ProgramTitle title={title} setTitle={(v) => setTitle(v)}>
         <ProgramDemandCheckBox
           disabled={demandCheckBoxDisabled}

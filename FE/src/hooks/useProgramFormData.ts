@@ -2,7 +2,7 @@ import { ProgramCategory, ProgramType } from "@/types/program";
 import { useEffect, useState } from "react";
 import { useGetProgramById } from "./query/useProgramQuery";
 
-interface ProgramFormDataState {
+export interface ProgramFormDataState {
   title: string;
   deadLine: string;
   type: ProgramType;
@@ -11,7 +11,7 @@ interface ProgramFormDataState {
   // members: Set<number>;
 }
 
-interface ProgramFormDataAction {
+export interface ProgramFormDataAction {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setDeadLine: React.Dispatch<React.SetStateAction<string>>;
   setType: React.Dispatch<React.SetStateAction<ProgramType>>;
