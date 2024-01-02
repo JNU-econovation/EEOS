@@ -36,7 +36,7 @@ const EditMemberTableItem = ({
       <span></span>
       <AttendStatusToggle
         disabled={!isRelated}
-        selectedValue={initAttendStatus}
+        selectedValue={selectedAttend}
         onSelect={handleAttendStatusChange}
       />
     </div>
