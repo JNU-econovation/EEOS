@@ -1,7 +1,11 @@
+import Title from "@/components/common/Title";
+import ProgramCreateForm from "@/components/programCreate/ProgramCreateForm";
+
 const ProgramCreatePage = () => {
   return (
-    <div>
-      <h1>Program Create Page</h1>
+    <div className="space-y-12">
+      <Title text="행사 생성" />
+      <ProgramCreateForm />
     </div>
   );
 };

@@ -12,15 +12,23 @@ const sizes = {
   lg: "py-3 px-5 rounded-lg min-w-[8rem]",
 };
 
-interface Props {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
-  color: keyof typeof colors;
-  size: keyof typeof sizes;
+  color?: keyof typeof colors;
+  size?: keyof typeof sizes;
   children: React.ReactNode;
   className?: string;
 }
 
-const Button = ({ disabled, color, size, children, className }: Props) => {
+const Button = ({
+  disabled,
+  color = "primary",
+  size = "md",
+  children,
+  className,
+  type = "button",
+  onClick = () => {},
+}: ButtonProps) => {
   const btnStyle = classNames(
     "flex justify-center gap-2",
     colors[color],
@@ -29,7 +37,12 @@ const Button = ({ disabled, color, size, children, className }: Props) => {
   );
 
   return (
-    <button disabled={disabled} className={btnStyle}>
+    <button
+      disabled={disabled}
+      className={btnStyle}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
