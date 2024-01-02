@@ -4,7 +4,7 @@ import { ActiveStatusWithAll } from "@/types/member";
 
 interface CreateMemberTableItemContainerProps {
   members: Set<number>;
-  setMembers: (members: Set<number>) => void;
+  setMembers: (memberId: number) => void;
   status: ActiveStatusWithAll;
 }
 
@@ -23,7 +23,9 @@ const CreateMemberTableItemContainer = ({
       {memberList.map((member) => (
         <CreateMemberTableItem
           key={member.memberId}
-          data={member}
+          memberId={member.memberId}
+          name={member.name}
+          activeStatus={member.activeStatus}
           members={members}
           setMembers={setMembers}
         />
