@@ -4,7 +4,7 @@ import {
   AttendStatus,
   MemberActiveStatusInfo,
   MemberAttendStatusInfo,
-} from "@/src/types/member";
+} from "@/types/member";
 
 export class MemberInfoDto {
   public readonly memberId: number;
