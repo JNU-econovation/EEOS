@@ -19,7 +19,11 @@ const MemberTableHeader = ({
 }: MemberTableHeaderProps) => {
   return (
     <div className="grid grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] justify-items-center gap-4 border-y-2 border-stroke-10 bg-gray-10 px-10 py-4 font-bold">
-      <CheckBox checked={checked} onClick={() => onClickCheckBox()} />
+      {formType !== "edit" ? (
+        <CheckBox checked={checked} onClick={() => onClickCheckBox()} />
+      ) : (
+        <span></span>
+      )}
       {HEADER_TEXT[formType].map((text: string, index: number) => (
         <span key={index}>{text}</span>
       ))}
