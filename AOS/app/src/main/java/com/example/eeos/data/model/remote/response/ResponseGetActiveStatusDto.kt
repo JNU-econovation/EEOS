@@ -16,7 +16,7 @@ data class ResponseGetActiveStatusDto(
     fun toActiveStatus(): ActiveStatus =
         ActiveStatus(
             name = name,
-            activeStatus = when(activeStatus) {
+            activeStatus = when (activeStatus) {
                 "am" -> "AM"
                 "cm" -> "CM"
                 "rm" -> "RM"

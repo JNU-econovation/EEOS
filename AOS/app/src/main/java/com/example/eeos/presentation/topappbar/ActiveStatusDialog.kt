@@ -53,9 +53,15 @@ fun ActiveStatusDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(
                     top = dimensionResource(id = R.dimen.margin_member_status_dialog_background_top),
-                    start = dimensionResource(id = R.dimen.margin_member_status_dialog_background_side),
-                    end = dimensionResource(id = R.dimen.margin_member_status_dialog_background_side),
-                    bottom = dimensionResource(id = R.dimen.margin_member_status_dialog_background_bottom)
+                    start = dimensionResource(
+                        id = R.dimen.margin_member_status_dialog_background_side
+                    ),
+                    end = dimensionResource(
+                        id = R.dimen.margin_member_status_dialog_background_side
+                    ),
+                    bottom = dimensionResource(
+                        id = R.dimen.margin_member_status_dialog_background_bottom
+                    )
                 )
             ) {
                 Row(
@@ -104,13 +110,17 @@ fun ActiveStatusDialog(
                 )
                 Spacer(
                     modifier = Modifier.height(
-                        dimensionResource(id = R.dimen.margin_member_status_dialog_space_between_text_and_status_button)
+                        dimensionResource(
+                            id = R.dimen.margin_member_status_dialog_space_between_text_and_status_button
+                        )
                     )
                 )
                 ActiveStatusButtons(activeStatus)
                 Spacer(
                     modifier = Modifier.height(
-                        dimensionResource(id = R.dimen.margin_active_status_dialog_between_status_button_and_long_button)
+                        dimensionResource(
+                            id = R.dimen.margin_active_status_dialog_between_status_button_and_long_button
+                        )
                     )
                 )
                 SaveActiveStatusButton(
@@ -118,7 +128,9 @@ fun ActiveStatusDialog(
                 )
                 Spacer(
                     modifier = Modifier.height(
-                        dimensionResource(id = R.dimen.margin_active_status_dialog_between_long_buttons)
+                        dimensionResource(
+                            id = R.dimen.margin_active_status_dialog_between_long_buttons
+                        )
                     )
                 )
                 LogoutButton(

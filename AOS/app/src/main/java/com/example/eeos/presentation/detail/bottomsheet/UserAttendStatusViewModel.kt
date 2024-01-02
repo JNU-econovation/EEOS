@@ -1,5 +1,7 @@
 package com.example.eeos.presentation.detail.bottomsheet
 
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
@@ -18,7 +20,9 @@ data class UserAttendStatusUiState(
     val isLoading: Boolean = false,
 
     val userName: String = "",
-    val userAttendStatus: String = ""
+    val userAttendStatus: String = "",
+
+    val snackbarHostState: SnackbarHostState = SnackbarHostState()
 )
 
 @HiltViewModel
@@ -76,6 +80,11 @@ class UserAttendStatusViewModel @Inject constructor(
             )
                 .onSuccess {
                     getUserAttendStatus(programId)
+                    _userAttendStatusUiState.value.snackbarHostState
+                        .showSnackbar(
+                            message = "상태가 변경 되었습니다.",
+                            duration = SnackbarDuration.Long
+                        )
                 }
                 .onFailure { exception ->
                     when (exception) {

@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -67,6 +68,7 @@ fun DetailScreen(
         sheetDragHandle = {
             SheetDragHandle()
         },
+        snackbarHost = { SnackbarHost(hostState = attendanceUiState.value.snackbarHostState) },
         containerColor = colorResource(id = R.color.background)
     ) {
         DetailScreenContent(

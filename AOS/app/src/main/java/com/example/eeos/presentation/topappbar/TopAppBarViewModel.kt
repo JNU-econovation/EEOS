@@ -1,24 +1,28 @@
 package com.example.eeos.presentation.topappbar
 
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
 import com.example.eeos.domain.repository.InfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 data class TopAppBarUiState(
     val isEmpty: Boolean = false,
     val isLoading: Boolean = false,
 
     val name: String = "",
-    val activeStatus: String = ""
+    val activeStatus: String = "",
+
+    val snackbarHostState: SnackbarHostState = SnackbarHostState()
 )
 
 @HiltViewModel
@@ -74,6 +78,11 @@ class TopAppBarViewModel @Inject constructor(
             )
                 .onSuccess {
                     getActiveStatus()
+                    _topAppBarUiState.value.snackbarHostState
+                        .showSnackbar(
+                            message = "상태가 변경 되었습니다.",
+                            duration = SnackbarDuration.Long
+                        )
                 }
                 .onFailure { exception ->
                     when (exception) {
