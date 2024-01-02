@@ -14,11 +14,22 @@ const EditMemberTableItem = ({
 }) => {
   const [selectedAttend, setSelectedAttend] =
     useState<AttendStatus>(initAttendStatus);
-  const isRelated = selectedAttend !== "nonResponse";
+  const isRelated = selectedAttend !== "nonRelated";
+
+  const getAfterAttendStatus = (
+    initAttend: AttendStatus,
+    selectedAttend: AttendStatus,
+  ) => {
+    if (selectedAttend !== "nonRelated") return "nonRelated";
+    if (initAttend === "nonRelated") return "nonResponse";
+    return initAttend;
+  };
 
   const handleCheckBoxChange = () => {
-    const afterAttendStatus =
-      selectedAttend === "nonResponse" ? initAttendStatus : "nonResponse";
+    const afterAttendStatus = getAfterAttendStatus(
+      initAttendStatus,
+      selectedAttend,
+    );
     setSelectedAttend(afterAttendStatus);
     setMembers(memberId, initAttendStatus, afterAttendStatus);
   };
