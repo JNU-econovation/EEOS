@@ -4,7 +4,6 @@ import EditMemberTableItem from "./EditMemberTableItem";
 import { Members } from "./ProgramEditForm";
 
 interface EditMemberTableItemContainerProps {
-  // FIXME: edit members 형식 변경
   members: Map<number, Members>;
   setMembers: (
     memberId: number,
