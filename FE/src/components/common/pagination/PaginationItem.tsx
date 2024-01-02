@@ -3,26 +3,23 @@ import classNames from "classnames";
 interface PaginationItemProps {
   isSelected: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  number: number;
 }
 
 const PaginationItem = ({
-  children,
+  number,
   isSelected,
   onClick,
 }: PaginationItemProps) => {
   const paginationItemStyle = classNames(
     "flex h-8 w-8 items-center justify-center rounded-lg",
-    {
-      "bg-primary": isSelected,
-      "bg-background": !isSelected,
-    },
+    isSelected ? "bg-primary" : "bg-background",
   );
 
   return (
-    <div onClick={onClick} className={paginationItemStyle}>
-      {children}
-    </div>
+    <button onClick={onClick} className={paginationItemStyle}>
+      {number}
+    </button>
   );
 };
 

@@ -37,6 +37,7 @@ const Tab = <T,>({
     <div className={tabStyle}>
       {options.map((option: TabOption<T>) => (
         <TabItem
+          key={option.text}
           color={getColor(option)}
           size={size}
           text={option.text}

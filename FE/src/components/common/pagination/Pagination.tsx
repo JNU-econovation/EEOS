@@ -1,5 +1,6 @@
 import { calcPageNumbers } from "@/utils/calcPageNumber";
 import PaginationItem from "./PaginationItem";
+import Image from "next/image";
 
 interface PaginataionProps {
   totalPage: number;
@@ -26,18 +27,32 @@ const Paginataion = ({
 
   return (
     <div className="my-14 flex w-full items-center justify-center gap-8">
-      <img src="/icons/left.svg" alt="이전 페이지" onClick={handleBackward} />
+      <Image
+        src="/icons/left.svg"
+        alt="이전 페이지"
+        onClick={handleBackward}
+        width={20}
+        height={20}
+        className="h-[20px] w-[20px]"
+      />
       <div className="hidden gap-4 md:flex">
         {pageNumbers.map((number) => (
           <PaginationItem
+            key={number}
             isSelected={number === currentPage}
             onClick={() => onChange(number)}
-          >
-            {number}
-          </PaginationItem>
+            number={number}
+          />
         ))}
       </div>
-      <img src="/icons/right.svg" alt="이후 페이지" onClick={handleForward} />
+      <Image
+        src="/icons/right.svg"
+        alt="이후 페이지"
+        onClick={handleForward}
+        width={20}
+        height={20}
+        className="h-[20px] w-[20px]"
+      />
     </div>
   );
 };

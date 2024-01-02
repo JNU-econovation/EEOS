@@ -3,9 +3,7 @@
 import useModal from "@/hooks/useModal";
 import useOutsideRef from "@/hooks/useOutsideRef";
 import Image from "next/image";
-import UserInfoModal from "./UserInfoModal";
-import { Suspense } from "react";
-import UserInfoModalSkeleton from "./UserInfoModal.loader";
+import UserActiveModal from "./UserActiveModal";
 
 const UserBtn = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -22,12 +20,9 @@ const UserBtn = () => {
         alt="사용자 정보 확인"
         width={28}
         height={28}
+        className="h-[28px] w-[28px]"
       />
-      {isOpen && (
-        <Suspense fallback={<UserInfoModalSkeleton />}>
-          <UserInfoModal />
-        </Suspense>
-      )}
+      {isOpen && <UserActiveModal />}
     </div>
   );
 };

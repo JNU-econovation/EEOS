@@ -3,13 +3,17 @@ import Tab from "../tabs/Tab";
 import { ActiveStatus } from "@/types/member";
 import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import Button from "../Button";
+import UserActiveModalSkeleton from "./UserActiveModal.loader";
 
 const MESSAGE = "본인의 회원 상태를 선택해주세요.";
 const LOGOUT = "로그아웃";
 
-const UserInfoModal = () => {
-  const { data: myActiveData } = useGetMyActiveStatus();
-  const { name, activeStatus } = myActiveData!;
+const UserActiveModal = () => {
+  const { data: myActiveData, isLoading, isError } = useGetMyActiveStatus();
+  const { name, activeStatus } = myActiveData;
+
+  if (isLoading) return <UserActiveModalSkeleton />;
+  if (isError) return <div>에러 발생</div>;
 
   return (
     <section className="absolute -left-32 top-10 flex w-80 flex-col items-center gap-6 rounded-2xl bg-background px-12 py-6 drop-shadow-lg">
@@ -18,7 +22,7 @@ const UserInfoModal = () => {
       <Tab<ActiveStatus>
         selected={activeStatus}
         onItemClick={() => {}}
-        options={ACTIVE_STATUS.TAB}
+        options={Object.values(ACTIVE_STATUS.TAB)}
         size="lg"
         baseColor="gray"
         pointColor="teal"
@@ -34,4 +38,4 @@ const UserInfoModal = () => {
     </section>
   );
 };
-export default UserInfoModal;
+export default UserActiveModal;

@@ -1,7 +1,7 @@
 import { ProgramSimpleInfoDto } from "@/apis/dtos/program.dto";
 import ROUTES from "@/constants/ROUTES";
 import { convertDate } from "@/utils/convert";
-import Link from "next/link";
+import Link from "@/components/common/Link";
 
 interface ProgramListItemProps {
   programData: ProgramSimpleInfoDto;
