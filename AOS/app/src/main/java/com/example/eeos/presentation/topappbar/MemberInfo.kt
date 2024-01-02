@@ -9,19 +9,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
 
 @Composable
 fun MemberInfo(
-    memberStatus: String,
-    generation: Int,
-    name: String,
+    topAppBarUiState: State<TopAppBarUiState>,
     onClick: () -> Unit
 ) {
     Row(
@@ -44,26 +45,14 @@ fun MemberInfo(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = memberStatus,
+                text = topAppBarUiState.value.activeStatus,
                 style = MaterialTheme.typography.labelSmall,
                 color = colorResource(id = R.color.paragraph)
             )
 
             Row {
                 Text(
-                    text = generation.toString() + "기",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = colorResource(id = R.color.paragraph)
-                )
-                Spacer(
-                    modifier = Modifier.width(
-                        dimensionResource(
-                            id = R.dimen.margin_common_screen_member_info_space_between_texts
-                        )
-                    )
-                )
-                Text(
-                    text = name,
+                    text = topAppBarUiState.value.name,
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.paragraph)
                 )
@@ -77,9 +66,7 @@ fun MemberInfo(
 private fun MemberInfoPreview() {
     MaterialTheme {
         MemberInfo(
-            memberStatus = "AM",
-            generation = 24,
-            name = "인텔리",
+            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
             onClick = {}
         )
     }

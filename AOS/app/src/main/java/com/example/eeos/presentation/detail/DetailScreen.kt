@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -27,6 +28,8 @@ import com.example.eeos.presentation.detail.bottomsheet.SheetDragHandle
 import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusUiState
 import com.example.eeos.presentation.detail.bottomsheet.UserAttendStatusViewModel
 import com.example.eeos.presentation.topappbar.EeosTopAppBar
+import com.example.eeos.presentation.topappbar.TopAppBarUiState
+import com.example.eeos.presentation.topappbar.TopAppBarViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +37,9 @@ fun DetailScreen(
     detailUiState: State<ProgramDetailUiState>,
     memberUiState: State<MemberAttendanceUiState>,
     attendanceUiState: State<UserAttendStatusUiState>,
-    putUserAttendStatus: (String) -> Unit
+    topAppBarUiState: State<TopAppBarUiState>,
+    putUserAttendStatus: (String) -> Unit,
+    putActiveStatus: (String) -> Unit
 ) {
     BottomSheetScaffold(
         sheetContent = {
@@ -45,7 +50,10 @@ fun DetailScreen(
             )
         },
         topBar = {
-            EeosTopAppBar()
+            EeosTopAppBar(
+                topAppBarUiState = topAppBarUiState,
+                putActiveStatus = putActiveStatus
+            )
         },
         sheetPeekHeight = dimensionResource(id = R.dimen.height_detail_screen_sheet_peek_height),
         sheetShape = RoundedCornerShape(
@@ -60,6 +68,7 @@ fun DetailScreen(
         sheetDragHandle = {
             SheetDragHandle()
         },
+        snackbarHost = { SnackbarHost(hostState = attendanceUiState.value.snackbarHostState) },
         containerColor = colorResource(id = R.color.background)
     ) {
         DetailScreenContent(
@@ -126,7 +135,9 @@ private fun DetailScreenPreview() {
             detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
             memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState(),
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
-            putUserAttendStatus = { p -> }
+            topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
+            putUserAttendStatus = { p -> },
+            putActiveStatus = { p -> }
         )
     }
 }

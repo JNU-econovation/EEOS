@@ -53,3 +53,10 @@ val attendStatusMap = mapOf(
     "perceive" to "지각",
     "nonResponse" to "미정"
 )
+
+object MemberStatus {
+    const val AM = "AM"
+    const val RM = "RM"
+    const val CM = "CM"
+    const val OB = "OB"
+}
