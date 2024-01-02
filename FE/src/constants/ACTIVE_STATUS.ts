@@ -16,8 +16,8 @@ const TAB: ActiveStatusTab = {
 };
 
 const TAB_WITH_ALL: ActiveStatusWithAllTab = {
-  ...TAB,
   all: { type: "all", text: "All" },
+  ...TAB,
 };
 
 Object.freeze(TAB);
