@@ -1,5 +1,5 @@
 const ROUTES = {
-  HOME: "/",
+  MAIN: "/main",
   CREATE: "/create",
   DETAIL: (programId: number) => `/detail/${programId}`,
   EDIT: (programId: number) => `/edit/${programId}`,

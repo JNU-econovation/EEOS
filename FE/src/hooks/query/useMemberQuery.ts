@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+
+import { ActiveStatusWithAll, AttendStatus } from "@/types/member";
 import {
   getMembersByActiveStatus,
   getProgramMembersByActiveStatus,
   getProgramMembersByAttendStatus,
-} from "../apis/member";
-import API from "../constants/API";
-import { ActiveStatusWithAll, AttendStatus } from "../types/member";
+} from "@/apis/member";
+import API from "@/constants/API";
 
 export const useGetMemberByActive = (activeStatus: ActiveStatusWithAll) => {
   return useQuery({
