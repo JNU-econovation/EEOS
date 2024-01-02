@@ -1,6 +1,6 @@
 package com.example.eeos.data.model.remote.response
 
-import com.example.eeos.consts.ActiveStatus
+import com.example.eeos.domain.model.ActiveStatus
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,11 +11,17 @@ data class ResponseGetActiveStatusDto(
     val name: String,
     @Contextual
     @SerialName("activeStatus")
-    val activeStatus: ActiveStatus
+    val activeStatus: String
 ) {
-    fun toActiveStatus(): com.example.eeos.domain.model.ActiveStatus =
-        com.example.eeos.domain.model.ActiveStatus(
+    fun toActiveStatus(): ActiveStatus =
+        ActiveStatus(
             name = name,
-            activeStatus = activeStatus
+            activeStatus = when (activeStatus) {
+                "am" -> "AM"
+                "cm" -> "CM"
+                "rm" -> "RM"
+                "ob" -> "OB"
+                else -> ""
+            }
         )
 }

@@ -1,11 +1,11 @@
-package com.example.eeos.presentation.detail.bottomsheet
+package com.example.eeos.presentation.topappbar
 
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
-import com.example.eeos.domain.repository.ProgramRepository
+import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
+import com.example.eeos.domain.repository.InfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
 import javax.inject.Inject
@@ -15,48 +15,52 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-data class UserAttendStatusUiState(
-    val isError: Boolean = false,
+data class TopAppBarUiState(
+    val isEmpty: Boolean = false,
     val isLoading: Boolean = false,
 
-    val userName: String = "",
-    val userAttendStatus: String = "",
+    val name: String = "",
+    val activeStatus: String = "",
 
     val snackbarHostState: SnackbarHostState = SnackbarHostState()
 )
 
 @HiltViewModel
-class UserAttendStatusViewModel @Inject constructor(
-    private val programRepository: ProgramRepository
+class TopAppBarViewModel @Inject constructor(
+    private val infoRepository: InfoRepository
 ) : ViewModel() {
-    private val _userAttendStatusUiState = MutableStateFlow(UserAttendStatusUiState())
-    val userAttendStatusUiState = _userAttendStatusUiState.asStateFlow()
+    private val _topAppBarUiState = MutableStateFlow(TopAppBarUiState())
+    val topAppBarUiState = _topAppBarUiState.asStateFlow()
 
-    fun getUserAttendStatus(programId: Int) {
+    init {
+        getActiveStatus()
+    }
+
+    private fun getActiveStatus() {
         viewModelScope.launch {
-            programRepository.getAttendStatus(programId)
-                .onSuccess { userAttendStatus ->
-                    _userAttendStatusUiState.update { currentState ->
+            infoRepository.getActiveStatus()
+                .onSuccess { userInfo ->
+                    _topAppBarUiState.update { currentState ->
                         currentState.copy(
-                            userName = userAttendStatus.name,
-                            userAttendStatus = userAttendStatus.attendStatus
+                            name = userInfo.name,
+                            activeStatus = userInfo.activeStatus
                         )
                     }
                 }
                 .onFailure { exception ->
                     when (exception) {
                         is HttpException -> {
-                            _userAttendStatusUiState.update { currentState ->
+                            _topAppBarUiState.update { currentState ->
                                 currentState.copy(
-                                    isError = true
+                                    isEmpty = true
                                 )
                             }
                         }
 
                         is IOException -> {
-                            _userAttendStatusUiState.update { currentState ->
+                            _topAppBarUiState.update { currentState ->
                                 currentState.copy(
-                                    isError = true
+                                    isEmpty = true
                                 )
                             }
                         }
@@ -65,22 +69,16 @@ class UserAttendStatusViewModel @Inject constructor(
         }
     }
 
-    fun putUserAttendStatus(
-        programId: Int,
-        beforeAttendStatus: String,
-        afterAttendStatus: String
-    ) {
+    fun putActiveStatus(activeStatus: String) {
         viewModelScope.launch {
-            programRepository.putAttendStatus(
-                programId = programId,
-                requestPutAttendStatusDto = RequestPutAttendStatusDto(
-                    beforeAttendStatus = beforeAttendStatus,
-                    afterAttendStatus = afterAttendStatus
+            infoRepository.putActiveStatus(
+                RequestPutActiveStatusDto(
+                    activeStatus = activeStatus
                 )
             )
                 .onSuccess {
-                    getUserAttendStatus(programId)
-                    _userAttendStatusUiState.value.snackbarHostState
+                    getActiveStatus()
+                    _topAppBarUiState.value.snackbarHostState
                         .showSnackbar(
                             message = "상태가 변경 되었습니다.",
                             duration = SnackbarDuration.Long
@@ -89,17 +87,17 @@ class UserAttendStatusViewModel @Inject constructor(
                 .onFailure { exception ->
                     when (exception) {
                         is HttpException -> {
-                            _userAttendStatusUiState.update { currentState ->
+                            _topAppBarUiState.update { currentState ->
                                 currentState.copy(
-                                    isError = true
+                                    isEmpty = true
                                 )
                             }
                         }
 
                         is IOException -> {
-                            _userAttendStatusUiState.update { currentState ->
+                            _topAppBarUiState.update { currentState ->
                                 currentState.copy(
-                                    isError = true
+                                    isEmpty = true
                                 )
                             }
                         }
