@@ -1,44 +1,73 @@
+// TODO: 서버 컴포넌트로 변경하기
 "use client";
 
 import Paginataion from "@/components/common/pagination/Pagination";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
 import ProgramList from "@/components/main/ProgramList";
-import ProgramListSkeleton from "@/components/main/ProgramList.loader";
+import ProgramListLoader from "@/components/main/ProgramList.loader";
+import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
-import {
-  pageAtom,
-  programCategoryAtom,
-  programStatusAtom,
-  totalPageAtom,
-} from "@/storages/main.atom";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
-import { useAtom, useAtomValue } from "jotai";
-import { Suspense } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 
 const MainPage = () => {
-  const [category, setCategory] = useAtom(programCategoryAtom);
-  const [status, setStatus] = useAtom(programStatusAtom);
-  const [page, setPage] = useAtom(pageAtom);
-  const totalPage = useAtomValue(totalPageAtom);
+  const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+
+  // TODO: Hook으로 변경하기
+  const [queryValue, setQueryValue] = useState(MAIN.DEFAULT_QUERY);
+
+  // TODO: useEffect를 Hook으로 변경하기
+  useEffect(() => {
+    setQueryValue({
+      ...MAIN.DEFAULT_QUERY,
+      category:
+        (searchParams.get("category") as ProgramCategoryWithAll) ?? "all",
+      status: (searchParams.get("status") as ProgramStatus) ?? "active",
+      page: searchParams.get("page") ?? "1",
+    });
+  }, [searchParams]);
+
+  useEffect(() => {
+    window.history.replaceState(
+      {},
+      "",
+      `?category=${queryValue.category}&status=${queryValue.status}&page=${queryValue.page}`,
+    );
+  }, [queryValue]);
 
   const handleSetCategory = (category: ProgramCategoryWithAll) => {
-    setCategory(category);
+    setQueryValue({
+      ...queryValue,
+      category,
+      page: "1",
+    });
   };
 
   const handleSetStatus = (status: ProgramStatus) => {
-    setStatus(status);
+    setQueryValue({
+      ...queryValue,
+      status,
+      page: "1",
+    });
   };
 
   const handleSetPage = (page: number) => {
-    setPage(page);
+    setQueryValue({
+      ...queryValue,
+      page: page.toString(),
+    });
   };
 
+  // TODO: 합성 컴포넌트!
   return (
-    <div className="w-full space-y-8">
+    <div className="space-y-8">
       <Tab<ProgramCategoryWithAll>
-        options={PROGRAM.CATEGORY_TAB_WITH_ALL}
-        selected={category}
+        options={Object.values(PROGRAM.CATEGORY_TAB_WITH_ALL)}
+        selected={queryValue.category}
         onItemClick={(v) => handleSetCategory(v)}
         size="lg"
         baseColor="white"
@@ -46,18 +75,22 @@ const MainPage = () => {
         align="line"
       />
       <TextTab<ProgramStatus>
-        options={PROGRAM.STATUS_TAB}
-        selected={status}
+        options={Object.values(PROGRAM.STATUS_TAB)}
+        selected={queryValue.status}
         onClick={(v) => handleSetStatus(v)}
       />
-      <Suspense fallback={<ProgramListSkeleton />}>
-        <ProgramList category={category} programStatus={status} page={page} />
+      <Suspense fallback={<ProgramListLoader />}>
+        <ProgramList
+          category={queryValue.category}
+          programStatus={queryValue.status}
+          page={+queryValue.page}
+        />
+        <Paginataion
+          totalPage={queryClient.getQueryData<number>(["totalPage"])}
+          currentPage={+queryValue.page}
+          onChange={(v) => handleSetPage(v)}
+        />
       </Suspense>
-      <Paginataion
-        totalPage={totalPage}
-        currentPage={page}
-        onChange={(v) => handleSetPage(v)}
-      />
     </div>
   );
 };
