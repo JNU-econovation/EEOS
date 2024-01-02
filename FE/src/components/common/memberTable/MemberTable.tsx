@@ -1,6 +1,6 @@
 "use client";
 
-import { ActiveStatusWithAll } from "@/types/member";
+import { ActiveStatusWithAll, AttendStatus } from "@/types/member";
 import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import { FormType } from "@/types/form";
 import Tab from "../tabs/Tab";
@@ -8,14 +8,23 @@ import MemberTableHeader from "./MemberTableHeader";
 import CreateMemberTableItemContainer from "@/components/programCreate/CreateMemberTableItemContainer";
 import EditMemberTableItemContainer from "@/components/programEdit/EditMemberTableItemContainer";
 import { Suspense, useState } from "react";
+import { Members } from "@/components/programEdit/ProgramEditForm";
 
 interface MemberTableProps {
   formType: FormType;
-  members: Set<number>;
-  setMembers: (members: Set<number>) => void;
+  members: Set<number> | Map<number, Members>;
+  setMembers:
+    | ((memberId: number) => void)
+    | ((memberId: number, before: AttendStatus, after: AttendStatus) => void);
+  programId?: number;
 }
 
-const MemberTable = ({ formType, members, setMembers }: MemberTableProps) => {
+const MemberTable = ({
+  formType,
+  members,
+  setMembers,
+  programId,
+}: MemberTableProps) => {
   const [selectedActive, setSelectedActive] =
     useState<ActiveStatusWithAll>("all");
   return (
@@ -38,12 +47,23 @@ const MemberTable = ({ formType, members, setMembers }: MemberTableProps) => {
         <Suspense fallback={<div>로딩중...</div>}>
           {formType === "create" ? (
             <CreateMemberTableItemContainer
-              members={members}
-              setMembers={setMembers}
+              members={members as Set<number>}
+              setMembers={setMembers as (memberId: number) => void}
               status={selectedActive}
             />
           ) : (
-            <EditMemberTableItemContainer />
+            <EditMemberTableItemContainer
+              members={members as Map<number, Members>}
+              setMembers={
+                setMembers as (
+                  memberId: number,
+                  before: AttendStatus,
+                  after: AttendStatus,
+                ) => void
+              }
+              status={selectedActive}
+              programId={programId || 0}
+            />
           )}
         </Suspense>
       </div>
