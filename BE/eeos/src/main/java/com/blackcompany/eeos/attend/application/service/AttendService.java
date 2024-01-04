@@ -4,10 +4,11 @@ import com.blackcompany.eeos.attend.application.dto.AttendInfoResponse;
 import com.blackcompany.eeos.attend.application.dto.ChangeStatusRequest;
 import com.blackcompany.eeos.attend.application.dto.converter.AttendInfoConverter;
 import com.blackcompany.eeos.attend.application.exception.NotFoundAttendException;
+import com.blackcompany.eeos.attend.application.exception.NotSameBeforeAttendStatusException;
 import com.blackcompany.eeos.attend.application.model.AttendModel;
 import com.blackcompany.eeos.attend.application.model.AttendStatus;
 import com.blackcompany.eeos.attend.application.model.converter.AttendEntityConverter;
-import com.blackcompany.eeos.attend.application.usecase.ChangeStatusUsecase;
+import com.blackcompany.eeos.attend.application.usecase.ChangeAttendStatusUsecase;
 import com.blackcompany.eeos.attend.application.usecase.GetAttendantInfoUsecase;
 import com.blackcompany.eeos.attend.persistence.AttendEntity;
 import com.blackcompany.eeos.attend.persistence.AttendRepository;
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class AttendService implements GetAttendantInfoUsecase, ChangeStatusUsecase {
+public class AttendService implements GetAttendantInfoUsecase, ChangeAttendStatusUsecase {
 
 	private final AttendRepository attendRepository;
 
@@ -44,7 +45,7 @@ public class AttendService implements GetAttendantInfoUsecase, ChangeStatusUseca
 		return attendRepository
 				.findByProgramIdAndMemberId(programId, memberId)
 				.map(AttendEntity::getStatus)
-				.orElseThrow(NotFoundAttendException::new);
+				.orElseThrow(() -> new NotFoundAttendException(programId));
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class AttendService implements GetAttendantInfoUsecase, ChangeStatusUseca
 				attendRepository
 						.findByProgramIdAndMemberId(programId, request.getMemberId())
 						.map(attendEntityConverter::from)
-						.orElseThrow(NotFoundAttendException::new);
+						.orElseThrow(() -> new NotSameBeforeAttendStatusException(request.getMemberId()));
 
 		model.isSame(request.getBeforeAttendStatus());
 

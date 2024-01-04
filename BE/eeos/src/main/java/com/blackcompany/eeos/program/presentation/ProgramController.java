@@ -6,9 +6,9 @@ import com.blackcompany.eeos.common.presentation.respnose.ApiResponseGenerator;
 import com.blackcompany.eeos.common.presentation.respnose.MessageCode;
 import com.blackcompany.eeos.program.application.dto.CommandProgramResponse;
 import com.blackcompany.eeos.program.application.dto.CreateProgramRequest;
-import com.blackcompany.eeos.program.application.dto.GetProgramResponse;
-import com.blackcompany.eeos.program.application.dto.GetProgramsResponse;
 import com.blackcompany.eeos.program.application.dto.PageResponse;
+import com.blackcompany.eeos.program.application.dto.QueryProgramResponse;
+import com.blackcompany.eeos.program.application.dto.QueryProgramsResponse;
 import com.blackcompany.eeos.program.application.dto.UpdateProgramRequest;
 import com.blackcompany.eeos.program.application.usecase.CreateProgramUsecase;
 import com.blackcompany.eeos.program.application.usecase.GetProgramUsecase;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/programs")
 public class ProgramController {
 
-	private final CreateProgramUsecase createBoardUsecase;
+	private final CreateProgramUsecase createProgramUsecase;
 	private final GetProgramUsecase getProgramUsecase;
 	private final UpdateProgramUsecase updateProgramUsecase;
 	private final GetProgramsUsecase getProgramsUsecase;
@@ -39,14 +39,14 @@ public class ProgramController {
 	@PostMapping
 	public ApiResponse<SuccessBody<CommandProgramResponse>> create(
 			@RequestBody @Valid CreateProgramRequest request) {
-		CommandProgramResponse response = createBoardUsecase.create(request);
+		CommandProgramResponse response = createProgramUsecase.create(request);
 		return ApiResponseGenerator.success(response, HttpStatus.CREATED, MessageCode.CREATE);
 	}
 
 	@GetMapping("/{programId}")
-	public ApiResponse<SuccessBody<GetProgramResponse>> findOne(
+	public ApiResponse<SuccessBody<QueryProgramResponse>> findOne(
 			@PathVariable("programId") Long programId) {
-		GetProgramResponse response = getProgramUsecase.getProgram(programId);
+		QueryProgramResponse response = getProgramUsecase.getProgram(programId);
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 
@@ -58,11 +58,12 @@ public class ProgramController {
 	}
 
 	@GetMapping()
-	public ApiResponse<SuccessBody<PageResponse<GetProgramsResponse>>> findAll(
+	public ApiResponse<SuccessBody<PageResponse<QueryProgramsResponse>>> findAll(
 			@RequestParam("programStatus") String status,
 			@RequestParam("size") int size,
 			@RequestParam("page") int page) {
-		PageResponse<GetProgramsResponse> response = getProgramsUsecase.getPrograms(status, size, page);
+		PageResponse<QueryProgramsResponse> response =
+				getProgramsUsecase.getPrograms(status, size, page);
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 }

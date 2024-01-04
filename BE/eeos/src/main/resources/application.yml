@@ -3,6 +3,17 @@ spring:
     group:
       local:
         - local-mysql
+        - api
+        - oauth
+        - local-token
       dev:
-        - dev-mysql
+        - mysql
+        - api
+        - oauth
+        - token
+      prod:
+        - mysql
+        - api
+        - oauth
+        - token
     active: local
