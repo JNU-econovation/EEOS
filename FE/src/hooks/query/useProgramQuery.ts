@@ -76,11 +76,7 @@ export const useGetProgramList = ({
 
   const result = useQuery({
     queryKey: [API.PROGRAM.LIST, category, programStatus, size, page],
-    queryFn: () =>
-      getProgramList({ category, programStatus, size, page }).then((res) => {
-        queryClient.setQueryData<number>(["totalPage"], res.totalPage);
-        return res;
-      }),
+    queryFn: () => getProgramList({ category, programStatus, size, page }),
     select: (data) => ({
       totalPage: data.totalPage,
       programs: data.programs,
