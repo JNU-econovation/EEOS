@@ -46,7 +46,11 @@ const ProgramForm = ({
 
   return (
     <form className="space-y-6" onSubmit={onSubmit}>
-      <ProgramTitle title={title} setTitle={(v) => setTitle(v)}>
+      <ProgramTitle
+        title={title}
+        setTitle={(v) => setTitle(v)}
+        prefix={isDemand && FORM_INFO.DEMAND_PREFIX}
+      >
         <ProgramDemandCheckBox
           disabled={demandCheckBoxDisabled}
           isDemand={isDemand}

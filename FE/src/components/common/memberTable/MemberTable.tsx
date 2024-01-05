@@ -18,6 +18,7 @@ interface MemberTableProps {
     | ((memberId: number, before: AttendStatus, after: AttendStatus) => void);
   onClickHeaderCheckBox?: (selected: boolean) => void;
   programId?: number;
+  isEditable?: boolean;
 }
 
 const MemberTable = ({
@@ -26,6 +27,7 @@ const MemberTable = ({
   setMembers,
   onClickHeaderCheckBox = () => {},
   programId,
+  isEditable = true,
 }: MemberTableProps) => {
   const [selectedActive, setSelectedActive] =
     useState<ActiveStatusWithAll>("all");
@@ -55,7 +57,6 @@ const MemberTable = ({
             />
           ) : (
             <EditMemberTableItemContainer
-              members={members as Map<number, Members>}
               setMembers={
                 setMembers as (
                   memberId: number,
@@ -65,6 +66,7 @@ const MemberTable = ({
               }
               status={selectedActive}
               programId={programId || 0}
+              isEditable={isEditable}
             />
           )}
         </Suspense>
