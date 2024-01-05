@@ -8,7 +8,6 @@ export interface ProgramFormDataState {
   type: ProgramType;
   category: ProgramCategory;
   content: string;
-  // members: Set<number>;
 }
 
 export interface ProgramFormDataAction {
@@ -17,7 +16,6 @@ export interface ProgramFormDataAction {
   setType: React.Dispatch<React.SetStateAction<ProgramType>>;
   setCategory: React.Dispatch<React.SetStateAction<ProgramCategory>>;
   setContent: React.Dispatch<React.SetStateAction<string>>;
-  // setMembers: React.Dispatch<React.SetStateAction<Set<number>>>;
   reset: () => void;
 }
 
@@ -27,7 +25,6 @@ const initalState: ProgramFormDataState = {
   type: "notification",
   category: "weekly",
   content: "",
-  // members: new Set<number>(),
 };
 
 export interface ProgramFormData
@@ -44,7 +41,6 @@ const useProgramFormData = (
     defaultData.category,
   );
   const [content, setContent] = useState<string>(defaultData.content);
-  // const [members, setMembers] = useState<Set<number>>(defaultData.members);
 
   const reset = () => {
     setTitle(defaultData.title);
@@ -52,7 +48,6 @@ const useProgramFormData = (
     setType(defaultData.type);
     setCategory(defaultData.category);
     setContent(defaultData.content);
-    // setMembers(defaultData.members);
   };
 
   return {
@@ -66,8 +61,6 @@ const useProgramFormData = (
     setCategory,
     content,
     setContent,
-    // members,
-    // setMembers,
     reset,
   };
 };
