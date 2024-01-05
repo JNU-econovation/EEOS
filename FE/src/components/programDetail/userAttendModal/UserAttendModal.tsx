@@ -65,7 +65,7 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
         height={6}
         style={{ width: 38, height: 6 }}
       />
-      <AttendStatusView userInfo={userInfo} />
+      <AttendStatusView userInfo={userInfo} programId={programId} />
       <AttendToggleLabel canEdit={canEdit} />
       <AttendStatusToggle
         selectedValue={attendStatus}
