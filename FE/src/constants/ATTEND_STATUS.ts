@@ -1,70 +1,86 @@
-// FIXME: {type, text, color, icon}[]의 형태로 바꾸기
+import { AttendStatus } from "@/types/member";
+import { TabOption } from "@/types/tab";
 
-import { attendStatus } from "../apis/types/member";
-
-interface badgeStyle {
-  type: attendStatus;
-  text: string;
-  color: "gray" | "green" | "yellow" | "red" | "teal";
-}
-
-interface titleStyle extends Omit<badgeStyle, "color"> {
+export interface AttendStatusToggleOption extends TabOption<AttendStatus> {
   color: string;
-  icon: string;
 }
+type AttendStatusToggle = {
+  [key in Exclude<
+    AttendStatus,
+    "nonRelated" | "nonResponse"
+  >]: AttendStatusToggleOption;
+};
 
-const TITLE_STYLE: titleStyle[] = [
-  {
+type AttendStatusList = {
+  [key in Exclude<AttendStatus, "nonRelated">]: TabOption<AttendStatus> & {
+    icon: string;
+    color: string;
+  };
+};
+
+type AttendStatusUser = {
+  [key in AttendStatus]: TabOption<AttendStatus> & {
+    color: string;
+    demand_text?: string;
+  };
+};
+
+const TOGGLE: AttendStatusToggle = {
+  attend: { type: "attend", text: "참석", color: "green" },
+  absent: { type: "absent", text: "불참", color: "red" },
+  perceive: { type: "perceive", text: "지각", color: "yellow" },
+};
+
+const LIST: AttendStatusList = {
+  attend: {
     type: "attend",
     text: "참석",
-    color: "bg-success-30",
     icon: "/icons/check.svg",
-  },
-  { type: "absent", text: "불참", color: "bg-action-20", icon: "/icons/x.svg" },
-  {
-    type: "perceive",
-    text: "지각",
-    color: "bg-warning-20",
-    icon: "/icons/click.svg",
-  },
-  {
-    type: "nonResponse",
-    text: "미정",
-    color: "bg-gray-20",
-    icon: "/icons/minus.svg",
-  },
-] as const;
-
-const BADGE_STYLE: badgeStyle[] = [
-  {
-    type: "attend",
-    text: "참석",
     color: "green",
   },
-  {
-    type: "perceive",
-    text: "지각",
-    color: "yellow",
-  },
-  {
+  absent: {
     type: "absent",
     text: "불참",
+    icon: "/icons/x.svg",
     color: "red",
   },
-  {
-    type: "nonResponse",
-    text: "출석체크 해주세요!",
-    color: "teal",
+  perceive: {
+    type: "perceive",
+    text: "지각",
+    icon: "/icons/clock.svg",
+    color: "yellow",
   },
-  {
-    type: "nonRelated",
-    text: "본 행사와 관련없음",
+  nonResponse: {
+    type: "nonResponse",
+    text: "미응답",
+    icon: "/icons/minus.svg",
     color: "gray",
   },
-] as const;
+};
 
-const LABEL = "본인의 출석 상태를 선택해주세요.";
+const USER: AttendStatusUser = {
+  ...TOGGLE,
+  nonResponse: {
+    type: "nonResponse",
+    text: "출석체크 해주세요!",
+    demand_text: "수요조사 해주세요!",
+    color: "teal",
+  },
+  nonRelated: {
+    type: "nonRelated",
+    text: "본 행사와 관련 없음",
+    color: "gray",
+  },
+};
 
-Object.freeze(TITLE_STYLE);
-Object.freeze(BADGE_STYLE);
-export default { TITLE_STYLE, BADGE_STYLE, LABEL };
+const LABEL = {
+  canEdit: "본인의 출석 상태를 선택해주세요.",
+  cannotEdit: "출석 상태를 변경할 수 없습니다.",
+};
+
+Object.freeze(TOGGLE);
+Object.freeze(LIST);
+Object.freeze(USER);
+Object.freeze(LABEL);
+
+export default { TOGGLE, LIST, USER, LABEL };

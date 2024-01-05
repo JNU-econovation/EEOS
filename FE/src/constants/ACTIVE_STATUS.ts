@@ -1,27 +1,26 @@
-const CATEGORY = [
-  {
-    text: "All",
-    type: "all",
-  },
-  {
-    text: "AM",
-    type: "am",
-  },
-  {
-    text: "RM",
-    type: "rm",
-  },
-  {
-    text: "CM",
-    type: "cm",
-  },
-  {
-    text: "OB",
-    type: "ob",
-  },
-];
+import { ActiveStatus, ActiveStatusWithAll } from "@/types/member";
+import { TabOption } from "@/types/tab";
 
-const LABEL = "본인의 회원 상태를 선택해주세요.";
+type ActiveStatusTab = {
+  [key in ActiveStatus]: TabOption<ActiveStatus>;
+};
+type ActiveStatusWithAllTab = {
+  [key in ActiveStatusWithAll]: TabOption<ActiveStatusWithAll>;
+};
 
-Object.freeze(CATEGORY);
-export default { CATEGORY, LABEL };
+const TAB: ActiveStatusTab = {
+  am: { type: "am", text: "AM" },
+  rm: { type: "rm", text: "RM" },
+  cm: { type: "cm", text: "CM" },
+  ob: { type: "ob", text: "OB" },
+};
+
+const TAB_WITH_ALL: ActiveStatusWithAllTab = {
+  all: { type: "all", text: "All" },
+  ...TAB,
+};
+
+Object.freeze(TAB);
+Object.freeze(TAB_WITH_ALL);
+
+export default { TAB, TAB_WITH_ALL };

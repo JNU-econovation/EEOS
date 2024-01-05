@@ -1,12 +1,12 @@
-interface IError {
+interface Error {
   TITLE: string;
   DESCRIPTION: string[];
   BUTTON_TEXT: string;
   IMAGE_URL: string;
 }
 
-const ERROR: IError = {
-  TITLE: "404 ERROR",
+const ERROR: Error = {
+  TITLE: "ERROR",
   DESCRIPTION: [
     "죄송합니다. 페이지를 찾을 수 없습니다.",
     "존재하지 않은 주소를 입력하셨거나,",

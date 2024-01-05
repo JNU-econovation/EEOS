@@ -1,8 +1,8 @@
 const ROUTES = {
-  HOME: "/",
+  MAIN: "/main",
   CREATE: "/create",
-  DETAIL: "/detail",
-  EDIT: "/edit",
+  DETAIL: (programId: number) => `/detail/${programId}`,
+  EDIT: (programId: number) => `/edit/${programId}`,
   ERROR: "/error",
 };
 
