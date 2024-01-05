@@ -10,7 +10,7 @@ import { ProgramInfo } from "@/types/program";
 
 interface ProgramEditFormProps {
   programId: string;
-  programInfo: Omit<ProgramInfo, "programId" | "programStatus">;
+  programInfo: Omit<ProgramInfo, "programId">;
 }
 
 export interface Members {
@@ -47,12 +47,10 @@ const ProgramEditForm = ({ programId, programInfo }: ProgramEditFormProps) => {
     after: AttendStatus,
   ) => {
     const newMembers = new Map<number, Members>(members);
-    console.log("before : ", before, "after : ", after);
 
     if (before === after) {
       newMembers.delete(memberId);
     }
-
     if (before !== after) {
       newMembers.set(memberId, {
         beforeAttendStatus: before,
@@ -84,6 +82,7 @@ const ProgramEditForm = ({ programId, programInfo }: ProgramEditFormProps) => {
         members={members}
         setMembers={updateMembers}
         programId={+programId}
+        isEditable={programInfo.programStatus === "active"}
       />
     </ProgramForm>
   );
