@@ -6,22 +6,24 @@ import MemberTable from "../common/memberTable/MemberTable";
 import useProgramFormData from "@/hooks/useProgramFormData";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateProgram } from "@/hooks/query/useProgramQuery";
+import FORM_INFO from "@/constants/FORM_INFO";
 
 const ProgramCreateForm = () => {
   const queryClient = useQueryClient();
-  const formData = useProgramFormData();
   const [members, setMembers] = useState<Set<number>>(new Set<number>());
+  const formData = useProgramFormData();
+  const { title, deadLine, content, category, type, reset } = formData;
 
   const { mutate: createProgramMutate } = useCreateProgram({
     programData: {
       members: Array.from(members, (memberId) => ({ memberId })),
-      title: formData.title,
-      deadLine: formData.deadLine,
-      content: formData.content,
-      category: formData.category,
-      type: formData.type,
+      title: type === "demand" ? `${FORM_INFO.DEMAND_PREFIX} ${title}` : title,
+      deadLine: deadLine,
+      content: content,
+      category: category,
+      type: type,
     },
-    formReset: formData.reset,
+    formReset: reset,
   });
 
   const updateMembers = (memberId: number) => {
@@ -46,13 +48,7 @@ const ProgramCreateForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      !formData.title ||
-      !formData.content ||
-      !formData.deadLine ||
-      !formData.category ||
-      !formData.type
-    ) {
+    if (!title || !content || !deadLine || !category || !type) {
       alert("모든 항목을 입력해주세요.");
       return;
     }
