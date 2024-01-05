@@ -12,7 +12,7 @@ import {
   postProgram,
 } from "@/apis/program";
 import API from "@/constants/API";
-import { ProgramStatus } from "@/types/program";
+import { ProgramStatus, ProgramType } from "@/types/program";
 
 interface CreateProgram {
   programData: PostProgramRequest;
@@ -60,6 +60,10 @@ export const useGetProgramById = (programId: number) => {
         queryClient.setQueryData<ProgramStatus>(
           ["programStatus", programId],
           res.programStatus,
+        );
+        queryClient.setQueryData<ProgramType>(
+          ["programType", programId],
+          res.type,
         );
         return res;
       }),
