@@ -27,13 +27,20 @@ const AttendStatusToggle = ({
     },
   );
 
+  const getItemColor = (type: AttendStatus, color: string) => {
+    if (disabled) {
+      return "gray";
+    }
+    return selectedValue === type ? color : "gray";
+  };
+
   return (
     <div className={selectorStyle}>
       {options.map((option) => (
         <div onClick={() => handleClick(option)} key={option.text}>
           <AttendStatusToggleItem
             text={option.text}
-            color={selectedValue === option.type ? option.color : "gray"}
+            color={getItemColor(option.type, option.color)}
           />
         </div>
       ))}

@@ -1,10 +1,10 @@
 import { FormType } from "@/types/form";
 import CheckBox from "../CheckBox";
+import { useState } from "react";
 
 interface MemberTableHeaderProps {
   formType: FormType;
-  checked: boolean;
-  onClickCheckBox: () => void;
+  onClickCheckBox: (selected: boolean) => void;
 }
 
 const HEADER_TEXT = {
@@ -14,13 +14,19 @@ const HEADER_TEXT = {
 
 const MemberTableHeader = ({
   formType,
-  checked,
   onClickCheckBox,
 }: MemberTableHeaderProps) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleClickCheckBox = () => {
+    onClickCheckBox(!checked);
+    setChecked((prev) => !prev);
+  };
+
   return (
     <div className="grid grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] justify-items-center gap-4 border-y-2 border-stroke-10 bg-gray-10 px-10 py-4 font-bold">
-      {formType !== "edit" ? (
-        <CheckBox checked={checked} onClick={() => onClickCheckBox()} />
+      {formType === "create" ? (
+        <CheckBox checked={checked} onClick={handleClickCheckBox} />
       ) : (
         <span></span>
       )}

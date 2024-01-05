@@ -84,11 +84,7 @@ const MainPage = () => {
           category={queryValue.category}
           programStatus={queryValue.status}
           page={+queryValue.page}
-        />
-        <Paginataion
-          totalPage={queryClient.getQueryData<number>(["totalPage"])}
-          currentPage={+queryValue.page}
-          onChange={(v) => handleSetPage(v)}
+          setPage={handleSetPage}
         />
       </Suspense>
     </div>

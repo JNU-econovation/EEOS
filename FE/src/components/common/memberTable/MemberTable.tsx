@@ -16,6 +16,7 @@ interface MemberTableProps {
   setMembers:
     | ((memberId: number) => void)
     | ((memberId: number, before: AttendStatus, after: AttendStatus) => void);
+  onClickHeaderCheckBox?: (selected: boolean) => void;
   programId?: number;
 }
 
@@ -23,10 +24,12 @@ const MemberTable = ({
   formType,
   members,
   setMembers,
+  onClickHeaderCheckBox = () => {},
   programId,
 }: MemberTableProps) => {
   const [selectedActive, setSelectedActive] =
     useState<ActiveStatusWithAll>("all");
+
   return (
     <div className="space-y-6 pt-10">
       <Tab<ActiveStatusWithAll>
@@ -41,8 +44,7 @@ const MemberTable = ({
       <div>
         <MemberTableHeader
           formType={formType}
-          checked={false}
-          onClickCheckBox={() => {}}
+          onClickCheckBox={onClickHeaderCheckBox}
         />
         <Suspense fallback={<div>로딩중...</div>}>
           {formType === "create" ? (
