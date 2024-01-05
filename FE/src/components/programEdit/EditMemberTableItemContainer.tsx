@@ -4,7 +4,6 @@ import EditMemberTableItem from "./EditMemberTableItem";
 import { Members } from "./ProgramEditForm";
 
 interface EditMemberTableItemContainerProps {
-  members: Map<number, Members>;
   setMembers: (
     memberId: number,
     before: AttendStatus,
@@ -12,13 +11,14 @@ interface EditMemberTableItemContainerProps {
   ) => void;
   status: ActiveStatusWithAll;
   programId: number;
+  isEditable?: boolean;
 }
 
 const EditMemberTableItemContainer = ({
-  members,
   setMembers,
   programId,
   status,
+  isEditable = true,
 }: EditMemberTableItemContainerProps) => {
   const {
     data: memberList,
@@ -41,8 +41,8 @@ const EditMemberTableItemContainer = ({
           name={member.name}
           activeStatus={member.activeStatus}
           initAttendStatus={member.attendStatus}
-          members={members}
           setMembers={setMembers}
+          isEditable={isEditable}
         />
       ))}
     </>

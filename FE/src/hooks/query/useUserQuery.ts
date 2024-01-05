@@ -16,10 +16,11 @@ export const useGetMyActiveStatus = () => {
   });
 };
 
-export const usePutMyActiveStatus = (activeStatus: ActiveStatus) => {
+export const usePutMyActiveStatus = () => {
   return useMutation({
     mutationKey: [API.USER.ACTIVE_STATUS],
-    mutationFn: () => putMyActiveStatus({ activeStatus }),
+    mutationFn: (activeStatus: ActiveStatus) =>
+      putMyActiveStatus({ activeStatus }),
   });
 };
 
