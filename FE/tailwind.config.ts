@@ -7,6 +7,7 @@ const config = {
   theme: {
     extend: {
       colors: {
+        slack: "#4A154B",
         background: "#FFFFFE",
         black: "#000000",
         paragraph: "#2D334A",
