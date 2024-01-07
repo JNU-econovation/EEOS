@@ -4,14 +4,17 @@ import { usePutMyActiveStatus } from "@/hooks/query/useUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
 import API from "@/constants/API";
 import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
+import MESSAGE from "@/constants/MESSAGE";
 
 const ActiveStatusTab = ({ activeStatus }) => {
   const queryClient = useQueryClient();
   const { mutate: changeActiveStatus } = usePutMyActiveStatus();
 
   const handleChangeActiveStatus = (activeStatus: ActiveStatus) => {
-    changeActiveStatus(activeStatus);
-    queryClient.invalidateQueries([API.USER.ACTIVE_STATUS]);
+    if (confirm(MESSAGE.CONFIRM.EDIT)) {
+      changeActiveStatus(activeStatus);
+      queryClient.invalidateQueries([API.USER.ACTIVE_STATUS]);
+    }
   };
 
   return (
