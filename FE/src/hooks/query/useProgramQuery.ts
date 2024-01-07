@@ -45,9 +45,13 @@ export const useUpdateProgram = ({ programId, body }: PatchProgramRequest) => {
 };
 
 export const useDeleteProgram = (programId: number) => {
+  const router = useRouter();
   return useMutation({
     mutationKey: [API.PROGRAM.DELETE(programId)],
     mutationFn: () => deleteProgram(programId),
+    onSettled: () => {
+      router.replace(ROUTES.MAIN);
+    },
   });
 };
 
