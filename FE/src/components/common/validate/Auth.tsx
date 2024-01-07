@@ -5,7 +5,7 @@ import { deleteTokenInfo } from "@/utils/authWithStorage";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const Validate = () => {
+const AuthValidate = () => {
   const router = useRouter();
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -19,4 +19,4 @@ const Validate = () => {
 
   return <></>;
 };
-export default Validate;
+export default AuthValidate;

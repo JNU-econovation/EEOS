@@ -1,10 +1,10 @@
-import Validate from "@/components/common/Validate";
+import AuthValidate from "@/components/common/AuthValidate";
 import { PropsWithChildren } from "react";
 
 const PrivateLayout = ({ children }: PropsWithChildren<{}>) => {
   return (
     <>
-      <Validate />
+      <AuthValidate />
       {children}
     </>
   );
