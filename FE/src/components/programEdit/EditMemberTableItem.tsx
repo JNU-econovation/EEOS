@@ -3,7 +3,7 @@ import CheckBox from "../common/CheckBox";
 import AttendStatusToggle from "../common/attendStatusToggle/AttendStatusToggle";
 import { useState } from "react";
 import { AttendStatus } from "@/types/member";
-import ALERT from "@/constants/ALERT";
+import MESSAGE from "@/constants/MESSAGE";
 import classNames from "classnames";
 
 interface EditMemberTableItemProps {
@@ -50,7 +50,7 @@ const EditMemberTableItem = ({
   const handleCheckBoxChange = () => {
     // Alert 훅으로 빼기
     if (!isEditable) {
-      alert(ALERT.EDIT_DISABLED.PROGRAM_ACTIVE);
+      alert(MESSAGE.EDIT_DISABLED.PROGRAM_ACTIVE);
       return;
     }
     const afterAttendStatus = getAfterAttendStatus(
@@ -64,7 +64,7 @@ const EditMemberTableItem = ({
   const handleAttendStatusChange = (value: AttendStatus) => {
     // Alert 훅으로 빼기
     if (!isEditable) {
-      alert(ALERT.EDIT_DISABLED.PROGRAM_ACTIVE);
+      alert(MESSAGE.EDIT_DISABLED.PROGRAM_ACTIVE);
       return;
     }
     setSelectedAttend(value);
