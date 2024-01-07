@@ -6,6 +6,7 @@ import com.blackcompany.eeos.common.utils.DateConverter;
 import com.blackcompany.eeos.program.application.model.ProgramStatus;
 import com.blackcompany.eeos.program.application.service.ProgramStatusService;
 import com.blackcompany.eeos.program.fixture.ProgramStatusServiceFixture;
+import com.blackcompany.eeos.program.persistence.ProgramCategory;
 import com.blackcompany.eeos.program.persistence.ProgramEntity;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ class ProgramStatusServiceCompositeTest {
 
 		// when
 		Page<ProgramEntity> result =
-				composite.getPages(ProgramStatus.ACTIVE, now, PageRequest.of(0, 1));
+				composite.getPages(ProgramCategory.ETC, ProgramStatus.ACTIVE, now, PageRequest.of(0, 1));
 
 		// then
 		assertEquals(result.getContent().size(), 1);
