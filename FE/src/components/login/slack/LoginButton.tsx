@@ -1,12 +1,26 @@
 "use client";
 
+import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const SlackLoginButton = () => {
   const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
   const redirectUrl = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL;
   const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=&user_scope=users.profile:read&redirect_uri=${redirectUrl}`;
+
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+  const { mutate: loginSlack } = useSlackLoginMutation();
+
+  useEffect(() => {
+    if (code) {
+      console.log(code);
+      loginSlack(code);
+    }
+  }, [code]);
 
   return (
     <Link
