@@ -17,14 +17,10 @@ import { https } from "./instance";
  * 프로그램 정보 조회
  */
 
-interface GetProgramByIdResponse {
-  data: ProgramInfo;
-}
-
 export const getProgramById = async (
   programId: number,
 ): Promise<ProgramInfoDto> => {
-  const { data } = await https<GetProgramByIdResponse>({
+  const { data } = await https({
     url: API.PROGRAM.DETAIL(programId),
   });
   return new ProgramInfoDto(data.data);
@@ -77,7 +73,7 @@ export const deleteProgram = async (programId: number) => {
  */
 
 export interface PostProgramRequest
-  extends Omit<ProgramInfo, "programId" | "programStatus"> {
+  extends Omit<ProgramInfo, "programId" | "programStatus" | "accessRight"> {
   members: { memberId: number }[];
 }
 
@@ -103,7 +99,7 @@ export interface PatchProgramMember {
 }
 
 export interface PatchProgramBody
-  extends Omit<ProgramInfo, "programId" | "programStatus"> {
+  extends Omit<ProgramInfo, "programId" | "programStatus" | "accessRight"> {
   members: PatchProgramMember[];
 }
 
