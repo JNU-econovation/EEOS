@@ -1,4 +1,4 @@
-import ALERT from "@/constants/ALERT";
+import MESSAGE from "@/constants/MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { redirect, useRouter } from "next/navigation";
 
@@ -22,7 +22,7 @@ export const removeTokenExpiration = () => {
 };
 
 export const deleteTokenInfo = () => {
-  alert(ALERT.AUTH.LOGIN_REQUIRED);
+  alert(MESSAGE.AUTH.LOGIN_REQUIRED);
   removeAccessToken();
   removeTokenExpiration();
 };

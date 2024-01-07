@@ -1,6 +1,6 @@
 "use client";
 
-import ALERT from "@/constants/ALERT";
+import MESSAGE from "@/constants/MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useGetProgramAccessRight } from "@/hooks/query/useProgramQuery";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const AccessRightValidate = ({ programId }) => {
   }
 
   if (data.accessRight !== "edit") {
-    alert(ALERT.EDIT_DISABLED.NO_RIGHT);
+    alert(MESSAGE.EDIT_DISABLED.NO_RIGHT);
     router.push(ROUTES.MAIN);
   }
 
