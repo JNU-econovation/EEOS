@@ -14,6 +14,7 @@ import AttendToggleLabel from "./AttendToggleLabel";
 import { AttendStatus } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProgramStatus } from "@/types/program";
+import MESSAGE from "@/constants/MESSAGE";
 
 interface UserAttendModalProps {
   programId: number;
@@ -53,7 +54,7 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
   const canEdit = attendStatus !== "nonRelated" && programStatus === "active";
 
   const handleSelectorClick = (value: AttendStatus) => {
-    updateAttendStatus(value);
+    confirm(MESSAGE.CONFIRM.EDIT) && updateAttendStatus(value);
   };
 
   return (
