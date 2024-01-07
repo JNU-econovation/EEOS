@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const SlackLoginButton = () => {
   const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
   const redirectUrl = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL;
-  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&amp;scope=&amp;&user_scope=users.profile:read&amp;redirect_uri=${redirectUrl}`;
+  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&amp;scope=&amp;&user_scope=users.profile:read&amp;&redirect_uri=${redirectUrl}`;
 
   console.log(slackLoginUrl);
 
