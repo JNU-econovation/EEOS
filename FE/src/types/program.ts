@@ -3,6 +3,7 @@ export type ProgramCategoryWithAll = ProgramCategory | "all";
 
 export type ProgramStatus = "active" | "end";
 export type ProgramType = "demand" | "notification";
+export type AccessRight = "edit" | "read_only";
 
 export interface ProgramInfo {
   programId: number;
@@ -12,6 +13,7 @@ export interface ProgramInfo {
   category: ProgramCategory;
   programStatus: ProgramStatus;
   type: ProgramType;
+  accessRight: AccessRight;
 }
 
 export interface ProgramSimpleInfo extends Omit<ProgramInfo, "content"> {}

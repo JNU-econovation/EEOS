@@ -4,6 +4,7 @@ import {
   ProgramInfo,
   ProgramStatus,
   ProgramCategory,
+  AccessRight,
 } from "@/types/program";
 
 export class ProgramIdDto {
@@ -22,6 +23,7 @@ export class ProgramInfoDto {
   public readonly category: ProgramCategory;
   public readonly programStatus: ProgramStatus;
   public readonly type: ProgramType;
+  public readonly accessRight: AccessRight;
 
   constructor(data: ProgramInfo) {
     this.programId = data.programId;
@@ -31,6 +33,7 @@ export class ProgramInfoDto {
     this.category = data.category;
     this.programStatus = data.programStatus;
     this.type = data.type;
+    this.accessRight = data.accessRight;
   }
 }
 
