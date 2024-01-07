@@ -9,7 +9,8 @@ const PROGRAM = {
 
 const MEMBER = {
   LIST: "/members",
-  PROGRAM: (programId: number) => `/programs/${programId}/members`,
+  ACTIVE_STATUS: (programId) => `/programs/${programId}/members`,
+  ATTEND_STATUS: (programId: number) => `/attend/programs/${programId}/members`,
 };
 
 const USER = {
