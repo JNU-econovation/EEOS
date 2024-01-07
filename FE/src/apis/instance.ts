@@ -30,13 +30,31 @@ https.interceptors.request.use(
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
-  return config;
+    return config;
   },
   (error) => Promise.reject(error),
 );
 
-https.interceptors.response.use((config) => {
-  return config;
-});
+https.interceptors.response.use(
+  async (config) => {
+    return config;
+  },
+  async (error) => {
+    const { config: originalRequest, response } = error;
+    const { code } = response.data;
+
+    if (code === 4001) {
+      const { accessToken, accessExpiredTime } = await postTokenReissue();
+
+      setAccessToken(accessToken);
+      setTokenExpiration(accessExpiredTime);
+      originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+
+      return await axios(originalRequest);
+    }
+
+    return Promise.reject(error);
+  },
+);
 
 export { https };
