@@ -5,10 +5,10 @@ name: Backend CI
 # main 브랜치에 push, PR이 되었을 때 workflow 실행
 on:
   push:
-    branches: [ "main","be" ]
+    branches: [ "main","be","release-be" ]
     paths : 'BE/**'
   pull_request:
-    branches: [ "main","be" ]
+    branches: [ "main","be","release-be" ]
     paths : 'BE/**'
 
 defaults:
@@ -22,7 +22,7 @@ jobs:
 
     # JDK setting : github actions에서 사용할 JDK 설정
     - name: Set up JDK 17
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
       with:
         java-version: '17'
         distribution: 'temurin'
