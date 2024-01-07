@@ -17,7 +17,13 @@ const USER = {
   ACTIVE_STATUS: "/members/activeStatus",
 };
 
+const AUTH = {
+  SLACK_LOGIN: "/auth/login/slack",
+  TOKEN_REISSUE: "/auth/reissue",
+};
+
 Object.freeze(PROGRAM);
 Object.freeze(MEMBER);
 Object.freeze(USER);
-export default { PROGRAM, MEMBER, USER };
+Object.freeze(AUTH);
+export default { PROGRAM, MEMBER, USER, AUTH };
