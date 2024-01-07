@@ -61,4 +61,11 @@ public class ProgramModel implements AbstractModel {
 		}
 		throw new DeniedProgramEditException(id);
 	}
+
+	public AccessRights getAccessRight(Long memberId) {
+		if (writer.equals(memberId)) {
+			return AccessRights.EDIT;
+		}
+		return AccessRights.READ_ONLY;
+	}
 }
