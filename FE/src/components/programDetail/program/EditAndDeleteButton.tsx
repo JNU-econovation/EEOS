@@ -1,3 +1,4 @@
+import MESSAGE from "@/constants/MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useDeleteProgram } from "@/hooks/query/useProgramQuery";
 import Image from "next/image";
@@ -6,7 +7,7 @@ import Link from "next/link";
 const EditAndDeleteButton = ({ programId }) => {
   const { mutate: deleteProgram } = useDeleteProgram(programId);
   const handleClickDelete = () => {
-    if (confirm("정말로 삭제하시겠습니까?")) {
+    if (confirm(MESSAGE.CONFIRM.DELETE)) {
       deleteProgram();
     }
   };
