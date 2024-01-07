@@ -1,3 +1,7 @@
+import ALERT from "@/constants/ALERT";
+import ROUTES from "@/constants/ROUTES";
+import { redirect, useRouter } from "next/navigation";
+
 export const setAccessToken = (token: string) => {
   localStorage.removeItem("accessToken");
   localStorage.setItem("accessToken", token);
@@ -15,4 +19,10 @@ export const removeAccessToken = () => {
 
 export const removeTokenExpiration = () => {
   localStorage.removeItem("tokenExpiration");
+};
+
+export const deleteTokenInfo = () => {
+  alert(ALERT.AUTH.LOGIN_REQUIRED);
+  removeAccessToken();
+  removeTokenExpiration();
 };
