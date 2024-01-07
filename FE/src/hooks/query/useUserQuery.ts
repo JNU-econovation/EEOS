@@ -17,10 +17,14 @@ export const useGetMyActiveStatus = () => {
 };
 
 export const usePutMyActiveStatus = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [API.USER.ACTIVE_STATUS],
     mutationFn: (activeStatus: ActiveStatus) =>
       putMyActiveStatus({ activeStatus }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API.USER.ACTIVE_STATUS] });
+    },
   });
 };
 
