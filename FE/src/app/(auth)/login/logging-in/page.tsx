@@ -13,7 +13,10 @@ const LoginSlackCallbackPage = () => {
 
   useEffect(() => {
     if (code) {
-      loginSlack(code);
+      loginSlack({
+        code,
+        redirect_uri: process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI,
+      });
     }
   }, [code]);
 

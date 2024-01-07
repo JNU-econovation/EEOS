@@ -8,10 +8,10 @@ import { useEffect } from "react";
 
 const SlackLoginButton = () => {
   const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
-  const redirectUrl = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL;
-  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&amp;scope=&amp;&user_scope=users.profile:read&amp;&redirect_uri=${redirectUrl}`;
+  const redirectUri = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI;
+  const teamId = process.env.NEXT_PUBLIC_SLACK_TEAM_ID;
 
-  console.log(slackLoginUrl);
+  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&team_id=${teamId}&scope=&user_scope=users.profile:read&redirect_uri=${redirectUri}`;
 
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
@@ -19,8 +19,7 @@ const SlackLoginButton = () => {
 
   useEffect(() => {
     if (code) {
-      console.log(code);
-      loginSlack(code);
+      loginSlack({ code, redirect_uri: redirectUri });
     }
   }, [code]);
 

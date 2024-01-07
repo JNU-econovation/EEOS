@@ -12,8 +12,8 @@ export const useSlackLoginMutation = () => {
   const router = useRouter();
   return useMutation(
     ["slackLogin"],
-    async (code: string) => {
-      return await postSlackLogin(code);
+    async ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
+      return await postSlackLogin(code, redirect_uri);
     },
     {
       onSuccess: (data) => {
