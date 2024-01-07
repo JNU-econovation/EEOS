@@ -1,7 +1,7 @@
 "use client";
 
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import { useSlackLoginMutation } from "@/hooks/query/useLoginQuery";
+import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
