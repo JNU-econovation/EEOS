@@ -36,8 +36,6 @@ const AttendeeInfo = ({ programId, status }: AttendeeInfoProps) => {
   const isRender =
     programType === "demand" && status === "nonResponse" ? false : true;
 
-  console.log(programType);
-
   return (
     <>
       {isRender && (

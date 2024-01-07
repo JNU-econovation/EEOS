@@ -1,7 +1,6 @@
 // TODO: 서버 컴포넌트로 변경하기
 "use client";
 
-import Paginataion from "@/components/common/pagination/Pagination";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
 import ProgramList from "@/components/main/ProgramList";
@@ -9,12 +8,10 @@ import ProgramListLoader from "@/components/main/ProgramList.loader";
 import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
-import { useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const MainPage = () => {
-  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
 
   // TODO: Hook으로 변경하기

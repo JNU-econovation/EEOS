@@ -1,5 +1,6 @@
 const EDIT_DISABLED = {
   PROGRAM_ACTIVE: "진행중인 프로그램은 수정할 수 없습니다.",
+  NO_RIGHT: "수정 권한이 없습니다.",
 };
 
 const AUTH = {

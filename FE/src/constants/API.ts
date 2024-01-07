@@ -4,6 +4,7 @@ const PROGRAM = {
   UPDATE: (programId: number) => `/programs/${programId}`,
   DELETE: (programId: number) => `/programs/${programId}`,
   DETAIL: (programId: number) => `/programs/${programId}`,
+  ACCESS_RIGHT: (programId: number) => `/programs/${programId}/accessRight`,
 };
 
 const MEMBER = {

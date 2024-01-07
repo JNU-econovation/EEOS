@@ -6,6 +6,7 @@ import {
   PatchProgramRequest,
   PostProgramRequest,
   deleteProgram,
+  getProgramAccessRight,
   getProgramById,
   getProgramList,
   patchProgram,
@@ -44,9 +45,13 @@ export const useUpdateProgram = ({ programId, body }: PatchProgramRequest) => {
 };
 
 export const useDeleteProgram = (programId: number) => {
+  const router = useRouter();
   return useMutation({
     mutationKey: [API.PROGRAM.DELETE(programId)],
     mutationFn: () => deleteProgram(programId),
+    onSettled: () => {
+      router.replace(ROUTES.MAIN);
+    },
   });
 };
 
@@ -76,9 +81,7 @@ export const useGetProgramList = ({
   size,
   page,
 }: GetProgramListRequest) => {
-  const queryClient = useQueryClient();
-
-  const result = useQuery({
+  return useQuery({
     queryKey: [API.PROGRAM.LIST, category, programStatus, size, page],
     queryFn: () => getProgramList({ category, programStatus, size, page }),
     select: (data) => ({
@@ -86,6 +89,11 @@ export const useGetProgramList = ({
       programs: data.programs,
     }),
   });
+};
 
-  return result;
+export const useGetProgramAccessRight = (programId: number) => {
+  return useQuery({
+    queryKey: [API.PROGRAM.ACCESS_RIGHT(programId)],
+    queryFn: () => getProgramAccessRight(programId),
+  });
 };
