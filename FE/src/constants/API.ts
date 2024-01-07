@@ -13,8 +13,7 @@ const MEMBER = {
 };
 
 const USER = {
-  ATTEND_STATUS: (programId: number) =>
-    `/programs/${programId}/members/attendStatus`,
+  ATTEND_STATUS: (programId: number) => `/attend/programs/${programId}`,
   ACTIVE_STATUS: "/members/activeStatus",
 };
 
