@@ -1,7 +1,9 @@
 package com.blackcompany.eeos.attend.application.usecase;
 
-import com.blackcompany.eeos.program.application.dto.ChangeAttendStatusRequest;
+import com.blackcompany.eeos.attend.application.dto.ChangeAttendStatusRequest;
+import com.blackcompany.eeos.attend.application.dto.ChangeAttendStatusResponse;
 
 public interface ChangeAttendStatusUsecase {
-	void changeStatus(final ChangeAttendStatusRequest request, final Long programId);
+	ChangeAttendStatusResponse changeStatus(
+			final Long memberId, final ChangeAttendStatusRequest request, final Long programId);
 }

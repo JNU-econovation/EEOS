@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class AttendInfoResponse implements AbstractResponseDto {
-	private Long memberId;
+public class ChangeAttendStatusResponse implements AbstractResponseDto {
 	private String name;
 	private String attendStatus;
 }
