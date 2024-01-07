@@ -1,9 +1,12 @@
 import { postSlackLogin } from "@/apis/auth";
 import ROUTES from "@/constants/ROUTES";
-import { setAccessToken, setTokenExpiration } from "@/utils/authWithStorage";
+import {
+  deleteTokenInfo,
+  setAccessToken,
+  setTokenExpiration,
+} from "@/utils/authWithStorage";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useDeleteTokenAndRedirect } from "../useDeleteTokenAndRedirect";
 
 export const useSlackLoginMutation = () => {
   const router = useRouter();
@@ -26,7 +29,5 @@ export const useSlackLoginMutation = () => {
 };
 
 export const useLogoutMutation = () => {
-  const deleteTokenAndRedirect = useDeleteTokenAndRedirect();
-
-  deleteTokenAndRedirect();
+  return { mutate: deleteTokenInfo };
 };
