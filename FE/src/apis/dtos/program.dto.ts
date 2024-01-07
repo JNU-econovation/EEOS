@@ -75,3 +75,11 @@ export class ProgramListDto {
     });
   }
 }
+
+export class ProgramAccessRightDto {
+  public readonly accessRight: AccessRight;
+
+  constructor(data: { accessRight: AccessRight }) {
+    this.accessRight = data.accessRight;
+  }
+}

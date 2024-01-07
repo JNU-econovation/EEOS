@@ -6,6 +6,7 @@ import {
   ProgramStatus,
 } from "../types/program";
 import {
+  ProgramAccessRightDto,
   ProgramIdDto,
   ProgramInfoDto,
   ProgramListDto,
@@ -122,4 +123,17 @@ export const patchProgram = async ({
   });
 
   return new ProgramIdDto(data.data);
+};
+
+/**
+ * 프로그램 수정 및 삭제 권한 확인
+ */
+export const getProgramAccessRight = async (
+  programId: number,
+): Promise<ProgramAccessRightDto> => {
+  const { data } = await https({
+    url: API.PROGRAM.ACCESS_RIGHT(programId),
+    method: "GET",
+  });
+  return data.data;
 };
