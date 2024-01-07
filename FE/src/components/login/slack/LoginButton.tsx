@@ -6,7 +6,7 @@ import Link from "next/link";
 const SlackLoginButton = () => {
   const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
   const redirectUrl = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL;
-  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=&user_scope=users.profile:read&redirect_url=${redirectUrl}`;
+  const slackLoginUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=&user_scope=users.profile:read&redirect_uri=${redirectUrl}`;
 
   return (
     <Link
