@@ -6,6 +6,7 @@ import ROUTES from "@/constants/ROUTES";
 import { convertDate } from "@/utils/convert";
 import Image from "next/image";
 import Link from "@/components/common/Link";
+import EditAndDeleteButton from "./EditAndDeleteButton";
 
 interface ProgramHeaderProps {
   data: ProgramInfoDto;
@@ -25,25 +26,7 @@ const ProgramHeader = ({ data }: ProgramHeaderProps) => {
       <div className="flex justify-between">
         <p className="text-lg">{DEADLINE_TEXT + convertDate(deadLine)}</p>
         {accessRight === "edit" && (
-          <div className="flex items-end gap-6">
-            <Link href={ROUTES.EDIT(programId)}>
-              <Image
-                src="/icons/pencil.svg"
-                alt="프로그램 수정"
-                width={22}
-                height={22}
-                className="h-[22px] w-[22px] hover:cursor-pointer"
-              />
-            </Link>
-            <Image
-              src="/icons/trash.svg"
-              alt="프로그램 삭제"
-              width={22}
-              height={22}
-              style={{ width: 22, height: 22 }}
-              className="h-[22px] w-[22px] hover:cursor-pointer"
-            />
-          </div>
+          <EditAndDeleteButton programId={programId} />
         )}
       </div>
     </section>
