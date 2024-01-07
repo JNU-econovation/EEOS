@@ -1,6 +1,7 @@
 "use client";
 
 import Title from "@/components/common/Title";
+import AccessRightValidate from "@/components/common/validate/AccessRight";
 import ProgramEditForm from "@/components/programEdit/ProgramEditForm";
 import { useGetProgramById } from "@/hooks/query/useProgramQuery";
 
@@ -22,10 +23,13 @@ const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
   if (isError) return <div>Error!</div>;
 
   return (
-    <div className="space-y-12">
-      <Title text="행사 수정" />
-      <ProgramEditForm programId={programId} programInfo={programInfo} />
-    </div>
+    <>
+      <AccessRightValidate programId={programId} />
+      <div className="space-y-12">
+        <Title text="행사 수정" />
+        <ProgramEditForm programId={programId} programInfo={programInfo} />
+      </div>
+    </>
   );
 };
 
