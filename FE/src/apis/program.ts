@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import API from "../constants/API";
 import { AttendStatus } from "../types/member";
 import {
@@ -12,6 +13,7 @@ import {
   ProgramListDto,
 } from "./dtos/program.dto";
 import { https } from "./instance";
+import MESSAGE from "@/constants/MESSAGE";
 
 /**
  * 프로그램 정보 조회
@@ -61,10 +63,17 @@ export const getProgramList = async ({
  */
 
 export const deleteProgram = async (programId: number) => {
-  const { data } = await https({
-    url: API.PROGRAM.DELETE(programId),
-    method: "DELETE",
-  });
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.DELETE(programId),
+      method: "DELETE",
+    }),
+    {
+      pending: MESSAGE.DELETE.PENDING,
+      success: MESSAGE.DELETE.SUCCESS,
+      error: MESSAGE.DELETE.FAILED,
+    },
+  );
   return data.data;
 };
 
@@ -80,11 +89,18 @@ export interface PostProgramRequest
 export const postProgram = async (
   body: PostProgramRequest,
 ): Promise<ProgramIdDto> => {
-  const { data } = await https({
-    url: API.PROGRAM.CREATE,
-    method: "POST",
-    data: body,
-  });
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.CREATE,
+      method: "POST",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.CREATE.PENDING,
+      success: MESSAGE.CREATE.SUCCESS,
+      error: MESSAGE.CREATE.FAILED,
+    },
+  );
   return new ProgramIdDto(data.data);
 };
 
@@ -112,17 +128,24 @@ export const patchProgram = async ({
   programId,
   body,
 }: PatchProgramRequest): Promise<ProgramIdDto> => {
-  const { data } = await https({
-    url: API.PROGRAM.UPDATE(programId),
-    method: "PATCH",
-    data: body,
-  });
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.UPDATE(programId),
+      method: "PATCH",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.EDIT.PENDING,
+      success: MESSAGE.EDIT.SUCCESS,
+      error: MESSAGE.EDIT.FAILED,
+    },
+  );
 
   return new ProgramIdDto(data.data);
 };
 
 /**
- * 프로그램 수정 및 삭제 권한 확인
+ * 프로그램 수정/삭제 권한 확인
  */
 export const getProgramAccessRight = async (
   programId: number,
