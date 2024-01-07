@@ -27,7 +27,7 @@ const ProgramList = ({
   } = useGetProgramList({
     category,
     programStatus,
-    page,
+    page: page - 1,
     size: PROGRAM.LIST_SIZE,
   });
 
