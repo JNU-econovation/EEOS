@@ -10,7 +10,7 @@ const Validate = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const tokenExpiration = localStorage.getItem("tokenExpiration");
-    console.log(accessToken, tokenExpiration);
+
     if (!accessToken || !tokenExpiration) {
       deleteTokenInfo();
       router.push(ROUTES.LOGIN);
