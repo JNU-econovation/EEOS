@@ -2,7 +2,7 @@ import classNames from "classnames";
 
 interface TitleProps {
   text: string;
-  textColor?: string;
+  textColor?: keyof typeof titleColors;
 }
 
 const titleColors = {
