@@ -74,7 +74,7 @@ const EditMemberTableItem = ({
   return (
     <div className={itemStyle}>
       <CheckBox checked={isRelated} onClick={handleCheckBoxChange} />
-      <span>{ACTIVE_STATUS.TAB[activeStatus].text}</span>
+      <span>{ACTIVE_STATUS.TAB[activeStatus]?.text ?? "."}</span>
       <span className="font-bold">{name}</span>
       <span></span>
       <AttendStatusToggle
