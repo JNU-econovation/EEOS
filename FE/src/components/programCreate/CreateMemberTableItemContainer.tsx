@@ -2,6 +2,7 @@ import { useGetMemberByActive } from "@/hooks/query/useMemberQuery";
 import CreateMemberTableItem from "./CreateMemberTableItem";
 import { ActiveStatusWithAll } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
+import MemberTableLoader from "../common/memberTable/MemberTable.loader";
 
 interface CreateMemberTableItemContainerProps {
   members: Set<number>;
@@ -15,10 +16,9 @@ const CreateMemberTableItemContainer = ({
   status,
 }: CreateMemberTableItemContainerProps) => {
   const queryClient = useQueryClient();
-  const { data: memberList, isLoading, isError } = useGetMemberByActive(status);
+  const { data: memberList, isLoading } = useGetMemberByActive(status);
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>에러가 발생했습니다.</div>;
+  if (isLoading) return <MemberTableLoader />;
 
   queryClient.setQueryData(
     ["memberIdList"],
