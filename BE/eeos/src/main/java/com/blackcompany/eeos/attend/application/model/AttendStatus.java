@@ -14,9 +14,7 @@ public enum AttendStatus {
 	/** 관련있음, 미응답 */
 	NONRESPONSE("nonResponse"),
 	/** 관련없음 */
-	NONRELATED("nonRelated"),
-	NONE("none");
-
+	NONRELATED("nonRelated");
 	private final String status;
 
 	AttendStatus(String status) {
@@ -27,14 +25,14 @@ public enum AttendStatus {
 		return status;
 	}
 
-	public static AttendStatus findByAttendStatus(String status) {
+	public static AttendStatus find(String status) {
 		return Arrays.stream(AttendStatus.values())
 				.filter(attendStatus -> attendStatus.getStatus().equals(status))
 				.findAny()
 				.orElseThrow(() -> new NotFoundAttendStatusException(status));
 	}
 
-	public static boolean isSame(String source, AttendStatus actualStatus) {
-		return actualStatus.getStatus().equals(source);
+	public static boolean isSame(String source, AttendStatus target) {
+		return target.getStatus().equals(source);
 	}
 }

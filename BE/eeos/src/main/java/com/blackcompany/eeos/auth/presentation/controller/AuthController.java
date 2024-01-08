@@ -1,4 +1,4 @@
-package com.blackcompany.eeos.auth.presentation.web.controller;
+package com.blackcompany.eeos.auth.presentation.controller;
 
 import com.blackcompany.eeos.auth.application.domain.TokenModel;
 import com.blackcompany.eeos.auth.application.dto.converter.TokenResponseConverter;
@@ -52,8 +52,9 @@ public class AuthController {
 	ApiResponse<SuccessBody<TokenResponse>> login(
 			@PathVariable String oauthServerType,
 			@RequestParam("code") String code,
+			@RequestParam("redirect_uri") String uri,
 			HttpServletResponse httpResponse) {
-		TokenModel tokenModel = loginUsecase.login(oauthServerType, code);
+		TokenModel tokenModel = loginUsecase.login(oauthServerType, code, uri);
 		TokenResponse response = toResponse(tokenModel, httpResponse);
 
 		return ApiResponseGenerator.success(response, HttpStatus.CREATED, MessageCode.CREATE);
@@ -82,8 +83,8 @@ public class AuthController {
 		cookie.setDomain(domain);
 		cookie.setPath("/");
 		cookie.setMaxAge(TimeUtil.convertSecondsFromMillis(tokenModel.getRefreshExpiredTime()));
-		cookie.setHttpOnly(false);
-		cookie.setSecure(false);
+		cookie.setHttpOnly(true);
+		cookie.setSecure(true);
 		response.addCookie(cookie);
 	}
 }

@@ -23,6 +23,10 @@ public class EndProgramStatusService implements ProgramStatusService {
 	@Override
 	public Page<ProgramEntity> getPages(
 			ProgramCategory programCategory, Timestamp now, PageRequest pageRequest) {
-		return programRepository.findAllByEnd(programCategory, now, pageRequest);
+		if (programCategory.isAll()) {
+			return programRepository.findAllByEnd(now, pageRequest);
+		}
+
+		return programRepository.findAllByEndAndCategory(programCategory, now, pageRequest);
 	}
 }

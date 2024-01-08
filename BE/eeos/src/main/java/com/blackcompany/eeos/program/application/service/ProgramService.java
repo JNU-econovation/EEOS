@@ -76,20 +76,21 @@ public class ProgramService
 	@Override
 	public QueryProgramResponse getProgram(final Long memberId, final Long programId) {
 		ProgramModel model = findProgram(programId);
-		return responseConverter.from(model, model.calculate(), findAccessRight(model, programId));
+		return responseConverter.from(
+				model, model.findProgramStatus(), findAccessRight(model, memberId));
 	}
 
 	@Override
 	@Transactional
 	public CommandProgramResponse update(
-			final Long memberId, final Long programId, final UpdateProgramRequest request) {
-		ProgramModel model = requestConverter.from(memberId, request, programId);
-		ProgramEntity entity = entityConverter.toEntity(model);
-		ProgramEntity updateEntity = programRepository.save(entity);
+			final Long writerId, final Long programId, final UpdateProgramRequest request) {
+		ProgramModel model = findProgram(programId);
+		ProgramModel requestModel = requestConverter.from(writerId, request, programId);
 
-		updateAttend(request.getMembers(), model, model.getWriter());
+		model.update(requestModel);
+		updateAttend(request.getMembers(), model);
 
-		return responseConverter.from(updateEntity.getId());
+		return responseConverter.from(model.getId());
 	}
 
 	@Override
@@ -133,18 +134,16 @@ public class ProgramService
 	}
 
 	private void updateAttend(
-			final List<ChangeAllAttendStatusRequest> members,
-			final ProgramModel model,
-			final Long memberId) {
+			final List<ChangeAllAttendStatusRequest> members, final ProgramModel model) {
+
 		if (members.isEmpty()) {
 			return;
 		}
 
-		model.validateEditAttend(memberId);
 		candidateService.updateCandidate(model.getId(), members);
 	}
 
 	private String findAccessRight(final ProgramModel model, final Long memberId) {
-		return model.getAccessRight(memberId).getAccessRight();
+		return model.getAccessRight(memberId);
 	}
 }
