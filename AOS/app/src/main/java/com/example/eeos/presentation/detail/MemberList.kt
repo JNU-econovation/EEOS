@@ -23,48 +23,59 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
+import com.example.eeos.consts.AttendStatus
+import com.example.eeos.consts.ProgramType
+import com.example.eeos.consts.attendStatusMap
 import com.example.eeos.domain.model.Member
 import com.example.eeos.presentation.util.ComponentUtil.NonLazyGrid
 
-data class Attendance(
-    val attendance: String,
-    val painter: Painter,
-    val memberList: List<Member>
-)
-
 @Composable
 fun MemberLists(
+    detailUiState: State<ProgramDetailUiState>,
     memberUiState: State<MemberAttendanceUiState>
 ) {
-    val attendStatusList: List<Attendance> = listOf(
-        Attendance(
-            attendance = "참석",
-            painter = painterResource(id = R.drawable.detail_ic_attend_20dp),
-            memberList = memberUiState.value.attendMembers
-        ),
-        Attendance(
-            attendance = "불참",
-            painter = painterResource(id = R.drawable.detail_ic_absent_20dp),
-            memberList = memberUiState.value.absentMembers
-        ),
-        Attendance(
-            attendance = "지각",
-            painter = painterResource(id = R.drawable.detail_ic_latecomers_20dp),
-            memberList = memberUiState.value.perceiveMembers
-        ),
-        Attendance(
-            attendance = "미정",
-            painter = painterResource(id = R.drawable.detail_ic_undefined_20dp),
-            memberList = memberUiState.value.nonResponseMembers
-        ),
-    )
-
     Column {
-        attendStatusList.forEach { attendStatus ->
+        MemberList(
+            title = attendStatusMap[AttendStatus.attend]!!,
+            painter = painterResource(id = R.drawable.detail_ic_attend_20dp),
+            memberList = memberUiState.value.attendMembers,
+        )
+        Spacer(
+            modifier = Modifier.height(
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_attendance
+                )
+            )
+        )
+        MemberList(
+            title = attendStatusMap[AttendStatus.late]!!,
+            painter = painterResource(id = R.drawable.detail_ic_latecomers_20dp),
+            memberList = memberUiState.value.lateMembers,
+        )
+        Spacer(
+            modifier = Modifier.height(
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_attendance
+                )
+            )
+        )
+        MemberList(
+            title = attendStatusMap[AttendStatus.absent]!!,
+            painter = painterResource(id = R.drawable.detail_ic_absent_20dp),
+            memberList = memberUiState.value.absentMembers,
+        )
+        Spacer(
+            modifier = Modifier.height(
+                height = dimensionResource(
+                    id = R.dimen.margin_detail_screen_space_between_attendance
+                )
+            )
+        )
+        if (detailUiState.value.programType == ProgramType.notification) {
             MemberList(
-                title = attendStatus.attendance,
-                painter = attendStatus.painter,
-                memberList = attendStatus.memberList,
+                title = attendStatusMap[AttendStatus.nonResponse]!!,
+                painter = painterResource(id = R.drawable.detail_ic_undefined_20dp),
+                memberList = memberUiState.value.nonResponseMembers,
             )
             Spacer(
                 modifier = Modifier.height(
@@ -158,6 +169,7 @@ private fun Member(member: Member) {
 private fun ProgramPreview() {
     MaterialTheme {
         MemberLists(
+            detailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
             memberUiState = hiltViewModel<MemberAttendanceViewModel>().memberDetailUiState.collectAsState()
         )
     }
