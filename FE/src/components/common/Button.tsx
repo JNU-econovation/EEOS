@@ -4,6 +4,7 @@ const colors = {
   primary: "bg-primary text-paragraph",
   gray: "bg-gray-100 text-paragraph",
   white: "bg-background text-paragraph",
+  error: "bg-error text-background",
 };
 
 const sizes = {

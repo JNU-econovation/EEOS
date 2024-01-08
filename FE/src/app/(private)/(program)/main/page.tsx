@@ -1,6 +1,7 @@
 // TODO: 서버 컴포넌트로 변경하기
 "use client";
 
+import ErrorFallback from "@/components/common/ErrorFallback";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
 import ProgramList from "@/components/main/ProgramList";
@@ -10,6 +11,7 @@ import PROGRAM from "@/constants/PROGRAM";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 const MainPage = () => {
   const searchParams = useSearchParams();
@@ -76,14 +78,16 @@ const MainPage = () => {
         selected={queryValue.status}
         onClick={(v) => handleSetStatus(v)}
       />
-      <Suspense fallback={<ProgramListLoader />}>
-        <ProgramList
-          category={queryValue.category}
-          programStatus={queryValue.status}
-          page={+queryValue.page}
-          setPage={handleSetPage}
-        />
-      </Suspense>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<ProgramListLoader />}>
+          <ProgramList
+            category={queryValue.category}
+            programStatus={queryValue.status}
+            page={+queryValue.page}
+            setPage={handleSetPage}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

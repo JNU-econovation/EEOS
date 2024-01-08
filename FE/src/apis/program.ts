@@ -25,7 +25,7 @@ export const getProgramById = async (
   const { data } = await https({
     url: API.PROGRAM.DETAIL(programId),
   });
-  return new ProgramInfoDto(data.data);
+  return new ProgramInfoDto(data?.data);
 };
 
 /**
@@ -55,7 +55,7 @@ export const getProgramList = async ({
       page,
     },
   });
-  return new ProgramListDto(data.data);
+  return new ProgramListDto(data?.data);
 };
 
 /**
@@ -74,7 +74,7 @@ export const deleteProgram = async (programId: number) => {
       error: MESSAGE.DELETE.FAILED,
     },
   );
-  return data.data;
+  return data?.data;
 };
 
 /**
@@ -101,7 +101,7 @@ export const postProgram = async (
       error: MESSAGE.CREATE.FAILED,
     },
   );
-  return new ProgramIdDto(data.data);
+  return new ProgramIdDto(data?.data);
 };
 
 /**
@@ -141,7 +141,7 @@ export const patchProgram = async ({
     },
   );
 
-  return new ProgramIdDto(data.data);
+  return new ProgramIdDto(data?.data);
 };
 
 /**
@@ -154,5 +154,5 @@ export const getProgramAccessRight = async (
     url: API.PROGRAM.ACCESS_RIGHT(programId),
     method: "GET",
   });
-  return data.data;
+  return data?.data;
 };

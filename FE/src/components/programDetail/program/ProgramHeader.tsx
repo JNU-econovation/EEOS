@@ -17,7 +17,7 @@ const DEADLINE_TEXT = "마감기한 : ";
 const ProgramHeader = ({ data }: ProgramHeaderProps) => {
   const { category, title, deadLine, programId, accessRight } = data;
 
-  const categoryText = PROGRAM.CATEGORY_TAB[category].text;
+  const categoryText = PROGRAM.CATEGORY_TAB[category]?.text ?? "기타";
 
   return (
     <section className="space-y-4 border-b-2 py-4">

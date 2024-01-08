@@ -1,12 +1,10 @@
-"use client";
-
 import { useGetProgramMembersByAttend } from "@/hooks/query/useMemberQuery";
 import { AttendStatus } from "@/types/member";
 import MemberList from "./MemberList";
 import AttendeeStatus from "./AttendeeStatus";
-import AttendeeInfoLoader from "./AttendeeInfo.loader";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProgramType } from "@/types/program";
+import AttendeeInfoLoader from "./AttendeeInfo.loader";
 
 interface AttendeeInfoProps {
   programId: number;
@@ -25,13 +23,13 @@ const AttendeeInfo = ({ programId, status }: AttendeeInfoProps) => {
     status,
   });
 
+  if (isLoading) return <AttendeeInfoLoader />;
+  if (isError) return <></>;
+
   const programType = queryClient.getQueryData<ProgramType>([
     "programType",
     programId,
   ]);
-
-  if (isLoading) return <AttendeeInfoLoader />;
-  if (isError) return <div>에러 발생</div>;
 
   const isRender =
     programType === "demand" && status === "nonResponse" ? false : true;

@@ -15,6 +15,7 @@ import { AttendStatus } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProgramStatus } from "@/types/program";
 import MESSAGE from "@/constants/MESSAGE";
+import AttendStatusModalLoader from "./AttendStatusModal.loader";
 
 interface UserAttendModalProps {
   programId: number;
@@ -22,29 +23,13 @@ interface UserAttendModalProps {
 
 const UserAttendModal = ({ programId }: UserAttendModalProps) => {
   const queryClient = useQueryClient();
-  const { isOpen, openModal, closeModal } = useModal();
-  const modalRef = useOutsideRef(closeModal);
-
-  const modalStyle = classNames(
-    "z-1 fixed left-0 flex h-60 w-full flex-col items-center gap-5 rounded-t-3xl border-t-2 bg-background pt-2 shadow-2xl transition-all duration-500",
-    {
-      "bottom-0": isOpen,
-      "-bottom-[9rem]": !isOpen,
-    },
-  );
-
-  const {
-    data: userInfo,
-    isLoading,
-    isError,
-  } = useGetMyAttendStatus(programId);
-
+  const { data: userInfo, isLoading } = useGetMyAttendStatus(programId);
   const { mutate: updateAttendStatus } = usePutMyAttendStatus({
     programId,
     beforeAttendStatus: userInfo ? userInfo.attendStatus : "nonRelated",
   });
 
-  if (isLoading || isError) return null;
+  if (isLoading) return <AttendStatusModalLoader />;
 
   const { attendStatus } = userInfo;
   const programStatus = queryClient.getQueryData<ProgramStatus>([
@@ -58,14 +43,7 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
   };
 
   return (
-    <div ref={modalRef} className={modalStyle} onClick={() => openModal()}>
-      <Image
-        src="/icons/line.svg"
-        alt="line"
-        width={38}
-        height={6}
-        style={{ width: 38, height: 6 }}
-      />
+    <>
       <AttendStatusView userInfo={userInfo} programId={programId} />
       <AttendToggleLabel canEdit={canEdit} />
       <AttendStatusToggle
@@ -73,7 +51,7 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
         disabled={!canEdit}
         onSelect={(v) => handleSelectorClick(v)}
       />
-    </div>
+    </>
   );
 };
 export default UserAttendModal;

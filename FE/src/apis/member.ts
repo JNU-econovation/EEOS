@@ -26,7 +26,7 @@ export const getMembersByActiveStatus = async (
     params: { activeStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberActiveStatusInfo) => new MemberActiveStatusInfoDto(member),
   );
 };
@@ -40,12 +40,12 @@ export const getProgramMembersByActiveStatus = async (
   activeStatus: ActiveStatusWithAll,
 ): Promise<MemberInfoDto[]> => {
   const { data } = await https({
-    url: API.MEMBER.PROGRAM(programId),
+    url: API.MEMBER.ACTIVE_STATUS(programId),
     method: "GET",
     params: { activeStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberInfo) => new MemberInfoDto(member),
   );
 };
@@ -59,12 +59,12 @@ export const getProgramMembersByAttendStatus = async (
   attendStatus: AttendStatus,
 ): Promise<MemberAttendStatusInfoDto[]> => {
   const { data } = await https({
-    url: API.MEMBER.PROGRAM(programId),
+    url: API.MEMBER.ATTEND_STATUS(programId),
     method: "GET",
     params: { attendStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberAttendStatusInfo) => new MemberAttendStatusInfoDto(member),
   );
 };

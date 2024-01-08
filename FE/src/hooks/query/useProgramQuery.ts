@@ -28,7 +28,7 @@ export const useCreateProgram = ({ programData, formReset }: CreateProgram) => {
     mutationFn: () => postProgram(programData),
     onSettled: (data) => {
       formReset();
-      data && router.replace(ROUTES.DETAIL(data.programId));
+      data && router.replace(ROUTES.DETAIL(data?.programId));
     },
   });
 };
@@ -39,7 +39,7 @@ export const useUpdateProgram = ({ programId, body }: PatchProgramRequest) => {
     mutationKey: [API.PROGRAM.UPDATE(programId)],
     mutationFn: () => patchProgram({ programId, body }),
     onSettled: (data) => {
-      data && router.replace(ROUTES.DETAIL(data.programId));
+      data && router.replace(ROUTES.DETAIL(data?.programId));
     },
   });
 };
@@ -85,9 +85,10 @@ export const useGetProgramList = ({
     queryKey: [API.PROGRAM.LIST, category, programStatus, size, page],
     queryFn: () => getProgramList({ category, programStatus, size, page }),
     select: (data) => ({
-      totalPage: data.totalPage,
-      programs: data.programs,
+      totalPage: data?.totalPage,
+      programs: data?.programs,
     }),
+    suspense: true,
   });
 };
 

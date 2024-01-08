@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 import Title from "@/components/common/Title";
 import AccessRightValidate from "@/components/common/validate/AccessRight";
 import ProgramEditForm from "@/components/programEdit/ProgramEditForm";
@@ -19,8 +20,7 @@ const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
     isError,
   } = useGetProgramById(+programId);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error!</div>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>

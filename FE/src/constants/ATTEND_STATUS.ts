@@ -28,7 +28,7 @@ type AttendStatusUser = {
 const TOGGLE: AttendStatusToggle = {
   attend: { type: "attend", text: "참석", color: "green" },
   absent: { type: "absent", text: "불참", color: "red" },
-  perceive: { type: "perceive", text: "지각", color: "yellow" },
+  late: { type: "late", text: "지각", color: "yellow" },
 };
 
 const LIST: AttendStatusList = {
@@ -44,8 +44,8 @@ const LIST: AttendStatusList = {
     icon: "/icons/x.svg",
     color: "red",
   },
-  perceive: {
-    type: "perceive",
+  late: {
+    type: "late",
     text: "지각",
     icon: "/icons/clock.svg",
     color: "yellow",

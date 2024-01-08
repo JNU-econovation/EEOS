@@ -1,22 +1,18 @@
-import { useGetMyActiveStatus } from "@/hooks/query/useUserQuery";
 import Button from "../../Button";
 import UserActiveModalSkeleton from "./UserActiveModal.loader";
-import ActiveStatusTab from "./ActiveStatusTab";
 import { useLogoutMutation } from "@/hooks/query/useAuthQuery";
 import { useRouter } from "next/navigation";
 import ROUTES from "@/constants/ROUTES";
+import { Suspense } from "react";
+import UserInfoSection from "./UserInfoSection";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../../ErrorFallback";
 
-const MESSAGE = "본인의 회원 상태를 선택해주세요.";
 const LOGOUT = "로그아웃";
 
 const UserActiveModal = () => {
   const router = useRouter();
-  const { data: myActiveData, isLoading, isError } = useGetMyActiveStatus();
-  const { name, activeStatus } = myActiveData;
   const { mutate: logout } = useLogoutMutation();
-
-  if (isLoading) return <UserActiveModalSkeleton />;
-  if (isError) return <div>에러 발생</div>;
 
   const handleLogout = () => {
     logout();
@@ -24,10 +20,12 @@ const UserActiveModal = () => {
   };
 
   return (
-    <section className="absolute -left-32 top-10 flex w-80 flex-col items-center gap-6 rounded-2xl bg-background px-12 py-6 drop-shadow-lg">
-      <p className="text-lg font-bold">{name}</p>
-      <p className="text-sm">{MESSAGE}</p>
-      <ActiveStatusTab activeStatus={activeStatus} />
+    <section className="absolute -left-32 top-10 flex w-80 min-w-fit flex-col items-center gap-6 rounded-2xl bg-background px-12 py-6 drop-shadow-lg">
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<UserActiveModalSkeleton />}>
+          <UserInfoSection />
+        </Suspense>
+      </ErrorBoundary>
       <Button
         color="white"
         size="lg"

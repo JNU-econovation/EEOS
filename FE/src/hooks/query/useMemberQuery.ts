@@ -29,7 +29,7 @@ export const useGetProgramMembersByActive = ({
   status,
 }: GetProgramMemebersByActive) => {
   return useQuery({
-    queryKey: [API.MEMBER.PROGRAM(programId), status],
+    queryKey: [API.MEMBER.ACTIVE_STATUS(programId), status],
     queryFn: () => getProgramMembersByActiveStatus(programId, status),
   });
 };
@@ -39,7 +39,7 @@ export const useGetProgramMembersByAttend = ({
   status,
 }: GetProgramMemebersByAttend) => {
   return useQuery({
-    queryKey: [API.MEMBER.PROGRAM, status],
+    queryKey: [API.MEMBER.ATTEND_STATUS(programId), status],
     queryFn: () => getProgramMembersByAttendStatus(programId, status),
   });
 };
