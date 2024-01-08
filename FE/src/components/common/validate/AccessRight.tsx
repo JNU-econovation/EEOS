@@ -4,6 +4,7 @@ import MESSAGE from "@/constants/MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useGetProgramAccessRight } from "@/hooks/query/useProgramQuery";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AccessRightValidate = ({ programId }) => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const AccessRightValidate = ({ programId }) => {
   }
 
   if (data?.accessRight !== "edit") {
-    alert(MESSAGE.EDIT_DISABLED.NO_RIGHT);
+    toast.error(MESSAGE.EDIT_DISABLED.NO_RIGHT);
     router.push(ROUTES.MAIN);
   }
 
