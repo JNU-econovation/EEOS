@@ -11,7 +11,6 @@ const EditPageError = () => {
     <ErrorFallback
       error={error}
       resetErrorBoundary={() => {
-        console.log("resetErrorBoundary");
         window.location.reload();
       }}
     />
