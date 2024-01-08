@@ -1,11 +1,11 @@
-interface Error {
+interface NotFount {
   TITLE: string;
   DESCRIPTION: string[];
   BUTTON_TEXT: string;
   IMAGE_URL: string;
 }
 
-const ERROR: Error = {
+const NOT_FOUND: NotFount = {
   TITLE: "ERROR",
   DESCRIPTION: [
     "죄송합니다. 페이지를 찾을 수 없습니다.",
@@ -16,5 +16,5 @@ const ERROR: Error = {
   IMAGE_URL: "/error.svg",
 };
 
-Object.freeze(ERROR);
-export { ERROR };
+Object.freeze(NOT_FOUND);
+export { NOT_FOUND };
