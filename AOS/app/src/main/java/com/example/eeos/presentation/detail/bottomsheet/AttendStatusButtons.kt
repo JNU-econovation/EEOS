@@ -46,7 +46,7 @@ fun AttendStatusButtons(
             )
         }
 
-        val onClick = { attendStatus: String ->
+        val onChangeAttendStatus = { attendStatus: String ->
             tempAttendStatus.value = attendStatus
             attendStatusDialogState.value = true
         }
@@ -54,23 +54,29 @@ fun AttendStatusButtons(
         AttendButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            onClick(AttendStatus.attend)
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+                onChangeAttendStatus(AttendStatus.attend)
+            }
         }
-        PercipientButton(
+        LateButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            onClick(AttendStatus.perceive)
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+                onChangeAttendStatus(AttendStatus.late)
+            }
         }
         AbsentButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            onClick(AttendStatus.absent)
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+                onChangeAttendStatus(AttendStatus.absent)
+            }
         }
     }
 }
 
 @Composable
-private fun AttendButton(selectedAttendStatus: String?, onClick: () -> Unit) {
+private fun AttendButton(selectedAttendStatus: String?, onClick: () -> Unit = {}) {
     AttendStatusButton(
         buttonText = stringResource(R.string.detail_attendees),
         contentColor = colorResource(R.color.success_strong),
@@ -82,7 +88,7 @@ private fun AttendButton(selectedAttendStatus: String?, onClick: () -> Unit) {
 }
 
 @Composable
-private fun PercipientButton(
+private fun LateButton(
     selectedAttendStatus: String?,
     onClick: () -> Unit
 ) {
@@ -114,7 +120,7 @@ private fun AttendStatusButtonsPreview() {
     MaterialTheme {
         AttendStatusButtons(
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
-            putUserAttendStatus = { p1 -> }
+            putUserAttendStatus = { p1 -> },
         )
     }
 }

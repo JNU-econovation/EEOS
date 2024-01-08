@@ -1,7 +1,9 @@
 package com.example.eeos.di
 
+import com.example.eeos.data.repository.AuthRepositoryImpl
 import com.example.eeos.data.repository.InfoRepositoryImpl
 import com.example.eeos.data.repository.ProgramRepositoryImpl
+import com.example.eeos.domain.repository.AuthRepository
 import com.example.eeos.domain.repository.InfoRepository
 import com.example.eeos.domain.repository.ProgramRepository
 import dagger.Binds
@@ -17,6 +19,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+    @Singleton
+    @Binds
+    abstract fun bindAuthRepository(
+        authRepository: AuthRepositoryImpl
+    ): AuthRepository
+
     @Singleton
     @Binds
     abstract fun bindsInfoRepository(

@@ -2,6 +2,8 @@
     <!--공통 화면 string 리소스-->
     <string name="app_name">EEOS</string>
 
+    <!--로그인 화면 string 리소스-->
+    <string name="login_try_login">로그인을 시도하고 있습니다.</string>
 
 
     <!--Home 화면 string 리소스-->
@@ -17,7 +19,6 @@
     <string name="home_tab_others">기타 행사</string>
 
 
-
     <!--Active Status Dialog 화면 string 리소스-->
     <string name="active_status_dialog_description">본인의 회원 상태를 선택해 주세요.</string>
     <string name="active_status_dialog_member_status_am">AM</string>
@@ -29,13 +30,11 @@
     <string name="active_status_dialog_logout">로그아웃</string>
 
 
-
     <!--Detail 화면 string 리소스-->
     <string name="detail_attendees">참석</string>
     <string name="detail_absentees">불참</string>
     <string name="detail_latecomers">지각</string>
     <string name="detail_undefined">미정</string>
-
 
 
     <!--Detail BottomSheet 화면 string 리소스-->
@@ -46,12 +45,10 @@
     <string name="detail_bottom_sheet_description">본인의 출석 상태를 선택해 주세요.</string>
 
 
-
     <!--Attend Status Confirm Dialog-->
     <string name="confirm_dialog_container">출석 상태가 "%1$s"으로 변경됩니다.</string>
     <string name="confirm_dialog_button_text_dismiss">취소</string>
     <string name="confirm_dialog_button_text_confirm">확인</string>
-
 
 
     <!--ContentDescriptions-->
@@ -59,5 +56,17 @@
 
     <string name="detail_bottom_sheet_drag_handle_description">Bottom Sheet를 올리면 출석 상태를 선택할 수 있습니다.</string>
 
+    <!--asset-->
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+            "namespace": "android_app",
+            "package_name": "com.example.eeos",
+            "sha256_cert_fingerprints":
+                ["90:3F:9B:5A:EA:08:34:C7:2C:87:6B:41:0F:BC:C3:99:E0:2E:29:BD:B9:A7:AA:5E:6F:5F:E8:25:08:DC:D6:DF"]
+            }
+        }]
+    </string>
 
 </resources>

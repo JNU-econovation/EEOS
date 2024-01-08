@@ -27,18 +27,18 @@ interface ProgramService {
         @Query("page") page: Int
     ): BaseResponse<ResponseGetProgramListDto>
 
-    @PUT("programs/{programId}/members/attendStatus")
+    @PUT("attend/programs/{programId}")
     suspend fun putAttendStatus(
         @Path(value = "programId") programId: Int,
         @Body requestPutAttendStatusDto: RequestPutAttendStatusDto
     ): BaseResponse<ResponsePutAttendStatusDto>
 
-    @GET("programs/{programId}/members/attendStatus")
+    @GET("attend/programs/{programId}")
     suspend fun getAttendStatus(
         @Path(value = "programId") programId: Int,
     ): BaseResponse<ResponseGetAttendStatusDto>
 
-    @GET("programs/{programId}/members")
+    @GET("attend/programs/{programId}/members")
     suspend fun getMemberList(
         @Path(value = "programId") programId: Int,
         @Query("attendStatus") attendStatus: String

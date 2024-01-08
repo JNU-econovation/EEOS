@@ -13,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -25,10 +26,8 @@ import com.example.eeos.consts.MemberStatus
 
 @Composable
 fun ActiveStatusButtons(
-    memberStatus: String,
+    tempActiveStatus: MutableState<String>
 ) {
-    val tempActiveStatus = remember { mutableStateOf(memberStatus) }
-
     Column {
         Row {
             MemberStatusButton(
@@ -122,7 +121,7 @@ private fun MemberStatusButton(
 private fun MemberStatusButtonsPreview() {
     MaterialTheme {
         ActiveStatusButtons(
-            memberStatus = "AM",
+            tempActiveStatus = remember { mutableStateOf("") }
         )
     }
 }
