@@ -6,6 +6,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eeos.EEOSApplication
+import com.example.eeos.consts.SnackBarMessage
 import com.example.eeos.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
@@ -79,7 +80,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _loginUiState.value.snackbarHostState
                 .showSnackbar(
-                    message = "성공적으로 로그아웃 되었습니다.",
+                    message = SnackBarMessage.onLogout,
                     duration = SnackbarDuration.Short
                 )
         }

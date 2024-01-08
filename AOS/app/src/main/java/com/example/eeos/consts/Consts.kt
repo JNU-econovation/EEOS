@@ -52,4 +52,5 @@ val memberStatusMap = mapOf(
 object SnackBarMessage {
     const val onActiveStatusChanged = "회원 상태가 변경 되었습니다."
     const val onAttendStatusChanged = "참석 상태가 변경 되었습니다."
+    const val onLogout = "성공적으로 로그아웃 되었습니다."
 }
