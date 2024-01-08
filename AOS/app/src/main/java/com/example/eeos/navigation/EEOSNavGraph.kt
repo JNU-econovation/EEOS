@@ -65,8 +65,7 @@ fun EEOSNavGraph(
                 LoginScreen(
                     postLogin = { code -> (loginViewModel::postLogin)(code) },
                     loginUiState = loginUiState,
-                    code = code,
-                    onClick = { navActions.navigateToHome() }
+                    code = code
                 )
             }
         }
