@@ -2,6 +2,7 @@ package com.blackcompany.eeos.member.application.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.blackcompany.eeos.member.application.exception.DeniedUpdateActiveException;
 import com.blackcompany.eeos.member.fixture.FakeMember;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,12 +14,23 @@ class MemberModelTest {
 	void update_active_status() {
 		// given
 		String status = "rm";
-		MemberModel memberModel = FakeMember.AmMemberModel();
+		MemberModel memberModel = FakeMember.AmMandoMemberModel();
 
 		// when
 		MemberModel updatedMemberModel = memberModel.updateActiveStatus(status);
 
 		// then
 		Assertions.assertEquals(ActiveStatus.RM, updatedMemberModel.getActiveStatus());
+	}
+
+	@Test
+	@DisplayName("all 활동 상태로 변경할 때는 예외가 발생한다.")
+	void fail_update_active_status() {
+		// given
+		String status = "all";
+		MemberModel memberModel = FakeMember.AmBadaMemberModel();
+
+		// when & then
+		assertThrows(DeniedUpdateActiveException.class, () -> memberModel.updateActiveStatus(status));
 	}
 }

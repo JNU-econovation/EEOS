@@ -9,7 +9,8 @@ public enum ActiveStatus {
 	ALL("all"),
 	AM("am"),
 	CM("cm"),
-	RM("rm");
+	RM("rm"),
+	OB("ob");
 	private final String status;
 
 	ActiveStatus(String status) {
@@ -29,5 +30,9 @@ public enum ActiveStatus {
 
 	public boolean isAll() {
 		return status.equals(ActiveStatus.ALL.getStatus());
+	}
+
+	public static boolean isSame(String activeStatus, ActiveStatus status) {
+		return status.getStatus().equals(activeStatus);
 	}
 }

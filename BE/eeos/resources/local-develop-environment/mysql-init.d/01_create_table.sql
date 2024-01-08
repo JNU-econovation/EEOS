@@ -42,6 +42,11 @@ CREATE TABLE attend
     primary key (attend_id)
 ) engine = InnoDB;
 
+ALTER TABLE member
+    ADD INDEX idx_name (member_name);
+
+ALTER TABLE attend
+    ADD INDEX idx_program (attend_program_id)
 
 ALTER TABLE program
     ADD COLUMN program_category varchar(255) NOT NULL,
