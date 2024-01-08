@@ -6,7 +6,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Provider = ({ children }: PropsWithChildren<{}>) => {
-  const client = new QueryClient();
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        useErrorBoundary: true,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={client}>

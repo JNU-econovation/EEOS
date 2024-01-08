@@ -26,7 +26,7 @@ export const getMembersByActiveStatus = async (
     params: { activeStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberActiveStatusInfo) => new MemberActiveStatusInfoDto(member),
   );
 };
@@ -45,7 +45,7 @@ export const getProgramMembersByActiveStatus = async (
     params: { activeStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberInfo) => new MemberInfoDto(member),
   );
 };
@@ -64,7 +64,7 @@ export const getProgramMembersByAttendStatus = async (
     params: { attendStatus },
   });
 
-  return data.data.members.map(
+  return data?.data?.members.map(
     (member: MemberAttendStatusInfo) => new MemberAttendStatusInfoDto(member),
   );
 };

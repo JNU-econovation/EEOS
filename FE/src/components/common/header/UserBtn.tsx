@@ -4,8 +4,6 @@ import useModal from "@/hooks/useModal";
 import useOutsideRef from "@/hooks/useOutsideRef";
 import Image from "next/image";
 import UserActiveModal from "./Modal/UserActiveModal";
-import { Suspense } from "react";
-import UserActiveModalSkeleton from "./Modal/UserActiveModal.loader";
 
 const UserBtn = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -24,11 +22,7 @@ const UserBtn = () => {
         height={28}
         className="h-[28px] w-[28px]"
       />
-      {isOpen && (
-        <Suspense fallback={<UserActiveModalSkeleton />}>
-          <UserActiveModal />
-        </Suspense>
-      )}
+      {isOpen && <UserActiveModal />}
     </div>
   );
 };

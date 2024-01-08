@@ -9,6 +9,8 @@ import CreateMemberTableItemContainer from "@/components/programCreate/CreateMem
 import EditMemberTableItemContainer from "@/components/programEdit/EditMemberTableItemContainer";
 import { Suspense, useState } from "react";
 import { Members } from "@/components/programEdit/ProgramEditForm";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../ErrorFallback";
 
 interface MemberTableProps {
   formType: FormType;
@@ -48,7 +50,7 @@ const MemberTable = ({
           formType={formType}
           onClickCheckBox={onClickHeaderCheckBox}
         />
-        <Suspense fallback={<div>로딩중...</div>}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
           {formType === "create" ? (
             <CreateMemberTableItemContainer
               members={members as Set<number>}
@@ -69,7 +71,7 @@ const MemberTable = ({
               isEditable={isEditable}
             />
           )}
-        </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );

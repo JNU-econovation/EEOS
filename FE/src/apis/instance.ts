@@ -41,7 +41,7 @@ https.interceptors.response.use(
   },
   async (error) => {
     const { config: originalRequest, response } = error;
-    const { code } = response.data;
+    const code = response?.data?.code;
 
     if (code === 4001) {
       const { accessToken, accessExpiredTime } = await postTokenReissue();
