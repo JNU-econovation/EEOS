@@ -71,6 +71,10 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.AUTH.EXPIRED_REFRESH_TOKEN]: {
     message: "로그인이 필요합니다.",
   },
+  [ERROR_CODE.AUTH.INVALID_NAME]: {
+    message:
+      "에코노베이션 슬랙의 표시 이름 형식이 올바르지 않습니다. (예: 25기 홍길동)",
+  },
 
   // API
   [ERROR_CODE.API.SLACK_CALL_FAILED]: {
