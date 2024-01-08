@@ -34,7 +34,7 @@ export interface PutMyAttendStatusRequest {
 export const putMyAttendStatus = async (
   programId: number,
   body: PutMyAttendStatusRequest,
-) => {
+): Promise<UserAttendStatusInfoDto> => {
   const { data } = await toast.promise(
     https({
       url: API.USER.ATTEND_STATUS(programId),
@@ -47,7 +47,7 @@ export const putMyAttendStatus = async (
       error: MESSAGE.EDIT.FAILED,
     },
   );
-  return data.data;
+  return new UserAttendStatusInfoDto(data.data);
 };
 
 /**
