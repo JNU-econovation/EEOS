@@ -1,7 +1,7 @@
 package com.blackcompany.eeos.member.application.service;
 
-import com.blackcompany.eeos.member.application.QueryMembersResponse;
 import com.blackcompany.eeos.member.application.dto.QueryMemberResponse;
+import com.blackcompany.eeos.member.application.dto.QueryMembersResponse;
 import com.blackcompany.eeos.member.application.dto.converter.QueryMemberResponseConverter;
 import com.blackcompany.eeos.member.application.exception.NotFoundMemberException;
 import com.blackcompany.eeos.member.application.model.ActiveStatus;
@@ -34,11 +34,12 @@ public class QueryMemberService implements GetMembersByActiveStatus, GetMemberBy
 	public QueryMembersResponse execute(final String activeStatus) {
 		ActiveStatus status = ActiveStatus.find(activeStatus);
 
-		List<MemberModel> models =
-				memberRepository.findMembersByActiveStatus(status).stream()
-						.map(entityConverter::from)
-						.collect(Collectors.toList());
+		if (status.isAll()) {
+			List<MemberModel> models = findMembers();
+			return responseConverter.from(models);
+		}
 
+		List<MemberModel> models = findMembersByStatus(status);
 		return responseConverter.from(models);
 	}
 
@@ -49,5 +50,24 @@ public class QueryMemberService implements GetMembersByActiveStatus, GetMemberBy
 
 		MemberModel model = entityConverter.from(member);
 		return responseConverter.from(model);
+	}
+
+	public String getName(final Long memberId) {
+		return memberRepository
+				.findById(memberId)
+				.map(MemberEntity::getName)
+				.orElseThrow(NotFoundMemberException::new);
+	}
+
+	private List<MemberModel> findMembers() {
+		return memberRepository.findMembers().stream()
+				.map(entityConverter::from)
+				.collect(Collectors.toList());
+	}
+
+	private List<MemberModel> findMembersByStatus(ActiveStatus activeStatus) {
+		return memberRepository.findMembersByActiveStatus(activeStatus).stream()
+				.map(entityConverter::from)
+				.collect(Collectors.toList());
 	}
 }

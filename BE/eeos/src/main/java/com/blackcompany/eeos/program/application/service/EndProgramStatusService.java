@@ -1,6 +1,7 @@
 package com.blackcompany.eeos.program.application.service;
 
 import com.blackcompany.eeos.program.application.model.ProgramStatus;
+import com.blackcompany.eeos.program.persistence.ProgramCategory;
 import com.blackcompany.eeos.program.persistence.ProgramEntity;
 import com.blackcompany.eeos.program.persistence.ProgramRepository;
 import java.sql.Timestamp;
@@ -20,7 +21,12 @@ public class EndProgramStatusService implements ProgramStatusService {
 	}
 
 	@Override
-	public Page<ProgramEntity> getPages(Timestamp now, PageRequest pageRequest) {
-		return programRepository.findAllByEnd(now, pageRequest);
+	public Page<ProgramEntity> getPages(
+			ProgramCategory programCategory, Timestamp now, PageRequest pageRequest) {
+		if (programCategory.isAll()) {
+			return programRepository.findAllByEnd(now, pageRequest);
+		}
+
+		return programRepository.findAllByEndAndCategory(programCategory, now, pageRequest);
 	}
 }

@@ -2,6 +2,7 @@ package com.blackcompany.eeos.attend.persistence;
 
 import com.blackcompany.eeos.attend.application.model.AttendStatus;
 import com.blackcompany.eeos.common.persistence.BaseEntity;
+import com.blackcompany.eeos.common.persistence.MemberIdEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +29,7 @@ import lombok.experimental.SuperBuilder;
 @Table(
 		name = AttendEntity.ENTITY_PREFIX,
 		indexes = @Index(name = "idx_program", columnList = "attend_program_id"))
-public class AttendEntity extends BaseEntity {
+public class AttendEntity extends BaseEntity implements MemberIdEntity {
 	public static final String ENTITY_PREFIX = "attend";
 
 	@Id
@@ -45,5 +46,5 @@ public class AttendEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = ENTITY_PREFIX + "_status", nullable = false)
 	@Builder.Default
-	private AttendStatus status = AttendStatus.NONE;
+	private AttendStatus status = AttendStatus.NONRELATED;
 }

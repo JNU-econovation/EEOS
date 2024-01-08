@@ -5,5 +5,6 @@ import com.blackcompany.eeos.program.application.dto.QueryProgramsResponse;
 
 public interface GetProgramsUsecase {
 
-	PageResponse<QueryProgramsResponse> getPrograms(String status, int size, int page);
+	PageResponse<QueryProgramsResponse> getPrograms(
+			String category, String status, int size, int page);
 }
