@@ -17,13 +17,14 @@ private object EEOSScreens {
  */
 object EEOSDestinationsArgs {
     const val PROGRAM_ID_ARG = "programId"
+    const val IS_LOGOUT_ARG = "isLogout"
 }
 
 /**
  * Destinations used in the [EEOSActivity]
  */
 object EEOSDestinations {
-    const val LOGIN_ROUTE = EEOSScreens.LOGIN_SCREEN
+    const val LOGIN_ROUTE = "${EEOSScreens.LOGIN_SCREEN}?${EEOSDestinationsArgs.IS_LOGOUT_ARG}={${EEOSDestinationsArgs.IS_LOGOUT_ARG}}"
     const val HOME_ROUTE = EEOSScreens.HOME_SCREEN
     const val DETAIL_ROUTE =
         "${EEOSScreens.PROGRAM_DETAIL_SCREEN}?${EEOSDestinationsArgs.PROGRAM_ID_ARG}={${EEOSDestinationsArgs.PROGRAM_ID_ARG}}" // programDetail/${programId}
@@ -33,11 +34,15 @@ object EEOSDestinations {
  * Models the navigation actions in the app.
  */
 class EEOSNavigationActions(private val navController: NavHostController) {
-    fun navigateToLogin() {
-        navController.navigate(EEOSDestinations.LOGIN_ROUTE) {
+    fun navigateToLogin(isLogout: Boolean = true) {
+        navController.navigate(
+            "${EEOSScreens.LOGIN_SCREEN}?${EEOSDestinationsArgs.IS_LOGOUT_ARG}=$isLogout"
+        ) {
             // 로그아웃 시도 후 로그인 페이지로 돌아오며
             // 모든 BackStack 제거
-            popUpTo(navController.graph.findStartDestination().id)
+            popUpTo(EEOSDestinations.HOME_ROUTE) {
+                inclusive = true
+            }
             launchSingleTop = true
         }
     }
@@ -61,7 +66,7 @@ class EEOSNavigationActions(private val navController: NavHostController) {
         navController.navigate(
             "${EEOSScreens.PROGRAM_DETAIL_SCREEN}?${EEOSDestinationsArgs.PROGRAM_ID_ARG}=$programId"
         ) {
-            popUpTo(EEOSDestinations.HOME_ROUTE)
+//            popUpTo(EEOSDestinations.HOME_ROUTE)
             launchSingleTop = true
         }
     }

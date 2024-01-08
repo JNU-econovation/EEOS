@@ -17,6 +17,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -39,20 +41,27 @@ fun DetailScreen(
     attendanceUiState: State<UserAttendStatusUiState>,
     topAppBarUiState: State<TopAppBarUiState>,
     putUserAttendStatus: (String) -> Unit,
-    putActiveStatus: (String) -> Unit
+    putActiveStatus: (String) -> Unit,
+    onLogoClick: () -> Unit,
+    onLogout: () -> Unit,
 ) {
+    val memberStatusDialogState = remember { mutableStateOf(false) }
+
     BottomSheetScaffold(
         sheetContent = {
             BottomSheetContents(
                 programDetailUiState = detailUiState,
                 attendanceUiState = attendanceUiState,
-                putUserAttendStatus = putUserAttendStatus
+                putUserAttendStatus = putUserAttendStatus,
             )
         },
         topBar = {
             EeosTopAppBar(
                 topAppBarUiState = topAppBarUiState,
-                putActiveStatus = putActiveStatus
+                putActiveStatus = putActiveStatus,
+                onLogoClick = onLogoClick,
+                onLogout = onLogout,
+                memberStatusDialogState = memberStatusDialogState
             )
         },
         sheetPeekHeight = dimensionResource(id = R.dimen.height_detail_screen_sheet_peek_height),
@@ -68,7 +77,13 @@ fun DetailScreen(
         sheetDragHandle = {
             SheetDragHandle()
         },
-        snackbarHost = { SnackbarHost(hostState = attendanceUiState.value.snackbarHostState) },
+        snackbarHost = {
+            if (memberStatusDialogState.value) {
+                SnackbarHost(hostState = topAppBarUiState.value.snackbarHostState)
+            } else {
+                SnackbarHost(hostState = attendanceUiState.value.snackbarHostState)
+            }
+        },
         containerColor = colorResource(id = R.color.background)
     ) {
         DetailScreenContent(
@@ -111,6 +126,7 @@ private fun DetailScreenContent(
                 )
             )
             MemberLists(
+                detailUiState = detailUiState,
                 memberUiState = memberUiState
             )
             Spacer(
@@ -137,7 +153,9 @@ private fun DetailScreenPreview() {
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
             topAppBarUiState = hiltViewModel<TopAppBarViewModel>().topAppBarUiState.collectAsState(),
             putUserAttendStatus = { p -> },
-            putActiveStatus = { p -> }
+            putActiveStatus = { p -> },
+            onLogoClick = {},
+            onLogout = {}
         )
     }
 }

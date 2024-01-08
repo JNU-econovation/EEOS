@@ -2,8 +2,10 @@ package com.example.eeos.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.eeos.EEOSApplication
 import com.example.eeos.consts.AttendStatus
 import com.example.eeos.domain.model.Member
+import com.example.eeos.domain.repository.AuthRepository
 import com.example.eeos.domain.repository.ProgramRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
@@ -20,13 +22,14 @@ data class MemberAttendanceUiState(
 
     val attendMembers: List<Member> = listOf(),
     val absentMembers: List<Member> = listOf(),
-    val perceiveMembers: List<Member> = listOf(),
+    val lateMembers: List<Member> = listOf(),
     val nonResponseMembers: List<Member> = listOf()
 )
 
 @HiltViewModel
 class MemberAttendanceViewModel @Inject constructor(
-    private val programRepository: ProgramRepository
+    private val programRepository: ProgramRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _memberAttendanceUiState = MutableStateFlow(MemberAttendanceUiState())
     val memberDetailUiState = _memberAttendanceUiState.asStateFlow()
@@ -41,6 +44,15 @@ class MemberAttendanceViewModel @Inject constructor(
                     updateUiState(attendStatus = attendStatus, memberList = memberList)
                 }
                 .onFailure { exception ->
+                    if (exception.message!!.contains("401")) {
+                        val refresh = EEOSApplication.prefs.refresh
+                        if (refresh != null) {
+                            authRepository.reIssueToken(refresh)
+                        } else {
+                            /* TODO: 로그인 페이지로 이동하는 함수 작성 */
+                        }
+                    }
+
                     when (exception) {
                         is HttpException -> {
                             _memberAttendanceUiState.update { currentState ->
@@ -76,10 +88,10 @@ class MemberAttendanceViewModel @Inject constructor(
                         absentMembers = memberList
                     )
                 }
-            AttendStatus.perceive ->
+            AttendStatus.late ->
                 _memberAttendanceUiState.update { currentState ->
                     currentState.copy(
-                        perceiveMembers = memberList
+                        lateMembers = memberList
                     )
                 }
             AttendStatus.nonResponse ->

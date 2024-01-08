@@ -2,8 +2,11 @@ package com.example.eeos.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.eeos.EEOSApplication
 import com.example.eeos.consts.categoryChips
+import com.example.eeos.domain.repository.AuthRepository
 import com.example.eeos.domain.repository.ProgramRepository
+import com.example.eeos.presentation.util.getDateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
 import javax.inject.Inject
@@ -26,7 +29,8 @@ data class ProgramDetailUiState(
 
 @HiltViewModel
 class ProgramDetailViewModel @Inject constructor(
-    private val programRepository: ProgramRepository
+    private val programRepository: ProgramRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _detailUiState = MutableStateFlow(ProgramDetailUiState())
     val detailUiState = _detailUiState.asStateFlow()
@@ -36,25 +40,28 @@ class ProgramDetailViewModel @Inject constructor(
             programRepository.getProgramDetail(programId)
                 .onSuccess { programDetail ->
                     val category = categoryAdjustment(programDetail.category)
-                    val title = if (programDetail.type == "demand") {
-                        titleAdjustment(
-                            programDetail.title
-                        )
-                    } else { programDetail.title }
-                    val deadLine = deadLineAdjustment(programDetail.deadLine)
+                    val deadLine = "마감기한 : " + getDateTime(programDetail.deadLine)
 
                     _detailUiState.update { currentState ->
                         currentState.copy(
                             category = category,
-                            title = title,
+                            title = programDetail.title,
                             deadLine = deadLine,
                             content = programDetail.content,
                             programType = programDetail.type
                         )
                     }
                 }
-                .onFailure {
-                        exception ->
+                .onFailure { exception ->
+                    if (exception.message!!.contains("4001")) {
+                        val refresh = EEOSApplication.prefs.refresh
+                        if (refresh != null) {
+                            authRepository.reIssueToken(refresh)
+                        } else {
+                            /* TODO: 로그인 페이지로 이동하는 함수 작성 */
+                        }
+                    }
+
                     when (exception) {
                         is HttpException -> {
                             _detailUiState.update { currentState ->
@@ -78,14 +85,5 @@ class ProgramDetailViewModel @Inject constructor(
 
     private fun categoryAdjustment(category: String): String {
         return categoryChips[com.example.eeos.consts.category.indexOf(category)]
-    }
-
-    private fun deadLineAdjustment(deadLine: String): String {
-        /* TODO */
-        return "날짜 조정 텍스트"
-    }
-
-    private fun titleAdjustment(title: String): String {
-        return "[수요조사] $title"
     }
 }

@@ -18,7 +18,7 @@ fun AttendChip() {
 }
 
 @Composable
-fun PercipientChip() {
+fun LateComerChip() {
     AttendStatusChip(
         buttonText = stringResource(R.string.detail_latecomers),
         contentColor = colorResource(R.color.warning_strong),

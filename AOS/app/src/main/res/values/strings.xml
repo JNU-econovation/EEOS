@@ -2,6 +2,9 @@
     <!--공통 화면 string 리소스-->
     <string name="app_name">EEOS</string>
 
+    <!--로그인 화면 string 리소스-->
+    <string name="login_try_login">로그인을 시도하고 있습니다.</string>
+
 
     <!--Home 화면 string 리소스-->
     <string name="home_program_list">행사 목록</string>
@@ -65,4 +68,5 @@
             }
         }]
     </string>
+
 </resources>

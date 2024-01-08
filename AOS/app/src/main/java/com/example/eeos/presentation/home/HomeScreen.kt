@@ -39,7 +39,9 @@ fun HomeScreen(
     loadProgramList: (String, String, Int) -> Unit,
     onProgramClick: (Int) -> Unit,
     refreshProgramList: () -> Unit,
-    putActiveStatus: (String) -> Unit
+    putActiveStatus: (String) -> Unit,
+    onLogoClick: () -> Unit,
+    onLogout: () -> Unit
 ) {
     val selectedCategory = rememberSaveable { mutableStateOf(categoryChips[0]) }
     val selectedProgramStatus = rememberSaveable { mutableStateOf(programStatusChips[0]) }
@@ -49,7 +51,9 @@ fun HomeScreen(
         topBar = {
             EeosTopAppBar(
                 topAppBarUiState = topAppBarUiState,
-                putActiveStatus = putActiveStatus
+                putActiveStatus = putActiveStatus,
+                onLogoClick = onLogoClick,
+                onLogout = onLogout
             )
         },
         snackbarHost = { SnackbarHost(hostState = topAppBarUiState.value.snackbarHostState) },
@@ -150,7 +154,9 @@ private fun HomeScreenPreview() {
             loadProgramList = { p1, p2, p3 -> },
             onProgramClick = { p1 -> },
             refreshProgramList = {},
-            putActiveStatus = { p -> }
+            putActiveStatus = { p -> },
+            onLogoClick = {},
+            onLogout = {}
         )
     }
 }

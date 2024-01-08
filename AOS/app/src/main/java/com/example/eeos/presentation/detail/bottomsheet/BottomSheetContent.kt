@@ -63,7 +63,7 @@ fun BottomSheetContents(
             when (attendanceUiState.value.userAttendStatus) {
                 AttendStatus.attend -> AttendChip()
                 AttendStatus.absent -> AbsentChip()
-                AttendStatus.perceive -> PercipientChip()
+                AttendStatus.late -> LateComerChip()
                 AttendStatus.nonRelated -> NonRelatedChip()
                 AttendStatus.nonResponse ->
                     if (programDetailUiState.value.programType == "demand") {
