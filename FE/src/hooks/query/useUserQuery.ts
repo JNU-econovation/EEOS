@@ -58,7 +58,7 @@ export const usePutMyAttendStatus = ({
         queryKey: [API.USER.ATTEND_STATUS(programId)],
       });
       queryClient.invalidateQueries({
-        queryKey: [API.MEMBER.ATTEND_STATUS(programId), data.attendStatus],
+        queryKey: [API.MEMBER.ATTEND_STATUS(programId), data?.attendStatus],
       });
     },
   });

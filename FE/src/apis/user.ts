@@ -19,7 +19,7 @@ export const getMyAttendStatus = async (
     url: API.USER.ATTEND_STATUS(programId),
     method: "GET",
   });
-  return new UserAttendStatusInfoDto(data.data);
+  return new UserAttendStatusInfoDto(data?.data);
 };
 
 /**
@@ -47,7 +47,7 @@ export const putMyAttendStatus = async (
       error: MESSAGE.EDIT.FAILED,
     },
   );
-  return new UserAttendStatusInfoDto(data.data);
+  return new UserAttendStatusInfoDto(data?.data);
 };
 
 /**
@@ -59,7 +59,7 @@ export const getMyActiveStatus = async (): Promise<UserActiveStatusInfoDto> => {
     url: API.USER.ACTIVE_STATUS,
     method: "GET",
   });
-  return new UserActiveStatusInfoDto(data.data);
+  return new UserActiveStatusInfoDto(data?.data);
 };
 
 /**
@@ -85,5 +85,5 @@ export const putMyActiveStatus = async (
       error: MESSAGE.EDIT.FAILED,
     },
   );
-  return new UserActiveStatusInfoDto(data.data);
+  return new UserActiveStatusInfoDto(data?.data);
 };

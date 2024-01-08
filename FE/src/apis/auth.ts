@@ -14,7 +14,7 @@ export const postSlackLogin = async (
     method: "POST",
     params: { code, redirect_uri },
   });
-  return new LoginDto(data.data);
+  return new LoginDto(data?.data);
 };
 
 /**
@@ -25,5 +25,5 @@ export const postTokenReissue = async (): Promise<LoginDto> => {
     url: API.AUTH.TOKEN_REISSUE,
     method: "POST",
   });
-  return new LoginDto(data.data);
+  return new LoginDto(data?.data);
 };

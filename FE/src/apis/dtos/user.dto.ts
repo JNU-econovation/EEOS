@@ -10,8 +10,8 @@ export class UserAttendStatusInfoDto {
   public readonly attendStatus: AttendStatus;
 
   constructor(data: UserAttendStatusInfo) {
-    this.name = data.name;
-    this.attendStatus = data.attendStatus;
+    this.name = data?.name;
+    this.attendStatus = data?.attendStatus;
   }
 }
 
@@ -20,7 +20,7 @@ export class UserActiveStatusInfoDto {
   public readonly activeStatus: ActiveStatus;
 
   constructor(data: UserActiveStatusInfo) {
-    this.name = data.name;
-    this.activeStatus = data.activeStatus;
+    this.name = data?.name;
+    this.activeStatus = data?.activeStatus;
   }
 }

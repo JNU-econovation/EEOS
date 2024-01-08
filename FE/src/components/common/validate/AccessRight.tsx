@@ -16,7 +16,7 @@ const AccessRightValidate = ({ programId }) => {
     return <></>;
   }
 
-  if (data.accessRight !== "edit") {
+  if (data?.accessRight !== "edit") {
     alert(MESSAGE.EDIT_DISABLED.NO_RIGHT);
     router.push(ROUTES.MAIN);
   }
