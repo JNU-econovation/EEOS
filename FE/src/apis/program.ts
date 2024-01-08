@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import API from "../constants/API";
 import { AttendStatus } from "../types/member";
 import {
@@ -6,27 +7,25 @@ import {
   ProgramStatus,
 } from "../types/program";
 import {
+  ProgramAccessRightDto,
   ProgramIdDto,
   ProgramInfoDto,
   ProgramListDto,
 } from "./dtos/program.dto";
 import { https } from "./instance";
+import MESSAGE from "@/constants/MESSAGE";
 
 /**
  * 프로그램 정보 조회
  */
 
-interface GetProgramByIdResponse {
-  data: ProgramInfo;
-}
-
 export const getProgramById = async (
   programId: number,
 ): Promise<ProgramInfoDto> => {
-  const { data } = await https<GetProgramByIdResponse>({
+  const { data } = await https({
     url: API.PROGRAM.DETAIL(programId),
   });
-  return new ProgramInfoDto(data.data);
+  return new ProgramInfoDto(data?.data);
 };
 
 /**
@@ -56,7 +55,7 @@ export const getProgramList = async ({
       page,
     },
   });
-  return new ProgramListDto(data.data);
+  return new ProgramListDto(data?.data);
 };
 
 /**
@@ -64,11 +63,18 @@ export const getProgramList = async ({
  */
 
 export const deleteProgram = async (programId: number) => {
-  const { data } = await https({
-    url: API.PROGRAM.DELETE(programId),
-    method: "DELETE",
-  });
-  return data.data;
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.DELETE(programId),
+      method: "DELETE",
+    }),
+    {
+      pending: MESSAGE.DELETE.PENDING,
+      success: MESSAGE.DELETE.SUCCESS,
+      error: MESSAGE.DELETE.FAILED,
+    },
+  );
+  return data?.data;
 };
 
 /**
@@ -76,19 +82,26 @@ export const deleteProgram = async (programId: number) => {
  */
 
 export interface PostProgramRequest
-  extends Omit<ProgramInfo, "programId" | "programStatus"> {
+  extends Omit<ProgramInfo, "programId" | "programStatus" | "accessRight"> {
   members: { memberId: number }[];
 }
 
 export const postProgram = async (
   body: PostProgramRequest,
 ): Promise<ProgramIdDto> => {
-  const { data } = await https({
-    url: API.PROGRAM.CREATE,
-    method: "POST",
-    data: body,
-  });
-  return new ProgramIdDto(data.data);
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.CREATE,
+      method: "POST",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.CREATE.PENDING,
+      success: MESSAGE.CREATE.SUCCESS,
+      error: MESSAGE.CREATE.FAILED,
+    },
+  );
+  return new ProgramIdDto(data?.data);
 };
 
 /**
@@ -102,7 +115,7 @@ export interface PatchProgramMember {
 }
 
 export interface PatchProgramBody
-  extends Omit<ProgramInfo, "programId" | "programStatus"> {
+  extends Omit<ProgramInfo, "programId" | "programStatus" | "accessRight"> {
   members: PatchProgramMember[];
 }
 
@@ -115,11 +128,31 @@ export const patchProgram = async ({
   programId,
   body,
 }: PatchProgramRequest): Promise<ProgramIdDto> => {
-  const { data } = await https({
-    url: API.PROGRAM.UPDATE(programId),
-    method: "PATCH",
-    data: body,
-  });
+  const { data } = await toast.promise(
+    https({
+      url: API.PROGRAM.UPDATE(programId),
+      method: "PATCH",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.EDIT.PENDING,
+      success: MESSAGE.EDIT.SUCCESS,
+      error: MESSAGE.EDIT.FAILED,
+    },
+  );
 
-  return new ProgramIdDto(data.data);
+  return new ProgramIdDto(data?.data);
+};
+
+/**
+ * 프로그램 수정/삭제 권한 확인
+ */
+export const getProgramAccessRight = async (
+  programId: number,
+): Promise<ProgramAccessRightDto> => {
+  const { data } = await https({
+    url: API.PROGRAM.ACCESS_RIGHT(programId),
+    method: "GET",
+  });
+  return data?.data;
 };

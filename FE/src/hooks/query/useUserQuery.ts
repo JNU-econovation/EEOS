@@ -16,16 +16,21 @@ export const useGetMyActiveStatus = () => {
   });
 };
 
-export const usePutMyActiveStatus = (activeStatus: ActiveStatus) => {
+export const usePutMyActiveStatus = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [API.USER.ACTIVE_STATUS],
-    mutationFn: () => putMyActiveStatus({ activeStatus }),
+    mutationFn: (activeStatus: ActiveStatus) =>
+      putMyActiveStatus({ activeStatus }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API.USER.ACTIVE_STATUS] });
+    },
   });
 };
 
 export const useGetMyAttendStatus = (programId: number) => {
   return useQuery({
-    queryKey: [API.USER.ATTEND_STATUS],
+    queryKey: [API.USER.ATTEND_STATUS(programId)],
     queryFn: () => getMyAttendStatus(programId),
   });
 };
@@ -48,7 +53,21 @@ export const usePutMyAttendStatus = ({
         beforeAttendStatus,
         afterAttendStatus: afterAttendStatus,
       }),
-    onSettled: () =>
-      queryClient.invalidateQueries({ queryKey: [API.USER.ATTEND_STATUS] }),
+    onSettled: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [API.USER.ATTEND_STATUS(programId)],
+      });
+      const statuses: AttendStatus[] = [
+        "attend",
+        "late",
+        "absent",
+        "nonResponse",
+      ];
+      statuses.forEach((status) => {
+        queryClient.invalidateQueries({
+          queryKey: [API.MEMBER.ATTEND_STATUS(programId), status],
+        });
+      });
+    },
   });
 };

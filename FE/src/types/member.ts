@@ -3,7 +3,7 @@ export type ActiveStatusWithAll = ActiveStatus | "all";
 export type AttendStatus =
   | "attend"
   | "absent"
-  | "perceive"
+  | "late"
   | "nonResponse"
   | "nonRelated";
 

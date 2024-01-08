@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import API from "../constants/API";
 import { ActiveStatus, AttendStatus } from "../types/member";
 import {
@@ -5,6 +6,7 @@ import {
   UserAttendStatusInfoDto,
 } from "./dtos/user.dto";
 import { https } from "./instance";
+import MESSAGE from "@/constants/MESSAGE";
 
 /**
  * 본인의 출석 상태 조회
@@ -17,7 +19,7 @@ export const getMyAttendStatus = async (
     url: API.USER.ATTEND_STATUS(programId),
     method: "GET",
   });
-  return new UserAttendStatusInfoDto(data.data);
+  return new UserAttendStatusInfoDto(data?.data);
 };
 
 /**
@@ -32,13 +34,20 @@ export interface PutMyAttendStatusRequest {
 export const putMyAttendStatus = async (
   programId: number,
   body: PutMyAttendStatusRequest,
-) => {
-  const { data } = await https({
-    url: API.USER.ATTEND_STATUS(programId),
-    method: "PUT",
-    data: body,
-  });
-  return data.data;
+): Promise<UserAttendStatusInfoDto> => {
+  const { data } = await toast.promise(
+    https({
+      url: API.USER.ATTEND_STATUS(programId),
+      method: "PUT",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.EDIT.PENDING,
+      success: MESSAGE.EDIT.SUCCESS,
+      error: MESSAGE.EDIT.FAILED,
+    },
+  );
+  return new UserAttendStatusInfoDto(data?.data);
 };
 
 /**
@@ -50,7 +59,7 @@ export const getMyActiveStatus = async (): Promise<UserActiveStatusInfoDto> => {
     url: API.USER.ACTIVE_STATUS,
     method: "GET",
   });
-  return new UserActiveStatusInfoDto(data.data);
+  return new UserActiveStatusInfoDto(data?.data);
 };
 
 /**
@@ -64,10 +73,17 @@ interface PutMyActiveStatusRequest {
 export const putMyActiveStatus = async (
   body: PutMyActiveStatusRequest,
 ): Promise<UserActiveStatusInfoDto> => {
-  const { data } = await https({
-    url: API.USER.ACTIVE_STATUS,
-    method: "PUT",
-    data: body,
-  });
-  return new UserActiveStatusInfoDto(data.data);
+  const { data } = await toast.promise(
+    https({
+      url: API.USER.ACTIVE_STATUS,
+      method: "PUT",
+      data: body,
+    }),
+    {
+      pending: MESSAGE.EDIT.PENDING,
+      success: MESSAGE.EDIT.SUCCESS,
+      error: MESSAGE.EDIT.FAILED,
+    },
+  );
+  return new UserActiveStatusInfoDto(data?.data);
 };

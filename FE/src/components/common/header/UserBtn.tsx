@@ -3,7 +3,7 @@
 import useModal from "@/hooks/useModal";
 import useOutsideRef from "@/hooks/useOutsideRef";
 import Image from "next/image";
-import UserActiveModal from "./UserActiveModal";
+import UserActiveModal from "./Modal/UserActiveModal";
 
 const UserBtn = () => {
   const { isOpen, openModal, closeModal } = useModal();
