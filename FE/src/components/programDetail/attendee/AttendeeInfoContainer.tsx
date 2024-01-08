@@ -1,4 +1,8 @@
+"use client";
+
 import AttendeeInfo from "./AttendeeInfo";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "@/components/common/ErrorFallback";
 
 interface AttendeeInfoContainerProps {
   programId: number;
@@ -6,12 +10,14 @@ interface AttendeeInfoContainerProps {
 
 const AttendeeInfoContainer = ({ programId }: AttendeeInfoContainerProps) => {
   return (
-    <div className="space-y-16">
-      <AttendeeInfo programId={programId} status="attend" />
-      <AttendeeInfo programId={programId} status="late" />
-      <AttendeeInfo programId={programId} status="absent" />
-      <AttendeeInfo programId={programId} status="nonResponse" />
-    </div>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <div className="space-y-16">
+        <AttendeeInfo programId={programId} status="attend" />
+        <AttendeeInfo programId={programId} status="late" />
+        <AttendeeInfo programId={programId} status="absent" />
+        <AttendeeInfo programId={programId} status="nonResponse" />
+      </div>
+    </ErrorBoundary>
   );
 };
 export default AttendeeInfoContainer;
