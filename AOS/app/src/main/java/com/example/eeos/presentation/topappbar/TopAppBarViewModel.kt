@@ -4,6 +4,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.eeos.consts.SnackBarMessage
 import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
 import com.example.eeos.domain.repository.InfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -80,11 +81,10 @@ class TopAppBarViewModel @Inject constructor(
                     getActiveStatus()
                     _topAppBarUiState.value.snackbarHostState
                         .showSnackbar(
-                            message = "상태가 변경 되었습니다.",
-                            duration = SnackbarDuration.Long
+                            message = SnackBarMessage.onActiveStatusChanged,
+                            duration = SnackbarDuration.Short
                         )
-                }
-                .onFailure { exception ->
+                }.onFailure { exception ->
                     when (exception) {
                         is HttpException -> {
                             _topAppBarUiState.update { currentState ->

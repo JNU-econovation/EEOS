@@ -1,6 +1,6 @@
 package com.example.eeos.consts
 
-val category = listOf("all", "weekly", "president", "event", " etc")
+val category = listOf("all", "weekly", "presidentTeam", "eventTeam", " etc")
 val programStatus = listOf("active", "end")
 
 val categoryChips: List<String> = listOf(
@@ -15,25 +15,6 @@ val programStatusChips: List<String> = listOf(
     "완료"
 )
 
-object ActiveStatus {
-    const val am = "am"
-    const val rm = "rm"
-    const val cm = "cm"
-    const val ob = "ob"
-}
-
-object Category {
-    const val weekly = "weekly"
-    const val president = "president"
-    const val event = "event"
-    const val etc = "etc"
-}
-
-object ProgramStatus {
-    const val active = "active"
-    const val end = "end"
-}
-
 object ProgramType {
     const val demand = " demand"
     const val notification = "notification"
@@ -42,7 +23,7 @@ object ProgramType {
 object AttendStatus {
     const val attend = "attend"
     const val absent = "absent"
-    const val perceive = "perceive"
+    const val late = "late"
     const val nonResponse = "nonResponse"
     const val nonRelated = "nonRelated"
 }
@@ -50,7 +31,7 @@ object AttendStatus {
 val attendStatusMap = mapOf(
     "attend" to "참석",
     "absent" to "불참",
-    "perceive" to "지각",
+    "late" to "지각",
     "nonResponse" to "미정"
 )
 
@@ -59,4 +40,16 @@ object MemberStatus {
     const val RM = "RM"
     const val CM = "CM"
     const val OB = "OB"
+}
+
+val memberStatusMap = mapOf(
+    "AM" to "am",
+    "RM" to "rm",
+    "CM" to "cm",
+    "OB" to "ob"
+)
+
+object SnackBarMessage {
+    const val onActiveStatusChanged = "회원 상태가 변경 되었습니다."
+    const val onAttendStatusChanged = "참석 상태가 변경 되었습니다."
 }

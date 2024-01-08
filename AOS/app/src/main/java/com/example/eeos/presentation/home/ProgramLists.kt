@@ -24,6 +24,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
 import com.example.eeos.domain.model.Program
+import com.example.eeos.presentation.util.getDateTime
 
 @Composable
 fun ProgramLists(
@@ -70,7 +71,7 @@ private fun Program(program: Program, onProgramClick: (Int) -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = program.deadLine,
+                text = getDateTime(program.deadLine),
                 style = MaterialTheme.typography.bodyMedium,
                 color = colorResource(R.color.paragraph)
             )

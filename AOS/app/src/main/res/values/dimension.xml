@@ -5,10 +5,17 @@
 
 
     <!--Common Screen Dimensions-->
-    <dimen name="size_common_screen_logo_120dp">120dp</dimen>
+    <dimen name="size_common_screen_logo_120dp">105dp</dimen>
     <dimen name="margin_common_screen">16dp</dimen>
     <dimen name="margin_common_screen_member_info_space_between_icon_and_text">13dp</dimen>
     <dimen name="margin_common_screen_member_info_space_between_texts">3dp</dimen>
+
+    <!--Login Screen Dimensions-->
+    <dimen name="width_login_screen_slack_button">160dp</dimen>
+    <dimen name="height_login_screen_slack_button">48.64dp</dimen>
+
+    <dimen name="margin_login_screen_between_logo_and_button">74dp</dimen>
+    <dimen name="height_login_screen_between_progress_and_text">25dp</dimen>
 
 
     <!--Home Screen Dimensions-->

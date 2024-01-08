@@ -15,6 +15,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -23,15 +25,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
+import com.example.eeos.EEOSApplication
 import com.example.eeos.R
 
 @Composable
 fun ActiveStatusDialog(
     name: String,
     activeStatus: String,
-    onSaveStatusBtnClick: () -> Unit,
-    onDismissRequest: () -> Unit
+    onSaveStatusBtnClick: (String) -> Unit,
+    onDismissRequest: () -> Unit,
+    onLogout: () -> Unit
 ) {
+    val tempActiveStatus = remember { mutableStateOf(activeStatus) }
+
     Dialog(onDismissRequest = onDismissRequest) {
         Card(
             modifier = Modifier
@@ -115,7 +121,9 @@ fun ActiveStatusDialog(
                         )
                     )
                 )
-                ActiveStatusButtons(activeStatus)
+                ActiveStatusButtons(
+                    tempActiveStatus = tempActiveStatus
+                )
                 Spacer(
                     modifier = Modifier.height(
                         dimensionResource(
@@ -124,7 +132,7 @@ fun ActiveStatusDialog(
                     )
                 )
                 SaveActiveStatusButton(
-                    onClick = onSaveStatusBtnClick
+                    onClick = { onSaveStatusBtnClick(tempActiveStatus.value) }
                 )
                 Spacer(
                     modifier = Modifier.height(
@@ -134,7 +142,13 @@ fun ActiveStatusDialog(
                     )
                 )
                 LogoutButton(
-                    onClick = {}
+                    onClick = {
+                        EEOSApplication.prefs.access = null
+                        EEOSApplication.prefs.refresh = null
+
+                        onDismissRequest()
+                        onLogout()
+                    }
                 )
             }
         }
@@ -149,7 +163,8 @@ private fun MemberStatusDialogPreview() {
             name = "24기 장현지",
             activeStatus = "AM",
             onSaveStatusBtnClick = {},
-            onDismissRequest = {}
+            onDismissRequest = {},
+            onLogout = {}
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.eeos.di
 
+import com.example.eeos.data.service.AuthService
 import com.example.eeos.data.service.InfoService
 import com.example.eeos.data.service.ProgramService
 import dagger.Module
@@ -12,6 +13,11 @@ import retrofit2.Retrofit
 @Module
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
+    @Provides
+    @Singleton
+    fun provideAuthService(retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
+
     @Provides
     @Singleton
     fun provideInfoService(retrofit: Retrofit): InfoService =
