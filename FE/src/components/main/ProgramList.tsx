@@ -2,7 +2,6 @@ import PROGRAM from "@/constants/PROGRAM";
 import { useGetProgramList } from "@/hooks/query/useProgramQuery";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
 import ProgramListItem from "./ProgramListItem";
-import ProgramListLoader from "./ProgramList.loader";
 import { useQueryClient } from "@tanstack/react-query";
 import Paginataion from "../common/pagination/Pagination";
 
@@ -20,22 +19,14 @@ const ProgramList = ({
   setPage: handleSetPage,
 }: ProgramListProps) => {
   const queryClient = useQueryClient();
-  const {
-    data: programListData,
-    isLoading,
-    isError,
-  } = useGetProgramList({
+  const { data: programListData } = useGetProgramList({
     category,
     programStatus,
     page: page - 1,
     size: PROGRAM.LIST_SIZE,
   });
 
-  if (isLoading) return <ProgramListLoader />;
-  if (isError) return <div>Error...</div>;
-
   queryClient.setQueryData<number>(["totalPage"], programListData.totalPage);
-
   const { programs } = programListData;
 
   return (
