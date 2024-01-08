@@ -76,6 +76,11 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.API.SLACK_CALL_FAILED]: {
     message: "슬랙 로그인에 실패했습니다.",
   },
+
+  // 알 수 없는
+  UNKNOWN: {
+    message: "알 수 없는 에러가 발생했습니다.",
+  },
 };
 
 Object.freeze(ERROR_MESSAGE);
