@@ -82,7 +82,7 @@ const ProgramEditForm = ({ programId, programInfo }: ProgramEditFormProps) => {
         members={members}
         setMembers={updateMembers}
         programId={+programId}
-        isEditable={programInfo.programStatus === "active"}
+        isEditable={programInfo.programStatus !== "active"}
       />
     </ProgramForm>
   );
