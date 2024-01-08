@@ -63,8 +63,17 @@ https.interceptors.response.use(
       return await axios(originalRequest);
     }
 
+    if (errorCode === ERROR_CODE.AUTH.INVALID_NAME) {
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
+      return Promise.reject(error);
+    }
+
     if (Object.values(ERROR_CODE.AUTH).includes(errorCode)) {
-      toast.error(errorMessage);
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
       deleteTokenInfo();
       setTimeout(() => {
         window.location.href = "/login";
