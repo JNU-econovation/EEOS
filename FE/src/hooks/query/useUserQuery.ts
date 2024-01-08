@@ -57,8 +57,16 @@ export const usePutMyAttendStatus = ({
       queryClient.invalidateQueries({
         queryKey: [API.USER.ATTEND_STATUS(programId)],
       });
-      queryClient.invalidateQueries({
-        queryKey: [API.MEMBER.ATTEND_STATUS(programId), data?.attendStatus],
+      const statuses: AttendStatus[] = [
+        "attend",
+        "late",
+        "absent",
+        "nonResponse",
+      ];
+      statuses.forEach((status) => {
+        queryClient.invalidateQueries({
+          queryKey: [API.MEMBER.ATTEND_STATUS(programId), status],
+        });
       });
     },
   });
