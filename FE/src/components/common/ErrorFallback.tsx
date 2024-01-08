@@ -17,7 +17,6 @@ const ErrorFallback = ({
   resetErrorBoundary = () => {},
   retryButton = true,
 }: FallbackProps) => {
-  console.log(resetErrorBoundary);
   const { reset } = useQueryErrorResetBoundary();
   const handleReset = () => {
     reset();

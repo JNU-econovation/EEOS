@@ -26,7 +26,6 @@ export const useSlackLoginMutation = () => {
       },
       onError: (error: any) => {
         const errorCode = error?.response?.data?.code;
-        console.log(errorCode);
         errorCode === ERROR_CODE.AUTH.INVALID_NAME &&
           router.replace(ROUTES.NAME_ERROR);
       },
