@@ -64,10 +64,7 @@ const MarkdownEditor = ({
             onKeyDown={handleKeydown}
           />
         ) : (
-          <MarkdownViewer
-            value={value}
-            className="scrollbar-none h-[32rem] w-full"
-          />
+          <MarkdownViewer value={value} height="fix" />
         )}
       </div>
     </div>
