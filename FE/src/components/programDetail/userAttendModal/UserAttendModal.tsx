@@ -1,15 +1,11 @@
 "use client";
 
-import useModal from "@/hooks/useModal";
-import useOutsideRef from "@/hooks/useOutsideRef";
 import {
   useGetMyAttendStatus,
   usePutMyAttendStatus,
 } from "@/hooks/query/useUserQuery";
-import classNames from "classnames";
 import AttendStatusView from "./AttendStatusView";
 import AttendStatusToggle from "@/components/common/attendStatusToggle/AttendStatusToggle";
-import Image from "next/image";
 import AttendToggleLabel from "./AttendToggleLabel";
 import { AttendStatus } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
