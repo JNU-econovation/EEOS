@@ -23,9 +23,9 @@ const AttendStatusToggleItem = ({
   );
 
   return (
-    <div className={badgeStyle}>
+    <button className={badgeStyle}>
       <span>{text}</span>
-    </div>
+    </button>
   );
 };
 export default AttendStatusToggleItem;
