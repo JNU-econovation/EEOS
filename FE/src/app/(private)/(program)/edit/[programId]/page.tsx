@@ -4,7 +4,9 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 import Title from "@/components/common/Title";
 import AccessRightValidate from "@/components/common/validate/AccessRight";
 import ProgramEditForm from "@/components/programEdit/ProgramEditForm";
+import FORM_INFO from "@/constants/FORM_INFO";
 import { useGetProgramById } from "@/hooks/query/useProgramQuery";
+import { convertText } from "@/utils/convert";
 
 interface ProgramEditPageProps {
   params: {
@@ -14,11 +16,7 @@ interface ProgramEditPageProps {
 
 const ProgramEditPage = ({ params }: ProgramEditPageProps) => {
   const { programId } = params;
-  const {
-    data: programInfo,
-    isLoading,
-    isError,
-  } = useGetProgramById(+programId);
+  const { data: programInfo, isLoading } = useGetProgramById(+programId);
 
   if (isLoading) return <LoadingSpinner />;
 
