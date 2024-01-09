@@ -17,7 +17,7 @@ const PaginationItem = ({
   );
 
   return (
-    <button onClick={onClick} className={paginationItemStyle}>
+    <button onClick={onClick} className={paginationItemStyle} type="button">
       {number}
     </button>
   );
