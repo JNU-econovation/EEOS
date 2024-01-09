@@ -31,7 +31,7 @@ const ProgramTitle = ({
         type={FORM_INFO.PROGRAM.TITLE.type}
         label={FORM_INFO.PROGRAM.TITLE.label}
         placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
-        value={convertText(title, FORM_INFO.DEMAND_PREFIX).trim()}
+        value={convertText(title, FORM_INFO.DEMAND_PREFIX)}
         onChange={handleTitleChange}
         prefix={prefix}
       />
