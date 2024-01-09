@@ -8,13 +8,13 @@ import {
 import ERROR_CODE from "@/constants/ERROR_CODE";
 import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
 
 const https = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 https.interceptors.request.use(
@@ -77,7 +77,7 @@ https.interceptors.response.use(
       deleteTokenInfo();
       setTimeout(() => {
         window.location.href = "/login";
-      }, 3000); // 2초 후에 페이지 이동
+      }, 3000);
     }
     error.message = errorMessage;
     return Promise.reject(error);
