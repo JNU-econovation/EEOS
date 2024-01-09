@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SelectCandidateService implements CandidateService {
+public class SelectAttendTargetService implements AttendTargetService {
 	private final AttendRepository attendRepository;
 	private final AttendEntityConverter entityConverter;
 	private final MemberRepository memberRepository;
@@ -34,7 +34,7 @@ public class SelectCandidateService implements CandidateService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void saveCandidate(final Long programId, final List<ProgramMembers> members) {
+	public void save(final Long programId, final List<ProgramMembers> members) {
 		List<AttendEntity> attendEntities =
 				findMembers(members).stream()
 						.map(member -> entityConverter.toEntity(member.getId(), programId))
@@ -45,8 +45,7 @@ public class SelectCandidateService implements CandidateService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void updateCandidate(
-			final Long programId, final List<ChangeAllAttendStatusRequest> requests) {
+	public void update(final Long programId, final List<ChangeAllAttendStatusRequest> requests) {
 		List<AttendModel> requestAttends = findAttends(programId, requests);
 
 		AttendManager attendManager = new AttendManager();
@@ -79,7 +78,8 @@ public class SelectCandidateService implements CandidateService {
 						.collect(Collectors.toList());
 
 		List<AttendModel> existingAttends = findExistingAttends(programId, memberIds);
-		List<AttendModel> notExistingAttends = findNotExistingAttends(memberIds, existingAttends);
+		List<AttendModel> notExistingAttends =
+				findNotExistingAttends(memberIds, existingAttends, programId);
 
 		return Stream.concat(existingAttends.stream(), notExistingAttends.stream())
 				.collect(Collectors.toList());
@@ -92,9 +92,9 @@ public class SelectCandidateService implements CandidateService {
 	}
 
 	private List<AttendModel> findNotExistingAttends(
-			final List<Long> memberIds, final List<AttendModel> existingAttends) {
+			final List<Long> memberIds, final List<AttendModel> existingAttends, final Long programId) {
 		List<Long> notExistingAttendMemberIds = findDifferent(memberIds, existingAttends);
-		return AttendModel.of(notExistingAttendMemberIds);
+		return AttendModel.of(notExistingAttendMemberIds, programId);
 	}
 
 	private <T extends MemberIdModel> void validateAllFind(
@@ -118,7 +118,7 @@ public class SelectCandidateService implements CandidateService {
 	private void updateAttendStatus(
 			AttendModel model, List<ChangeAllAttendStatusRequest> requests, AttendManager attendManager) {
 		ChangeAllAttendStatusRequest request = findUpdateRequest(model.getMemberId(), requests);
-		model.changeStatusByManager(request.getBeforeAttendStatus(), request.getAfterAttendStatus());
+		model.changeStatus(request.getAfterAttendStatus());
 
 		if (Objects.equals(request.getAfterAttendStatus(), AttendStatus.NONRELATED.getStatus())) {
 			attendManager.addNonRelated(model);
@@ -142,7 +142,6 @@ public class SelectCandidateService implements CandidateService {
 						.map(entityConverter::toEntity)
 						.collect(Collectors.toList());
 
-		System.out.println(nonRelated.size());
 		attendRepository.deleteAll(nonRelated);
 	}
 
@@ -151,7 +150,6 @@ public class SelectCandidateService implements CandidateService {
 				attendManager.getRelated().stream()
 						.map(entityConverter::toEntity)
 						.collect(Collectors.toList());
-		System.out.println(related.size());
 
 		attendRepository.saveAll(related);
 	}
