@@ -2,6 +2,7 @@ package com.example.eeos.di
 
 import com.example.eeos.EEOSApplication
 import com.google.gson.GsonBuilder
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +41,7 @@ object RetrofitModule {
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BE_DEV_URL)
         .client(client)
+        .addCallAdapterFactory(ApiResponseCallAdapterFactory.create()) // Here!
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 }
