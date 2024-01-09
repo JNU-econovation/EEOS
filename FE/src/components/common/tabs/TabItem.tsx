@@ -37,7 +37,7 @@ const TabItem = ({ color, rounded, size, text, onClick }: Props) => {
   };
 
   return (
-    <button className={tabItemStyle} onClick={handleClick}>
+    <button className={tabItemStyle} onClick={handleClick} type="button">
       <p>{text}</p>
     </button>
   );

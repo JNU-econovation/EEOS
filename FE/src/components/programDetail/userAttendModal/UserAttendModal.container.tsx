@@ -29,7 +29,12 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
   };
 
   return (
-    <button ref={modalRef} className={modalStyle} onClick={openModal}>
+    <button
+      ref={modalRef}
+      className={modalStyle}
+      onClick={openModal}
+      type="button"
+    >
       <Image
         src="/icons/line.svg"
         alt="line"

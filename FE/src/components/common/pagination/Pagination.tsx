@@ -27,7 +27,7 @@ const Paginataion = ({
 
   return (
     <div className="my-14 flex w-full items-center justify-center gap-8">
-      <button onClick={handleBackward}>
+      <button onClick={handleBackward} type="button">
         <Image
           src="/icons/left.svg"
           alt="이전 페이지"
@@ -46,7 +46,7 @@ const Paginataion = ({
           />
         ))}
       </div>
-      <button onClick={handleForward}>
+      <button onClick={handleForward} type="button">
         <Image
           src="/icons/right.svg"
           alt="이후 페이지"

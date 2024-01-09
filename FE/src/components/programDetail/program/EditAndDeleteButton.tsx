@@ -22,7 +22,7 @@ const EditAndDeleteButton = ({ programId }) => {
           className="h-[22px] w-[22px] hover:cursor-pointer"
         />
       </Link>
-      <button onClick={handleClickDelete}>
+      <button onClick={handleClickDelete} type="button">
         <Image
           src="/icons/trash.svg"
           alt="프로그램 삭제"
