@@ -23,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitModule {
     private const val MOCK_URL = "https://562ee14c-9738-4e79-ba16-f8d78480a890.mock.pstmn.io/api/"
     private const val BE_DEV_URL = "https://dev.eeos.store/api/"
+    private const val BE_OPERATE_URL = "https://be.eeos.store/api/"
 
     @Provides
     @Singleton
@@ -59,7 +60,7 @@ object RetrofitModule {
         client: OkHttpClient,
         gsonFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(BE_DEV_URL)
+        .baseUrl(BE_OPERATE_URL)
         .client(client)
         .addCallAdapterFactory(ApiResponseCallAdapterFactory.create()) // Here!
         .addConverterFactory(gsonFactory)
