@@ -15,6 +15,7 @@ import {
   ProgramFormData,
   ProgramFormDataAction,
 } from "@/hooks/useProgramFormData";
+import { useRouter } from "next/navigation";
 
 interface ProgramFormProps extends ProgramFormData, ProgramFormDataAction {
   formType: FormType;
@@ -37,11 +38,17 @@ const ProgramForm = ({
   reset,
   onSubmit,
 }: PropsWithChildren<ProgramFormProps>) => {
+  const router = useRouter();
   const isDemand = type === "demand";
   const demandCheckBoxDisabled = formType === "edit";
 
   const handleChangeType = () => {
     setType(isDemand ? "notification" : "demand");
+  };
+
+  const handleReset = () => {
+    reset();
+    router.back();
   };
 
   return (
@@ -80,7 +87,10 @@ const ProgramForm = ({
         onChange={(v) => setContent(v)}
       />
       {children}
-      <FormBtn submitText={FORM_INFO.SUBMIT_TEXT[formType]} formReset={reset} />
+      <FormBtn
+        submitText={FORM_INFO.SUBMIT_TEXT[formType]}
+        formReset={handleReset}
+      />
     </form>
   );
 };
