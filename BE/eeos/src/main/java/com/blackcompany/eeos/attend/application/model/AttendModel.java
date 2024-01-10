@@ -30,7 +30,8 @@ public class AttendModel implements AbstractModel, MemberIdModel {
 		return this;
 	}
 
-	public AttendModel changeStatus(String afterStatus) {
+	public AttendModel changeStatusByManager(String beforeStatus, String afterStatus) {
+		validateChangeByManager(beforeStatus);
 		this.status = AttendStatus.find(afterStatus);
 
 		return this;
@@ -58,6 +59,10 @@ public class AttendModel implements AbstractModel, MemberIdModel {
 
 	private void validateChange(String beforeStatus) {
 		canChange(beforeStatus);
+		isSameBeforeStatus(beforeStatus);
+	}
+
+	private void validateChangeByManager(String beforeStatus) {
 		isSameBeforeStatus(beforeStatus);
 	}
 
