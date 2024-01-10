@@ -4,6 +4,7 @@ import com.example.eeos.data.model.remote.response.ResponsePostLoginDto
 import com.example.eeos.data.model.remote.response.ResponseReIssueTokenDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
 import com.example.eeos.data.service.AuthService
+import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
@@ -11,7 +12,7 @@ class AuthDataSource @Inject constructor(
 ) {
     suspend fun postLogin(
         code: String,
-    ): BaseResponse<ResponsePostLoginDto> =
+    ): ApiResponse<BaseResponse<ResponsePostLoginDto>> =
         authService.postLogin(
             code = code,
             redirectUri = "https://android.eeos.store"
