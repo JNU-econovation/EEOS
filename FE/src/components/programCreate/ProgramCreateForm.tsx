@@ -7,6 +7,7 @@ import useProgramFormData from "@/hooks/useProgramFormData";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateProgram } from "@/hooks/query/useProgramQuery";
 import FORM_INFO from "@/constants/FORM_INFO";
+import { toast } from "react-toastify";
 
 const ProgramCreateForm = () => {
   const queryClient = useQueryClient();
@@ -49,7 +50,7 @@ const ProgramCreateForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title || !content || !deadLine || !category || !type) {
-      alert("모든 항목을 입력해주세요.");
+      toast.error("모든 항목을 입력해주세요.");
       return;
     }
     createProgramMutate();

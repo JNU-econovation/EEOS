@@ -14,6 +14,7 @@ import {
 } from "@/apis/program";
 import API from "@/constants/API";
 import { ProgramStatus, ProgramType } from "@/types/program";
+import { ActiveStatusWithAll } from "@/types/member";
 
 interface CreateProgram {
   programData: PostProgramRequest;
@@ -35,17 +36,27 @@ export const useCreateProgram = ({ programData, formReset }: CreateProgram) => {
 
 export const useUpdateProgram = ({ programId, body }: PatchProgramRequest) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: [API.PROGRAM.UPDATE(programId)],
     mutationFn: () => patchProgram({ programId, body }),
     onSettled: (data) => {
       data && router.replace(ROUTES.DETAIL(data?.programId));
+      const statuses: ActiveStatusWithAll[] = ["all", "am", "cm", "rm", "ob"];
+      statuses.forEach((status) => {
+        queryClient.invalidateQueries([
+          API.MEMBER.ACTIVE_STATUS(programId),
+          status,
+        ]);
+      });
     },
   });
 };
 
 export const useDeleteProgram = (programId: number) => {
   const router = useRouter();
+
   return useMutation({
     mutationKey: [API.PROGRAM.DELETE(programId)],
     mutationFn: () => deleteProgram(programId),

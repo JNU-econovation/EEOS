@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import LabeledInput from "./LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
+import { convertText } from "@/utils/convert";
 
 interface ProgramTitleProps {
   title: string;
@@ -14,6 +15,14 @@ const ProgramTitle = ({
   prefix,
   children,
 }: PropsWithChildren<ProgramTitleProps>) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (title.includes(FORM_INFO.DEMAND_PREFIX)) {
+      const newTitle = convertText(title, FORM_INFO.DEMAND_PREFIX);
+      setTitle(newTitle);
+      return;
+    }
+    setTitle(e.target.value);
+  };
   return (
     <div className="relative">
       {children}
@@ -22,10 +31,8 @@ const ProgramTitle = ({
         type={FORM_INFO.PROGRAM.TITLE.type}
         label={FORM_INFO.PROGRAM.TITLE.label}
         placeholder={FORM_INFO.PROGRAM.TITLE.placeholder}
-        value={title}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setTitle(e.target.value)
-        }
+        value={convertText(title, FORM_INFO.DEMAND_PREFIX)}
+        onChange={handleTitleChange}
         prefix={prefix}
       />
     </div>

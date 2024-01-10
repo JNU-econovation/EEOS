@@ -24,8 +24,17 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
     },
   );
 
+  const handleOpenModal = () => {
+    isOpen ? closeModal() : openModal();
+  };
+
   return (
-    <div ref={modalRef} className={modalStyle} onClick={() => openModal()}>
+    <button
+      ref={modalRef}
+      className={modalStyle}
+      onClick={openModal}
+      type="button"
+    >
       <Image
         src="/icons/line.svg"
         alt="line"
@@ -36,7 +45,7 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
       <ErrorBoundary FallbackComponent={ErrorFallbackNoIcon}>
         <UserAttendModal programId={programId} />
       </ErrorBoundary>
-    </div>
+    </button>
   );
 };
 export default UserAttendModalContainer;

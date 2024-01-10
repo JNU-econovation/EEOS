@@ -9,11 +9,13 @@ const RETRY_BUTTON_TEXT = "Try again";
 type FallbackProps = {
   error: any;
   resetErrorBoundary?: (...args: any[]) => void;
+  retryButton?: boolean;
 };
 
 const ErrorFallback = ({
   error,
   resetErrorBoundary = () => {},
+  retryButton = true,
 }: FallbackProps) => {
   const { reset } = useQueryErrorResetBoundary();
   const handleReset = () => {
@@ -30,9 +32,11 @@ const ErrorFallback = ({
       />
       <Title text={ERROR_TITLE} textColor="error" />
       {error?.message && <p className="text-sm font-normal">{error.message}</p>}
-      <Button color="error" size="lg" type="button" onClick={handleReset}>
-        {RETRY_BUTTON_TEXT}
-      </Button>
+      {retryButton && (
+        <Button color="error" size="lg" type="button" onClick={handleReset}>
+          {RETRY_BUTTON_TEXT}
+        </Button>
+      )}
     </div>
   );
 };

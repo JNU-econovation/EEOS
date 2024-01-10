@@ -6,6 +6,7 @@ const ROUTES = {
   ERROR: "/error",
   LOGIN: "/login",
   LOGGIN_IN: "/login/logging-in",
+  NAME_ERROR: "/login/name-error",
 };
 
 Object.freeze(ROUTES);

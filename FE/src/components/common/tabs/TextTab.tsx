@@ -11,17 +11,18 @@ const TextTab = <T,>({ options, selected, onClick }: TextTabProps<T>) => {
     <div className="flex w-full gap-4 border-b-2 border-stroke-30 px-2 py-4">
       {options.map((option) =>
         option.type === selected ? (
-          <span key={option.text} className="text-xl font-bold">
+          <button key={option.text} className="text-xl font-bold" type="button">
             {option.text}
-          </span>
+          </button>
         ) : (
-          <span
+          <button
             key={option.text}
             className="text-lg font-normal text-gray-600"
             onClick={() => onClick(option.type)}
+            type="button"
           >
             {option.text}
-          </span>
+          </button>
         ),
       )}
     </div>

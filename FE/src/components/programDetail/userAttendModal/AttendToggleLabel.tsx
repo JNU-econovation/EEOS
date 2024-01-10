@@ -1,15 +1,12 @@
 import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
+import { EditableStatus } from "@/types/attendStatusModal";
 
 interface AttendToggleLabelProps {
-  canEdit: boolean;
+  editableStatus: EditableStatus;
 }
 
-const AttendToggleLabel = ({ canEdit }: AttendToggleLabelProps) => {
-  return (
-    <p className="mb-2">
-      {canEdit ? ATTEND_STATUS.LABEL.canEdit : ATTEND_STATUS.LABEL.cannotEdit}
-    </p>
-  );
+const AttendToggleLabel = ({ editableStatus }: AttendToggleLabelProps) => {
+  return <p className="mb-2">{ATTEND_STATUS.LABEL[editableStatus]}</p>;
 };
 
 export default AttendToggleLabel;
