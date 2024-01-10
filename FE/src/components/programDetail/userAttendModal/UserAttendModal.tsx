@@ -12,6 +12,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ProgramStatus } from "@/types/program";
 import MESSAGE from "@/constants/MESSAGE";
 import AttendStatusModalLoader from "./AttendStatusModal.loader";
+import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
+import { EditableStatus } from "@/types/attendStatusModal";
 
 interface UserAttendModalProps {
   programId: number;
@@ -32,7 +34,17 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
     "programStatus",
     programId,
   ]);
-  const canEdit = attendStatus !== "nonRelated" && programStatus === "active";
+
+  const getEditableStatus = (
+    attendStatus: AttendStatus,
+    programStatus: ProgramStatus,
+  ): EditableStatus => {
+    if (attendStatus === "nonRelated") return "NON_RELATED";
+    if (programStatus !== "active") return "INACTIVE";
+    return "EDITABLE";
+  };
+
+  const editableStatus = getEditableStatus(attendStatus, programStatus);
 
   const handleSelectorClick = (value: AttendStatus) => {
     confirm(MESSAGE.CONFIRM.EDIT) && updateAttendStatus(value);
@@ -41,10 +53,10 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
   return (
     <>
       <AttendStatusView userInfo={userInfo} programId={programId} />
-      <AttendToggleLabel canEdit={canEdit} />
+      <AttendToggleLabel editableStatus={editableStatus} />
       <AttendStatusToggle
         selectedValue={attendStatus}
-        disabled={!canEdit}
+        disabled={editableStatus !== "EDITABLE"}
         onSelect={(v) => handleSelectorClick(v)}
       />
     </>

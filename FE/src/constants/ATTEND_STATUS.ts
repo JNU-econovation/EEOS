@@ -74,8 +74,9 @@ const USER: AttendStatusUser = {
 };
 
 const LABEL = {
-  canEdit: "본인의 출석 상태를 선택해주세요.",
-  cannotEdit: "출석 상태를 변경할 수 없습니다.",
+  EDITABLE: "본인의 출석 상태를 선택해주세요.",
+  NON_RELATED: "출석 상태를 변경할 수 없습니다.",
+  INACTIVE: "종료된 행사는 출석 상태를 변경할 수 없습니다.",
 };
 
 Object.freeze(TOGGLE);
