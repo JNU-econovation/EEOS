@@ -1,6 +1,5 @@
 import { ProgramCategory, ProgramType } from "@/types/program";
 import { useEffect, useState } from "react";
-import { useGetProgramById } from "./query/useProgramQuery";
 
 export interface ProgramFormDataState {
   title: string;
