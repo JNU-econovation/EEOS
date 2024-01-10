@@ -4,9 +4,7 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 import Title from "@/components/common/Title";
 import AccessRightValidate from "@/components/common/validate/AccessRight";
 import ProgramEditForm from "@/components/programEdit/ProgramEditForm";
-import FORM_INFO from "@/constants/FORM_INFO";
 import { useGetProgramById } from "@/hooks/query/useProgramQuery";
-import { convertText } from "@/utils/convert";
 
 interface ProgramEditPageProps {
   params: {
