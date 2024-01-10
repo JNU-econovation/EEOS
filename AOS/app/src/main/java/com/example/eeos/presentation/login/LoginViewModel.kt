@@ -1,23 +1,26 @@
 package com.example.eeos.presentation.login
 
-import android.util.Log
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eeos.EEOSApplication
+import com.example.eeos.consts.SnackBarMessage
+import com.example.eeos.consts.USER_NAME_INVALID
 import com.example.eeos.domain.repository.AuthRepository
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import org.json.JSONObject
 
 data class LoginUiState(
-    val isLogin: Boolean = false,
+    val isLoading: Boolean = false,
     val isError: Boolean = false,
     val hasTokens: Boolean = false,
 
@@ -34,36 +37,31 @@ class LoginViewModel @Inject constructor(
     fun postLogin(code: String) {
         _loginUiState.update { currentState ->
             currentState.copy(
-                isLogin = true
+                isLoading = true
             )
         }
         viewModelScope.launch {
             authRepository.postLogin(
                 code = code
             )
-                .onSuccess { response ->
-                    EEOSApplication.prefs.access = response.accessToken
+                .suspendOnSuccess {
+                    EEOSApplication.prefs.access = data.data?.accessToken
 
                     _loginUiState.update { currentState ->
                         currentState.copy(
                             isError = false,
                             hasTokens = true,
-                            isLogin = false
+                            isLoading = false
                         )
                     }
                 }
-                .onFailure { exception ->
-                    Log.d("실패", "exception: $exception")
-                    when (exception) {
-                        is HttpException -> {
-                            _loginUiState.update { currentState ->
-                                currentState.copy(
-                                    isError = true
-                                )
-                            }
-                        }
+                .suspendOnError {
+                    val e = this.errorBody?.string()
+                    if (e != null) {
+                        val jsonObject = JSONObject(e)
+                        val errorCode = jsonObject.getString("code")
 
-                        is IOException -> {
+                        if (errorCode == USER_NAME_INVALID) {
                             _loginUiState.update { currentState ->
                                 currentState.copy(
                                     isError = true
@@ -71,6 +69,9 @@ class LoginViewModel @Inject constructor(
                             }
                         }
                     }
+                }
+                .suspendOnException {
+                    this.exception
                 }
         }
     }
@@ -79,7 +80,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _loginUiState.value.snackbarHostState
                 .showSnackbar(
-                    message = "성공적으로 로그아웃 되었습니다.",
+                    message = SnackBarMessage.onLogout,
                     duration = SnackbarDuration.Short
                 )
         }
