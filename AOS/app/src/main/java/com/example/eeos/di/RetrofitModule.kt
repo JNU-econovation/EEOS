@@ -1,7 +1,10 @@
 package com.example.eeos.di
 
-import com.example.eeos.EEOSApplication
-import com.google.gson.GsonBuilder
+import com.example.eeos.data.interceptor.AddHeaderInterceptor
+import com.example.eeos.data.interceptor.GetRefreshInterceptor
+import com.example.eeos.data.interceptor.Header
+import com.example.eeos.data.interceptor.Logging
+import com.example.eeos.data.interceptor.Reissue
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -10,8 +13,8 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,54 +23,51 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitModule {
     private const val MOCK_URL = "https://562ee14c-9738-4e79-ba16-f8d78480a890.mock.pstmn.io/api/"
     private const val BE_DEV_URL = "https://dev.eeos.store/api/"
-    private var gson = GsonBuilder().setLenient().create()
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(
-            HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-        )
-        .addInterceptor(AuthInterceptor())
-        .addInterceptor(GetRefreshInterceptor())
+    @Header
+    fun provideAddHeaderInterceptor(): Interceptor = AddHeaderInterceptor()
+
+    @Provides
+    @Singleton
+    @Reissue
+    fun provideGetRefreshInterceptor(): Interceptor = GetRefreshInterceptor()
+
+    @Provides
+    @Singleton
+    @Logging
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        @Header addHeaderInterceptor: Interceptor,
+        @Reissue getRefreshInterceptor: Interceptor,
+        @Logging httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(httpLoggingInterceptor)
+        .addInterceptor(addHeaderInterceptor)
+        .addInterceptor(getRefreshInterceptor)
         .build()
 
     @Provides
     @Singleton
     fun provideRetrofit(
         client: OkHttpClient,
+        gsonFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BE_DEV_URL)
         .client(client)
         .addCallAdapterFactory(ApiResponseCallAdapterFactory.create()) // Here!
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(gsonFactory)
         .build()
-}
 
-class AuthInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest = chain.request()
-        val authRequest = originalRequest.newBuilder()
-
-        authRequest.addHeader(
-            "Authorization",
-            ("Bearer " + EEOSApplication.prefs.access)
-        )
-
-        val req = authRequest.build()
-        return chain.proceed(req)
-    }
-}
-
-class GetRefreshInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val originalResponse = chain.proceed(chain.request())
-        val refreshToken = originalResponse.header("Set-Cookie")
-
-        EEOSApplication.prefs.refresh = refreshToken
-
-        return originalResponse
+    @Provides
+    @Singleton
+    fun provideConverterFactory(): Converter.Factory {
+        return GsonConverterFactory.create()
     }
 }

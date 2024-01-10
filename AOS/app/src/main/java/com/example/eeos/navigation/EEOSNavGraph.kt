@@ -58,6 +58,8 @@ fun EEOSNavGraph(
                         isLogout = false
                     }
                 }
+
+                // postLogin 성공 시 실행
                 if (loginUiState.value.hasTokens) {
                     navActions.navigateToHome()
                 }
