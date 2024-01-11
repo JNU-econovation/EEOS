@@ -42,7 +42,9 @@
     <string name="detail_bottom_sheet_irrelevant">본 행사와 관련 없음</string>
     <string name="detail_bottom_sheet_check_attendance">출석 체크 해주세요!</string>
     <string name="detail_bottom_sheet_do_survey">수요 조사 해주세요!</string>
-    <string name="detail_bottom_sheet_description">본인의 출석 상태를 선택해 주세요.</string>
+    <string name="detail_bottom_sheet_description_can_change">본인의 출석 상태를 선택해 주세요.</string>
+    <string name="detail_bottom_sheet_description_cant_change">출석 상태를 변경할 수 없습니다.</string>
+    <string name="detail_bottom_sheet_description_cant_change_program_end">종료된 행사는 출석 상태를 변경할 수 없습니다.</string>
 
 
     <!--Attend Status Confirm Dialog-->

@@ -17,11 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
 import com.example.eeos.consts.AttendStatus
+import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.consts.attendStatusMap
+import com.example.eeos.presentation.detail.ProgramDetailUiState
+import com.example.eeos.presentation.detail.ProgramDetailViewModel
 import com.example.eeos.presentation.detail.confirmdialog.ConfirmAttendStatusDialog
 
 @Composable
 fun AttendStatusButtons(
+    programDetailUiState: State<ProgramDetailUiState>,
     attendanceUiState: State<UserAttendStatusUiState>,
     putUserAttendStatus: (String) -> Unit
 ) {
@@ -54,21 +58,24 @@ fun AttendStatusButtons(
         AttendButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
+                && programDetailUiState.value.programStatus == ProgramStatus.active) {
                 onChangeAttendStatus(AttendStatus.attend)
             }
         }
         LateButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
+                && programDetailUiState.value.programStatus == ProgramStatus.active) {
                 onChangeAttendStatus(AttendStatus.late)
             }
         }
         AbsentButton(
             selectedAttendStatus = selectedAttendStatus
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
+                && programDetailUiState.value.programStatus == ProgramStatus.active) {
                 onChangeAttendStatus(AttendStatus.absent)
             }
         }
@@ -119,6 +126,7 @@ private fun AbsentButton(selectedAttendStatus: String?, onClick: () -> Unit) {
 private fun AttendStatusButtonsPreview() {
     MaterialTheme {
         AttendStatusButtons(
+            programDetailUiState = hiltViewModel<ProgramDetailViewModel>().detailUiState.collectAsState(),
             attendanceUiState = hiltViewModel<UserAttendStatusViewModel>().userAttendStatusUiState.collectAsState(),
             putUserAttendStatus = { p1 -> },
         )
