@@ -1,6 +1,7 @@
 import { FormType } from "@/types/form";
 import CheckBox from "../CheckBox";
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { memberTableCheckedAtom } from "@/store/memberTableCheckedAtom";
 
 interface MemberTableHeaderProps {
   formType: FormType;
@@ -16,7 +17,7 @@ const MemberTableHeader = ({
   formType,
   onClickCheckBox,
 }: MemberTableHeaderProps) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useAtom(memberTableCheckedAtom);
 
   const handleClickCheckBox = () => {
     onClickCheckBox(!checked);
