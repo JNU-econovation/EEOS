@@ -1,44 +1,70 @@
-import { sortMembers } from "../utils/sort";
+import API from "../constants/API";
 import {
-  attendStatus,
-  getAllMembersResponse,
-  getMembersByStatusResponse,
-  updateMembersRequest,
-  updateMembersResponse,
-} from "./types/member";
-import { https } from ".";
-import API from "@/src/constants/API";
+  ActiveStatusWithAll,
+  AttendStatus,
+  MemberActiveStatusInfo,
+  MemberAttendStatusInfo,
+  MemberInfo,
+} from "../types/member";
+import {
+  MemberActiveStatusInfoDto,
+  MemberAttendStatusInfoDto,
+  MemberInfoDto,
+} from "./dtos/member.dto";
+import { https } from "./instance";
 
-export const getAllMembers = async (programId: string) => {
-  const { data } = await https<getAllMembersResponse>({
-    url: API.MEMBER.GET_ALL_MEMBERS + `/${programId}`,
+/**
+ * 활동 상태별 회원 정보 조회
+ */
+
+export const getMembersByActiveStatus = async (
+  activeStatus: ActiveStatusWithAll,
+): Promise<MemberActiveStatusInfoDto[]> => {
+  const { data } = await https({
+    url: API.MEMBER.LIST,
     method: "GET",
+    params: { activeStatus },
   });
 
-  return sortMembers(data.data);
+  return data?.data?.members.map(
+    (member: MemberActiveStatusInfo) => new MemberActiveStatusInfoDto(member),
+  );
 };
 
-export const getMembersByStatus = async (
+/**
+ * 해당 프로그램의 활동 상태별 회원 정보 조회
+ */
+
+export const getProgramMembersByActiveStatus = async (
   programId: number,
-  attendStatus: attendStatus,
-) => {
-  const { data } = await https<getMembersByStatusResponse>({
-    url: API.MEMBER.GET_MEMBER_LIST_BY_STATUS(programId),
+  activeStatus: ActiveStatusWithAll,
+): Promise<MemberInfoDto[]> => {
+  const { data } = await https({
+    url: API.MEMBER.ACTIVE_STATUS(programId),
+    method: "GET",
+    params: { activeStatus },
+  });
+
+  return data?.data?.members.map(
+    (member: MemberInfo) => new MemberInfoDto(member),
+  );
+};
+
+/**
+ * 해당 프로그램의 출석 상태별 회원 정보 조회
+ */
+
+export const getProgramMembersByAttendStatus = async (
+  programId: number,
+  attendStatus: AttendStatus,
+): Promise<MemberAttendStatusInfoDto[]> => {
+  const { data } = await https({
+    url: API.MEMBER.ATTEND_STATUS(programId),
     method: "GET",
     params: { attendStatus },
   });
 
-  return data.data;
-};
-
-export const updateMembers = async (
-  programId: string,
-  body: updateMembersRequest,
-) => {
-  const { data } = await https<updateMembersResponse>({
-    url: API.MEMBER.UPDATE_ATTENDSTATUS + `/${programId}`,
-    method: "POST",
-    data: body,
-  });
-  return data.data;
+  return data?.data?.members.map(
+    (member: MemberAttendStatusInfo) => new MemberAttendStatusInfoDto(member),
+  );
 };

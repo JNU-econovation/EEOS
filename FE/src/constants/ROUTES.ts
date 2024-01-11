@@ -1,9 +1,12 @@
 const ROUTES = {
-  HOME: "/",
+  MAIN: "/main",
   CREATE: "/create",
-  DETAIL: "/detail",
-  EDIT: "/edit",
+  DETAIL: (programId: number) => `/detail/${programId}`,
+  EDIT: (programId: number) => `/edit/${programId}`,
   ERROR: "/error",
+  LOGIN: "/login",
+  LOGGIN_IN: "/login/logging-in",
+  NAME_ERROR: "/login/name-error",
 };
 
 Object.freeze(ROUTES);
