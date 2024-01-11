@@ -59,11 +59,14 @@
     <!--asset-->
     <string name="asset_statements">
         [{
-            "relation": ["delegate_permission/common.handle_all_urls"],
-             "target" : { "namespace": "android_app", "package_name": "com.example.eeos",
-               "sha256_cert_fingerprints": ["D8:5F:06:E3:BD:AC:2D:E9:6F:62:18:DE:D8:33:26:F8:33:E0:A2:FF:92:4B:7F:CE:E5:0D:06:A0:F1:F8:34:DC"] }
-        }]
-
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.eeos",
+    "sha256_cert_fingerprints":
+    ["0F:B7:33:22:11:78:C2:48:CE:30:1E:29:53:BE:44:87:BF:53:4B:40:5C:F2:2B:29:5E:5D:CA:C3:9A:44:7D:2E"]
+  }
+}]
     </string>
 
 </resources>
