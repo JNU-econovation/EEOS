@@ -1,6 +1,8 @@
 package com.blackcompany.eeos.member.application.model.converter;
 
+import com.blackcompany.eeos.auth.application.domain.OauthServerType;
 import com.blackcompany.eeos.common.support.converter.AbstractEntityConverter;
+import com.blackcompany.eeos.member.application.model.ActiveStatus;
 import com.blackcompany.eeos.member.application.model.MemberModel;
 import com.blackcompany.eeos.member.persistence.MemberEntity;
 import org.springframework.stereotype.Component;
@@ -13,7 +15,8 @@ public class MemberEntityConverter implements AbstractEntityConverter<MemberEnti
 		return MemberModel.builder()
 				.id(source.getId())
 				.name(source.getName())
-				.generation(source.getGeneration())
+				.activeStatus(source.getActiveStatus())
+				.oauthServerType(source.getOauthServerType())
 				.build();
 	}
 
@@ -22,7 +25,12 @@ public class MemberEntityConverter implements AbstractEntityConverter<MemberEnti
 		return MemberEntity.builder()
 				.id(source.getId())
 				.name(source.getName())
-				.generation(source.getGeneration())
+				.activeStatus(ActiveStatus.find(source.getActiveStatus()))
+				.oauthServerType(source.getOauthServerType())
 				.build();
+	}
+
+	public MemberEntity toEntity(String name, OauthServerType oauthServerType) {
+		return MemberEntity.builder().name(name).oauthServerType(oauthServerType).build();
 	}
 }

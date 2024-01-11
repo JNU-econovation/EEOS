@@ -1,12 +1,17 @@
-buildscript {
+ buildscript {
     ext {
         projectName = 'eeos'
         projectVersion = '1.0.1'
         springBootVersion = '2.7.5'
         dependencyManagementVersion = '1.0.15.RELEASE'
         spotlessVersion = '6.8.0'
+
+        set('springCloudVersion', "2021.0.4")
+        jsonwebtokenVersion = '0.11.5'
+
         asciidoctorVersion = '3.3.2'
         epagesRestDocsApiSpecVersion = '0.16.0'
+        swaggerUIVersion = '4.11.1'
     }
 }
 plugins {
@@ -15,6 +20,13 @@ plugins {
     id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
 
     id "com.diffplug.spotless" version "${spotlessVersion}"
+    // docs plugins
+    id 'org.asciidoctor.jvm.convert' version "${asciidoctorVersion}"
+    id 'com.epages.restdocs-api-spec' version "${epagesRestDocsApiSpecVersion}"
+    id 'org.hidetake.swagger.generator' version '2.18.2'
+
+    // flyway
+    id 'org.flywaydb.flyway' version '8.5.13'
 }
 
 group = 'com.econovation'
@@ -38,12 +50,19 @@ repositories {
 apply from: './tasks/formatting-task.gradle'
 apply from: './tasks/install-git-hooks.gradle'
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
@@ -52,6 +71,22 @@ dependencies {
     // database
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'mysql:mysql-connector-java'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
+
+    // openfeign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    // jwt
+    implementation "io.jsonwebtoken:jjwt-api:${jsonwebtokenVersion}"
+    implementation "io.jsonwebtoken:jjwt-impl:${jsonwebtokenVersion}"
+    implementation "io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}"
+
+    // swagger & restdocs
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation "com.epages:restdocs-api-spec-mockmvc:${epagesRestDocsApiSpecVersion}"
+    swaggerUI "org.webjars:swagger-ui:${swaggerUIVersion}"
 }
 
 test {

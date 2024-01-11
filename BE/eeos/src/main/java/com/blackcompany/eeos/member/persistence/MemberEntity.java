@@ -1,8 +1,12 @@
 package com.blackcompany.eeos.member.persistence;
 
+import com.blackcompany.eeos.auth.application.domain.OauthServerType;
 import com.blackcompany.eeos.common.persistence.BaseEntity;
+import com.blackcompany.eeos.member.application.model.ActiveStatus;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,10 +14,13 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,7 +30,12 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(
 		name = MemberEntity.ENTITY_PREFIX,
-		indexes = @Index(name = "idx_generation_name", columnList = "member_generation,member_name"))
+		indexes = {
+			@Index(name = "idx_member_name", columnList = "member_name"),
+			@Index(name = "idx_member_active_status", columnList = "member_active_status")
+		})
+@SQLDelete(sql = "UPDATE member SET is_deleted=true where member_id=?")
+@Where(clause = "is_deleted=false")
 public class MemberEntity extends BaseEntity {
 
 	public static final String ENTITY_PREFIX = "member";
@@ -36,6 +48,12 @@ public class MemberEntity extends BaseEntity {
 	@Column(name = ENTITY_PREFIX + "_name", nullable = false)
 	private String name;
 
-	@Column(name = ENTITY_PREFIX + "_generation", nullable = false)
-	private Long generation;
+	@Column(name = ENTITY_PREFIX + "_oath_server_type", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private OauthServerType oauthServerType;
+
+	@Column(name = ENTITY_PREFIX + "_active_status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Builder.Default
+	private ActiveStatus activeStatus = ActiveStatus.AM;
 }

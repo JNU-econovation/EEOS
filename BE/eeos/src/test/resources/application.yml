@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    group:
+      test:
+        - test-mysql
+        - test-api
+        - test-token
+        - oauth
+    active: test
