@@ -7,6 +7,7 @@ import MemberTable from "../common/memberTable/MemberTable";
 import { AttendStatus } from "@/types/member";
 import { useUpdateProgram } from "@/hooks/query/useProgramQuery";
 import { ProgramInfo } from "@/types/program";
+import { toast } from "react-toastify";
 
 interface ProgramEditFormProps {
   programId: string;
@@ -69,7 +70,7 @@ const ProgramEditForm = ({ programId, programInfo }: ProgramEditFormProps) => {
       !formData.category ||
       !formData.type
     ) {
-      alert("모든 항목을 입력해주세요.");
+      toast.error("모든 항목을 입력해주세요.");
       return;
     }
     updateProgramMutate();
@@ -82,7 +83,7 @@ const ProgramEditForm = ({ programId, programInfo }: ProgramEditFormProps) => {
         members={members}
         setMembers={updateMembers}
         programId={+programId}
-        isEditable={programInfo.programStatus === "active"}
+        isEditable={programInfo.programStatus !== "active"}
       />
     </ProgramForm>
   );

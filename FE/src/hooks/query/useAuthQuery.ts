@@ -1,4 +1,5 @@
 import { postSlackLogin } from "@/apis/auth";
+import ERROR_CODE from "@/constants/ERROR_CODE";
 import ROUTES from "@/constants/ROUTES";
 import {
   deleteTokenInfo,
@@ -23,7 +24,11 @@ export const useSlackLoginMutation = () => {
 
         router.replace(ROUTES.MAIN);
       },
-      onError: (error) => {},
+      onError: (error: any) => {
+        const errorCode = error?.response?.data?.code;
+        errorCode === ERROR_CODE.AUTH.INVALID_NAME &&
+          router.replace(ROUTES.NAME_ERROR);
+      },
     },
   );
 };

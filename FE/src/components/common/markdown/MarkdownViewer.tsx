@@ -5,15 +5,23 @@ import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import remarkGfm from "remark-gfm";
 import "./markdown-editor.styles.css";
 
+const markdownHeight = {
+  full: "h-full",
+  fix: "h-[32rem]",
+};
+
 const MarkdownViewer = ({
   value,
   className = "",
+  height = "full",
 }: {
   value: string;
   className?: string;
+  height?: "full" | "fix";
 }) => {
   const markdownClass = classNames(
-    "markdown-body h-full overflow-y-auto p-4",
+    "markdown-body overflox-y-scroll scrollbar-none w-full overflow-y-auto bg-background p-4",
+    markdownHeight[height],
     className,
   );
   return (

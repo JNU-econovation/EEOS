@@ -1,21 +1,19 @@
 "use client";
 
-import useModal from "@/hooks/useModal";
-import useOutsideRef from "@/hooks/useOutsideRef";
 import {
   useGetMyAttendStatus,
   usePutMyAttendStatus,
 } from "@/hooks/query/useUserQuery";
-import classNames from "classnames";
 import AttendStatusView from "./AttendStatusView";
 import AttendStatusToggle from "@/components/common/attendStatusToggle/AttendStatusToggle";
-import Image from "next/image";
 import AttendToggleLabel from "./AttendToggleLabel";
 import { AttendStatus } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
 import { ProgramStatus } from "@/types/program";
 import MESSAGE from "@/constants/MESSAGE";
 import AttendStatusModalLoader from "./AttendStatusModal.loader";
+import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
+import { EditableStatus } from "@/types/attendStatusModal";
 
 interface UserAttendModalProps {
   programId: number;
@@ -36,7 +34,17 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
     "programStatus",
     programId,
   ]);
-  const canEdit = attendStatus !== "nonRelated" && programStatus === "active";
+
+  const getEditableStatus = (
+    attendStatus: AttendStatus,
+    programStatus: ProgramStatus,
+  ): EditableStatus => {
+    if (attendStatus === "nonRelated") return "NON_RELATED";
+    if (programStatus !== "active") return "INACTIVE";
+    return "EDITABLE";
+  };
+
+  const editableStatus = getEditableStatus(attendStatus, programStatus);
 
   const handleSelectorClick = (value: AttendStatus) => {
     confirm(MESSAGE.CONFIRM.EDIT) && updateAttendStatus(value);
@@ -45,10 +53,10 @@ const UserAttendModal = ({ programId }: UserAttendModalProps) => {
   return (
     <>
       <AttendStatusView userInfo={userInfo} programId={programId} />
-      <AttendToggleLabel canEdit={canEdit} />
+      <AttendToggleLabel editableStatus={editableStatus} />
       <AttendStatusToggle
         selectedValue={attendStatus}
-        disabled={!canEdit}
+        disabled={editableStatus !== "EDITABLE"}
         onSelect={(v) => handleSelectorClick(v)}
       />
     </>

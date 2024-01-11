@@ -1,12 +1,20 @@
 import axios from "axios";
 import { postTokenReissue } from "./auth";
-import { setAccessToken, setTokenExpiration } from "@/utils/authWithStorage";
+import {
+  deleteTokenInfo,
+  setAccessToken,
+  setTokenExpiration,
+} from "@/utils/authWithStorage";
+import ERROR_CODE from "@/constants/ERROR_CODE";
+import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
+import { toast } from "react-toastify";
 
 const https = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 https.interceptors.request.use(
@@ -41,9 +49,11 @@ https.interceptors.response.use(
   },
   async (error) => {
     const { config: originalRequest, response } = error;
-    const code = response?.data?.code;
+    const errorCode = response?.data?.code;
+    const errorMessage =
+      ERROR_MESSAGE[errorCode]?.message || ERROR_MESSAGE.UNKNOWN.message;
 
-    if (code === 4001) {
+    if (errorCode === ERROR_CODE.AUTH.EXPIRED_ACCESS_TOKEN) {
       const { accessToken, accessExpiredTime } = await postTokenReissue();
 
       setAccessToken(accessToken);
@@ -53,6 +63,23 @@ https.interceptors.response.use(
       return await axios(originalRequest);
     }
 
+    if (errorCode === ERROR_CODE.AUTH.INVALID_NAME) {
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
+      return Promise.reject(error);
+    }
+
+    if (Object.values(ERROR_CODE.AUTH).includes(errorCode)) {
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
+      deleteTokenInfo();
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 3000);
+    }
+    error.message = errorMessage;
     return Promise.reject(error);
   },
 );

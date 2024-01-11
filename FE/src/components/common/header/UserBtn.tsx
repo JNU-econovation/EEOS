@@ -10,7 +10,7 @@ const UserBtn = () => {
   const modalRef = useOutsideRef(closeModal);
 
   return (
-    <div
+    <button
       ref={modalRef}
       className="relative cursor-pointer"
       onClick={() => openModal()}
@@ -23,7 +23,7 @@ const UserBtn = () => {
         className="h-[28px] w-[28px]"
       />
       {isOpen && <UserActiveModal />}
-    </div>
+    </button>
   );
 };
 
