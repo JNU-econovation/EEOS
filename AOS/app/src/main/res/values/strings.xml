@@ -60,13 +60,10 @@
     <string name="asset_statements">
         [{
             "relation": ["delegate_permission/common.handle_all_urls"],
-            "target": {
-            "namespace": "android_app",
-            "package_name": "com.example.eeos",
-            "sha256_cert_fingerprints":
-                ["90:3F:9B:5A:EA:08:34:C7:2C:87:6B:41:0F:BC:C3:99:E0:2E:29:BD:B9:A7:AA:5E:6F:5F:E8:25:08:DC:D6:DF"]
-            }
+             "target" : { "namespace": "android_app", "package_name": "com.example.eeos",
+               "sha256_cert_fingerprints": ["D8:5F:06:E3:BD:AC:2D:E9:6F:62:18:DE:D8:33:26:F8:33:E0:A2:FF:92:4B:7F:CE:E5:0D:06:A0:F1:F8:34:DC"] }
         }]
+
     </string>
 
 </resources>
