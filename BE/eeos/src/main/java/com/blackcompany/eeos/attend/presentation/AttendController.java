@@ -3,6 +3,7 @@ package com.blackcompany.eeos.attend.presentation;
 import com.blackcompany.eeos.attend.application.dto.AttendInfoResponse;
 import com.blackcompany.eeos.attend.application.dto.ChangeAttendStatusRequest;
 import com.blackcompany.eeos.attend.application.dto.ChangeAttendStatusResponse;
+import com.blackcompany.eeos.attend.application.dto.QueryAttendActiveStatusResponse;
 import com.blackcompany.eeos.attend.application.dto.QueryAttendStatusResponse;
 import com.blackcompany.eeos.attend.application.usecase.ChangeAttendStatusUsecase;
 import com.blackcompany.eeos.attend.application.usecase.GetAttendAllInfoSortActiveStatusUsecase;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/attend")
+@RequestMapping("/api")
 public class AttendController {
 
 	private final GetAttendantInfoUsecase getAttendantInfoUsecase;
@@ -34,14 +35,14 @@ public class AttendController {
 	private final GetAttendStatusUsecase getAttendStatusUsecase;
 	private final GetAttendAllInfoSortActiveStatusUsecase getAttendAllInfoSortActiveStatusUsecase;
 
-	@GetMapping("/candidate/programs/{programId}")
+	@GetMapping("/attend/candidate/programs/{programId}")
 	public ApiResponse<SuccessBody<List<AttendInfoResponse>>> findAttendMemberInfo(
 			@PathVariable("programId") Long programId) {
 		List<AttendInfoResponse> response = getAttendantInfoUsecase.findAttendInfo(programId);
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 
-	@PutMapping("/programs/{programId}")
+	@PutMapping("/attend/programs/{programId}")
 	public ApiResponse<SuccessBody<ChangeAttendStatusResponse>> changeAttendStatus(
 			@Member Long memberId,
 			@PathVariable("programId") Long programId,
@@ -51,29 +52,30 @@ public class AttendController {
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.UPDATE);
 	}
 
-	@GetMapping("/programs/{programId}")
+	@GetMapping("/attend/programs/{programId}")
 	public ApiResponse<SuccessBody<ChangeAttendStatusResponse>> getAttendStatus(
 			@Member Long memberId, @PathVariable("programId") Long programId) {
 		ChangeAttendStatusResponse response = getAttendStatusUsecase.getStatus(memberId, programId);
-		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.UPDATE);
+		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 
-	@GetMapping("/programs/{programId}/members")
+	@GetMapping("/attend/programs/{programId}/members")
 	public ApiResponse<SuccessBody<QueryAttendStatusResponse>> getAttendInfoByProgram(
 			@PathVariable("programId") Long programId,
 			@RequestParam("attendStatus") String attendStatus) {
+
 		QueryAttendStatusResponse response =
 				getAttendantInfoUsecase.findAttendInfo(programId, attendStatus);
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 
-	@GetMapping("candidate/programs/{programId}/members")
-	public ApiResponse<SuccessBody<QueryAttendStatusResponse>>
+	@GetMapping("/programs/{programId}/members")
+	public ApiResponse<SuccessBody<QueryAttendActiveStatusResponse>>
 			getAttendAllInfoByProgramSortActiveStatus(
 					@PathVariable("programId") Long programId,
 					@RequestParam("activeStatus") String activeStatus) {
-		QueryAttendStatusResponse response =
-				getAttendAllInfoSortActiveStatusUsecase.execute(programId, activeStatus);
+		QueryAttendActiveStatusResponse response =
+				getAttendAllInfoSortActiveStatusUsecase.getAttendInfo(programId, activeStatus);
 		return ApiResponseGenerator.success(response, HttpStatus.OK, MessageCode.GET);
 	}
 }
