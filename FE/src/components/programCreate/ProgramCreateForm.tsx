@@ -37,12 +37,12 @@ const ProgramCreateForm = () => {
 
   const updateAllMembers = (selected: boolean) => {
     const newMembers = new Set<number>(members);
+    const memberIdList: number[] = queryClient.getQueryData(["memberIdList"]);
     if (selected) {
-      const memberIdList: number[] = queryClient.getQueryData(["memberIdList"]);
       memberIdList.forEach((v) => newMembers.add(v));
     }
     if (!selected) {
-      newMembers.clear();
+      memberIdList.forEach((v) => newMembers.delete(v));
     }
     setMembers(newMembers);
   };
