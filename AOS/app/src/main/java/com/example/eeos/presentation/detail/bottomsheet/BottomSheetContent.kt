@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
 import com.example.eeos.consts.AttendStatus
+import com.example.eeos.consts.ProgramStatus
 import com.example.eeos.domain.model.Member
 import com.example.eeos.presentation.detail.ProgramDetailUiState
 import com.example.eeos.presentation.detail.ProgramDetailViewModel
@@ -87,11 +88,31 @@ fun BottomSheetContents(
                 )
             )
         )
-        Text(
-            text = stringResource(R.string.detail_bottom_sheet_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = colorResource(R.color.paragraph)
-        )
+        if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+            programDetailUiState.value.programStatus == ProgramStatus.active
+        ) {
+            Text(
+                text = stringResource(R.string.detail_bottom_sheet_description_can_change),
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.paragraph)
+            )
+        } else if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+            programDetailUiState.value.programStatus == ProgramStatus.end
+        ) {
+            Text(
+                text = stringResource(
+                    R.string.detail_bottom_sheet_description_cant_change_program_end
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.paragraph)
+            )
+        } else {
+            Text(
+                text = stringResource(R.string.detail_bottom_sheet_description_cant_change),
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.paragraph)
+            )
+        }
         Spacer(
             modifier = Modifier.height(
                 height = dimensionResource(
@@ -100,6 +121,7 @@ fun BottomSheetContents(
             )
         )
         AttendStatusButtons(
+            programDetailUiState = programDetailUiState,
             attendanceUiState = attendanceUiState,
             putUserAttendStatus = putUserAttendStatus
         )
