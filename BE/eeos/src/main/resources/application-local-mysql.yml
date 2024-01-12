@@ -1,0 +1,30 @@
+spring:
+  config:
+    activate:
+      on-profile: local-mysql
+  datasource:
+    url: jdbc:mysql://localhost:13308/eeos?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    generate-ddl: false
+  flyway:
+    baseline-on-migrate: true
+    enabled: false
+    baseline-version: 0
+    out-of-order: true
+    url: jdbc:mysql://localhost:13308/eeos?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+    user: root
+    password: root
+
+logging:
+  level:
+    root: info
+

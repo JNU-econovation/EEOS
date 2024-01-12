@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+  mysql:
+    container_name: eeos-mysql
+    image: mysql/mysql-server:8.0.27
+    environment:
+      - MYSQL_DATABASE=eeos
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=root
+    command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--skip-character-set-client-handshake", "--lower_case_table_names=1", "--max_connections=2048", "--wait_timeout=3600" ]
+    ports:
+      - "13306:3306"
+    volumes: #볼륨 지정
+      - ./resources/local-develop-environment/mysql-init.d/:/docker-entrypoint-initdb.d
+      - ./resources/local-develop-environment/mysql-data:/var/lib/mysql
+    networks: #사용할 네트워크 지정
+      - eeos-network
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eeos-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://eeos-mysql:3306/eeos?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_FLYWAY_URL: jdbc:mysql://eeos-mysql:3306/eeos?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_FLWYAY_USERNAME: root
+      SPRING_FLYWAY_PASSWORD: root
+      SPRING_PROFILES_ACTIVE: dev
+    networks: #사용할 네트워크 지정
+      - eeos-network
+networks:
+  eeos-network:

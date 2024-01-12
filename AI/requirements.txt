@@ -1,0 +1,7 @@
+numpy
+pandas
+urllib.request
+fastapi
+uvicorn
+math
+-U sentence_transformers
