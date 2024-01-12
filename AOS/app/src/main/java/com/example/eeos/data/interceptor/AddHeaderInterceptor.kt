@@ -36,7 +36,7 @@ class AddHeaderInterceptor : Interceptor {
         if (refreshToken != null) {
             val reIssueRequest = originalRequest.newBuilder()
                 .post("".toRequestBody())
-                .url("https://dev.eeos.store/api/auth/reissue")
+                .url("https://eeos.store/api/auth/reissue")
                 .addHeader("Cookie", refreshToken)
                 .build()
             val reIssueResponse = chain.proceed(reIssueRequest)

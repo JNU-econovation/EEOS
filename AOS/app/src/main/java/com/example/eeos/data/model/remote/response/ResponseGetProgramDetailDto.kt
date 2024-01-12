@@ -30,6 +30,7 @@ data class ResponseGetProgramDetailDto(
         deadLine = deadLine,
         content = content,
         category = category,
-        type = type
+        type = type,
+        programStatus = programStatus
     )
 }
