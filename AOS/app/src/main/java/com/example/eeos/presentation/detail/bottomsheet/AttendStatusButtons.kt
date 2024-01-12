@@ -56,26 +56,29 @@ fun AttendStatusButtons(
         }
 
         AttendButton(
-            selectedAttendStatus = selectedAttendStatus
+            selectedAttendStatus = if (programDetailUiState.value.programStatus == ProgramStatus.end) { "" } else { selectedAttendStatus }
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
-                && programDetailUiState.value.programStatus == ProgramStatus.active) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+                programDetailUiState.value.programStatus == ProgramStatus.active
+            ) {
                 onChangeAttendStatus(AttendStatus.attend)
             }
         }
         LateButton(
-            selectedAttendStatus = selectedAttendStatus
+            selectedAttendStatus = if (programDetailUiState.value.programStatus == ProgramStatus.end) { "" } else { selectedAttendStatus }
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
-                && programDetailUiState.value.programStatus == ProgramStatus.active) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+                programDetailUiState.value.programStatus == ProgramStatus.active
+            ) {
                 onChangeAttendStatus(AttendStatus.late)
             }
         }
         AbsentButton(
-            selectedAttendStatus = selectedAttendStatus
+            selectedAttendStatus = if (programDetailUiState.value.programStatus == ProgramStatus.end) { "" } else { selectedAttendStatus }
         ) {
-            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
-                && programDetailUiState.value.programStatus == ProgramStatus.active) {
+            if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+                programDetailUiState.value.programStatus == ProgramStatus.active
+            ) {
                 onChangeAttendStatus(AttendStatus.absent)
             }
         }

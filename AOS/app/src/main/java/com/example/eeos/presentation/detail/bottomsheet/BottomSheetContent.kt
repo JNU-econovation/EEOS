@@ -88,17 +88,21 @@ fun BottomSheetContents(
                 )
             )
         )
-        if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
-            && programDetailUiState.value.programStatus == ProgramStatus.active) {
+        if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+            programDetailUiState.value.programStatus == ProgramStatus.active
+        ) {
             Text(
                 text = stringResource(R.string.detail_bottom_sheet_description_can_change),
                 style = MaterialTheme.typography.bodySmall,
                 color = colorResource(R.color.paragraph)
             )
-        } else if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated
-            && programDetailUiState.value.programStatus == ProgramStatus.end ) {
+        } else if (attendanceUiState.value.userAttendStatus != AttendStatus.nonRelated &&
+            programDetailUiState.value.programStatus == ProgramStatus.end
+        ) {
             Text(
-                text = stringResource(R.string.detail_bottom_sheet_description_cant_change_program_end),
+                text = stringResource(
+                    R.string.detail_bottom_sheet_description_cant_change_program_end
+                ),
                 style = MaterialTheme.typography.bodySmall,
                 color = colorResource(R.color.paragraph)
             )
