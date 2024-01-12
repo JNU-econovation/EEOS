@@ -7,8 +7,6 @@ import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useRouter } from "next/navigation";
 
-const NAME_MANUAL_URL = "https://github.com/JNU-econovation/black-company";
-
 const SlackNameErrorPage = () => {
   const router = useRouter();
   const error = {
@@ -27,7 +25,10 @@ const SlackNameErrorPage = () => {
         로그인 페이지로 이동
       </Button>
       <p className="mt-24 text-sm font-normal">
-        <a href={NAME_MANUAL_URL} className="text-blue-500">
+        <a
+          href={process.env.NEXT_PUBLIC_NAME_MANUAL_URL}
+          className="text-blue-500"
+        >
           링크
         </a>
         에서 더 자세한 내용을 확인하실 수 있습니다.
