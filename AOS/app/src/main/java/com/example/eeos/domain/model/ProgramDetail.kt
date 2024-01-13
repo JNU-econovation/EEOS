@@ -5,5 +5,6 @@ data class ProgramDetail(
     val deadLine: String,
     val content: String,
     val category: String,
-    val type: String
+    val type: String,
+    val programStatus: String
 )

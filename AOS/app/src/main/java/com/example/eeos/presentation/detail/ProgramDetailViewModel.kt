@@ -2,9 +2,7 @@ package com.example.eeos.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eeos.EEOSApplication
 import com.example.eeos.consts.categoryChips
-import com.example.eeos.domain.repository.AuthRepository
 import com.example.eeos.domain.repository.ProgramRepository
 import com.example.eeos.presentation.util.getDateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,13 +22,13 @@ data class ProgramDetailUiState(
     val title: String = "",
     val deadLine: String = "",
     val content: String = "",
-    val programType: String = ""
+    val programType: String = "",
+    val programStatus: String = ""
 )
 
 @HiltViewModel
 class ProgramDetailViewModel @Inject constructor(
     private val programRepository: ProgramRepository,
-    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _detailUiState = MutableStateFlow(ProgramDetailUiState())
     val detailUiState = _detailUiState.asStateFlow()
@@ -48,20 +46,12 @@ class ProgramDetailViewModel @Inject constructor(
                             title = programDetail.title,
                             deadLine = deadLine,
                             content = programDetail.content,
-                            programType = programDetail.type
+                            programType = programDetail.type,
+                            programStatus = programDetail.programStatus
                         )
                     }
                 }
                 .onFailure { exception ->
-                    if (exception.message!!.contains("4001")) {
-                        val refresh = EEOSApplication.prefs.refresh
-                        if (refresh != null) {
-                            authRepository.reIssueToken(refresh)
-                        } else {
-                            /* TODO: 로그인 페이지로 이동하는 함수 작성 */
-                        }
-                    }
-
                     when (exception) {
                         is HttpException -> {
                             _detailUiState.update { currentState ->

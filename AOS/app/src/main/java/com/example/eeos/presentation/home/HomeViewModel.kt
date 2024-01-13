@@ -2,11 +2,9 @@ package com.example.eeos.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eeos.EEOSApplication
 import com.example.eeos.consts.category
 import com.example.eeos.consts.programStatus
 import com.example.eeos.domain.model.Program
-import com.example.eeos.domain.repository.AuthRepository
 import com.example.eeos.domain.repository.ProgramRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
@@ -26,7 +24,6 @@ data class HomeUiState(
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val programRepository: ProgramRepository,
-    private val authRepository: AuthRepository
     ) : ViewModel() {
         private val _homeUiState = MutableStateFlow(HomeUiState())
         val homeUiState = _homeUiState.asStateFlow()
@@ -63,15 +60,6 @@ class HomeViewModel @Inject constructor(
                     }
                 }
                 .onFailure { exception ->
-                    if (exception.message!!.contains("401")) {
-                        val refresh = EEOSApplication.prefs.refresh
-                        if (refresh != null) {
-                            authRepository.reIssueToken(refresh)
-                        } else {
-                            /* TODO: 로그인 페이지로 이동하는 함수 작성 */
-                        }
-                    }
-
                     when (exception) {
                         is HttpException -> {
                             _homeUiState.update { currentState ->
