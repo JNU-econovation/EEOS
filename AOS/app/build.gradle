@@ -15,7 +15,13 @@ android {
     compileSdk 33
 
     signingConfigs {
-        releaseWithSignedKey {
+        debugKey {
+            keyAlias KEY_ALIAS_DEBUG
+            keyPassword KEY_PASSWORD_DEBUG
+            storeFile file(STORE_FILE_DEBUG)
+            storePassword STORE_PASSWORD_DEBUG
+        }
+        releaseKey {
             keyAlias KEY_ALIAS
             keyPassword KEY_PASSWORD
             storeFile file(STORE_FILE)
@@ -46,10 +52,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            signingConfig signingConfigs.debugKey
+            minifyEnabled false
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.releaseWithSignedKey
+            signingConfig signingConfigs.releaseKey
         }
     }
     compileOptions {
