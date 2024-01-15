@@ -13,3 +13,16 @@
 .externalNativeBuild
 .cxx
 local.properties
+gradle.properties
+
+# Built application files
+.apk
+.ap
+.aab
+
+# Keystore file
+.keystore
+
+# Properties
+/*/local.properties
+/*/gradle.properties
