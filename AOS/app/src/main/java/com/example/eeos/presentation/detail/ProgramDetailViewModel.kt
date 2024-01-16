@@ -74,6 +74,6 @@ class ProgramDetailViewModel @Inject constructor(
     }
 
     private fun categoryAdjustment(category: String): String {
-        return categoryChips[com.example.eeos.consts.category.indexOf(category)]
+        return categoryChips[com.example.eeos.consts.programCategory.indexOf(category)]
     }
 }
