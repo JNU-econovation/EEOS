@@ -29,16 +29,16 @@ class Item(BaseModel) :
     sentence : str
 
 class Item_and_num(BaseModel) :
-    item_list : List[Item]
-    min_n : int
-    max_n : int
+    items : List[Item]
+    teamMin : int
+    teamMax : int
 
 @sbert.post('/clustering')
 async def start_sbert(data:Item_and_num):
     
-    input = data.item_list
-    min_num = data.min_n
-    max_num = data.max_n
+    input = data.items
+    min_num = data.teamMin
+    max_num = data.teamMax
     
 
     # 문장 임베딩
