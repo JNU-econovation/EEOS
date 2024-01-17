@@ -1,34 +1,37 @@
 package com.example.eeos.domain.repository
 
 import com.example.eeos.data.model.remote.request.RequestPutAttendStatusDto
-import com.example.eeos.domain.model.AttendStatus
-import com.example.eeos.domain.model.Member
-import com.example.eeos.domain.model.Program
-import com.example.eeos.domain.model.ProgramDetail
+import com.example.eeos.data.model.remote.response.ResponseGetAttendStatusDto
+import com.example.eeos.data.model.remote.response.ResponseGetMemberListDto
+import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
+import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
+import com.example.eeos.data.model.remote.response.ResponsePutAttendStatusDto
+import com.example.eeos.data.model.remote.response.base.BaseResponse
+import com.skydoves.sandwich.ApiResponse
 
 interface ProgramRepository {
     suspend fun getProgramDetail(
         programId: Int
-    ): Result<ProgramDetail>
+    ): ApiResponse<BaseResponse<ResponseGetProgramDetailDto>>
 
     suspend fun getProgramList(
         category: String,
         programStatus: String,
         size: Int,
         page: Int
-    ): Result<List<Program>>
+    ): ApiResponse<BaseResponse<ResponseGetProgramListDto>>
 
     suspend fun putAttendStatus(
         programId: Int,
         requestPutAttendStatusDto: RequestPutAttendStatusDto
-    ): Result<Unit>
+    ): ApiResponse<BaseResponse<ResponsePutAttendStatusDto>>
 
     suspend fun getAttendStatus(
         programId: Int
-    ): Result<AttendStatus>
+    ): ApiResponse<BaseResponse<ResponseGetAttendStatusDto>>
 
     suspend fun getMemberList(
         programId: Int,
         attendStatus: String
-    ): Result<List<Member>>
+    ): ApiResponse<BaseResponse<ResponseGetMemberListDto>>
 }

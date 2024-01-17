@@ -8,6 +8,7 @@ import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
 import com.example.eeos.data.model.remote.response.ResponsePutAttendStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
 import com.example.eeos.data.service.ProgramService
+import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
 class ProgramDataSource @Inject constructor(
@@ -15,7 +16,7 @@ class ProgramDataSource @Inject constructor(
 ) {
     suspend fun getProgramDetail(
         programId: Int
-    ): BaseResponse<ResponseGetProgramDetailDto> =
+    ): ApiResponse<BaseResponse<ResponseGetProgramDetailDto>> =
         programService.getProgramDetail(programId = programId)
 
     suspend fun getProgramLists(
@@ -23,7 +24,7 @@ class ProgramDataSource @Inject constructor(
         programStatus: String,
         size: Int,
         page: Int
-    ): BaseResponse<ResponseGetProgramListDto> =
+    ): ApiResponse<BaseResponse<ResponseGetProgramListDto>> =
         programService.getProgramList(
             category = category,
             programStatus = programStatus,
@@ -34,7 +35,7 @@ class ProgramDataSource @Inject constructor(
     suspend fun putAttendStatus(
         programId: Int,
         requestPutAttendStatusDto: RequestPutAttendStatusDto
-    ): BaseResponse<ResponsePutAttendStatusDto> =
+    ): ApiResponse<BaseResponse<ResponsePutAttendStatusDto>> =
         programService.putAttendStatus(
             programId = programId,
             requestPutAttendStatusDto = requestPutAttendStatusDto
@@ -42,7 +43,7 @@ class ProgramDataSource @Inject constructor(
 
     suspend fun getAttendStatus(
         programId: Int
-    ): BaseResponse<ResponseGetAttendStatusDto> =
+    ): ApiResponse<BaseResponse<ResponseGetAttendStatusDto>> =
         programService.getAttendStatus(
             programId = programId
         )
@@ -50,7 +51,7 @@ class ProgramDataSource @Inject constructor(
     suspend fun getMemberList(
         programId: Int,
         attendStatus: String
-    ): BaseResponse<ResponseGetMemberListDto> =
+    ): ApiResponse<BaseResponse<ResponseGetMemberListDto>> =
         programService.getMemberList(
             programId = programId,
             attendStatus = attendStatus

@@ -7,6 +7,7 @@ import com.example.eeos.data.model.remote.response.ResponseGetProgramDetailDto
 import com.example.eeos.data.model.remote.response.ResponseGetProgramListDto
 import com.example.eeos.data.model.remote.response.ResponsePutAttendStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
+import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -17,7 +18,7 @@ interface ProgramService {
     @GET("programs/{programId}")
     suspend fun getProgramDetail(
         @Path(value = "programId") programId: Int
-    ): BaseResponse<ResponseGetProgramDetailDto>
+    ): ApiResponse<BaseResponse<ResponseGetProgramDetailDto>>
 
     @GET("programs")
     suspend fun getProgramList(
@@ -25,22 +26,22 @@ interface ProgramService {
         @Query("programStatus") programStatus: String,
         @Query("size") size: Int,
         @Query("page") page: Int
-    ): BaseResponse<ResponseGetProgramListDto>
+    ): ApiResponse<BaseResponse<ResponseGetProgramListDto>>
 
     @PUT("attend/programs/{programId}")
     suspend fun putAttendStatus(
         @Path(value = "programId") programId: Int,
         @Body requestPutAttendStatusDto: RequestPutAttendStatusDto
-    ): BaseResponse<ResponsePutAttendStatusDto>
+    ): ApiResponse<BaseResponse<ResponsePutAttendStatusDto>>
 
     @GET("attend/programs/{programId}")
     suspend fun getAttendStatus(
         @Path(value = "programId") programId: Int,
-    ): BaseResponse<ResponseGetAttendStatusDto>
+    ): ApiResponse<BaseResponse<ResponseGetAttendStatusDto>>
 
     @GET("attend/programs/{programId}/members")
     suspend fun getMemberList(
         @Path(value = "programId") programId: Int,
         @Query("attendStatus") attendStatus: String
-    ): BaseResponse<ResponseGetMemberListDto>
+    ): ApiResponse<BaseResponse<ResponseGetMemberListDto>>
 }
