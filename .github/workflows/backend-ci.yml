@@ -5,34 +5,30 @@ name: Backend CI
 # main 브랜치에 push, PR이 되었을 때 workflow 실행
 on:
   push:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
   pull_request:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
 
 defaults:
   run:
-    working-directory: BE/eeos
+    working-directory: ./BE/eeos
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory : ./BE/eeos
-        
     steps:
 
     # JDK setting : github actions에서 사용할 JDK 설정
-    - name: JDK 설정
+    - name: Set up JDK 17
     - uses: actions/checkout@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         
     # gradle caching - 빌드 시간 향상
-    - name: Gradle 캐싱
+    - name: Gradle Caching
       uses: actions/cache@v3
       with:
         path: |
@@ -43,8 +39,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
   # gradle build
-    - name: Gradle 실행
-      run: ./gradlew build 
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: 테스트 결과를 PR에 코멘트로 등록합니다
       uses: EnricoMi/publish-unit-test-result-action@v1
