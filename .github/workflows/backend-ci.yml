@@ -26,6 +26,11 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+
+    - name: DB를 실행합니다.
+      run: |
+        docker-compose -f resources/local-develop-environment/docker-compose.yml up -d
+        sleep 20
         
     # gradle caching - 빌드 시간 향상
     - name: Gradle Caching
