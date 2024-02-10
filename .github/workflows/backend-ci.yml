@@ -69,3 +69,17 @@ jobs:
       env:
        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       if: failure()
+
+    - name: Add Jacoco Test coverage to PR
+      uses: madrapps/jacoco-report@v1.6.1        
+      with:
+        paths: |
+          ${{ github.workspace }}/animory/build/reports/jacoco/test/jacocoTestReport.xml
+        token: ${{ secrets.TOKEN }}
+        title: 'Test Coverage Report'
+        update-comment: true
+        pass-emoji: ':heart_eyes:'
+        fail-emoji: ':disappointed:'
+        skip-if-no-changes: true
+        min-coverage-overall: 70
+        min-coverage-changed-files: 50
