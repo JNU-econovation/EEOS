@@ -6,10 +6,10 @@ name: Backend CI
 on:
   push:
     branches: [ "main","be","release-be" ]
-    paths : 'BE/**'
+    paths : 'BE/eeos/**'
   pull_request:
     branches: [ "main","be","release-be" ]
-    paths : 'BE/**'
+    paths : 'BE/eeos/**'
 
 permissions: write-all
 
