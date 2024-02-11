@@ -47,11 +47,19 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: 테스트 결과를 PR에 코멘트로 등록합니다
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
+    - name: Github 이벤트 파일 업로드
+      uses: actions/upload-artifact@v2
       with:
-        files: '**/build/test-results/test/TEST-*.xml'
+        name: Event File
+        path: ${{ github.event_path }}
+
+    - name: 단위 테스트 파일 결과 업로드
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Unit Test Results
+        path: |
+          '**/build/test-results/test/TEST-*.xml'
 
     - name: 테스트 실패 시, 실패한 코드 라인에 Check 코멘트를 등록합니다
       uses: mikepenz/action-junit-report@v3
