@@ -20,20 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    # JDK setting : github actions에서 사용할 JDK 설정
-    - name: Set up JDK 17
+    - name: JDK 17 설정
       uses: actions/checkout@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: DB를 실행합니다.
+    - name: DB를 실행
       run: |
         docker-compose -f resources/local-develop-environment/docker-compose.yml up -d
         sleep 20
-        
-    # gradle caching - 빌드 시간 향상
-    - name: Gradle Caching
+      
+    - name: Gradle 캐싱
       uses: actions/cache@v3
       with:
         path: |
@@ -43,8 +41,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-gradle-
 
-  # gradle build
-    - name: Build with Gradle
+    - name: Gradle로 빌드
       run: ./gradlew build
 
     - name: Github 이벤트 파일 업로드
@@ -61,7 +58,7 @@ jobs:
         path: |
           '**/build/test-results/test/TEST-*.xml'
 
-    - name: 테스트 실패 시, 실패한 코드 라인에 Check 코멘트를 등록합니다
+    - name: 테스트 실패 시, 실패한 코드 라인에 Check 코멘트를 등록
       uses: mikepenz/action-junit-report@v3
       if: always()
       with:
