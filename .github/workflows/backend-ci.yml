@@ -59,27 +59,6 @@ jobs:
       with:
         report_paths: '**/build/test-results/test/TEST-*.xml'
         token: ${{ github.token }}
-
-    - name: build 실패 시 Slack으로 알립니다
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        author_name: 백엔드 빌드 실패 알림
-        fields: repo, message, commit, author, action, eventName, ref, workflow, job, took
-      env:
-       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: failure()
-
-    - name: Add Jacoco Test coverage to PR
-      uses: madrapps/jacoco-report@v1.6.1        
-      with:
-        paths: |
-          ${{ github.workspace }}/animory/build/reports/jacoco/test/jacocoTestReport.xml
-        token: ${{ secrets.TOKEN }}
-        title: 'Test Coverage Report'
-        update-comment: true
-        pass-emoji: ':heart_eyes:'
-        fail-emoji: ':disappointed:'
         skip-if-no-changes: true
         min-coverage-overall: 70
         min-coverage-changed-files: 50
