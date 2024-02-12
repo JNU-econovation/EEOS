@@ -17,14 +17,16 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
   const modalRef = useOutsideRef(closeModal);
 
   const modalStyle = classNames(
-    "z-1 fixed left-0 flex h-60 w-full flex-col items-center gap-5 rounded-t-3xl border-t-2 bg-background pt-2 shadow-2xl transition-all duration-500",
+    "z-1 fixed left-0 flex h-60 w-full flex-col items-center gap-6 rounded-t-3xl border-t-2 bg-background shadow-2xl transition-all duration-500",
     {
       "bottom-0": isOpen,
-      "-bottom-[9rem]": !isOpen,
+      "-bottom-[7.5rem]": !isOpen,
     },
   );
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log("hi", isOpen);
     isOpen ? closeModal() : openModal();
   };
 
@@ -35,13 +37,15 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
       onClick={openModal}
       type="button"
     >
-      <Image
-        src="/icons/line.svg"
-        alt="line"
-        width={38}
-        height={6}
-        style={{ width: 38, height: 6 }}
-      />
+      <div onClick={handleOpenModal} className="pb-1 pt-4">
+        <Image
+          src="/icons/line.svg"
+          alt="line"
+          width={38}
+          height={6}
+          style={{ width: 38, height: 6 }}
+        />
+      </div>
       <ErrorBoundary FallbackComponent={ErrorFallbackNoIcon}>
         <UserAttendModal programId={programId} />
       </ErrorBoundary>
