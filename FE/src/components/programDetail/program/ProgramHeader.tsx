@@ -24,7 +24,7 @@ const ProgramHeader = ({ data }: ProgramHeaderProps) => {
       <TabItem color="yellow" size="sm" text={categoryText} rounded />
       <Title text={title} />
       <div className="flex justify-between">
-        <p className="text-lg">{DEADLINE_TEXT + convertDate(deadLine)}</p>
+        <p className="sm:text-lg">{DEADLINE_TEXT + convertDate(deadLine)}</p>
         {accessRight === "edit" && (
           <EditAndDeleteButton programId={programId} />
         )}

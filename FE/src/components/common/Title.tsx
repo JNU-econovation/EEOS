@@ -12,7 +12,10 @@ const titleColors = {
 };
 
 const Title = ({ text, textColor = "black" }: TitleProps) => {
-  const titleStyle = classNames("text-3xl font-bold", titleColors[textColor]);
+  const titleStyle = classNames(
+    "text-2xl font-bold sm:text-3xl",
+    titleColors[textColor],
+  );
   return <h1 className={titleStyle}>{text}</h1>;
 };
 export default Title;
