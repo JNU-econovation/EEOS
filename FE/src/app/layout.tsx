@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
   return (
-    <html lang="en">
-      <body className="flex h-full w-full flex-col items-center">
+    <html lang="ko">
+      <body className="flex flex-col items-center">
         <Provider>{children}</Provider>
       </body>
     </html>

@@ -12,7 +12,7 @@ const ProgramDetailPage = ({ params }: ProgramDetailPageProps) => {
   const { programId } = params;
 
   return (
-    <div className="space-y-16">
+    <div className="mb-16 space-y-16">
       <ProgramInfo programId={+programId} />
       <AttendeeInfoContainer programId={+programId} />
       <UserAttendModalContainer programId={+programId} />

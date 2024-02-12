@@ -15,8 +15,10 @@ const ProgramListItem = ({ programData }: ProgramListItemProps) => {
       className="flex w-full flex-col items-center justify-between gap-4 rounded-lg bg-gray-10 px-8 py-6 transition-all hover:bg-secondary-20 sm:flex-row"
       key={programId}
     >
-      <p className="w-full truncate text-lg font-bold">{title}</p>
-      <p className="w-48 text-base font-normal">{convertDate(deadLine)}</p>
+      <p className="w-full truncate text-center text-lg font-bold sm:text-left">
+        {title}
+      </p>
+      <p className="text-base font-normal sm:w-52">{convertDate(deadLine)}</p>
     </Link>
   );
 };
