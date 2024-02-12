@@ -17,7 +17,7 @@ const UserAttendModalContainer = ({ programId }: UserAttendModalProps) => {
   const modalRef = useOutsideRef(closeModal);
 
   const modalStyle = classNames(
-    "z-1 fixed left-0 flex h-60 w-full flex-col items-center gap-5 rounded-t-3xl border-t-2 bg-background px-6 pt-2 shadow-2xl transition-all duration-500",
+    "z-1 fixed left-0 flex h-60 w-full flex-col items-center gap-5 rounded-t-3xl border-t-2 bg-background pt-2 shadow-2xl transition-all duration-500",
     {
       "bottom-0": isOpen,
       "-bottom-[9rem]": !isOpen,
