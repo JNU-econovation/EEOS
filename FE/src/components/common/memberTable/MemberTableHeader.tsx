@@ -25,7 +25,7 @@ const MemberTableHeader = ({
   };
 
   return (
-    <div className="grid grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] justify-items-center gap-4 border-y-2 border-stroke-10 bg-gray-10 px-10 py-4 font-bold">
+    <div className="grid w-fit grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] justify-items-center gap-4 border-y-2 border-stroke-10 bg-gray-10 px-10 py-4 font-bold">
       {formType === "create" ? (
         <CheckBox checked={checked} onClick={handleClickCheckBox} />
       ) : (

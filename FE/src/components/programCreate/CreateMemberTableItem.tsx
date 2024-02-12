@@ -22,7 +22,7 @@ const CreateMemberTableItem = ({
   const isRelated = members.has(memberId);
 
   return (
-    <div className="grid h-20 grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10">
+    <div className="grid h-20 w-fit grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10">
       <CheckBox checked={isRelated} onClick={() => setMembers(memberId)} />
       <span>{ACTIVE_STATUS.TAB[activeStatus]?.text ?? "."}</span>
       <span className="font-bold">{name}</span>
