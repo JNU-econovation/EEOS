@@ -11,6 +11,10 @@ on:
     branches: [ "main","be","be-release"]
     paths : 'BE/**'
 
+permissions:
+  contents: read
+  checks: write
+
 defaults:
   run:
     working-directory: ./BE/eeos
