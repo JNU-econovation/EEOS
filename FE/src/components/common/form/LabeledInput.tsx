@@ -7,7 +7,7 @@ const LabeledInput = ({
   id,
   label,
   value,
-  onChange,
+  onChange = () => {},
   placeholder,
   type,
   prefix,

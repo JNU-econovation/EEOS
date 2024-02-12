@@ -23,13 +23,7 @@ const CheckBox = ({ checked, onClick, disabled = false }: CheckBoxProps) => {
   return (
     <div onClick={handleCheckBoxClick} className={checkboxClass}>
       {checked && (
-        <Image
-          src={"/icons/check.svg"}
-          alt="check"
-          width={24}
-          height={24}
-          style={{ width: 24, height: 24 }}
-        />
+        <Image src={"/icons/check.svg"} alt="check" width={24} height={24} />
       )}
     </div>
   );
