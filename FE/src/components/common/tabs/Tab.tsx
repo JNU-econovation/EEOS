@@ -28,7 +28,10 @@ const Tab = <T,>({
   align,
   rounded,
 }: TabProps<T>) => {
-  const tabStyle = classNames(tabAlign[align], "overflow-x-scroll");
+  const tabStyle = classNames(
+    tabAlign[align],
+    "scrollbar-hide overflow-x-scroll",
+  );
   const getColor = (option: TabOption<T>) => {
     return option.type === selected ? pointColor : baseColor;
   };
@@ -45,6 +48,7 @@ const Tab = <T,>({
           rounded={rounded}
         />
       ))}
+      <div className="s"></div>
     </div>
   );
 };
