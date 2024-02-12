@@ -33,7 +33,7 @@ const EditMemberTableItem = ({
   const isRelated = selectedAttend !== "nonRelated";
 
   const itemStyle = classNames(
-    "grid h-20 w-fit grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10",
+    "grid h-20 w-fit grid-cols-[4.75rem_7rem_7.25rem_1fr_20.5rem] items-center justify-items-center gap-4 border-b-2 border-stroke-10 bg-background px-10 sm:w-full",
     {
       "opacity-50": !isEditable,
     },
