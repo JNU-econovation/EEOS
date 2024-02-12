@@ -20,6 +20,33 @@ const PROGRAM = {
   },
 };
 
+const TEAM_BUILDING = {
+  TITLE: {
+    id: "team_building_title",
+    type: "text",
+    label: "팀빌딩 이름",
+    placeholder: "팀빌딩 이름 입력",
+  },
+  CONTENT: {
+    id: "team_building_content",
+    type: "text",
+    label: "팀빌딩 내용",
+    placeholder: "팀빌딩 내용 입력",
+  },
+  MIN_TEAM_SIZE: {
+    id: "team_building_min_size",
+    type: "number",
+    label: "최소 팀원 수",
+    placeholder: "1",
+  },
+  MAX_TEAM_SIZE: {
+    id: "team_building_max_size",
+    type: "number",
+    label: "최대 팀원 수",
+    placeholder: "1",
+  },
+};
+
 const DEMAND_PREFIX = "[수요조사]";
 
 type SubmitText = {
@@ -33,4 +60,4 @@ const SUBMIT_TEXT: SubmitText = {
 
 Object.freeze(PROGRAM);
 Object.freeze(SUBMIT_TEXT);
-export default { PROGRAM, DEMAND_PREFIX, SUBMIT_TEXT };
+export default { PROGRAM, DEMAND_PREFIX, SUBMIT_TEXT, TEAM_BUILDING };
