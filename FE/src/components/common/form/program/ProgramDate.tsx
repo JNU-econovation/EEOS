@@ -2,10 +2,10 @@
 
 import useOutsideRef from "@/hooks/useOutsideRef";
 import { useState } from "react";
-import LabeledInput from "./LabeledInput";
+import LabeledInput from "../LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { convertDate } from "@/utils/convert";
-import Calendar from "../calendar/Calendar";
+import Calendar from "../../calendar/Calendar";
 
 interface ProgramDateProps {
   programDate: string;

@@ -1,23 +1,23 @@
 "use client";
 
 import { ProgramCategory } from "@/types/program";
-import Tab from "../tabs/Tab";
+import Tab from "../../tabs/Tab";
 import ProgramDate from "./ProgramDate";
 import ProgramDemandCheckBox from "./ProgramDemandCheckBox";
 import ProgramTitle from "./ProgramTitle";
 import PROGRAM from "@/constants/PROGRAM";
 import { PropsWithChildren } from "react";
-import FormBtn from "./FormBtn";
+import FormBtn from "../FormBtn";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { FormType } from "@/types/form";
-import MarkdownEditor from "../markdown/MarkdownEditor";
+import MarkdownEditor from "../../markdown/MarkdownEditor";
 import {
   ProgramFormData,
   ProgramFormDataAction,
 } from "@/hooks/useProgramFormData";
 import { useRouter } from "next/navigation";
 
-interface ProgramFormProps extends ProgramFormData, ProgramFormDataAction {
+interface ProgramFormProps extends ProgramFormData {
   formType: FormType;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }

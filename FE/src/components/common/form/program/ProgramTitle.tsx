@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import LabeledInput from "./LabeledInput";
+import LabeledInput from "../LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { convertText } from "@/utils/convert";
 
