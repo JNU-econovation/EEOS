@@ -1,6 +1,10 @@
 import Title from "../common/Title";
 import SlackLoginSection from "./slack/LoginSection";
 
+const responsiveClass = {
+  sm: "",
+};
+
 const LoginRightSection = () => {
   return (
     <div
@@ -13,3 +17,5 @@ const LoginRightSection = () => {
   );
 };
 export default LoginRightSection;
+
+//

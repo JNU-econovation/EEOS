@@ -64,20 +64,23 @@ const ProgramForm = ({
           onClick={() => handleChangeType()}
         />
       </ProgramTitle>
-      <div className="flex items-end gap-8">
+      <div className="flex flex-col items-end gap-8 sm:flex-row">
         <ProgramDate
           programDate={deadLine}
           setProgramDate={(v) => setDeadLine(v)}
         />
-        <Tab<ProgramCategory>
-          options={Object.values(PROGRAM.CATEGORY_TAB)}
-          selected={category}
-          onItemClick={(v) => setCategory(v)}
-          size="lg"
-          baseColor="gray"
-          pointColor="yellow"
-          align="line"
-        />
+        <div className="flex w-full flex-col gap-2 sm:w-fit">
+          <label className="text-sm">행사 카테고리</label>
+          <Tab<ProgramCategory>
+            options={Object.values(PROGRAM.CATEGORY_TAB)}
+            selected={category}
+            onItemClick={(v) => setCategory(v)}
+            size="lg"
+            baseColor="gray"
+            pointColor="yellow"
+            align="line"
+          />
+        </div>
       </div>
       <MarkdownEditor
         id={FORM_INFO.PROGRAM.CONTENT.id}

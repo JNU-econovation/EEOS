@@ -36,7 +36,7 @@ const Paginataion = ({
           className="h-[20px] w-[20px]"
         />
       </button>
-      <div className="hidden gap-4 md:flex">
+      <div className="flex gap-4">
         {pageNumbers.map((number) => (
           <PaginationItem
             key={number}

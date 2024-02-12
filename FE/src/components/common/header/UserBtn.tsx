@@ -9,11 +9,15 @@ const UserBtn = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const modalRef = useOutsideRef(closeModal);
 
+  const handleClick = () => {
+    isOpen ? closeModal() : openModal();
+  };
+
   return (
     <button
       ref={modalRef}
       className="relative cursor-pointer"
-      onClick={() => openModal()}
+      onClick={handleClick}
     >
       <Image
         src="/icons/user.svg"

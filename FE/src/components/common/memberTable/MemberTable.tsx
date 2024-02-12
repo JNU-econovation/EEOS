@@ -45,7 +45,7 @@ const MemberTable = ({
         pointColor="teal"
         align="line"
       />
-      <div>
+      <div className="scrollbar-hide overflow-x-scroll">
         <MemberTableHeader
           formType={formType}
           onClickCheckBox={onClickHeaderCheckBox}
