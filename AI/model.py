@@ -30,7 +30,6 @@ class Item(BaseModel) :
 
 class Item_and_num(BaseModel) :
     participantResponses : List[Item]
-    minTeamSize : int
     maxTeamSize : int
 
 @sbert.post('/team-building')
@@ -78,39 +77,7 @@ async def start_sbert(data:Item_and_num):
             copy_list.append(copy_list[i][(len(copy_list[i])//2):])
             copy_list[i]=[]
 
-    # 하나인 것끼리 묶어준다.
-    st_len = len(copy_list)
-
-    one_list =[]
-    for i in range(st_len) :
-        if len(copy_list[i]) == 1 :
-            one_list += copy_list[i]
-            copy_list[i] = []
-
-    copy_list.append(one_list)
-
-
-    # min_num보다 작은 애들끼리 더해줌
-    st_len = len(copy_list)
-
-    for i in range(st_len-1):
-        for j in range(1, st_len-i-1):
-            team_check = copy_list[i] + copy_list[i+j]
-            # print(team_check)
-            if (len(team_check) <= max_num) and (len(team_check) >= min_num):
-
-                copy_list.append(team_check)
-                copy_list[i+j] = []
-                copy_list[i] = []
-
     while [] in copy_list:
         copy_list.remove([])
-
-    for i in range(len(copy_list)):
-        for j in range (len(copy_list[i])):
-            target_value = copy_list[i][j]
-            for Item in input :
-                if Item.sentence == target_value :
-                    copy_list[i][j] = Item.name
 
     return copy_list
