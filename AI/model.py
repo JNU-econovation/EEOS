@@ -29,11 +29,11 @@ class Item(BaseModel) :
     sentence : str
 
 class Item_and_num(BaseModel) :
-    items : List[Item]
-    teamMin : int
-    teamMax : int
+    participantResponses : List[Item]
+    minTeamSize : int
+    maxTeamSize : int
 
-@sbert.post('/clustering')
+@sbert.post('/team-building')
 async def start_sbert(data:Item_and_num):
     
     input = data.items
