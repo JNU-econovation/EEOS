@@ -35,9 +35,8 @@ class Item_and_num(BaseModel) :
 @sbert.post('/team-building')
 async def start_sbert(data:Item_and_num):
     
-    input = data.items
-    min_num = data.teamMin
-    max_num = data.teamMax
+    input = data.participantResponses
+    max_num = data.maxTeamSize
     
 
     # 문장 임베딩
