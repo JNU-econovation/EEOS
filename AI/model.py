@@ -25,7 +25,7 @@ async def start_sbert():
     return {'message' : "sbert is starting"}
 
 class Item(BaseModel) :
-    name: str
+    memberId: str
     sentence : str
 
 class Item_and_num(BaseModel) :
@@ -79,4 +79,12 @@ async def start_sbert(data:Item_and_num):
     while [] in copy_list:
         copy_list.remove([])
 
+
+    for i in range(len(copy_list)):
+        for j in range (len(copy_list[i])):
+            target_value = copy_list[i][j]
+            for Item in input :
+                if Item.sentence == target_value :
+                    copy_list[i][j] = Item.memberId
+        
     return copy_list
