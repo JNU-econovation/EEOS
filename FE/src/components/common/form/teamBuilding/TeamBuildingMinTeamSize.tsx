@@ -1,9 +1,10 @@
 import FORM_INFO from "@/constants/FORM_INFO";
 import LabeledInput from "../LabeledInput";
+import { Dispatch, SetStateAction } from "react";
 
 interface TeamBuildingMinTeamSizeProps {
   minTeamSize: number;
-  setMinTeamSize: (v: number) => void;
+  setMinTeamSize: Dispatch<SetStateAction<number>>;
 }
 
 const TeamBuildingMinTeamSize = ({

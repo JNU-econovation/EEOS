@@ -1,9 +1,10 @@
 import FORM_INFO from "@/constants/FORM_INFO";
 import LabeledInput from "../LabeledInput";
+import { Dispatch, SetStateAction } from "react";
 
 interface TeamBuildingTitleProps {
   title: string;
-  setTitle: (title: string) => void;
+  setTitle: Dispatch<SetStateAction<string>>;
 }
 
 const TeamBuildingTitle = ({ title, setTitle }: TeamBuildingTitleProps) => {

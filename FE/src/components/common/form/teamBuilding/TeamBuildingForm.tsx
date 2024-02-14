@@ -1,5 +1,4 @@
 import { TeamBuildingFormData } from "@/hooks/useTeamBuildingFormData";
-import LabeledInput from "../LabeledInput";
 import { FormType } from "@/types/form";
 import { PropsWithChildren } from "react";
 import { useRouter } from "next/navigation";
@@ -39,14 +38,14 @@ const TeamBuildingForm = ({
   return (
     <form className="space-y-6" onSubmit={onSubmit}>
       <div className="grid grid-cols-[1fr_3.5rem_3.5rem] gap-4 sm:grid-cols-[1fr_5rem_5rem]">
-        <TeamBuildingTitle title={title} setTitle={(v) => setTitle(v)} />
+        <TeamBuildingTitle title={title} setTitle={setTitle} />
         <TeamBuildingMinTeamSize
           minTeamSize={minTeamSize}
-          setMinTeamSize={(v) => setMinTeamSize(v)}
+          setMinTeamSize={setMinTeamSize}
         />
         <TeamBuildingMaxTeamSize
           maxTeamSize={maxTeamSize}
-          setMaxTeamSize={(v) => setMaxTeamSize(v)}
+          setMaxTeamSize={setMaxTeamSize}
         />
       </div>
       <MarkdownEditor

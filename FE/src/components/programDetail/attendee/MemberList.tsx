@@ -14,4 +14,5 @@ const MemberList = ({ members }: MemberListProps) => {
     </div>
   );
 };
+
 export default MemberList;

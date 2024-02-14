@@ -55,7 +55,7 @@ const ProgramForm = ({
     <form className="space-y-6" onSubmit={onSubmit}>
       <ProgramTitle
         title={title}
-        setTitle={(v) => setTitle(v)}
+        setTitle={setTitle}
         prefix={isDemand && FORM_INFO.DEMAND_PREFIX}
       >
         <ProgramDemandCheckBox
@@ -65,10 +65,7 @@ const ProgramForm = ({
         />
       </ProgramTitle>
       <div className="flex flex-col items-end gap-8 sm:flex-row">
-        <ProgramDate
-          programDate={deadLine}
-          setProgramDate={(v) => setDeadLine(v)}
-        />
+        <ProgramDate programDate={deadLine} setProgramDate={setDeadLine} />
         <div className="flex w-full flex-col gap-2 sm:w-fit">
           <label className="text-sm">행사 카테고리</label>
           <Tab<ProgramCategory>
