@@ -9,3 +9,7 @@ from model import sbert
 
 app = FastAPI()
 app.include_router(sbert)
+
+@app.get('/')
+async def eeosTeamBuilding():
+    return {'message' : "eeos team building start"}
