@@ -10,7 +10,8 @@
     color: #2d334a;
   }
   body {
-    width: 96vw;
+    width: 100vw;
+    overflow-x: hidden;
   }
 }
 
