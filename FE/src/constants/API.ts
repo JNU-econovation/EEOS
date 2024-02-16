@@ -23,8 +23,20 @@ const AUTH = {
   TOKEN_REISSUE: "/auth/reissue",
 };
 
+const TEAM_BUILDING = {
+  CREATE: "/team-building",
+  DETAIL: "/team-building",
+  CLOSE: "/team-building/end",
+  CREATABLE: "/team-building/status",
+  INPUT_STATUS: "/target/team-building/status",
+  RESULT: "/team-building/result",
+  SENTENCE: "/target/team-building",
+};
+
 Object.freeze(PROGRAM);
 Object.freeze(MEMBER);
 Object.freeze(USER);
 Object.freeze(AUTH);
-export default { PROGRAM, MEMBER, USER, AUTH };
+Object.freeze(TEAM_BUILDING);
+
+export default { PROGRAM, MEMBER, USER, AUTH, TEAM_BUILDING };
