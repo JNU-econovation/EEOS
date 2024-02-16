@@ -3,14 +3,17 @@ import { PropsWithChildren, useState } from "react";
 
 interface DropupItem {
   text: string;
+  onClick: () => void;
 }
 
 interface DropupProps extends PropsWithChildren<{}> {
-  text: string;
+  title: string;
   items: DropupItem[];
 }
 
-const Dropup = ({ children, text, items }: DropupProps) => {
+interface DropupItemProps extends DropupItem {}
+
+const Dropup = ({ children, title, items }: DropupProps) => {
   const [isDropupOpen, setIsDropupOpen] = useState(false);
   const dropupRef = useOutsideRef(() => setIsDropupOpen(false));
 
@@ -25,7 +28,7 @@ const Dropup = ({ children, text, items }: DropupProps) => {
       ref={dropupRef}
     >
       {children}
-      <span className="text-lg font-semibold text-stroke-30">{text}</span>
+      <span className="text-lg font-semibold text-stroke-30">{title}</span>
       {isDropupOpen && <DropupItemContainer items={items} />}
     </div>
   );
@@ -36,17 +39,20 @@ const DropupItemContainer = ({ items }: { items: DropupItem[] }) => {
     <div className="absolute bottom-14 left-0 z-10 w-full overflow-hidden">
       <div className="animate-dropup space-y-1 rounded-lg bg-gray-10 p-1">
         {items.map((item) => (
-          <DropupItem item={item} />
+          <DropupItem {...item} />
         ))}
       </div>
     </div>
   );
 };
 
-const DropupItem = ({ item }: { item: DropupItem }) => {
+const DropupItem = ({ text, onClick }: DropupItemProps) => {
   return (
-    <div className="cursor-pointer rounded-lg bg-background p-4 text-center font-semibold shadow-sm transition-colors  duration-200 hover:bg-warning-10">
-      {item.text}
+    <div
+      onClick={onClick}
+      className=" cursor-pointer rounded-lg bg-background p-4 text-center font-semibold shadow-sm  transition-colors duration-200 hover:bg-warning-10"
+    >
+      {text}
     </div>
   );
 };
