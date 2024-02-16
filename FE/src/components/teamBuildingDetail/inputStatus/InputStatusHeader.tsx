@@ -1,6 +1,8 @@
 "use client";
 
-import INPUT_STATUS, { InputStatus } from "@/constants/INPUT_STATUS";
+import INPUT_STATUS from "@/constants/INPUT_STATUS";
+import { SimpleMemberInfo } from "@/types/member";
+import { InputStatus } from "@/types/teamBuilding";
 import classNames from "classnames";
 import Image from "next/image";
 
@@ -11,7 +13,7 @@ const colors = {
 
 interface InputStatusHeaderProps {
   status: InputStatus;
-  members: { memberId: number; name: string }[];
+  members: SimpleMemberInfo[];
 }
 
 const InputStatusHeader = ({ status, members }: InputStatusHeaderProps) => {

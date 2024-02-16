@@ -1,5 +1,7 @@
+import { SimpleMemberInfo } from "@/types/member";
+
 interface MemberListProps {
-  members: { memberId: number; name: string }[];
+  members: SimpleMemberInfo[];
 }
 
 const MemberList = ({ members }: MemberListProps) => {

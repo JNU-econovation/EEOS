@@ -1,9 +1,10 @@
+import { SimpleMemberInfo } from "@/types/member";
 import MemberList from "./MemberList";
 import TeamResultInfoHeader from "./TeamResultInfoHeader";
 
 interface TeamResultInfoProps {
   index: number;
-  members: { name: string }[];
+  members: SimpleMemberInfo[];
 }
 
 const TeamResultInfo = ({ index, members }: TeamResultInfoProps) => {
