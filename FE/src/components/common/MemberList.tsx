@@ -14,11 +14,12 @@ const MemberList = ({ members }: MemberListProps) => {
   );
 };
 
-const MemberListItem = ({ name }: { name: string }) => {
+const MemberListItem = ({ name }: Omit<SimpleMemberInfo, "memberId">) => {
   return (
-    <div className="grid w-fit grid-cols-1 justify-items-center py-6 text-lg sm:px-9">
+    <div className="sm: grid w-fit grid-cols-1 justify-items-center px-4 py-6 text-lg">
       <span>{name}</span>
     </div>
   );
 };
+
 export default MemberList;
