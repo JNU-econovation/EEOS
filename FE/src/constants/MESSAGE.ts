@@ -31,11 +31,24 @@ const CONFIRM = {
   DELETE: "삭제하시겠습니까?",
 };
 
+const TEAM_BUILDING = {
+  INCREATABLE: "진행중인 팀빌딩이 있어 팀빌딩을 생성할 수 없습니다.",
+};
+
 Object.freeze(EDIT_DISABLED);
 Object.freeze(AUTH);
 Object.freeze(EDIT);
 Object.freeze(CREATE);
 Object.freeze(DELETE);
 Object.freeze(CONFIRM);
+Object.freeze(TEAM_BUILDING);
 
-export default { EDIT_DISABLED, AUTH, EDIT, CREATE, DELETE, CONFIRM };
+export default {
+  EDIT_DISABLED,
+  AUTH,
+  EDIT,
+  CREATE,
+  DELETE,
+  CONFIRM,
+  TEAM_BUILDING,
+};
