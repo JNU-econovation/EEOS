@@ -1,6 +1,6 @@
 import { SimpleMemberInfo } from "@/types/member";
-import MemberList from "./MemberList";
 import TeamResultInfoHeader from "./TeamResultInfoHeader";
+import MemberList from "../common/MemberList";
 
 interface TeamResultInfoProps {
   index: number;
