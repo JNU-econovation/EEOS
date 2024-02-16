@@ -1,6 +1,5 @@
 import { TabOption } from "@/types/tab";
-
-export type InputStatus = "incomplete" | "complete";
+import { InputStatus } from "@/types/teamBuilding";
 
 export interface InputStatusToggleOption extends TabOption<InputStatus> {
   color: string;
