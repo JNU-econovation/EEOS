@@ -1,6 +1,7 @@
 // TODO: 서버 컴포넌트로 변경하기
 "use client";
 
+import Dropup from "@/components/common/Dropup";
 import ErrorFallback from "@/components/common/ErrorFallback";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
@@ -9,6 +10,7 @@ import ProgramListLoader from "@/components/main/ProgramList.loader";
 import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -61,9 +63,12 @@ const MainPage = () => {
     });
   };
 
+  // FIXME: 임시 데이터
+  const items = [{ text: "팀빌딩 생성하기" }, { text: "팀빌딩 참여하기" }];
+
   // TODO: 합성 컴포넌트!
   return (
-    <div className="space-y-8">
+    <div className="relative space-y-8">
       <Tab<ProgramCategoryWithAll>
         options={Object.values(PROGRAM.CATEGORY_TAB_WITH_ALL)}
         selected={queryValue.category}
@@ -88,7 +93,16 @@ const MainPage = () => {
           />
         </Suspense>
       </ErrorBoundary>
+      <Dropup items={items} text="AI 팀빌딩">
+        <Image
+          src="/icons/robot.svg"
+          alt="팀빌딩 로봇"
+          width={28}
+          height={28}
+        />
+      </Dropup>
     </div>
   );
 };
+
 export default MainPage;
