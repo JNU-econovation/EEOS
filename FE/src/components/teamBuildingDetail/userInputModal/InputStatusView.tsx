@@ -1,5 +1,6 @@
 import StatusToggleItem from "@/components/common/attendStatusToggle/StatusToggleItem";
-import INPUT_STATUS, { InputStatus } from "@/constants/INPUT_STATUS";
+import INPUT_STATUS from "@/constants/INPUT_STATUS";
+import { InputStatus } from "@/types/teamBuilding";
 
 interface InputStatusViewProps {
   name: string;
