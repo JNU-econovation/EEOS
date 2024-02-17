@@ -2,10 +2,7 @@ import { ProgramInfoDto } from "@/apis/dtos/program.dto";
 import Title from "@/components/common/Title";
 import TabItem from "@/components/common/tabs/TabItem";
 import PROGRAM from "@/constants/PROGRAM";
-import ROUTES from "@/constants/ROUTES";
 import { convertDate } from "@/utils/convert";
-import Image from "next/image";
-import Link from "@/components/common/Link";
 import EditAndDeleteButton from "./EditAndDeleteButton";
 
 interface ProgramHeaderProps {
