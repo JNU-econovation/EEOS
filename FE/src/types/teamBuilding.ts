@@ -1,10 +1,12 @@
 import { SimpleMemberInfo } from "./member";
+import { AccessRight } from "./program";
 
 export type InputStatus = "incomplete" | "complete";
 
 export type TeamBuildingInfo = {
   title: string;
   content: string;
+  accessRight: AccessRight;
 };
 
 export interface UserInputStatusInfo {
