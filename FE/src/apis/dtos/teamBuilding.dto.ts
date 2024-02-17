@@ -1,3 +1,4 @@
+import { AccessRight } from "@/types/program";
 import type {
   InputStatus,
   TeamBuildingInfo,
@@ -9,10 +10,12 @@ import type {
 export class TeamBuildingInfoDto {
   public readonly title: string;
   public readonly content: string;
+  public readonly accessRight: AccessRight;
 
   constructor(data: TeamBuildingInfo) {
     this.title = data.title;
     this.content = data.content;
+    this.accessRight = data.accessRight;
   }
 }
 
