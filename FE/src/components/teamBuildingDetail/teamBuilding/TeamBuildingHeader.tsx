@@ -1,33 +1,24 @@
 "use client";
 
 import Title from "@/components/common/Title";
+import { useCloseTeamBuildingMutation } from "@/hooks/query/useTeamBuildingQuery";
+import { AccessRight } from "@/types/program";
 
 interface TeamBuildingHeaderProps {
   title: string;
-  accessRight: "edit" | "viewer";
+  accessRight: AccessRight;
 }
 
 const TeamBuildingHeader = ({
   title,
   accessRight,
 }: TeamBuildingHeaderProps) => {
-  const handleCompleteButtonClick = () => {
-    confirm("팀빌딩을 완료하시겠습니까?");
-  };
-
   return (
     <section className="flex justify-between border-b-2 py-4">
       <Title text={title} />
       <div className="flex gap-6">
         <ProgressDisplay />
-        {accessRight === "edit" && (
-          <button
-            className="text-lg font-bold text-gray-30 transition-colors duration-300 hover:text-stroke-30"
-            onClick={handleCompleteButtonClick}
-          >
-            완료하기
-          </button>
-        )}
+        {accessRight === "edit" && <CloseBtn />}
       </div>
     </section>
   );
@@ -42,6 +33,25 @@ const ProgressDisplay = () => {
       </span>
       <p className="text-lg font-bold text-action-20">진행중</p>
     </div>
+  );
+};
+
+const CloseBtn = () => {
+  const { mutate: closeTeamBuilding } = useCloseTeamBuildingMutation();
+
+  const handleCompleteButtonClick = () => {
+    if (confirm("팀빌딩을 완료하시겠습니까?")) {
+      closeTeamBuilding();
+    }
+  };
+
+  return (
+    <button
+      className="text-lg font-bold text-gray-30 transition-colors duration-300 hover:text-stroke-30"
+      onClick={handleCompleteButtonClick}
+    >
+      완료하기
+    </button>
   );
 };
 
