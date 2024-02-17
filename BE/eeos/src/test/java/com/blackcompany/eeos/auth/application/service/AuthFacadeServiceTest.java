@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import com.blackcompany.eeos.auth.application.domain.OauthMemberModel;
-import com.blackcompany.eeos.auth.application.domain.client.OauthMemberClientComposite;
 import com.blackcompany.eeos.auth.fixture.FakeOauthMember;
 import com.blackcompany.eeos.auth.persistence.OauthInfoEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -17,11 +16,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class AuthFacadeServiceTest {
-	@Mock OauthMemberClientComposite oauthMemberClientComposite;
-
 	@Mock CreateTokenService createTokenService;
 
 	@Mock AuthService authService;
+	@Mock OauthClientService oauthClientService;
 
 	@InjectMocks AuthFacadeService authFacadeService;
 
@@ -37,7 +35,7 @@ class AuthFacadeServiceTest {
 		OauthMemberModel oauthMemberModel = FakeOauthMember.oauthMemberModel();
 		OauthInfoEntity oauthInfoEntity = FakeOauthMember.oauthInfoEntity();
 
-		when(oauthMemberClientComposite.fetch(type, authCode, uri)).thenReturn(oauthMemberModel);
+		when(oauthClientService.getOauthMember(type, authCode, uri)).thenReturn(oauthMemberModel);
 		when(authService.login(oauthMemberModel)).thenReturn(oauthInfoEntity);
 
 		// when
