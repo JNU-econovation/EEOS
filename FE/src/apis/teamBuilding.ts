@@ -142,7 +142,7 @@ export const closeTeamBuilding = async () => {
   await toast.promise(
     https({
       url: API.TEAM_BUILDING.CLOSE,
-      method: "POST",
+      method: "PUT",
     }),
     {
       pending: MESSAGE.DELETE.PENDING,
