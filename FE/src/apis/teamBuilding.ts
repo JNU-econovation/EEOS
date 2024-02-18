@@ -73,7 +73,13 @@ export const getTeamBuildingInfo = async (): Promise<TeamBuildingInfoDto> => {
  * 팀빌딩 문장 입력
  */
 
-export const postTeamBuildingSentence = async (data: { sentence: string }) => {
+export interface TeamBuildingSentenceRequest {
+  sentence: string;
+}
+
+export const postTeamBuildingSentence = async (
+  data: TeamBuildingSentenceRequest,
+) => {
   await toast.promise(
     https({
       url: API.TEAM_BUILDING.SENTENCE,
@@ -92,7 +98,9 @@ export const postTeamBuildingSentence = async (data: { sentence: string }) => {
  * 팀빌딩 문장 수정
  */
 
-export const putTeamBuildingSentence = async (data: { sentence: string }) => {
+export const putTeamBuildingSentence = async (
+  data: TeamBuildingSentenceRequest,
+) => {
   await toast.promise(
     https({
       url: API.TEAM_BUILDING.SENTENCE,
