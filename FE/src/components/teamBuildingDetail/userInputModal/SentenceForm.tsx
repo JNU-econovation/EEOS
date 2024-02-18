@@ -1,7 +1,12 @@
 import Button from "@/components/common/Button";
-import FormBtn from "@/components/common/form/FormBtn";
 import classNames from "classnames";
 import { Dispatch, SetStateAction, useRef } from "react";
+import { FieldType } from "./SentenceField";
+import {
+  usePostSentenceMutation,
+  usePutSentenceMutation,
+} from "@/hooks/query/useTeamBuildingQuery";
+import { create } from "domain";
 
 const color = {
   default: "border-gray-20",
@@ -12,10 +17,8 @@ const color = {
 interface SentenceFormProps {
   content: string;
   setContent: Dispatch<SetStateAction<string>>;
-  type: "default" | "inputting" | "editing";
-  setType: Dispatch<
-    SetStateAction<"default" | "inputting" | "editing" | "viewer">
-  >;
+  type: FieldType;
+  setType: Dispatch<SetStateAction<FieldType>>;
 }
 
 const SentenceForm = ({
@@ -25,6 +28,15 @@ const SentenceForm = ({
   setType,
 }: SentenceFormProps) => {
   const textareaRef = useRef(null);
+  const textareaStyle = classNames(
+    "w-full resize-none overflow-hidden border-b-2 p-4 leading-relaxed outline-none",
+    color[type],
+  );
+
+  const { mutate: createSentence, isSuccess: createSuccess } =
+    usePostSentenceMutation();
+  const { mutate: editSentence, isSuccess: editSuccess } =
+    usePutSentenceMutation();
 
   const handleResizeHeight = () => {
     textareaRef.current.style.height = "auto";
@@ -34,47 +46,50 @@ const SentenceForm = ({
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleResizeHeight();
     setContent(e.target.value);
-    if (e.target.value.length === 0 && type === "inputting") {
-      setType("default");
-      return;
-    }
+
     if (e.target.value.length > 0 && type === "default") {
       setType("inputting");
-      return;
     }
-    console.log(e.target.value.length, type);
   };
-
-  const textareaStyle = classNames(
-    "w-full resize-none overflow-hidden border-b-2 p-4 leading-relaxed outline-none",
-    color[type],
-  );
 
   const handleReset = () => {
     if (type === "inputting") {
       setContent("");
       setType("default");
     }
+
     if (type === "editing") {
       setType("viewer");
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (type === "inputting") {
-      console.log("submit");
-      setType("viewer");
+      createSentence({ sentence: content });
+      createSuccess && setType("viewer");
     }
     if (type === "editing") {
-      setType("viewer");
+      editSentence({ sentence: content });
+      editSuccess && setType("viewer");
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSubmit();
+  };
+
+  const handlePressEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
     }
   };
 
   return (
     <form
       className="flex w-full flex-col items-end gap-4"
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <textarea
         rows={1}
@@ -83,6 +98,7 @@ const SentenceForm = ({
         value={content}
         onChange={handleChange}
         className={textareaStyle}
+        onKeyDown={handlePressEnter}
       />
       {type !== "default" && <Buttons formReset={handleReset} />}
     </form>

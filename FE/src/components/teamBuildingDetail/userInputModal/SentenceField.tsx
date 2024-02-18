@@ -3,21 +3,21 @@
 import { useState } from "react";
 import SentenceViewer from "./SentenceViewer";
 import SentenceForm from "./SentenceForm";
+import { InputStatus } from "@/types/teamBuilding";
 
+export type FieldType = "default" | "inputting" | "editing" | "viewer";
 interface SentenceFieldProps {
-  inputStatus: "incomplete" | "complete";
+  inputStatus: InputStatus;
 }
 
-const getType = (inputStatus: "incomplete" | "complete") => {
+const getType = (inputStatus: InputStatus) => {
   if (inputStatus === "incomplete") return "default";
   if (inputStatus === "complete") return "viewer";
 };
 
 const SentenceField = ({ inputStatus }: SentenceFieldProps) => {
   const [content, setContent] = useState<string>("");
-  const [type, setType] = useState<
-    "default" | "inputting" | "editing" | "viewer"
-  >(getType(inputStatus));
+  const [type, setType] = useState<FieldType>(getType(inputStatus));
 
   return (
     <div className="w-[80%] max-w-[60rem]">
