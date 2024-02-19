@@ -1,13 +1,13 @@
-package com.blackcompany.eeos.target.persistence;
+package com.blackcompany.eeos.teamBuilding.persistence;
 
 import com.blackcompany.eeos.common.persistence.BaseEntity;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,23 +24,21 @@ import org.hibernate.annotations.Where;
 @ToString
 @SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = TeamBuildingTargetEntity.ENTITY_PREFIX)
-@SQLDelete(sql = "UPDATE team_building_target SET is_deleted=true where team_building_target_id=?")
+@Table(name = RestrictTeamBuildingEntity.ENTITY_PREFIX)
+@SQLDelete(
+		sql = "UPDATE restrict_team_building SET is_deleted=true where restrict_team_building_id=?")
 @Where(clause = "is_deleted=false")
-public class TeamBuildingTargetEntity extends BaseEntity {
-	public static final String ENTITY_PREFIX = "team_building_target";
+public class RestrictTeamBuildingEntity extends BaseEntity {
+	public static final String ENTITY_PREFIX = "restrict_team_building";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = ENTITY_PREFIX + "_id", nullable = false)
 	private Long id;
 
-	@Column(name = ENTITY_PREFIX + "_team_building_id", nullable = false)
-	private Long teamBuildingId;
+	@Column(name = ENTITY_PREFIX + "_total_active_count", nullable = false)
+	@Builder.Default
+	private Long totalActiveCount = 0L;
 
-	@Column(name = ENTITY_PREFIX + "_member_id", nullable = false)
-	private Long memberId;
-
-	@Embedded @Builder.Default
-	private TeamBuildingInputDataEntity inputData = TeamBuildingInputDataEntity.init();
+	@Version private Long version;
 }
