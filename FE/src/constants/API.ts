@@ -28,7 +28,7 @@ const TEAM_BUILDING = {
   DETAIL: "/team-building",
   CLOSE: "/team-building/end",
   VALIDATE: "/team-building/validate",
-  INPUT_STATUS: "/target/team-building/status",
+  INPUT_STATUS: "/target/team-building",
   RESULT: "/team-building/result",
   SENTENCE: "/target/team-building",
   COMPLETE: "/team-building/complete",
