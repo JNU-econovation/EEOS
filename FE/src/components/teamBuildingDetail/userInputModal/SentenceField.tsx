@@ -20,7 +20,7 @@ const SentenceField = ({ inputStatus }: SentenceFieldProps) => {
   const [type, setType] = useState<FieldType>(getType(inputStatus));
 
   return (
-    <div className="w-[80%] max-w-[60rem]">
+    <div className="mb-8 min-h-[7rem] w-[80%] max-w-[60rem]">
       {type === "viewer" ? (
         <SentenceViewer content={content} setType={setType} />
       ) : (
