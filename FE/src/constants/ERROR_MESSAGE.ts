@@ -81,6 +81,15 @@ const ERROR_MESSAGE = {
     message: "슬랙 로그인에 실패했습니다.",
   },
 
+  // 팀빌딩
+  [ERROR_CODE.TEAM_BUILDING.NOT_CREATABLE]: {
+    message: "이미 진행중인 팀빌딩이 있습니다.",
+  },
+
+  [ERROR_CODE.TEAM_BUILDING.NOT_JOINABLE]: {
+    message: "진행 중인 팀빌딩이 없거나, 대상자가 아닙니다.",
+  },
+
   // 알 수 없는
   UNKNOWN: {
     message: "알 수 없는 에러가 발생했습니다.",
