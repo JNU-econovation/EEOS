@@ -23,5 +23,5 @@ export type TeamBuildingResult = SimpleMemberInfo[][];
 
 export type TeamBuildingResultList = {
   accessRight: AccessRight;
-  result: TeamBuildingResult;
+  results: TeamBuildingResult;
 };
