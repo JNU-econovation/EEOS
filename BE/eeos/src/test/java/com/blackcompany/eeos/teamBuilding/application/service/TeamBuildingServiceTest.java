@@ -25,13 +25,13 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class CommandTeamBuildingServiceTest {
+class TeamBuildingServiceTest {
 	@Spy private TeamBuildingRequestConverter requestConverter;
 	@Spy private TeamBuildingEntityConverter entityConverter;
 	@Mock private TeamBuildingRepository teamBuildingRepository;
 	@Mock private SelectTeamBuildingTargetService teamBuildingTargetService;
 	@Mock private RestrictTeamBuildingService restrictTeamBuildingService;
-	@InjectMocks private CommandTeamBuildingService commandTeamBuildingService;
+	@InjectMocks private TeamBuildingService teamBuildingService;
 
 	@Test
 	@DisplayName("팀빌딩 생성 시 팀빌딩 대상자를 선정한다.")
@@ -42,7 +42,7 @@ class CommandTeamBuildingServiceTest {
 		when(teamBuildingRepository.save(any())).thenReturn(생성한_팀빌딩);
 
 		// when
-		commandTeamBuildingService.create(1L, 팀빌딩_생성_요청);
+		teamBuildingService.create(1L, 팀빌딩_생성_요청);
 
 		// then
 		verify(teamBuildingTargetService).save(생성한_팀빌딩.getId(), 팀빌딩_생성_요청.getMembers());
@@ -52,12 +52,11 @@ class CommandTeamBuildingServiceTest {
 	@DisplayName("진행 중인 팀빌딩의 작성자가 아니라면 수정 권한이 없음 예외가 발생한다.")
 	void denied_edit_team_building() {
 		// given
-		TeamBuildingEntity 생성된_팀빌딩 = TeamBuildingFixture.팀빌딩(TeamBuildingStatus.PROGRESS, 1L);
-		when(teamBuildingRepository.findByStatus(TeamBuildingStatus.PROGRESS))
+		TeamBuildingEntity 생성된_팀빌딩 = TeamBuildingFixture.팀빌딩(TeamBuildingStatus.COMPLETE, 1L);
+		when(teamBuildingRepository.findByStatus(TeamBuildingStatus.COMPLETE))
 				.thenReturn(Optional.of(생성된_팀빌딩));
 
 		// when & then
-		Assertions.assertThrows(
-				DeniedEditTeamBuilding.class, () -> commandTeamBuildingService.delete(2L));
+		Assertions.assertThrows(DeniedEditTeamBuilding.class, () -> teamBuildingService.delete(2L));
 	}
 }
