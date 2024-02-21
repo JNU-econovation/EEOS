@@ -72,11 +72,11 @@ const SentenceForm = ({
       return;
     }
     if (type === "inputting") {
-      createSentence({ sentence: content });
+      createSentence({ content });
       setType("viewer");
     }
     if (type === "editing") {
-      editSentence({ sentence: content });
+      editSentence({ content });
       setType("viewer");
     }
   };

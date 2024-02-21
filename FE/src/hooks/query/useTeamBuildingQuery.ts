@@ -56,8 +56,8 @@ export const usePostSentenceMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [API.TEAM_BUILDING.SENTENCE],
-    mutationFn: ({ sentence }: TeamBuildingSentenceRequest) =>
-      postTeamBuildingSentence({ sentence }),
+    mutationFn: ({ content }: TeamBuildingSentenceRequest) =>
+      postTeamBuildingSentence({ content }),
     onSettled: () => {
       queryClient.invalidateQueries([API.TEAM_BUILDING.INPUT_STATUS]);
     },
@@ -68,8 +68,8 @@ export const usePutSentenceMutation = () => {
   const QueryClient = useQueryClient();
   return useMutation({
     mutationKey: [API.TEAM_BUILDING.SENTENCE],
-    mutationFn: ({ sentence }: TeamBuildingSentenceRequest) =>
-      putTeamBuildingSentence({ sentence }),
+    mutationFn: ({ content }: TeamBuildingSentenceRequest) =>
+      putTeamBuildingSentence({ content }),
     onSettled: () => {
       QueryClient.invalidateQueries([API.TEAM_BUILDING.INPUT_STATUS]);
     },
