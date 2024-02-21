@@ -63,10 +63,14 @@ export const usePostSentenceMutation = () => {
 };
 
 export const usePutSentenceMutation = () => {
+  const QueryClient = useQueryClient();
   return useMutation({
     mutationKey: [API.TEAM_BUILDING.SENTENCE],
     mutationFn: ({ sentence }: TeamBuildingSentenceRequest) =>
       putTeamBuildingSentence({ sentence }),
+    onSettled: () => {
+      QueryClient.invalidateQueries([API.TEAM_BUILDING.INPUT_STATUS]);
+    },
   });
 };
 

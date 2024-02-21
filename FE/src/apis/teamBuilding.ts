@@ -69,6 +69,7 @@ export const getTeamBuildingInfo = async (): Promise<TeamBuildingInfoDto> => {
   const { data } = await https({
     url: API.TEAM_BUILDING.DETAIL,
     method: "GET",
+    params: { status: "progress" },
   });
 
   return new TeamBuildingInfoDto(data?.data);
