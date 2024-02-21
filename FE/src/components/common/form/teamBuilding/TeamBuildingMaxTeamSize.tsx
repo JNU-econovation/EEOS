@@ -1,6 +1,7 @@
 import FORM_INFO from "@/constants/FORM_INFO";
 import LabeledInput from "../LabeledInput";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 
 interface TeamBuildingMinTeamSizeProps {
   maxTeamSize: number;
@@ -13,6 +14,11 @@ const TeamBuildingMaxTeamSize = ({
 }: TeamBuildingMinTeamSizeProps) => {
   const handleMaxTeamSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (parseInt(e.target.value) <= 0) {
+      return;
+    }
+    if (parseInt(e.target.value) > 100) {
+      toast.error("최대 팀원 수는 100명을 넘을 수 없습니다.");
+      setMaxTeamSize(100);
       return;
     }
     setMaxTeamSize(parseInt(e.target.value));
