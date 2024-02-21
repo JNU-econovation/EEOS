@@ -80,7 +80,7 @@ export const getTeamBuildingInfo = async (): Promise<TeamBuildingInfoDto> => {
  */
 
 export interface TeamBuildingSentenceRequest {
-  sentence: string;
+  content: string;
 }
 
 export const postTeamBuildingSentence = async (
