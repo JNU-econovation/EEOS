@@ -1,11 +1,13 @@
 import { useGetTeamBuildingResultQuery } from "@/hooks/query/useTeamBuildingQuery";
 import TeamResultInfo from "./TeamResultInfo";
 
-const TeamResultInfoContainer = () => {
-  const { data: teamResult, isLoading } = useGetTeamBuildingResultQuery();
+interface TeamResultInfoContainerProps {
+  teamResult: ReturnType<typeof useGetTeamBuildingResultQuery>["data"];
+}
 
-  if (isLoading) return null;
-
+const TeamResultInfoContainer = ({
+  teamResult,
+}: TeamResultInfoContainerProps) => {
   return (
     <div className="flex h-full w-full flex-col gap-16 overflow-y-scroll scrollbar-hide">
       {teamResult.result.map((members, index) => (
