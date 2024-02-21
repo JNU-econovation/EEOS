@@ -39,7 +39,7 @@ export class TeamBuildingResultListDto {
 
   constructor(data: TeamBuildingResultList) {
     this.accessRight = data.accessRight;
-    this.result = data.result;
+    this.result = data.results;
   }
 }
 
