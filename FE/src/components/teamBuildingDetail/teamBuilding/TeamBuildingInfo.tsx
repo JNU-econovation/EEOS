@@ -5,7 +5,6 @@ import TeamBuildingHeader from "./TeamBuildingHeader";
 import { useGetTeamBuildingInfoQuery } from "@/hooks/query/useTeamBuildingQuery";
 
 const TeamBuildingInfo = () => {
-  //TODO: teamBuildingId를 받아와서 해당 팀빌딩 정보를 가져오는 로직 필요
   const { data: teamBuildingData, isLoading } = useGetTeamBuildingInfoQuery();
 
   if (isLoading) {
