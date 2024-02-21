@@ -1,12 +1,13 @@
 import Button from "@/components/common/Button";
 import classNames from "classnames";
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { FieldType } from "./SentenceField";
 import {
   usePostSentenceMutation,
   usePutSentenceMutation,
 } from "@/hooks/query/useTeamBuildingQuery";
 import { create } from "domain";
+import { toast } from "react-toastify";
 
 const color = {
   default: "border-gray-20",
@@ -33,10 +34,12 @@ const SentenceForm = ({
     color[type],
   );
 
-  const { mutate: createSentence, isSuccess: createSuccess } =
-    usePostSentenceMutation();
-  const { mutate: editSentence, isSuccess: editSuccess } =
-    usePutSentenceMutation();
+  useEffect(() => {
+    handleResizeHeight();
+  }, [content]);
+
+  const { mutate: createSentence } = usePostSentenceMutation();
+  const { mutate: editSentence } = usePutSentenceMutation();
 
   const handleResizeHeight = () => {
     textareaRef.current.style.height = "auto";
@@ -64,13 +67,17 @@ const SentenceForm = ({
   };
 
   const handleSubmit = () => {
+    if (content.length === 0) {
+      toast.error("문장을 입력해주세요.");
+      return;
+    }
     if (type === "inputting") {
       createSentence({ sentence: content });
-      createSuccess && setType("viewer");
+      setType("viewer");
     }
     if (type === "editing") {
       editSentence({ sentence: content });
-      editSuccess && setType("viewer");
+      setType("viewer");
     }
   };
 
@@ -92,6 +99,7 @@ const SentenceForm = ({
       onSubmit={handleFormSubmit}
     >
       <textarea
+        maxLength={500}
         rows={1}
         ref={textareaRef}
         placeholder="문장을 입력해주세요."
