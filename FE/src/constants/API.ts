@@ -9,7 +9,7 @@ const PROGRAM = {
 
 const MEMBER = {
   LIST: "/members",
-  ACTIVE_STATUS: (programId) => `/programs/${programId}/members`,
+  ACTIVE_STATUS: (programId: number) => `/programs/${programId}/members`,
   ATTEND_STATUS: (programId: number) => `/attend/programs/${programId}/members`,
 };
 
@@ -27,10 +27,11 @@ const TEAM_BUILDING = {
   CREATE: "/team-building",
   DETAIL: "/team-building",
   CLOSE: "/team-building/end",
-  CREATABLE: "/team-building/status",
+  VALIDATE: "/team-building/validate",
   INPUT_STATUS: "/target/team-building/status",
   RESULT: "/team-building/result",
   SENTENCE: "/target/team-building",
+  COMPLETE: "/team-building/complete",
 };
 
 Object.freeze(PROGRAM);
