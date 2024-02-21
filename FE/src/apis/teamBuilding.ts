@@ -1,3 +1,4 @@
+import { StatusType } from "./../types/teamBuilding";
 import API from "@/constants/API";
 import { https } from "./instance";
 import { toast } from "react-toastify";
@@ -6,23 +7,28 @@ import {
   TeamBuildingIdDto,
   TeamBuildingInfoDto,
   TeamBuildingResultListDto,
+  TeamBuildingStatusDto,
   UserInputStatusInfoDto,
 } from "./dtos/teamBuilding.dto";
 
 /**
- * 팀빌딩 생성 가능한지 확인
+ * 팀빌딩 생성/참여 가능한지 확인
  */
-export const getIsTeamBuildingCreatable = async () => {
-  const { status } = await toast.promise(
-    https({
-      url: API.TEAM_BUILDING.CREATABLE,
-      method: "GET",
-    }),
-    {
-      error: MESSAGE.TEAM_BUILDING.INCREATABLE,
-    },
-  );
-  return status === 200;
+
+interface GetTeamBuildingCreatableRequest {
+  status: StatusType;
+}
+
+export const getTeamBuildingValidation = async ({
+  status,
+}: GetTeamBuildingCreatableRequest) => {
+  const { data } = await https({
+    url: API.TEAM_BUILDING.VALIDATE,
+    method: "GET",
+    params: { status },
+  });
+
+  return new TeamBuildingStatusDto(data?.data);
 };
 
 /**
@@ -32,7 +38,6 @@ export const getIsTeamBuildingCreatable = async () => {
 export interface CreateTeamBuildingRequest {
   title: string;
   content: string;
-  minTeamSize: number;
   maxTeamSize: number;
   members: { memberId: number }[];
 }
@@ -129,6 +134,24 @@ export const getUserInputStatus = async (): Promise<UserInputStatusInfoDto> => {
 };
 
 /**
+ * 팀빌딩 완료하기
+ */
+
+export const completeTeamBuilding = async () => {
+  await toast.promise(
+    https({
+      url: API.TEAM_BUILDING.COMPLETE,
+      method: "POST",
+    }),
+    {
+      pending: MESSAGE.COMPLATE.PENDING,
+      success: MESSAGE.COMPLATE.SUCCESS,
+      error: MESSAGE.COMPLATE.FAILED,
+    },
+  );
+};
+
+/**
  * 팀빌딩 결과 조회
  */
 
@@ -150,7 +173,7 @@ export const closeTeamBuilding = async () => {
   await toast.promise(
     https({
       url: API.TEAM_BUILDING.CLOSE,
-      method: "PUT",
+      method: "DELETE",
     }),
     {
       pending: MESSAGE.DELETE.PENDING,
