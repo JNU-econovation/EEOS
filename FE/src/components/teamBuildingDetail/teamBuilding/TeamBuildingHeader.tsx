@@ -1,7 +1,7 @@
 "use client";
 
 import Title from "@/components/common/Title";
-import { useCloseTeamBuildingMutation } from "@/hooks/query/useTeamBuildingQuery";
+import { useCompleteTeamBuildingMutation } from "@/hooks/query/useTeamBuildingQuery";
 import { AccessRight } from "@/types/program";
 
 interface TeamBuildingHeaderProps {
@@ -37,11 +37,11 @@ const ProgressDisplay = () => {
 };
 
 const CloseBtn = () => {
-  const { mutate: closeTeamBuilding } = useCloseTeamBuildingMutation();
+  const { mutate: completeTeamBuilding } = useCompleteTeamBuildingMutation();
 
   const handleCompleteButtonClick = () => {
     if (confirm("팀빌딩을 완료하시겠습니까?")) {
-      closeTeamBuilding();
+      completeTeamBuilding();
     }
   };
 
