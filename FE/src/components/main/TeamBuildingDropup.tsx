@@ -12,8 +12,8 @@ import ERROR_CODE from "@/constants/ERROR_CODE";
 
 const TeamBuildingDropup = () => {
   const router = useRouter();
-  const { refetch: refetchCreatable } = useGetIsCreableQuery();
-  const { refetch: refetchJoinable } = useGetIsJoinableQuery();
+  const { refetch: refetchCreatable } = useGetIsCreableQuery(false);
+  const { refetch: refetchJoinable } = useGetIsJoinableQuery(false);
 
   const TITLE = "AI 팀빌딩";
   const ITEMS = [

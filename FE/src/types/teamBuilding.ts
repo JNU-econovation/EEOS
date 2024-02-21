@@ -3,7 +3,7 @@ import { AccessRight } from "./program";
 
 export type InputStatus = "incomplete" | "complete";
 
-export type StatusType = "creatable" | "joinable";
+export type StatusType = "creatability" | "joinability";
 export type CreatableStatus = "creatable" | "noncreatable";
 export type JoinableStatus = "joinable" | "nonjoinable";
 

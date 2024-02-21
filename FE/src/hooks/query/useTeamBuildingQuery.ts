@@ -16,19 +16,21 @@ import ROUTES from "@/constants/ROUTES";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-export const useGetIsCreableQuery = () => {
+// TODO: option 받는 부분 수정하기
+export const useGetIsCreableQuery = (enabled: boolean) => {
   return useQuery({
     queryKey: [API.TEAM_BUILDING.VALIDATE, "creatable"],
-    queryFn: () => getTeamBuildingValidation({ status: "creatable" }),
-    enabled: false,
+    queryFn: () => getTeamBuildingValidation({ status: "creatability" }),
+    enabled,
   });
 };
 
-export const useGetIsJoinableQuery = () => {
+// TODO: option 받는 부분 수정하기
+export const useGetIsJoinableQuery = (enabled: boolean) => {
   return useQuery({
     queryKey: [API.TEAM_BUILDING.VALIDATE, "joinable"],
-    queryFn: () => getTeamBuildingValidation({ status: "joinable" }),
-    enabled: false,
+    queryFn: () => getTeamBuildingValidation({ status: "joinability" }),
+    enabled,
   });
 };
 
@@ -37,7 +39,7 @@ export const useCreateTeamBuildingMutation = () => {
   return useMutation({
     mutationKey: [API.TEAM_BUILDING.CREATE],
     mutationFn: (data: CreateTeamBuildingRequest) => createTeamBuilding(data),
-    onSuccess: () => {
+    onSettled: () => {
       router.push(ROUTES.TEAM_BUILDING.DETAIL);
     },
   });
