@@ -3,13 +3,11 @@ import { useState } from "react";
 export interface TeamBuildingFormDataState {
   title: string;
   content: string;
-  minTeamSize: number;
   maxTeamSize: number;
 }
 export interface TeamBuildingFormDataAction {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setContent: React.Dispatch<React.SetStateAction<string>>;
-  setMinTeamSize: React.Dispatch<React.SetStateAction<number>>;
   setMaxTeamSize: React.Dispatch<React.SetStateAction<number>>;
   reset: () => void;
 }
@@ -17,7 +15,6 @@ export interface TeamBuildingFormDataAction {
 const initialState: TeamBuildingFormDataState = {
   title: "",
   content: "",
-  minTeamSize: 1,
   maxTeamSize: 1,
 };
 
@@ -30,9 +27,7 @@ const useTeamBuildingFormData = (
 ) => {
   const [title, setTitle] = useState<string>(defaultData.title);
   const [content, setContent] = useState<string>(defaultData.content);
-  const [minTeamSize, setMinTeamSize] = useState<number>(
-    defaultData.minTeamSize,
-  );
+
   const [maxTeamSize, setMaxTeamSize] = useState<number>(
     defaultData.maxTeamSize,
   );
@@ -40,7 +35,6 @@ const useTeamBuildingFormData = (
   const reset = () => {
     setTitle(defaultData.title);
     setContent(defaultData.content);
-    setMinTeamSize(defaultData.minTeamSize);
     setMaxTeamSize(defaultData.maxTeamSize);
   };
 
@@ -49,8 +43,6 @@ const useTeamBuildingFormData = (
     setTitle,
     content,
     setContent,
-    minTeamSize,
-    setMinTeamSize,
     maxTeamSize,
     setMaxTeamSize,
     reset,

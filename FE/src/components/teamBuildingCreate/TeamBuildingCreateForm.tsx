@@ -6,12 +6,15 @@ import MemberTable from "../common/memberTable/MemberTable";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCreateTeamBuildingMutation } from "@/hooks/query/useTeamBuildingQuery";
 
 const TeamBuildingCreateForm = () => {
   const queryClient = useQueryClient();
   const [members, setMembers] = useState<Set<number>>(new Set<number>());
   const formData = useTeamBuildingFormData();
-  const { title, content, minTeamSize, maxTeamSize, reset } = formData;
+  const { title, content, maxTeamSize } = formData;
+
+  const { mutate: createTeamBuilding } = useCreateTeamBuildingMutation();
 
   const updateMembers = (memberId: number) => {
     const newMembers = new Set<number>(members);
@@ -35,10 +38,17 @@ const TeamBuildingCreateForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title || !content || !minTeamSize || !maxTeamSize) {
+    if (!title || !content || !maxTeamSize) {
       toast.error("모든 항목을 입력해주세요.");
       return;
     }
+
+    createTeamBuilding({
+      title,
+      content,
+      maxTeamSize,
+      members: Array.from(members).map((memberId) => ({ memberId })),
+    });
   };
 
   return (

@@ -21,8 +21,6 @@ const TeamBuildingForm = ({
   setTitle,
   content,
   setContent,
-  minTeamSize,
-  setMinTeamSize,
   maxTeamSize,
   setMaxTeamSize,
   reset,
@@ -37,12 +35,8 @@ const TeamBuildingForm = ({
 
   return (
     <form className="space-y-6" onSubmit={onSubmit}>
-      <div className="grid grid-cols-[1fr_3.5rem_3.5rem] gap-4 sm:grid-cols-[1fr_5rem_5rem]">
+      <div className="grid grid-cols-[1fr_5rem] gap-4 sm:grid-cols-[1fr_8rem]">
         <TeamBuildingTitle title={title} setTitle={setTitle} />
-        <TeamBuildingMinTeamSize
-          minTeamSize={minTeamSize}
-          setMinTeamSize={setMinTeamSize}
-        />
         <TeamBuildingMaxTeamSize
           maxTeamSize={maxTeamSize}
           setMaxTeamSize={setMaxTeamSize}
