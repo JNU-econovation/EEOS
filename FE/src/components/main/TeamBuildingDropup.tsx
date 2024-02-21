@@ -21,7 +21,7 @@ const TeamBuildingDropup = () => {
       text: "팀빌딩 생성하기",
       onClick: async () => {
         const latestCreatable = (await refetchCreatable()).data;
-        if (latestCreatable.status === "nonCreatable") {
+        if (latestCreatable.status === "noncreatable") {
           toast.error(
             ERROR_MESSAGE[ERROR_CODE.TEAM_BUILDING.NOT_CREATABLE].message,
           );
@@ -34,7 +34,7 @@ const TeamBuildingDropup = () => {
       text: "팀빌딩 참여하기",
       onClick: async () => {
         const latestJoinable = (await refetchJoinable()).data;
-        if (latestJoinable.status === "nonJoinable") {
+        if (latestJoinable.status === "nonjoinable") {
           toast.error(
             ERROR_MESSAGE[ERROR_CODE.TEAM_BUILDING.NOT_JOINABLE].message,
           );

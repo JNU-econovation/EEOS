@@ -4,8 +4,8 @@ import { AccessRight } from "./program";
 export type InputStatus = "incomplete" | "complete";
 
 export type StatusType = "creatable" | "joinable";
-export type CreatableStatus = "creatable" | "nonCreatable";
-export type JoinableStatus = "joinable" | "nonJoinable";
+export type CreatableStatus = "creatable" | "noncreatable";
+export type JoinableStatus = "joinable" | "nonjoinable";
 
 export type TeamBuildingInfo = {
   title: string;
