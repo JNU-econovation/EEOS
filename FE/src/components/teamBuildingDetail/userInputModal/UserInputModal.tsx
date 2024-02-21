@@ -10,7 +10,10 @@ const UserInputModal = () => {
   return (
     <>
       <InputStatusView {...userInfo} />
-      <SentenceField inputStatus={userInfo.inputStatus} />
+      <SentenceField
+        inputStatus={userInfo.inputStatus}
+        initContent={userInfo.content}
+      />
     </>
   );
 };

@@ -16,6 +16,7 @@ export type TeamBuildingInfo = {
 export interface UserInputStatusInfo {
   name: string;
   status: InputStatus;
+  content: string | null;
 }
 
 export type TeamBuildingResult = SimpleMemberInfo[][];

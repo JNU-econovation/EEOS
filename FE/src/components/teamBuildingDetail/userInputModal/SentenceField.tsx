@@ -8,6 +8,7 @@ import { InputStatus } from "@/types/teamBuilding";
 export type FieldType = "default" | "inputting" | "editing" | "viewer";
 interface SentenceFieldProps {
   inputStatus: InputStatus;
+  initContent: string;
 }
 
 const getType = (inputStatus: InputStatus) => {
@@ -15,8 +16,8 @@ const getType = (inputStatus: InputStatus) => {
   if (inputStatus === "complete") return "viewer";
 };
 
-const SentenceField = ({ inputStatus }: SentenceFieldProps) => {
-  const [content, setContent] = useState<string>("");
+const SentenceField = ({ inputStatus, initContent }: SentenceFieldProps) => {
+  const [content, setContent] = useState<string>(initContent || "");
   const [type, setType] = useState<FieldType>(getType(inputStatus));
 
   return (

@@ -24,10 +24,12 @@ export class TeamBuildingInfoDto {
 export class UserInputStatusInfoDto {
   public readonly name: string;
   public readonly inputStatus: InputStatus;
+  public readonly content: string | null;
 
   constructor(data: UserInputStatusInfo) {
     this.name = data.name;
     this.inputStatus = data.status;
+    this.content = data.content;
   }
 }
 
