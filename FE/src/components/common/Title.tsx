@@ -9,6 +9,7 @@ const titleColors = {
   black: "text-black",
   white: "text-background",
   error: "text-error",
+  gray: "text-gray-30",
 };
 
 const Title = ({ text, textColor = "black" }: TitleProps) => {
