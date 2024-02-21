@@ -38,7 +38,7 @@ export class TeamBuildingResultListDto {
   public readonly result: TeamBuildingResult;
 
   constructor(data: TeamBuildingResultList) {
-    this.accessRight = data.accessRight;
+    this.accessRight = data.accessRights;
     this.result = data.results;
   }
 }
