@@ -1,6 +1,8 @@
 import { AccessRight } from "@/types/program";
 import type {
+  CreatableStatus,
   InputStatus,
+  JoinableStatus,
   TeamBuildingInfo,
   TeamBuildingResult,
   TeamBuildingResultList,
@@ -20,17 +22,21 @@ export class TeamBuildingInfoDto {
 }
 
 export class UserInputStatusInfoDto {
-  public readonly status: InputStatus;
+  public readonly name: string;
+  public readonly inputStatus: InputStatus;
 
   constructor(data: UserInputStatusInfo) {
-    this.status = data.status;
+    this.name = data.name;
+    this.inputStatus = data.status;
   }
 }
 
 export class TeamBuildingResultListDto {
+  public readonly accessRight: AccessRight;
   public readonly result: TeamBuildingResult;
 
   constructor(data: TeamBuildingResultList) {
+    this.accessRight = data.accessRight;
     this.result = data.result;
   }
 }
@@ -40,5 +46,13 @@ export class TeamBuildingIdDto {
 
   constructor(data: { teamBuildingId: number }) {
     this.teamBuildingId = data.teamBuildingId;
+  }
+}
+
+export class TeamBuildingStatusDto {
+  public readonly status: CreatableStatus | JoinableStatus;
+
+  constructor(data: { status: CreatableStatus | JoinableStatus }) {
+    this.status = data.status;
   }
 }
