@@ -1,15 +1,12 @@
+import { useGetUserInputStatusQuery } from "@/hooks/query/useTeamBuildingQuery";
 import InputStatusView from "./InputStatusView";
 import SentenceField from "./SentenceField";
 
 const UserInputModal = () => {
-  // TODO: useQuery로 수정
-  const userInfo: {
-    name: string;
-    inputStatus: "incomplete" | "complete";
-  } = {
-    name: "25기 강바다",
-    inputStatus: "incomplete",
-  };
+  const { data: userInfo, isLoading } = useGetUserInputStatusQuery();
+
+  if (isLoading) return null;
+
   return (
     <>
       <InputStatusView {...userInfo} />
