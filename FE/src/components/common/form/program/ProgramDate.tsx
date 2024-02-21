@@ -1,15 +1,15 @@
 "use client";
 
 import useOutsideRef from "@/hooks/useOutsideRef";
-import { useState } from "react";
-import LabeledInput from "./LabeledInput";
+import { Dispatch, SetStateAction, useState } from "react";
+import LabeledInput from "../LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { convertDate } from "@/utils/convert";
-import Calendar from "../calendar/Calendar";
+import Calendar from "../../calendar/Calendar";
 
 interface ProgramDateProps {
   programDate: string;
-  setProgramDate: (date: string) => void;
+  setProgramDate: Dispatch<SetStateAction<string>>;
 }
 
 const ProgramDate = ({ programDate, setProgramDate }: ProgramDateProps) => {
@@ -26,9 +26,13 @@ const ProgramDate = ({ programDate, setProgramDate }: ProgramDateProps) => {
     );
   };
 
+  const handleCalenderOpen = () => {
+    setOpenCalender(true);
+  };
+
   return (
     <div
-      onClick={() => setOpenCalender(true)}
+      onClick={handleCalenderOpen}
       className="relative w-full"
       ref={calenderRef}
     >

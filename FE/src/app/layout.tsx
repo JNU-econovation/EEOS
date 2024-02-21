@@ -9,7 +9,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EEOS",
-  description: "Econovation Event Operating System",
+  description: "에코노베이션 행사 관리 서비스",
+  openGraph: {
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {

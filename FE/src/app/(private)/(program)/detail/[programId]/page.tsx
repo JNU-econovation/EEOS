@@ -1,4 +1,4 @@
-import AttendeeInfoContainer from "@/components/programDetail/attendee/AttendeeInfoContainer";
+import AttendeeInfoContainer from "@/components/programDetail/attendee/AttendeeInfo.container";
 import ProgramInfo from "@/components/programDetail/program/ProgramInfo";
 import UserAttendModalContainer from "@/components/programDetail/userAttendModal/UserAttendModal.container";
 

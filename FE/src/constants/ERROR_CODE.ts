@@ -30,6 +30,10 @@ const ERROR_CODE = {
     INVALID_NAME: "4006",
   },
   API: { SLACK_CALL_FAILED: "5000" },
+  TEAM_BUILDING: {
+    NOT_CREATABLE: "6000",
+    NOT_JOINABLE: "6003",
+  },
 };
 
 Object.freeze(ERROR_CODE);
