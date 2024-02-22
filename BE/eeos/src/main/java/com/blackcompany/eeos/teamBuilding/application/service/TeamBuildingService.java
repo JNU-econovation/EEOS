@@ -9,7 +9,11 @@ import com.blackcompany.eeos.teamBuilding.application.dto.CreateTeamBuildingRequ
 import com.blackcompany.eeos.teamBuilding.application.dto.EachMemberResponse;
 import com.blackcompany.eeos.teamBuilding.application.dto.ResultTeamBuildingResponse;
 import com.blackcompany.eeos.teamBuilding.application.dto.converter.ResultTeamBuildingResponseConverter;
+import com.blackcompany.eeos.teamBuilding.application.exception.CompleteTeamBuildingException;
+import com.blackcompany.eeos.teamBuilding.application.exception.EndTeamBuildingException;
+import com.blackcompany.eeos.teamBuilding.application.exception.NotFoundProgressTeamBuildingException;
 import com.blackcompany.eeos.teamBuilding.application.exception.NotFoundTeamBuildingStatusException;
+import com.blackcompany.eeos.teamBuilding.application.model.TeamBuildingAccessRights;
 import com.blackcompany.eeos.teamBuilding.application.model.TeamBuildingModel;
 import com.blackcompany.eeos.teamBuilding.application.model.converter.TeamBuildingEntityConverter;
 import com.blackcompany.eeos.teamBuilding.application.model.converter.TeamBuildingRequestConverter;
@@ -18,6 +22,8 @@ import com.blackcompany.eeos.teamBuilding.application.usecase.CompleteTeamBuildi
 import com.blackcompany.eeos.teamBuilding.application.usecase.CreateTeamBuildingUsecase;
 import com.blackcompany.eeos.teamBuilding.application.usecase.EndTeamBuildingUsecase;
 import com.blackcompany.eeos.teamBuilding.application.usecase.GetResultTeamBuildingUsecase;
+import com.blackcompany.eeos.teamBuilding.application.usecase.GetTeamBuildingUsecase;
+import com.blackcompany.eeos.teamBuilding.application.usecase.QueryTeamBuildingResponse;
 import com.blackcompany.eeos.teamBuilding.infra.client.ClusteringTeamApiClient;
 import com.blackcompany.eeos.teamBuilding.infra.dto.converter.ParticipantRequestConverter;
 import com.blackcompany.eeos.teamBuilding.persistence.TeamBuildingEntity;
@@ -26,6 +32,7 @@ import com.blackcompany.eeos.teamBuilding.persistence.TeamBuildingResultEntity;
 import com.blackcompany.eeos.teamBuilding.persistence.TeamBuildingResultRepository;
 import com.blackcompany.eeos.teamBuilding.persistence.TeamBuildingStatus;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +45,8 @@ public class TeamBuildingService
 		implements CreateTeamBuildingUsecase,
 				EndTeamBuildingUsecase,
 				CompleteTeamBuildingUsecase,
-				GetResultTeamBuildingUsecase {
+				GetResultTeamBuildingUsecase,
+				GetTeamBuildingUsecase {
 	private final RestrictTeamBuildingService restrictTeamBuildingService;
 	private final TeamBuildingRequestConverter requestConverter;
 	private final TeamBuildingEntityConverter entityConverter;
@@ -93,20 +101,38 @@ public class TeamBuildingService
 
 	@Override
 	public ResultTeamBuildingResponse getResult(Long memberId) {
-		Long teamBuildingId = queryTeamBuildingService.getByStatus(TeamBuildingStatus.COMPLETE).getId();
+		TeamBuildingEntity entity = queryTeamBuildingService.getByStatus(TeamBuildingStatus.COMPLETE);
+		TeamBuildingModel model = entityConverter.from(entity);
+
+		validateReadAccessibility(memberId, model.getId());
 
 		List<List<Long>> memberIds =
-				teamBuildingResultRepository.findAllByTeamBuildingId(teamBuildingId).stream()
+				teamBuildingResultRepository.findAllByTeamBuildingId(model.getId()).stream()
 						.map(TeamBuildingResultEntity::getMemberIds)
 						.collect(Collectors.toList());
 
 		List<List<MemberEntity>> members = getMembers(memberIds);
 
-		TeamBuildingEntity entity = queryTeamBuildingService.getByStatus(TeamBuildingStatus.COMPLETE);
-		TeamBuildingModel model = entityConverter.from(entity);
-
 		return responseConverter.from(
 				model.getAccessRight(memberId).getAccessRight(), combines(members, memberIds));
+	}
+
+	@Override
+	public QueryTeamBuildingResponse getTeamBuilding(Long memberId) {
+		TeamBuildingModel model =
+				teamBuildingRepository
+						.findByStatus(TeamBuildingStatus.PROGRESS)
+						.map(entityConverter::from)
+						.orElseThrow(generateNotFoundProgressTeamBuildingException());
+
+		validateReadAccessibility(memberId, model.getId());
+		TeamBuildingAccessRights accessRight = model.getAccessRight(memberId);
+
+		return QueryTeamBuildingResponse.builder()
+				.title(model.getTitle())
+				.content(model.getContent())
+				.accessRight(accessRight.getAccessRight())
+				.build();
 	}
 
 	private List<List<EachMemberResponse>> combines(
@@ -155,5 +181,18 @@ public class TeamBuildingService
 
 	private List<List<MemberEntity>> getMembers(List<List<Long>> memberIds) {
 		return memberIds.stream().map(memberRepository::findMembersByIds).collect(Collectors.toList());
+	}
+
+	private void validateReadAccessibility(Long memberId, Long programId) {
+		queryTeamBuildingTargetService.getTarget(memberId, programId);
+	}
+
+	private Supplier<NotFoundProgressTeamBuildingException>
+			generateNotFoundProgressTeamBuildingException() {
+		if (teamBuildingRepository.existsByStatus(TeamBuildingStatus.COMPLETE)) {
+			return CompleteTeamBuildingException::new;
+		} else {
+			return EndTeamBuildingException::new;
+		}
 	}
 }

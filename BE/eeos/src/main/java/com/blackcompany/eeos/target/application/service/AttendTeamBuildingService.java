@@ -1,9 +1,12 @@
 package com.blackcompany.eeos.target.application.service;
 
+import com.blackcompany.eeos.member.application.service.QueryMemberService;
 import com.blackcompany.eeos.target.application.dto.AttendTeamBuildingRequest;
+import com.blackcompany.eeos.target.application.dto.QueryTargetInfoResponse;
 import com.blackcompany.eeos.target.application.model.TeamBuildingTargetModel;
 import com.blackcompany.eeos.target.application.model.converter.TeamBuildingTargetEntityConverter;
 import com.blackcompany.eeos.target.application.usecase.AttendTeamBuildingUsecase;
+import com.blackcompany.eeos.target.application.usecase.GetTargetInfoUsecase;
 import com.blackcompany.eeos.target.application.usecase.UpdateAttendTeamBuildingUsecase;
 import com.blackcompany.eeos.target.persistence.TeamBuildingTargetEntity;
 import com.blackcompany.eeos.target.persistence.TeamBuildingTargetRepository;
@@ -19,22 +22,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class CommandAttendTeamBuildingService
-		implements AttendTeamBuildingUsecase, UpdateAttendTeamBuildingUsecase {
+public class AttendTeamBuildingService
+		implements AttendTeamBuildingUsecase, UpdateAttendTeamBuildingUsecase, GetTargetInfoUsecase {
 	private final QueryTeamBuildingService queryTeamBuildingService;
 	private final QueryTeamBuildingTargetService queryTeamBuildingTargetService;
 	private final TeamBuildingTargetEntityConverter entityConverter;
 	private final TeamBuildingTargetRepository teamBuildingTargetRepository;
 	private final TeamBuildingEntityConverter teamBuildingEntityConverter;
+	private final QueryMemberService queryMemberService;
 
 	@Override
 	@Transactional
 	public void create(Long memberId, AttendTeamBuildingRequest request) {
 		TeamBuildingTargetModel model = getTargetByActiveBuilding(memberId);
 
-		TeamBuildingTargetEntity newEntity =
+		TeamBuildingTargetEntity entity =
 				entityConverter.toEntity(model.inputContent(request.getContent()));
-		teamBuildingTargetRepository.save(newEntity);
+		teamBuildingTargetRepository.save(entity);
 	}
 
 	@Override
@@ -43,10 +47,22 @@ public class CommandAttendTeamBuildingService
 		validateAttendTeamBuilding();
 
 		TeamBuildingTargetModel model = getTargetByActiveBuilding(memberId);
-		TeamBuildingTargetEntity newEntity =
+		TeamBuildingTargetEntity entity =
 				entityConverter.toEntity(model.inputContent(request.getContent()));
 
-		teamBuildingTargetRepository.save(newEntity);
+		teamBuildingTargetRepository.save(entity);
+	}
+
+	@Override
+	public QueryTargetInfoResponse getTargetInfo(Long memberId) {
+		TeamBuildingTargetModel model = getTargetByActiveBuilding(memberId);
+		String name = queryMemberService.getName(memberId);
+
+		return QueryTargetInfoResponse.builder()
+				.name(name)
+				.status(model.getInputStatus())
+				.content(model.getContent())
+				.build();
 	}
 
 	private TeamBuildingTargetModel getTargetByActiveBuilding(Long memberId) {
