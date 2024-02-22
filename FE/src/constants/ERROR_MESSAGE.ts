@@ -90,6 +90,10 @@ const ERROR_MESSAGE = {
     message: "진행 중인 팀빌딩이 없거나, 대상자가 아닙니다.",
   },
 
+  [ERROR_CODE.TEAM_BUILDING.COMPLETED]: {
+    message: "팀빌딩이 이미 완료되었습니다.",
+  },
+
   // 알 수 없는
   UNKNOWN: {
     message: "알 수 없는 에러가 발생했습니다.",
