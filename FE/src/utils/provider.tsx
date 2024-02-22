@@ -9,6 +9,7 @@ const Provider = ({ children }: PropsWithChildren<{}>) => {
   const client = new QueryClient({
     defaultOptions: {
       queries: {
+        retry: false,
         useErrorBoundary: true,
       },
     },
