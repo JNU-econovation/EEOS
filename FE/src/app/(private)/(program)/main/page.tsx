@@ -6,6 +6,7 @@ import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
 import ProgramList from "@/components/main/ProgramList";
 import ProgramListLoader from "@/components/main/ProgramList.loader";
+import TeamBuildingDropup from "@/components/main/TeamBuildingDropup";
 import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
@@ -63,7 +64,7 @@ const MainPage = () => {
 
   // TODO: 합성 컴포넌트!
   return (
-    <div className="space-y-8">
+    <div className="relative space-y-8">
       <Tab<ProgramCategoryWithAll>
         options={Object.values(PROGRAM.CATEGORY_TAB_WITH_ALL)}
         selected={queryValue.category}
@@ -88,7 +89,9 @@ const MainPage = () => {
           />
         </Suspense>
       </ErrorBoundary>
+      <TeamBuildingDropup />
     </div>
   );
 };
+
 export default MainPage;

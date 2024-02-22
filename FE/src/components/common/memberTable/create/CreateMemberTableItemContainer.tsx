@@ -2,7 +2,7 @@ import { useGetMemberByActive } from "@/hooks/query/useMemberQuery";
 import CreateMemberTableItem from "./CreateMemberTableItem";
 import { ActiveStatusWithAll } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
-import MemberTableLoader from "../common/memberTable/MemberTable.loader";
+import MemberTableLoader from "../MemberTable.loader";
 import { useSetAtom } from "jotai";
 import { memberTableCheckedAtom } from "@/store/memberTableCheckedAtom";
 

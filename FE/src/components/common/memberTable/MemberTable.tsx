@@ -5,7 +5,7 @@ import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import { FormType } from "@/types/form";
 import Tab from "../tabs/Tab";
 import MemberTableHeader from "./MemberTableHeader";
-import CreateMemberTableItemContainer from "@/components/programCreate/CreateMemberTableItemContainer";
+import CreateMemberTableItemContainer from "@/components/common/memberTable/create/CreateMemberTableItemContainer";
 import EditMemberTableItemContainer from "@/components/programEdit/EditMemberTableItemContainer";
 import { Suspense, useState } from "react";
 import { Members } from "@/components/programEdit/ProgramEditForm";

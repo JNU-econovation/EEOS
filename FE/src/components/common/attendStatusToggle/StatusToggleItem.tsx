@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-interface AttendStatusToggleItemProps {
+interface StatusToggleItemProps {
   text: string;
   color: string;
 }
@@ -13,10 +13,7 @@ const badgeColors = {
   teal: "bg-secondary-20 text-tertiary-20 border-tertiary-20",
 };
 
-const AttendStatusToggleItem = ({
-  text,
-  color = "gray",
-}: AttendStatusToggleItemProps) => {
+const StatusToggleItem = ({ text, color = "gray" }: StatusToggleItemProps) => {
   const badgeStyle = classNames(
     "flex h-fit w-fit transform cursor-pointer items-center justify-center rounded-3xl border-2 px-8 py-2 font-bold duration-200",
     badgeColors[color],
@@ -28,4 +25,4 @@ const AttendStatusToggleItem = ({
     </div>
   );
 };
-export default AttendStatusToggleItem;
+export default StatusToggleItem;

@@ -1,5 +1,5 @@
 import { ProgramCategory, ProgramType } from "@/types/program";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export interface ProgramFormDataState {
   title: string;
@@ -18,7 +18,7 @@ export interface ProgramFormDataAction {
   reset: () => void;
 }
 
-const initalState: ProgramFormDataState = {
+const initialState: ProgramFormDataState = {
   title: "",
   deadLine: new Date().getTime().toString(),
   type: "notification",
@@ -31,7 +31,7 @@ export interface ProgramFormData
     ProgramFormDataAction {}
 
 const useProgramFormData = (
-  defaultData: ProgramFormDataState = initalState,
+  defaultData: ProgramFormDataState = initialState,
 ) => {
   const [title, setTitle] = useState<string>(defaultData.title);
   const [deadLine, setDeadLine] = useState<string>(defaultData.deadLine);
