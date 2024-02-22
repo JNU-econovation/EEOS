@@ -1,14 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import TeamBuildingDetail from "./TeamBuildingDetail";
 import TeamBuildingHeader from "./TeamBuildingHeader";
 import { useGetTeamBuildingInfoQuery } from "@/hooks/query/useTeamBuildingQuery";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 const TeamBuildingInfo = () => {
   const { data: teamBuildingData, isLoading } = useGetTeamBuildingInfoQuery();
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
