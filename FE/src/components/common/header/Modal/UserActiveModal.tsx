@@ -20,7 +20,7 @@ const UserActiveModal = () => {
   };
 
   return (
-    <section className="absolute -left-32 top-10 flex w-80 min-w-fit flex-col items-center gap-6 rounded-2xl bg-background px-12 py-6 drop-shadow-lg">
+    <section className="absolute -left-44 top-10 flex w-80 min-w-fit flex-col items-center gap-6 rounded-2xl bg-background px-12 py-6 drop-shadow-lg">
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<UserActiveModalSkeleton />}>
           <UserInfoSection />

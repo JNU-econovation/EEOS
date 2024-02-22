@@ -9,7 +9,7 @@ const PROGRAM = {
 
 const MEMBER = {
   LIST: "/members",
-  ACTIVE_STATUS: (programId) => `/programs/${programId}/members`,
+  ACTIVE_STATUS: (programId: number) => `/programs/${programId}/members`,
   ATTEND_STATUS: (programId: number) => `/attend/programs/${programId}/members`,
 };
 
@@ -23,8 +23,22 @@ const AUTH = {
   TOKEN_REISSUE: "/auth/reissue",
 };
 
+const TEAM_BUILDING = {
+  CREATE: "/team-building",
+  DETAIL: "/team-building",
+  CLOSE: "/team-building/end",
+  VALIDATE: "/team-building/validate",
+  INPUT_STATUS: "/target/team-building",
+  RESULT: "/team-building/result",
+  SENTENCE: "/target/team-building",
+  COMPLETE: "/team-building/complete",
+  DELETE: "/team-building",
+};
+
 Object.freeze(PROGRAM);
 Object.freeze(MEMBER);
 Object.freeze(USER);
 Object.freeze(AUTH);
-export default { PROGRAM, MEMBER, USER, AUTH };
+Object.freeze(TEAM_BUILDING);
+
+export default { PROGRAM, MEMBER, USER, AUTH, TEAM_BUILDING };

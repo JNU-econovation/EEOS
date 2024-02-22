@@ -31,11 +31,32 @@ const CONFIRM = {
   DELETE: "삭제하시겠습니까?",
 };
 
+const COMPLATE = {
+  SUCCESS: "완료되었습니다.",
+  FAILED: "완료에 실패했습니다.",
+  PENDING: "팀빌딩 완료 중...",
+};
+
+const TEAM_BUILDING = {
+  INCREATABLE: "진행중인 팀빌딩이 있어 팀빌딩을 생성할 수 없습니다.",
+};
+
 Object.freeze(EDIT_DISABLED);
 Object.freeze(AUTH);
 Object.freeze(EDIT);
 Object.freeze(CREATE);
 Object.freeze(DELETE);
 Object.freeze(CONFIRM);
+Object.freeze(TEAM_BUILDING);
+Object.freeze(COMPLATE);
 
-export default { EDIT_DISABLED, AUTH, EDIT, CREATE, DELETE, CONFIRM };
+export default {
+  EDIT_DISABLED,
+  AUTH,
+  EDIT,
+  CREATE,
+  DELETE,
+  CONFIRM,
+  TEAM_BUILDING,
+  COMPLATE,
+};

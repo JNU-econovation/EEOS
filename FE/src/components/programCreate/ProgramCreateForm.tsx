@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ProgramForm from "../common/form/ProgramForm";
+import ProgramForm from "../common/form/program/ProgramForm";
 import MemberTable from "../common/memberTable/MemberTable";
 import useProgramFormData from "@/hooks/useProgramFormData";
 import { useQueryClient } from "@tanstack/react-query";
@@ -37,12 +37,12 @@ const ProgramCreateForm = () => {
 
   const updateAllMembers = (selected: boolean) => {
     const newMembers = new Set<number>(members);
+    const memberIdList: number[] = queryClient.getQueryData(["memberIdList"]);
     if (selected) {
-      const memberIdList: number[] = queryClient.getQueryData(["memberIdList"]);
       memberIdList.forEach((v) => newMembers.add(v));
     }
     if (!selected) {
-      newMembers.clear();
+      memberIdList.forEach((v) => newMembers.delete(v));
     }
     setMembers(newMembers);
   };

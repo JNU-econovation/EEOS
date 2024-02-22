@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from "react";
-import LabeledInput from "./LabeledInput";
+import React, { Dispatch, PropsWithChildren, SetStateAction } from "react";
+import LabeledInput from "../LabeledInput";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { convertText } from "@/utils/convert";
 
 interface ProgramTitleProps {
   title: string;
-  setTitle: (title: string) => void;
+  setTitle: Dispatch<SetStateAction<string>>;
   prefix?: string;
 }
 

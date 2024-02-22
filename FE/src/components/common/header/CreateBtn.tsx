@@ -12,7 +12,7 @@ const CreateBtn = () => {
         alt="행사 추가"
         width={20}
         height={20}
-        className="h-[20px] w-[20px]"
+        className="hidden sm:block sm:h-[20px] sm:w-[20px]"
       />
       {CREATE}
     </Link>

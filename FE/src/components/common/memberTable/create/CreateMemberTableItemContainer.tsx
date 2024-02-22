@@ -2,7 +2,9 @@ import { useGetMemberByActive } from "@/hooks/query/useMemberQuery";
 import CreateMemberTableItem from "./CreateMemberTableItem";
 import { ActiveStatusWithAll } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
-import MemberTableLoader from "../common/memberTable/MemberTable.loader";
+import MemberTableLoader from "../MemberTable.loader";
+import { useSetAtom } from "jotai";
+import { memberTableCheckedAtom } from "@/store/memberTableCheckedAtom";
 
 interface CreateMemberTableItemContainerProps {
   members: Set<number>;
@@ -16,6 +18,7 @@ const CreateMemberTableItemContainer = ({
   status,
 }: CreateMemberTableItemContainerProps) => {
   const queryClient = useQueryClient();
+  const setChecked = useSetAtom(memberTableCheckedAtom);
   const { data: memberList, isLoading } = useGetMemberByActive(status);
 
   if (isLoading) return <MemberTableLoader />;
@@ -24,6 +27,11 @@ const CreateMemberTableItemContainer = ({
     ["memberIdList"],
     memberList.map((v) => v.memberId),
   );
+
+  const isCheckedAll = memberList
+    .map((v) => v.memberId)
+    .every((v) => members.has(v));
+  setChecked(isCheckedAll);
 
   return (
     <>

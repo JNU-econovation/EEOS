@@ -1,23 +1,23 @@
 "use client";
 
 import { ProgramCategory } from "@/types/program";
-import Tab from "../tabs/Tab";
+import Tab from "../../tabs/Tab";
 import ProgramDate from "./ProgramDate";
 import ProgramDemandCheckBox from "./ProgramDemandCheckBox";
 import ProgramTitle from "./ProgramTitle";
 import PROGRAM from "@/constants/PROGRAM";
 import { PropsWithChildren } from "react";
-import FormBtn from "./FormBtn";
+import FormBtn from "../FormBtn";
 import FORM_INFO from "@/constants/FORM_INFO";
 import { FormType } from "@/types/form";
-import MarkdownEditor from "../markdown/MarkdownEditor";
+import MarkdownEditor from "../../markdown/MarkdownEditor";
 import {
   ProgramFormData,
   ProgramFormDataAction,
 } from "@/hooks/useProgramFormData";
 import { useRouter } from "next/navigation";
 
-interface ProgramFormProps extends ProgramFormData, ProgramFormDataAction {
+interface ProgramFormProps extends ProgramFormData {
   formType: FormType;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -55,7 +55,7 @@ const ProgramForm = ({
     <form className="space-y-6" onSubmit={onSubmit}>
       <ProgramTitle
         title={title}
-        setTitle={(v) => setTitle(v)}
+        setTitle={setTitle}
         prefix={isDemand && FORM_INFO.DEMAND_PREFIX}
       >
         <ProgramDemandCheckBox
@@ -64,20 +64,20 @@ const ProgramForm = ({
           onClick={() => handleChangeType()}
         />
       </ProgramTitle>
-      <div className="flex items-end gap-8">
-        <ProgramDate
-          programDate={deadLine}
-          setProgramDate={(v) => setDeadLine(v)}
-        />
-        <Tab<ProgramCategory>
-          options={Object.values(PROGRAM.CATEGORY_TAB)}
-          selected={category}
-          onItemClick={(v) => setCategory(v)}
-          size="lg"
-          baseColor="gray"
-          pointColor="yellow"
-          align="line"
-        />
+      <div className="flex flex-col items-end gap-8 sm:flex-row">
+        <ProgramDate programDate={deadLine} setProgramDate={setDeadLine} />
+        <div className="flex w-full flex-col gap-2 sm:w-fit">
+          <label className="text-sm">행사 카테고리</label>
+          <Tab<ProgramCategory>
+            options={Object.values(PROGRAM.CATEGORY_TAB)}
+            selected={category}
+            onItemClick={(v) => setCategory(v)}
+            size="lg"
+            baseColor="gray"
+            pointColor="yellow"
+            align="line"
+          />
+        </div>
       </div>
       <MarkdownEditor
         id={FORM_INFO.PROGRAM.CONTENT.id}

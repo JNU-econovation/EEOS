@@ -13,7 +13,7 @@ const PaginationItem = ({
 }: PaginationItemProps) => {
   const paginationItemStyle = classNames(
     "flex h-8 w-8 items-center justify-center rounded-lg",
-    isSelected ? "bg-primary" : "bg-background",
+    isSelected ? "bg-primary" : "hidden bg-background sm:block",
   );
 
   return (
