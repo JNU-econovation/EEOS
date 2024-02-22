@@ -4,6 +4,7 @@ import {
   closeTeamBuilding,
   completeTeamBuilding,
   createTeamBuilding,
+  deleteTeamBuilding,
   getTeamBuildingInfo,
   getTeamBuildingResult,
   getTeamBuildingValidation,
@@ -13,7 +14,6 @@ import {
 } from "@/apis/teamBuilding";
 import API from "@/constants/API";
 import ERROR_CODE from "@/constants/ERROR_CODE";
-import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -120,6 +120,17 @@ export const useCloseTeamBuildingMutation = () => {
   return useMutation({
     mutationKey: [API.TEAM_BUILDING.CLOSE],
     mutationFn: () => closeTeamBuilding(),
+    onSuccess: () => {
+      router.push(ROUTES.MAIN);
+    },
+  });
+};
+
+export const useDeleteTeamBuildingMutation = () => {
+  const router = useRouter();
+  return useMutation({
+    mutationKey: [API.TEAM_BUILDING.DELETE],
+    mutationFn: () => deleteTeamBuilding(),
     onSuccess: () => {
       router.push(ROUTES.MAIN);
     },
