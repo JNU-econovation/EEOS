@@ -5,35 +5,38 @@ name: Backend CI
 # main 브랜치에 push, PR이 되었을 때 workflow 실행
 on:
   push:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
   pull_request:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
 
 defaults:
   run:
-    working-directory: BE/eeos
+    working-directory: ./BE/eeos
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
 
-    # JDK setting : github actions에서 사용할 JDK 설정
-    - name: Set up JDK 17
-    - uses: actions/checkout@v3
+    - name: JDK 17 설정
+      uses: actions/checkout@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    # gradlew에 실행 권한을 부여합니다.
-    - name: Grant execute permisson for gradlew
-      run: chmod +x gradlew
-      shell : bash
-        
-    # gradle caching - 빌드 시간 향상
-    - name: Gradle Caching
+    - name: DB를 실행
+      run: |
+        docker-compose -f resources/test-develop-environment/docker-compose.yml up -d
+        sleep 20
+      
+    - name: Gradle 캐싱
       uses: actions/cache@v3
       with:
         path: |
@@ -43,30 +46,11 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-gradle-
 
-  # gradle build
-    - name: Build with Gradle
-      working-directory : ./be/overflow
-      run: ./gradlew build -x test
+    - name: Gradle로 빌드
+      run: ./gradlew build
 
-    - name: 테스트 결과를 PR에 코멘트로 등록합니다
+    - name: 테스트 결과를 PR에 코멘트로 등록
       uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
+      if: contains(github.event.pull_request.head.repo.full_name, 'JNU-econovation') == false
       with:
         files: '**/build/test-results/test/TEST-*.xml'
-
-    - name: 테스트 실패 시, 실패한 코드 라인에 Check 코멘트를 등록합니다
-      uses: mikepenz/action-junit-report@v3
-      if: always()
-      with:
-        report_paths: '**/build/test-results/test/TEST-*.xml'
-        token: ${{ github.token }}
-
-    - name: build 실패 시 Slack으로 알립니다
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        author_name: 백엔드 빌드 실패 알림
-        fields: repo, message, commit, author, action, eventName, ref, workflow, job, took
-      env:
-       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: failure()
