@@ -12,7 +12,7 @@ const EditAndDeleteButton = ({ programId }) => {
     }
   };
   return (
-    <div className="flex items-end gap-6">
+    <div className="flex items-end gap-3 sm:gap-6">
       <Link href={ROUTES.EDIT(programId)}>
         <Image
           src="/icons/pencil.svg"

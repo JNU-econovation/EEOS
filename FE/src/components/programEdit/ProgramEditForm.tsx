@@ -2,7 +2,7 @@
 
 import useProgramFormData from "@/hooks/useProgramFormData";
 import { useState } from "react";
-import ProgramForm from "../common/form/ProgramForm";
+import ProgramForm from "../common/form/program/ProgramForm";
 import MemberTable from "../common/memberTable/MemberTable";
 import { AttendStatus } from "@/types/member";
 import { useUpdateProgram } from "@/hooks/query/useProgramQuery";

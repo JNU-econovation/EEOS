@@ -47,8 +47,19 @@ const config = {
           20: "#FF6530",
         },
       },
+      animation: {
+        dropup: "dropup 0.5s ease-in-out",
+      },
+      keyframes: {
+        dropup: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+      },
     },
   },
-  plugins: [import("tailwind-scrollbar")],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
 export default config;

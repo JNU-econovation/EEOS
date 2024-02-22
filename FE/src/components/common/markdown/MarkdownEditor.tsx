@@ -59,7 +59,7 @@ const MarkdownEditor = ({
             id={id}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="scrollbar-none h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none"
+            className="scrollbar-hide h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none"
             placeholder={placeholder}
             onKeyDown={handleKeydown}
           />

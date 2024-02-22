@@ -1,5 +1,5 @@
 import { UserAttendStatusInfoDto } from "@/apis/dtos/user.dto";
-import AttendStatusToggleItem from "@/components/common/attendStatusToggle/AttendStatusToggleItem";
+import StatusToggleItem from "@/components/common/attendStatusToggle/StatusToggleItem";
 import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
 import { ProgramType } from "@/types/program";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ const AttendStatusView = ({ userInfo, programId }: AttendStatusViewProps) => {
   return (
     <div className="mb-4 flex items-center gap-4">
       <p className="text-lg font-semibold">{name}</p>
-      <AttendStatusToggleItem text={displayText} color={color} />
+      <StatusToggleItem text={displayText} color={color} />
     </div>
   );
 };

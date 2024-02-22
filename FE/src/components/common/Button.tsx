@@ -8,7 +8,7 @@ const colors = {
 };
 
 const sizes = {
-  sm: "py-1 px-3 rounded-sm min-w-[4rem]",
+  sm: "py-1 px-3 rounded-md min-w-[4rem]",
   md: "py-2 px-4 rounded-md min-w-[6rem]",
   lg: "py-3 px-5 rounded-lg min-w-[8rem]",
 };

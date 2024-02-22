@@ -7,14 +7,14 @@ const LabeledInput = ({
   id,
   label,
   value,
-  onChange,
+  onChange = () => {},
   placeholder,
   type,
   prefix,
 }: InputProps) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm">
+      <label htmlFor={id} className="truncate text-sm">
         {label}
       </label>
       <div className="flex w-full gap-1 rounded-md border-[1.5px] border-gray-300 px-3 py-2 focus:border-tertiary-10">

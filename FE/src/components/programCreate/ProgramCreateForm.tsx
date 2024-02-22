@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ProgramForm from "../common/form/ProgramForm";
+import ProgramForm from "../common/form/program/ProgramForm";
 import MemberTable from "../common/memberTable/MemberTable";
 import useProgramFormData from "@/hooks/useProgramFormData";
 import { useQueryClient } from "@tanstack/react-query";
