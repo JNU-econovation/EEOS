@@ -32,6 +32,7 @@ const TEAM_BUILDING = {
   RESULT: "/team-building/result",
   SENTENCE: "/target/team-building",
   COMPLETE: "/team-building/complete",
+  DELETE: "/team-building",
 };
 
 Object.freeze(PROGRAM);

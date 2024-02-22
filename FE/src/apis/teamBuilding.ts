@@ -183,3 +183,21 @@ export const closeTeamBuilding = async () => {
     },
   );
 };
+
+/**
+ * 팀빌딩 삭제
+ */
+
+export const deleteTeamBuilding = async () => {
+  await toast.promise(
+    https({
+      url: API.TEAM_BUILDING.DELETE,
+      method: "DELETE",
+    }),
+    {
+      pending: MESSAGE.DELETE.PENDING,
+      success: MESSAGE.DELETE.SUCCESS,
+      error: MESSAGE.DELETE.FAILED,
+    },
+  );
+};

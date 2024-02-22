@@ -1,7 +1,10 @@
 "use client";
 
 import Title from "@/components/common/Title";
-import { useCompleteTeamBuildingMutation } from "@/hooks/query/useTeamBuildingQuery";
+import {
+  useCompleteTeamBuildingMutation,
+  useDeleteTeamBuildingMutation,
+} from "@/hooks/query/useTeamBuildingQuery";
 import { AccessRight } from "@/types/program";
 
 interface TeamBuildingHeaderProps {
@@ -17,7 +20,7 @@ const TeamBuildingHeader = ({
     <section className="flex justify-between border-b-2 py-4">
       <Title text={title} />
       <div className="flex gap-6">
-        <ProgressDisplay />
+        {accessRight === "read_only" && <ProgressDisplay />}
         {accessRight === "edit" && <CloseBtn />}
       </div>
     </section>
@@ -38,6 +41,7 @@ const ProgressDisplay = () => {
 
 const CloseBtn = () => {
   const { mutate: completeTeamBuilding } = useCompleteTeamBuildingMutation();
+  const { mutate: deleteTeamBuilding } = useDeleteTeamBuildingMutation();
 
   const handleCompleteButtonClick = () => {
     if (confirm("팀빌딩을 완료하시겠습니까?")) {
@@ -45,13 +49,27 @@ const CloseBtn = () => {
     }
   };
 
+  const handleDeleteButtonClick = () => {
+    if (confirm("팀빌딩을 삭제하시겠습니까?")) {
+      deleteTeamBuilding();
+    }
+  };
+
   return (
-    <button
-      className="text-lg font-bold text-gray-30 transition-colors duration-300 hover:text-stroke-30"
-      onClick={handleCompleteButtonClick}
-    >
-      완료하기
-    </button>
+    <>
+      <button
+        className="text-lg font-bold text-gray-30 transition-colors duration-300 hover:text-stroke-30"
+        onClick={handleCompleteButtonClick}
+      >
+        완료하기
+      </button>
+      <button
+        className="text-lg font-bold text-gray-30 transition-colors duration-300 hover:text-error"
+        onClick={handleDeleteButtonClick}
+      >
+        삭제하기
+      </button>
+    </>
   );
 };
 
