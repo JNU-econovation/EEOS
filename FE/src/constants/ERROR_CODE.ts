@@ -33,6 +33,7 @@ const ERROR_CODE = {
   TEAM_BUILDING: {
     NOT_CREATABLE: "6000",
     NOT_JOINABLE: "6003",
+    COMPLETED: "6010",
   },
 };
 

@@ -22,6 +22,6 @@ export interface UserInputStatusInfo {
 export type TeamBuildingResult = SimpleMemberInfo[][];
 
 export type TeamBuildingResultList = {
-  accessRight: AccessRight;
+  accessRights: AccessRight;
   results: TeamBuildingResult;
 };

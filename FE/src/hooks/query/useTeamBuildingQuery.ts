@@ -12,9 +12,13 @@ import {
   putTeamBuildingSentence,
 } from "@/apis/teamBuilding";
 import API from "@/constants/API";
+import ERROR_CODE from "@/constants/ERROR_CODE";
+import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 // TODO: option 받는 부분 수정하기
 export const useGetIsCreableQuery = (enabled: boolean) => {
@@ -45,10 +49,20 @@ export const useCreateTeamBuildingMutation = () => {
   });
 };
 
+// FIXME: 에러 처리 수정하기
 export const useGetTeamBuildingInfoQuery = () => {
   return useQuery({
     queryKey: [API.TEAM_BUILDING.DETAIL],
     queryFn: () => getTeamBuildingInfo(),
+    onError: (
+      error: AxiosError<{ code: string; message: string; status: string }>,
+    ) => {
+      const { response } = error;
+      const errorCode = response?.data?.code;
+      if (errorCode === ERROR_CODE.TEAM_BUILDING.COMPLETED) {
+        window.location.href = ROUTES.TEAM_BUILDING.RESULT;
+      }
+    },
   });
 };
 
