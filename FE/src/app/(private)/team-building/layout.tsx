@@ -1,5 +1,5 @@
-import Header from "@/components/common/header/Header";
 import { PropsWithChildren } from "react";
+import Header from "@/components/common/header/Header";
 
 export default function TeamBuildingLayout({
   children,

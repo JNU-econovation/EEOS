@@ -1,10 +1,10 @@
-import { useGetMemberByActive } from "@/hooks/query/useMemberQuery";
-import CreateMemberTableItem from "./CreateMemberTableItem";
-import { ActiveStatusWithAll } from "@/types/member";
 import { useQueryClient } from "@tanstack/react-query";
-import MemberTableLoader from "../MemberTable.loader";
 import { useSetAtom } from "jotai";
+import MemberTableLoader from "../MemberTable.loader";
+import CreateMemberTableItem from "./CreateMemberTableItem";
+import { useGetMemberByActive } from "@/hooks/query/useMemberQuery";
 import { memberTableCheckedAtom } from "@/store/memberTableCheckedAtom";
+import { ActiveStatusWithAll } from "@/types/member";
 
 interface CreateMemberTableItemContainerProps {
   members: Set<number>;

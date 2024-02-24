@@ -1,11 +1,11 @@
-import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
-import CheckBox from "../common/CheckBox";
-import AttendStatusToggle from "../common/attendStatusToggle/AttendStatusToggle";
-import { useState } from "react";
-import { AttendStatus } from "@/types/member";
-import MESSAGE from "@/constants/MESSAGE";
 import classNames from "classnames";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import AttendStatusToggle from "../common/attendStatusToggle/AttendStatusToggle";
+import CheckBox from "../common/CheckBox";
+import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
+import MESSAGE from "@/constants/MESSAGE";
+import { AttendStatus } from "@/types/member";
 
 interface EditMemberTableItemProps {
   memberId: number;

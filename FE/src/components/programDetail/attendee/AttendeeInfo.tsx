@@ -1,10 +1,10 @@
+import { useQueryClient } from "@tanstack/react-query";
+import AttendeeInfoLoader from "./AttendeeInfo.loader";
+import AttendeeStatus from "./AttendeeStatus";
+import MemberList from "@/components/common/MemberList";
 import { useGetProgramMembersByAttend } from "@/hooks/query/useMemberQuery";
 import { AttendStatus } from "@/types/member";
-import AttendeeStatus from "./AttendeeStatus";
-import { useQueryClient } from "@tanstack/react-query";
 import { ProgramType } from "@/types/program";
-import AttendeeInfoLoader from "./AttendeeInfo.loader";
-import MemberList from "@/components/common/MemberList";
 
 interface AttendeeInfoProps {
   programId: number;

@@ -30,7 +30,7 @@ const Tab = <T,>({
 }: TabProps<T>) => {
   const tabStyle = classNames(
     tabAlign[align],
-    "scrollbar-hide w-full overflow-x-scroll",
+    "w-full overflow-x-scroll scrollbar-hide",
   );
   const getColor = (option: TabOption<T>) => {
     return option.type === selected ? pointColor : baseColor;

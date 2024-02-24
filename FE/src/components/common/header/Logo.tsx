@@ -1,8 +1,8 @@
 "use client";
 
-import ROUTES from "@/constants/ROUTES";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import ROUTES from "@/constants/ROUTES";
 
 const INIT_CATEGORY = "all";
 const INIT_STATUS = "active";

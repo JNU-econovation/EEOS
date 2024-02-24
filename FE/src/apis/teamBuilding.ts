@@ -1,8 +1,5 @@
-import { StatusType } from "./../types/teamBuilding";
-import API from "@/constants/API";
-import { https } from "./instance";
 import { toast } from "react-toastify";
-import MESSAGE from "@/constants/MESSAGE";
+import { StatusType } from "./../types/teamBuilding";
 import {
   TeamBuildingIdDto,
   TeamBuildingInfoDto,
@@ -10,6 +7,9 @@ import {
   TeamBuildingStatusDto,
   UserInputStatusInfoDto,
 } from "./dtos/teamBuilding.dto";
+import { https } from "./instance";
+import API from "@/constants/API";
+import MESSAGE from "@/constants/MESSAGE";
 
 /**
  * 팀빌딩 생성/참여 가능한지 확인

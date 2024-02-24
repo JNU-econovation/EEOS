@@ -1,7 +1,7 @@
 "use client";
 
-import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import CheckBox from "../../CheckBox";
+import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
 import { ActiveStatus } from "@/types/member";
 
 interface CreateMemberTableItemProps {

@@ -1,10 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import MESSAGE from "@/constants/MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useGetProgramAccessRight } from "@/hooks/query/useProgramQuery";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 
 const AccessRightValidate = ({ programId }) => {
   const router = useRouter();

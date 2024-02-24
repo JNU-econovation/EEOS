@@ -1,6 +1,9 @@
 // TODO: 서버 컴포넌트로 변경하기
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "@/components/common/ErrorFallback";
 import Tab from "@/components/common/tabs/Tab";
 import TextTab from "@/components/common/tabs/TextTab";
@@ -10,9 +13,6 @@ import TeamBuildingDropup from "@/components/main/TeamBuildingDropup";
 import MAIN from "@/constants/MAIN";
 import PROGRAM from "@/constants/PROGRAM";
 import { ProgramCategoryWithAll, ProgramStatus } from "@/types/program";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 const MainPage = () => {
   const searchParams = useSearchParams();

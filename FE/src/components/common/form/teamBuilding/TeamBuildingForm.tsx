@@ -1,13 +1,13 @@
+import { useRouter } from "next/navigation";
+import { PropsWithChildren } from "react";
+import MarkdownEditor from "../../markdown/MarkdownEditor";
+import FormBtn from "../FormBtn";
+import TeamBuildingMaxTeamSize from "./TeamBuildingMaxTeamSize";
+import TeamBuildingMinTeamSize from "./TeamBuildingMinTeamSize";
+import TeamBuildingTitle from "./TeamBuildingTitle";
+import FORM_INFO from "@/constants/FORM_INFO";
 import { TeamBuildingFormData } from "@/hooks/useTeamBuildingFormData";
 import { FormType } from "@/types/form";
-import { PropsWithChildren } from "react";
-import { useRouter } from "next/navigation";
-import FormBtn from "../FormBtn";
-import FORM_INFO from "@/constants/FORM_INFO";
-import TeamBuildingTitle from "./TeamBuildingTitle";
-import MarkdownEditor from "../../markdown/MarkdownEditor";
-import TeamBuildingMinTeamSize from "./TeamBuildingMinTeamSize";
-import TeamBuildingMaxTeamSize from "./TeamBuildingMaxTeamSize";
 
 interface TeamBuildingFormProps extends TeamBuildingFormData {
   formType: FormType;

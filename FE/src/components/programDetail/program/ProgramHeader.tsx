@@ -1,9 +1,9 @@
+import EditAndDeleteButton from "./EditAndDeleteButton";
 import { ProgramInfoDto } from "@/apis/dtos/program.dto";
-import Title from "@/components/common/Title";
 import TabItem from "@/components/common/tabs/TabItem";
+import Title from "@/components/common/Title";
 import PROGRAM from "@/constants/PROGRAM";
 import { convertDate } from "@/utils/convert";
-import EditAndDeleteButton from "./EditAndDeleteButton";
 
 interface ProgramHeaderProps {
   data: ProgramInfoDto;

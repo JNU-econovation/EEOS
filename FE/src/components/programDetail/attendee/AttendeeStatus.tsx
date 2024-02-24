@@ -1,10 +1,10 @@
 "use client";
 
+import classNames from "classnames";
+import Image from "next/image";
 import { MemberAttendStatusInfoDto } from "@/apis/dtos/member.dto";
 import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
 import { AttendStatus } from "@/types/member";
-import classNames from "classnames";
-import Image from "next/image";
 
 const colors = {
   green: "bg-success-30",

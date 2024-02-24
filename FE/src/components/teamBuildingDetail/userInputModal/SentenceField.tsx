@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import SentenceViewer from "./SentenceViewer";
 import SentenceForm from "./SentenceForm";
+import SentenceViewer from "./SentenceViewer";
 import { InputStatus } from "@/types/teamBuilding";
 
 export type FieldType = "default" | "inputting" | "editing" | "viewer";

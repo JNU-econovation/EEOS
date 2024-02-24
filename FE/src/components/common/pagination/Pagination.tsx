@@ -1,6 +1,6 @@
-import { calcPageNumbers } from "@/utils/calcPageNumber";
-import PaginationItem from "./PaginationItem";
 import Image from "next/image";
+import PaginationItem from "./PaginationItem";
+import { calcPageNumbers } from "@/utils/calcPageNumber";
 
 interface PaginataionProps {
   totalPage: number;

@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Title from "./Title";
-import Button from "./Button";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import Image from "next/image";
+import Button from "./Button";
+import Title from "./Title";
 
 const ERROR_TITLE = "ERROR";
 const RETRY_BUTTON_TEXT = "Try again";
