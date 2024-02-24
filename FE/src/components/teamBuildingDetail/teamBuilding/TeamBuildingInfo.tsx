@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import TeamBuildingDetail from "./TeamBuildingDetail";
 import TeamBuildingHeader from "./TeamBuildingHeader";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
