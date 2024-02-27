@@ -5,17 +5,17 @@ import com.example.eeos.data.model.remote.response.ResponseGetActiveStatusDto
 import com.example.eeos.data.model.remote.response.ResponsePutActiveStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
 import com.example.eeos.data.service.InfoService
+import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
 class InfoDataSource @Inject constructor(
     private val infoService: InfoService
 ) {
-    suspend fun getActiveStatus(): BaseResponse<ResponseGetActiveStatusDto> =
+    suspend fun getActiveStatus(): ApiResponse<BaseResponse<ResponseGetActiveStatusDto>> =
         infoService.getActiveStatus()
 
     suspend fun putActiveStatus(
         requestPutActiveStatusDto: RequestPutActiveStatusDto
-    ): BaseResponse<ResponsePutActiveStatusDto> = infoService.putActiveStatus(
-        requestPutActiveStatusDto
-    )
+    ): ApiResponse<BaseResponse<ResponsePutActiveStatusDto>> =
+        infoService.putActiveStatus(requestPutActiveStatusDto)
 }

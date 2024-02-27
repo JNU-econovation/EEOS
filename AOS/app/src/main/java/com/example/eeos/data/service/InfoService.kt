@@ -4,16 +4,17 @@ import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
 import com.example.eeos.data.model.remote.response.ResponseGetActiveStatusDto
 import com.example.eeos.data.model.remote.response.ResponsePutActiveStatusDto
 import com.example.eeos.data.model.remote.response.base.BaseResponse
+import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 
 interface InfoService {
     @GET("members/activeStatus")
-    suspend fun getActiveStatus(): BaseResponse<ResponseGetActiveStatusDto>
+    suspend fun getActiveStatus(): ApiResponse<BaseResponse<ResponseGetActiveStatusDto>>
 
     @PUT("members/activeStatus")
     suspend fun putActiveStatus(
         @Body requestPutActiveStatusDto: RequestPutActiveStatusDto
-    ): BaseResponse<ResponsePutActiveStatusDto>
+    ): ApiResponse<BaseResponse<ResponsePutActiveStatusDto>>
 }

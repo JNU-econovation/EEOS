@@ -7,14 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.eeos.consts.SnackBarMessage
 import com.example.eeos.data.model.remote.request.RequestPutActiveStatusDto
 import com.example.eeos.domain.repository.InfoRepository
+import com.example.eeos.presentation.util.getErrorCode
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 
 data class TopAppBarUiState(
     val isEmpty: Boolean = false,
@@ -40,32 +42,24 @@ class TopAppBarViewModel @Inject constructor(
     private fun getActiveStatus() {
         viewModelScope.launch {
             infoRepository.getActiveStatus()
-                .onSuccess { userInfo ->
+                .suspendOnSuccess {
+                    val userInfo = data.data?.toActiveStatus()
+                    val name = userInfo!!.name
+                    val activeStatus = userInfo.activeStatus
+
                     _topAppBarUiState.update { currentState ->
                         currentState.copy(
-                            name = userInfo.name,
-                            activeStatus = userInfo.activeStatus
+                            name = name,
+                            activeStatus = activeStatus
                         )
                     }
                 }
-                .onFailure { exception ->
-                    when (exception) {
-                        is HttpException -> {
-                            _topAppBarUiState.update { currentState ->
-                                currentState.copy(
-                                    isEmpty = true
-                                )
-                            }
-                        }
+                .suspendOnError {
+                    val errorCode = getErrorCode(this.errorBody!!.string())
 
-                        is IOException -> {
-                            _topAppBarUiState.update { currentState ->
-                                currentState.copy(
-                                    isEmpty = true
-                                )
-                            }
-                        }
-                    }
+                }
+                .suspendOnException {
+                    this.exception
                 }
         }
     }
@@ -77,31 +71,20 @@ class TopAppBarViewModel @Inject constructor(
                     activeStatus = activeStatus
                 )
             )
-                .onSuccess {
+                .suspendOnSuccess {
                     getActiveStatus()
                     _topAppBarUiState.value.snackbarHostState
                         .showSnackbar(
                             message = SnackBarMessage.onActiveStatusChanged,
                             duration = SnackbarDuration.Short
                         )
-                }.onFailure { exception ->
-                    when (exception) {
-                        is HttpException -> {
-                            _topAppBarUiState.update { currentState ->
-                                currentState.copy(
-                                    isEmpty = true
-                                )
-                            }
-                        }
+                }
+                .suspendOnError {
+                    val errorCode = getErrorCode(this.errorBody!!.string())
 
-                        is IOException -> {
-                            _topAppBarUiState.update { currentState ->
-                                currentState.copy(
-                                    isEmpty = true
-                                )
-                            }
-                        }
-                    }
+                }
+                .suspendOnException {
+                    this.exception
                 }
         }
     }
