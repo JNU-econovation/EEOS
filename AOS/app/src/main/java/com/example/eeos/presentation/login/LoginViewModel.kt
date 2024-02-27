@@ -8,6 +8,7 @@ import com.example.eeos.EEOSApplication
 import com.example.eeos.consts.SnackBarMessage
 import com.example.eeos.consts.USER_NAME_INVALID
 import com.example.eeos.domain.repository.AuthRepository
+import com.example.eeos.presentation.util.getErrorCode
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
@@ -17,7 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 
 data class LoginUiState(
     val isLoading: Boolean = false,
@@ -56,17 +56,12 @@ class LoginViewModel @Inject constructor(
                     }
                 }
                 .suspendOnError {
-                    val e = this.errorBody?.string()
-                    if (e != null) {
-                        val jsonObject = JSONObject(e)
-                        val errorCode = jsonObject.getString("code")
-
-                        if (errorCode == USER_NAME_INVALID) {
-                            _loginUiState.update { currentState ->
-                                currentState.copy(
-                                    isError = true
-                                )
-                            }
+                    val errorCode = getErrorCode(this.errorBody!!.string())
+                    if (errorCode == USER_NAME_INVALID) {
+                        _loginUiState.update { currentState ->
+                            currentState.copy(
+                                isError = true
+                            )
                         }
                     }
                 }

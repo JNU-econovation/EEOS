@@ -2,7 +2,7 @@ package com.example.eeos.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eeos.consts.category
+import com.example.eeos.consts.programCategory
 import com.example.eeos.consts.programStatus
 import com.example.eeos.domain.model.Program
 import com.example.eeos.domain.repository.ProgramRepository
@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getProgramList(
-            category = category[0],
+            category = programCategory[0],
             programStatus = programStatus[0],
             page = 0
         )
