@@ -1,7 +1,7 @@
 "use client";
 
-import InputStatusInfo from "./InputStatusInfo";
 import { ErrorBoundary } from "react-error-boundary";
+import InputStatusInfo from "./InputStatusInfo";
 import ErrorFallback from "@/components/common/ErrorFallback";
 
 const InputStatusInfoContainer = () => {

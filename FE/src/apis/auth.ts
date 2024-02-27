@@ -1,6 +1,6 @@
-import API from "@/constants/API";
-import { https } from "./instance";
 import { LoginDto } from "./dtos/auth.dto";
+import { https } from "./instance";
+import API from "@/constants/API";
 
 /**
  * 슬랙 리다이렉트 후 토큰 정보 요청

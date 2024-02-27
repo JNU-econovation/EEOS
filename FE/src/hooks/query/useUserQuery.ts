@@ -1,3 +1,4 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getMyActiveStatus,
   getMyAttendStatus,
@@ -6,7 +7,6 @@ import {
 } from "@/apis/user";
 import API from "@/constants/API";
 import { ActiveStatus, AttendStatus } from "@/types/member";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetMyActiveStatus = () => {
   return useQuery({

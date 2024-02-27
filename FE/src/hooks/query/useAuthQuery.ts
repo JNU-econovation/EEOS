@@ -1,3 +1,5 @@
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { postSlackLogin } from "@/apis/auth";
 import ERROR_CODE from "@/constants/ERROR_CODE";
 import ROUTES from "@/constants/ROUTES";
@@ -6,8 +8,6 @@ import {
   setAccessToken,
   setTokenExpiration,
 } from "@/utils/authWithStorage";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 export const useSlackLoginMutation = () => {
   const router = useRouter();

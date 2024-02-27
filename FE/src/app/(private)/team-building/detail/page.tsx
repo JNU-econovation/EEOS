@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import InputStatusInfoContainer from "@/components/teamBuildingDetail/inputStatus/InputStatusInfo.container";
 import TeamBuildingInfo from "@/components/teamBuildingDetail/teamBuilding/TeamBuildingInfo";
@@ -8,8 +10,6 @@ import ERROR_CODE from "@/constants/ERROR_CODE";
 import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
 import { useGetIsJoinableQuery } from "@/hooks/query/useTeamBuildingQuery";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 
 const TeamBuildingDetailPage = () => {
   const router = useRouter();

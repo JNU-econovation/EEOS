@@ -2,9 +2,9 @@
 
 import "./markdown-editor.styles.css";
 import { useState } from "react";
+import Tab from "../tabs/Tab";
 import MarkdownViewer from "./MarkdownViewer";
 import { TabOption } from "@/types/tab";
-import Tab from "../tabs/Tab";
 import { handleKeydown } from "@/utils/handleKeydown";
 
 interface MarkdownEditorProps {
@@ -59,7 +59,7 @@ const MarkdownEditor = ({
             id={id}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="scrollbar-hide h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none"
+            className="h-[32rem] w-full resize-none overflow-y-scroll bg-background p-4 outline-none scrollbar-hide"
             placeholder={placeholder}
             onKeyDown={handleKeydown}
           />

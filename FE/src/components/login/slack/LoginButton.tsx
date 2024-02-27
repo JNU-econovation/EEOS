@@ -1,10 +1,10 @@
 "use client";
 
-import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 
 const SlackLoginButton = () => {
   const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;

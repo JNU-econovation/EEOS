@@ -1,9 +1,9 @@
 "use client";
 
-import LoadingSpinner from "@/components/common/LoadingSpinner";
-import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import { useSlackLoginMutation } from "@/hooks/query/useAuthQuery";
 
 const LoginSlackCallbackPage = () => {
   const searchParams = useSearchParams();

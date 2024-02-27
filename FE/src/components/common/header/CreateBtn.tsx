@@ -1,6 +1,6 @@
-import ROUTES from "@/constants/ROUTES";
 import Image from "next/image";
 import Link from "../Link";
+import ROUTES from "@/constants/ROUTES";
 
 const CREATE = "행사 추가";
 

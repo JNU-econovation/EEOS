@@ -1,12 +1,12 @@
 "use client";
 
-import useModal from "@/hooks/useModal";
-import useOutsideRef from "@/hooks/useOutsideRef";
 import classNames from "classnames";
 import Image from "next/image";
 import { ErrorBoundary } from "react-error-boundary";
 import UserAttendModal from "./UserAttendModal";
 import ErrorFallbackNoIcon from "@/components/common/ErrorFallbackNoIcon";
+import useModal from "@/hooks/useModal";
+import useOutsideRef from "@/hooks/useOutsideRef";
 
 interface UserAttendModalProps {
   programId: number;

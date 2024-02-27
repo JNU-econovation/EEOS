@@ -1,9 +1,9 @@
 "use client";
 
-import useModal from "@/hooks/useModal";
-import useOutsideRef from "@/hooks/useOutsideRef";
 import Image from "next/image";
 import UserActiveModal from "./Modal/UserActiveModal";
+import useModal from "@/hooks/useModal";
+import useOutsideRef from "@/hooks/useOutsideRef";
 
 const UserBtn = () => {
   const { isOpen, openModal, closeModal } = useModal();

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import StatusToggleItem from "./StatusToggleItem";
-import { AttendStatus } from "@/types/member";
 import ATTEND_STATUS, {
   AttendStatusToggleOption,
 } from "@/constants/ATTEND_STATUS";
+import { AttendStatus } from "@/types/member";
 
 interface AttendStatusToggleProps {
   selectedValue: AttendStatus;

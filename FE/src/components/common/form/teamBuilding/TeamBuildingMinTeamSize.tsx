@@ -1,6 +1,6 @@
-import FORM_INFO from "@/constants/FORM_INFO";
-import LabeledInput from "../LabeledInput";
 import { Dispatch, SetStateAction } from "react";
+import LabeledInput from "../LabeledInput";
+import FORM_INFO from "@/constants/FORM_INFO";
 
 interface TeamBuildingMinTeamSizeProps {
   minTeamSize: number;
