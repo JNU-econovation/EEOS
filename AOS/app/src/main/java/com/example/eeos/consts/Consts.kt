@@ -1,6 +1,6 @@
 package com.example.eeos.consts
 
-val category = listOf("all", "weekly", "presidentTeam", "eventTeam", "etc")
+val programCategory = listOf("all", "weekly", "presidentTeam", "eventTeam", "etc")
 val programStatus = listOf("active", "end")
 
 val categoryChips: List<String> = listOf(

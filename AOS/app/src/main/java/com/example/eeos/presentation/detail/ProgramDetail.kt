@@ -23,6 +23,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eeos.R
+import com.halilibo.richtext.markdown.Markdown
+import com.halilibo.richtext.ui.RichText
 
 @Composable
 fun ProgramDetail(
@@ -149,7 +151,12 @@ private fun Title(title: String, deadLine: String) {
 
 @Composable
 private fun Content(content: String) {
-    Text(
+    RichText {
+      Markdown(
+          content = content
+      )
+    }
+    /*Text(
         text = content,
         style = MaterialTheme.typography.bodySmall,
         modifier = Modifier.width(
@@ -159,7 +166,7 @@ private fun Content(content: String) {
                 id = R.dimen.margin_detail_screen_space_post_content_horizontal
             )
         )
-    )
+    )*/
 }
 
 @Preview(showBackground = true)

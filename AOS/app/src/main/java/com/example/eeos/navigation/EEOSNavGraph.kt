@@ -29,21 +29,22 @@ fun EEOSNavGraph(
     startDestination: String = EEOSDestinations.LOGIN_ROUTE,
     navActions: EEOSNavigationActions = remember(navController) {
         EEOSNavigationActions(navController)
-    }
+    },
 ) {
 //    val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
 //    val currentRoute = currentNavBackStackEntry?.destination?.route ?: startDestination
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination,
     ) {
         composable(
             EEOSDestinations.LOGIN_ROUTE,
             arguments = listOf(
                 navArgument("isLogout") {
-                    type = NavType.BoolType; defaultValue = false
-                }
-            )
+                    type = NavType.BoolType
+                    defaultValue = false
+                },
+            ),
         ) {
             if (EEOSApplication.prefs.access != null && EEOSApplication.prefs.refresh != null) {
                 navActions.navigateToHome()
@@ -54,7 +55,7 @@ fun EEOSNavGraph(
 
                 if (isLogout) {
                     run {
-                        (loginViewModel::onLogout)() /* 왜 두 번 호출되는지? */
+                        (loginViewModel::onLogout)() // 왜 두 번 호출되는지?
                         isLogout = false
                     }
                 }
@@ -67,12 +68,12 @@ fun EEOSNavGraph(
                 LoginScreen(
                     postLogin = { code -> (loginViewModel::postLogin)(code) },
                     loginUiState = loginUiState,
-                    code = code
+                    code = code,
                 )
             }
         }
         composable(
-            EEOSDestinations.HOME_ROUTE
+            EEOSDestinations.HOME_ROUTE,
         ) {
             val topAppBarViewModel = hiltViewModel<TopAppBarViewModel>()
             val homeViewModel = hiltViewModel<HomeViewModel>()
@@ -87,7 +88,7 @@ fun EEOSNavGraph(
                     (homeViewModel::getProgramList)(
                         category,
                         programStatus,
-                        page
+                        page,
                     )
                 },
                 onProgramClick = { programId -> navActions.navigateToProgramDetail(programId) },
@@ -96,7 +97,7 @@ fun EEOSNavGraph(
                     (topAppBarViewModel::putActiveStatus)(activeStatus)
                 },
                 onLogoClick = {},
-                onLogout = { navActions.navigateToLogin(true) }
+                onLogout = { navActions.navigateToLogin(true) },
             )
         }
 
@@ -104,37 +105,33 @@ fun EEOSNavGraph(
             EEOSDestinations.DETAIL_ROUTE,
             arguments = listOf(
                 navArgument(EEOSDestinationsArgs.PROGRAM_ID_ARG) {
-                    type = NavType.IntType; defaultValue = 0
-                }
-            )
+                    type = NavType.IntType
+                    defaultValue = 0
+                },
+            ),
         ) {
             val programId =
-                it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 /* TODO */
+                it.arguments?.getInt(EEOSDestinationsArgs.PROGRAM_ID_ARG) ?: 1 // TODO: 에러 처리
 
             val topAppBarViewModel = hiltViewModel<TopAppBarViewModel>()
             val programDetailViewModel = hiltViewModel<ProgramDetailViewModel>()
             val memberAttendanceViewModel = hiltViewModel<MemberAttendanceViewModel>()
             val userAttendanceViewModel = hiltViewModel<UserAttendStatusViewModel>()
 
-            if (programId != null) {
-                programDetailViewModel.getProgramDetail(programId)
-
-                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.attend)
-                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.absent)
-                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.late)
-                memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.nonResponse)
-
-                userAttendanceViewModel.getUserAttendStatus(programId)
-            } else {
-                /* TODO */
+            if (programId == null) {
+                // TODO: 에러 처리
             }
+            programDetailViewModel.getProgramDetail(programId)
+            memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.attend)
+            memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.absent)
+            memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.late)
+            memberAttendanceViewModel.getAttendeeList(programId, AttendStatus.nonResponse)
+            userAttendanceViewModel.getUserAttendStatus(programId)
 
             val topAppBarUiState = topAppBarViewModel.topAppBarUiState.collectAsState()
             val programDetailUiState = programDetailViewModel.detailUiState.collectAsState()
-            val memberAttendanceUiState =
-                memberAttendanceViewModel.memberDetailUiState.collectAsState()
-            val userAttendanceUiState =
-                userAttendanceViewModel.userAttendStatusUiState.collectAsState()
+            val memberAttendanceUiState = memberAttendanceViewModel.memberDetailUiState.collectAsState()
+            val userAttendanceUiState = userAttendanceViewModel.userAttendStatusUiState.collectAsState()
 
             DetailScreen(
                 detailUiState = programDetailUiState,
@@ -145,14 +142,14 @@ fun EEOSNavGraph(
                     (userAttendanceViewModel::putUserAttendStatus)(
                         programId,
                         userAttendanceUiState.value.userAttendStatus,
-                        afterAttendStatus
+                        afterAttendStatus,
                     ) {
                         (memberAttendanceViewModel::getAttendeeList)(programId, AttendStatus.attend)
                         (memberAttendanceViewModel::getAttendeeList)(programId, AttendStatus.absent)
                         (memberAttendanceViewModel::getAttendeeList)(programId, AttendStatus.late)
                         (memberAttendanceViewModel::getAttendeeList)(
                             programId,
-                            AttendStatus.nonResponse
+                            AttendStatus.nonResponse,
                         )
                     }
                 },
@@ -160,7 +157,7 @@ fun EEOSNavGraph(
                     (topAppBarViewModel::putActiveStatus)(activeStatus)
                 },
                 onLogoClick = { navActions.navigateToHome() },
-                onLogout = { navActions.navigateToLogin(true) }
+                onLogout = { navActions.navigateToLogin(true) },
             )
         }
     }

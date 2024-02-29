@@ -16,10 +16,6 @@
         android:theme="@style/Theme.Eeos"
         tools:targetApi="31">
 
-        <meta-data
-            android:name="asset_statements"
-            android:resource="@string/asset_statements" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

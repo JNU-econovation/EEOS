@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eeos.R
-import com.example.eeos.consts.category
+import com.example.eeos.consts.programCategory
 import com.example.eeos.consts.categoryChips
 import com.example.eeos.consts.programStatus
 import com.example.eeos.consts.programStatusChips
@@ -87,7 +87,7 @@ fun HomeScreen(
                         refreshProgramList()
                         page.value = 0
                         loadProgramList(
-                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programCategory[categoryChips.indexOf(selectedCategory.value)],
                             programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
                             page.value,
                         )
@@ -108,7 +108,7 @@ fun HomeScreen(
                         refreshProgramList()
                         page.value = 0
                         loadProgramList(
-                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programCategory[categoryChips.indexOf(selectedCategory.value)],
                             programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
                             page.value,
                         )
@@ -128,7 +128,7 @@ fun HomeScreen(
                     onProgramClick = onProgramClick,
                     loadMorePrograms = {
                         loadProgramList(
-                            category[categoryChips.indexOf(selectedCategory.value)],
+                            programCategory[categoryChips.indexOf(selectedCategory.value)],
                             programStatus[programStatusChips.indexOf(selectedProgramStatus.value)],
                             ++page.value
                         )
