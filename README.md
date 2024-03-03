@@ -28,7 +28,7 @@ EEOS는 Econovation Event Operation System의 준말로, 전남대학교 IT 동�
 - EEOS VOC
 - EEOS Update
 
-## 주요 기능을 소개합니다. (이미지를 첨부하고 싶은데 생각보다 어렵네여;;) (버전마다 한장의 페이지로 정리하고 싶은데, 기능이 너무 많아여)
+## 주요 기능을 소개합니다.
 
 ### **📍**EEOS 1.0
 
