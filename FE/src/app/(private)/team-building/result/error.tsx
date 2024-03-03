@@ -1,10 +1,10 @@
 "use client"; // Error components must be Client Components
 
+import { useRouter } from "next/navigation";
 import Title from "@/components/common/Title";
 import ERROR_CODE from "@/constants/ERROR_CODE";
 import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
-import { useRouter } from "next/navigation";
 
 export default function TeamBuildingResultError({
   error,

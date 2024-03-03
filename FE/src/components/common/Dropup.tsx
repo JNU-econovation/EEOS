@@ -1,5 +1,5 @@
-import useOutsideRef from "@/hooks/useOutsideRef";
 import { PropsWithChildren, useState } from "react";
+import useOutsideRef from "@/hooks/useOutsideRef";
 
 interface DropupItem {
   text: string;

@@ -1,10 +1,10 @@
-import { ActiveStatus } from "@/types/member";
-import Tab from "../../tabs/Tab";
-import { usePutMyActiveStatus } from "@/hooks/query/useUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
-import API from "@/constants/API";
+import Tab from "../../tabs/Tab";
 import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
+import API from "@/constants/API";
 import MESSAGE from "@/constants/MESSAGE";
+import { usePutMyActiveStatus } from "@/hooks/query/useUserQuery";
+import { ActiveStatus } from "@/types/member";
 
 const ActiveStatusTab = ({ activeStatus }) => {
   const queryClient = useQueryClient();

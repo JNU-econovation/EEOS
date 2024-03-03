@@ -1,10 +1,10 @@
 "use client";
 
+import classNames from "classnames";
+import Image from "next/image";
 import INPUT_STATUS from "@/constants/INPUT_STATUS";
 import { SimpleMemberInfo } from "@/types/member";
 import { InputStatus } from "@/types/teamBuilding";
-import classNames from "classnames";
-import Image from "next/image";
 
 const colors = {
   green: "bg-success-30",

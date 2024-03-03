@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FE - README.md
 
-## Getting Started
+## TechStack
 
-First, run the development server:
+| Architecture            | MVVM                                            |
+| ----------------------- | ----------------------------------------------- |
+| Language                | TypeScript                                      |
+| UI                      | Tailwind CSS                                    |
+| Libraries               | Next.js, React Query, jotai, axios, TailwindCSS |
+| Asynchronous Processing | React Query, axios                              |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Package Structure
+
+```
+FE
+├─ 📁 public
+├─ 📁 src
+│  ├─ 📁 apis
+│  │  ├─ 📁 dtos
+│  ├─ 📁 app
+│  ├─ 📁 components
+│  ├─ 📁 constants
+│  ├─ 📁 hooks
+│  │  ├─ 📁 query
+│  ├─ 📁 store
+│  ├─ 📁 types
+└─ └─ 📁 utils
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Directory Name  | Description                           |
+| --------------- | ------------------------------------- |
+| public          | 정적 파일 (이미지 등)                 |
+| src             | 소스 코드                             |
+| src/apis        | API 요청 및 응답 처리                 |
+| src/apis/dtos   | 네트워크 통신을 위한 데이터 전송 객체 |
+| src/app         | 앱 전체 레이아웃 및 라우팅 설정       |
+| src/component   | 컴포넌트                              |
+| src/constants   | 변하지 않는 값 선언                   |
+| src/hooks       | 상태 관리 및 비즈니스 로직            |
+| src/hooks/query | query & mutate 로직 처리              |
+| src/store       | 전역 상태 관리 (Jotai)                |
+| src/types       | Typescript 타입 정의                  |
+| src/utils       | 공통 유틸리티 함수                    |

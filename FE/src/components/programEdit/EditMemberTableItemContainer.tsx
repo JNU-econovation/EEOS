@@ -1,9 +1,9 @@
 "use client";
 
+import MemberTableLoader from "../common/memberTable/MemberTable.loader";
+import EditMemberTableItem from "./EditMemberTableItem";
 import { useGetProgramMembersByActive } from "@/hooks/query/useMemberQuery";
 import { ActiveStatusWithAll, AttendStatus } from "@/types/member";
-import EditMemberTableItem from "./EditMemberTableItem";
-import MemberTableLoader from "../common/memberTable/MemberTable.loader";
 
 interface EditMemberTableItemContainerProps {
   setMembers: (

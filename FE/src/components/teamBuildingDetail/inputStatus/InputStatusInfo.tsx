@@ -1,6 +1,6 @@
-import { InputStatus } from "@/types/teamBuilding";
 import InputStatusHeader from "./InputStatusHeader";
 import MemberList from "@/components/common/MemberList";
+import { InputStatus } from "@/types/teamBuilding";
 
 interface InputStatusInfoProps {
   status: InputStatus;

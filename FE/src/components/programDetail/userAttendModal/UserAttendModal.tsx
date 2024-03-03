@@ -1,19 +1,19 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
+import AttendStatusModalLoader from "./AttendStatusModal.loader";
+import AttendStatusView from "./AttendStatusView";
+import AttendToggleLabel from "./AttendToggleLabel";
+import AttendStatusToggle from "@/components/common/attendStatusToggle/AttendStatusToggle";
+import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
+import MESSAGE from "@/constants/MESSAGE";
 import {
   useGetMyAttendStatus,
   usePutMyAttendStatus,
 } from "@/hooks/query/useUserQuery";
-import AttendStatusView from "./AttendStatusView";
-import AttendStatusToggle from "@/components/common/attendStatusToggle/AttendStatusToggle";
-import AttendToggleLabel from "./AttendToggleLabel";
-import { AttendStatus } from "@/types/member";
-import { useQueryClient } from "@tanstack/react-query";
-import { ProgramStatus } from "@/types/program";
-import MESSAGE from "@/constants/MESSAGE";
-import AttendStatusModalLoader from "./AttendStatusModal.loader";
-import ATTEND_STATUS from "@/constants/ATTEND_STATUS";
 import { EditableStatus } from "@/types/attendStatusModal";
+import { AttendStatus } from "@/types/member";
+import { ProgramStatus } from "@/types/program";
 
 interface UserAttendModalProps {
   programId: number;

@@ -1,12 +1,12 @@
-import Button from "../../Button";
-import UserActiveModalSkeleton from "./UserActiveModal.loader";
-import { useLogoutMutation } from "@/hooks/query/useAuthQuery";
 import { useRouter } from "next/navigation";
-import ROUTES from "@/constants/ROUTES";
 import { Suspense } from "react";
-import UserInfoSection from "./UserInfoSection";
 import { ErrorBoundary } from "react-error-boundary";
+import Button from "../../Button";
 import ErrorFallback from "../../ErrorFallback";
+import UserActiveModalSkeleton from "./UserActiveModal.loader";
+import UserInfoSection from "./UserInfoSection";
+import ROUTES from "@/constants/ROUTES";
+import { useLogoutMutation } from "@/hooks/query/useAuthQuery";
 
 const LOGOUT = "로그아웃";
 

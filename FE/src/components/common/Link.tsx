@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
-import LinkNext, { LinkProps } from "next/link";
 import classNames from "classnames";
+import LinkNext, { LinkProps } from "next/link";
+import { PropsWithChildren } from "react";
 
 const colors = {
   primary: "bg-primary text-paragraph",

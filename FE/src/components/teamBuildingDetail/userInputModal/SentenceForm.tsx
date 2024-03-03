@@ -1,13 +1,13 @@
-import Button from "@/components/common/Button";
+import { create } from "domain";
 import classNames from "classnames";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 import { FieldType } from "./SentenceField";
+import Button from "@/components/common/Button";
 import {
   usePostSentenceMutation,
   usePutSentenceMutation,
 } from "@/hooks/query/useTeamBuildingQuery";
-import { create } from "domain";
-import { toast } from "react-toastify";
 
 const color = {
   default: "border-gray-20",

@@ -1,5 +1,5 @@
-import { useGetMyActiveStatus } from "@/hooks/query/useUserQuery";
 import ActiveStatusTab from "./ActiveStatusTab";
+import { useGetMyActiveStatus } from "@/hooks/query/useUserQuery";
 
 const MESSAGE = "본인의 회원 상태를 선택해주세요.";
 

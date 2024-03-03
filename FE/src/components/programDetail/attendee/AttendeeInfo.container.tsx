@@ -1,7 +1,7 @@
 "use client";
 
-import AttendeeInfo from "./AttendeeInfo";
 import { ErrorBoundary } from "react-error-boundary";
+import AttendeeInfo from "./AttendeeInfo";
 import ErrorFallback from "@/components/common/ErrorFallback";
 
 interface AttendeeInfoContainerProps {

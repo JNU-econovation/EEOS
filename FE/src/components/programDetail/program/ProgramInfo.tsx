@@ -1,9 +1,9 @@
 "use client";
 
-import { useGetProgramById } from "@/hooks/query/useProgramQuery";
 import ProgramDetail from "./ProgramDetail";
 import ProgramHeader from "./ProgramHeader";
 import ProgramInfoLoader from "./ProgramInfo.loader";
+import { useGetProgramById } from "@/hooks/query/useProgramQuery";
 
 interface ProgramInfoProps {
   programId: number;

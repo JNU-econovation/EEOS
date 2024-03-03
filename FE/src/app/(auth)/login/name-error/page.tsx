@@ -1,11 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Button from "@/components/common/Button";
 import ErrorFallback from "@/components/common/ErrorFallback";
 import ERROR_CODE from "@/constants/ERROR_CODE";
 import ERROR_MESSAGE from "@/constants/ERROR_MESSAGE";
 import ROUTES from "@/constants/ROUTES";
-import { useRouter } from "next/navigation";
 
 const SlackNameErrorPage = () => {
   const router = useRouter();

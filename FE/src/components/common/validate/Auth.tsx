@@ -1,9 +1,9 @@
 "use client";
 
-import ROUTES from "@/constants/ROUTES";
-import { deleteTokenInfo } from "@/utils/authWithStorage";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ROUTES from "@/constants/ROUTES";
+import { deleteTokenInfo } from "@/utils/authWithStorage";
 
 const AuthValidate = () => {
   const router = useRouter();

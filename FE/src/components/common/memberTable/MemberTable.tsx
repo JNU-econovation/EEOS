@@ -1,16 +1,16 @@
 "use client";
 
-import { ActiveStatusWithAll, AttendStatus } from "@/types/member";
-import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
-import { FormType } from "@/types/form";
+import { Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../ErrorFallback";
 import Tab from "../tabs/Tab";
 import MemberTableHeader from "./MemberTableHeader";
 import CreateMemberTableItemContainer from "@/components/common/memberTable/create/CreateMemberTableItemContainer";
 import EditMemberTableItemContainer from "@/components/programEdit/EditMemberTableItemContainer";
-import { Suspense, useState } from "react";
 import { Members } from "@/components/programEdit/ProgramEditForm";
-import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "../ErrorFallback";
+import ACTIVE_STATUS from "@/constants/ACTIVE_STATUS";
+import { FormType } from "@/types/form";
+import { ActiveStatusWithAll, AttendStatus } from "@/types/member";
 
 interface MemberTableProps {
   formType: FormType;
@@ -45,7 +45,7 @@ const MemberTable = ({
         pointColor="teal"
         align="line"
       />
-      <div className="scrollbar-hide overflow-x-scroll">
+      <div className="overflow-x-scroll scrollbar-hide">
         <MemberTableHeader
           formType={formType}
           onClickCheckBox={onClickHeaderCheckBox}

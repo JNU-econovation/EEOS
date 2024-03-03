@@ -20,7 +20,7 @@ const MarkdownViewer = ({
   height?: "full" | "fix";
 }) => {
   const markdownClass = classNames(
-    "markdown-body overflox-y-scroll scrollbar-hide w-full overflow-y-auto bg-background p-4",
+    "markdown-body overflox-y-scroll w-full overflow-y-auto bg-background p-4 scrollbar-hide",
     markdownHeight[height],
     className,
   );
