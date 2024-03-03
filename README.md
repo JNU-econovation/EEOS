@@ -1,5 +1,8 @@
 ![EEOS.png](https://github.com/kssumin/black-company-be/assets/88534959/5969a08a-9e10-4bb5-be76-1b538a1988f1)
+
 https://econo.eeos.store
+
+현재는 econovation 회원들만 서비스를 이용할 수 있습니다.
 
 ## EEOS를 소개합니다.
 
