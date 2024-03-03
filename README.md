@@ -52,7 +52,8 @@ EEOS는 Econovation Event Operation System의 준말로, 전남대학교 IT 동�
 ![Frontend](https://github.com/kssumin/black-company-be/assets/88534959/c548d7fc-c6bc-4ecd-a152-1c8c8ce2e03c)
 
 ### Backend Architecture
-![Backend](https://github.com/kssumin/black-company-be/assets/88534959/1ee97117-7c2b-40bd-bd21-2e72b43d80a5)
+![Backend](https://github.com/kssumin/black-company-be/assets/88534959/52122af3-95eb-4b40-94df-e51a9fc02b94)
+
 
 [AI - README.md](https://github.com/JNU-econovation/black-company/blob/main/AI/AI_README.md)
 
