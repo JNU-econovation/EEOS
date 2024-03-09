@@ -33,7 +33,7 @@ jobs:
 
     - name: DB를 실행
       run: |
-        docker-compose -f resources/test-develop-environment/docker-compose.yml up -d
+        docker-compose -f resources/local-develop-environment/docker-compose.yml up -d
         sleep 20
       
     - name: Gradle 캐싱
