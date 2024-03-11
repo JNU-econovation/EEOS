@@ -3,9 +3,12 @@ package com.blackcompany.eeos.auth.presentation.controller;
 import com.blackcompany.eeos.auth.application.domain.TokenModel;
 import com.blackcompany.eeos.auth.application.dto.converter.TokenResponseConverter;
 import com.blackcompany.eeos.auth.application.dto.response.TokenResponse;
+import com.blackcompany.eeos.auth.application.usecase.LogOutUsecase;
 import com.blackcompany.eeos.auth.application.usecase.LoginUsecase;
 import com.blackcompany.eeos.auth.application.usecase.ReissueUsecase;
+import com.blackcompany.eeos.auth.application.usecase.WithDrawUsecase;
 import com.blackcompany.eeos.auth.presentation.support.AuthConstants;
+import com.blackcompany.eeos.auth.presentation.support.Member;
 import com.blackcompany.eeos.auth.presentation.support.TokenExtractor;
 import com.blackcompany.eeos.common.presentation.respnose.ApiResponse;
 import com.blackcompany.eeos.common.presentation.respnose.ApiResponseBody.SuccessBody;
@@ -32,18 +35,24 @@ public class AuthController {
 	private final TokenExtractor tokenExtractor;
 	private final CookieManager cookieManager;
 	private final TokenResponseConverter tokenResponseConverter;
+	private final LogOutUsecase logOutUsecase;
+	private final WithDrawUsecase withDrawUsecase;
 
 	public AuthController(
 			LoginUsecase loginUsecase,
 			ReissueUsecase reissueUsecase,
 			@Qualifier("cookie") TokenExtractor tokenExtractor,
 			TokenResponseConverter tokenResponseConverter,
-			CookieManager cookieManager) {
+			CookieManager cookieManager,
+			LogOutUsecase logOutUsecase,
+			WithDrawUsecase withDrawUsecase) {
 		this.loginUsecase = loginUsecase;
 		this.reissueUsecase = reissueUsecase;
 		this.tokenExtractor = tokenExtractor;
 		this.tokenResponseConverter = tokenResponseConverter;
 		this.cookieManager = cookieManager;
+		this.logOutUsecase = logOutUsecase;
+		this.withDrawUsecase = withDrawUsecase;
 	}
 
 	@PostMapping("/login/{oauthServerType}")
@@ -53,7 +62,7 @@ public class AuthController {
 			@RequestParam("redirect_uri") String uri,
 			HttpServletResponse httpResponse) {
 		TokenModel tokenModel = loginUsecase.login(oauthServerType, code, uri);
-		TokenResponse response = toResponse(tokenModel, httpResponse);
+		TokenResponse response = generateTokenResponse(tokenModel, httpResponse);
 
 		return ApiResponseGenerator.success(response, HttpStatus.CREATED, MessageCode.CREATE);
 	}
@@ -63,19 +72,45 @@ public class AuthController {
 			HttpServletRequest request, HttpServletResponse httpResponse) {
 		String token = tokenExtractor.extract(request);
 		TokenModel tokenModel = reissueUsecase.execute(token);
-		TokenResponse response = toResponse(tokenModel, httpResponse);
+		TokenResponse response = generateTokenResponse(tokenModel, httpResponse);
 
 		return ApiResponseGenerator.success(response, HttpStatus.CREATED, MessageCode.CREATE);
 	}
 
-	private TokenResponse toResponse(TokenModel tokenModel, HttpServletResponse httpServletResponse) {
+	@PostMapping("/logout")
+	ApiResponse<SuccessBody<Void>> logout(
+			HttpServletRequest request, HttpServletResponse httpResponse, @Member Long memberId) {
+		String token = tokenExtractor.extract(request);
+		logOutUsecase.logOut(token, memberId);
+		deleteTokenResponse(httpResponse);
+
+		return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.DELETE);
+	}
+
+	@PostMapping("/withdraw")
+	ApiResponse<SuccessBody<Void>> withDraw(
+			HttpServletRequest request, HttpServletResponse httpResponse, @Member Long memberId) {
+		String token = tokenExtractor.extract(request);
+		withDrawUsecase.withDraw(token, memberId);
+		deleteTokenResponse(httpResponse);
+
+		return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.DELETE);
+	}
+
+	private TokenResponse generateTokenResponse(
+			TokenModel tokenModel, HttpServletResponse httpServletResponse) {
 		TokenResponse response =
 				tokenResponseConverter.from(tokenModel.getAccessToken(), tokenModel.getAccessExpiredTime());
 
 		ResponseCookie cookie =
-				cookieManager.createCookie(AuthConstants.TOKEN_KEY, tokenModel.getRefreshToken());
+				cookieManager.setCookie(AuthConstants.TOKEN_KEY, tokenModel.getRefreshToken());
 		httpServletResponse.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 		return response;
+	}
+
+	private void deleteTokenResponse(HttpServletResponse httpServletResponse) {
+		ResponseCookie cookie = cookieManager.deleteCookie(AuthConstants.TOKEN_KEY);
+		httpServletResponse.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 	}
 }
