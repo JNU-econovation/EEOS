@@ -1,7 +1,6 @@
 package com.blackcompany.eeos.target.application.service;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.blackcompany.eeos.member.application.model.ActiveStatus;
@@ -10,7 +9,7 @@ import com.blackcompany.eeos.member.application.service.QueryMemberService;
 import com.blackcompany.eeos.member.fixture.MemberFixture;
 import com.blackcompany.eeos.member.persistence.MemberEntity;
 import com.blackcompany.eeos.member.persistence.MemberRepository;
-import com.blackcompany.eeos.program.application.service.ProgramValidService;
+import com.blackcompany.eeos.program.persistence.ProgramRepository;
 import com.blackcompany.eeos.target.application.dto.AttendInfoActiveStatusResponse;
 import com.blackcompany.eeos.target.application.dto.AttendInfoResponse;
 import com.blackcompany.eeos.target.application.dto.QueryAttendActiveStatusResponse;
@@ -37,10 +36,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class AttendServiceTest {
 	@Mock private AttendRepository attendRepository;
 	@Mock private MemberRepository memberRepository;
-	@Mock private ProgramValidService programValidService;
 	@Spy private AttendInfoConverter infoConverter;
 	@Spy private AttendEntityConverter attendEntityConverter;
 	@Mock private QueryMemberService queryMemberService;
+	@Mock private ProgramRepository programRepository;
 	@Spy private ChangeAttendStatusConverter changeAttendStatusConverter;
 	@Spy private MemberEntityConverter memberEntityConverter;
 	@Spy private AttendInfoConverter attendInfoConverter;
@@ -63,7 +62,7 @@ class AttendServiceTest {
 		AttendEntity 바다_참석 =
 				com.blackcompany.eeos.target.fixture.AttendFixture.참석대상자_엔티티(2L, AttendStatus.ATTEND);
 
-		doNothing().when(programValidService).validate(programId);
+		when(programRepository.existsById(programId)).thenReturn(Boolean.TRUE);
 		when(attendRepository.findAllByProgramIdAndStatus(programId, AttendStatus.find(attendStatus)))
 				.thenReturn(List.of(수민_참석, 바다_참석));
 		when(memberRepository.findMembersByIds(List.of(수민_참석.getMemberId(), 바다_참석.getMemberId())))
